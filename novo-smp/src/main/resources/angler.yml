@@ -846,8 +846,9 @@ loot:
     fortune_5: {enchantment: minecraft:fortune, level: 5, min-prestige: 4}
     efficiency_7: {enchantment: minecraft:efficiency, level: 7, min-prestige: 5}
 afk:
-  waiting-actionbar: '<aqua>🎣 AFK-Angeln</aqua> <dark_gray>•</dark_gray> <gray>Warte auf AFK...</gray>'
-  actionbar: '<aqua>🎣 AFK-Angeln</aqua> <dark_gray>•</dark_gray> <gray>Nächster Fang: <white>%seconds%s</white> <dark_gray>•</dark_gray> Lager: <white>%stored%/%capacity%</white></gray>'
+  started-message: '<green>AFK-Angeln wurde gestartet.</green>'
+  ended-message: '<gray>AFK-Angeln wurde beendet.</gray>'
+  actionbar: '<aqua>🎣 AFK-Angeln</aqua> <dark_gray>•</dark_gray> <gray>Nächster Biss: <white>%seconds%s</white> <dark_gray>•</dark_gray> Lager: <white>%stored%/%capacity%</white></gray>'
 enchants:
   ausdauer:
     afk-interval-seconds:

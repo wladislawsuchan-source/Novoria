@@ -157,7 +157,22 @@ public final class AfkZoneManager {
     }
 
     private void showOverlay(Player player, Component overlay) {
-        if (overlay != null && !overlay.equals(Component.empty())) player.sendActionBar(overlay);
+        if (overlay != null && !overlay.equals(Component.empty()))
+            player.sendActionBar(balanceHud(player).append(Component.text("   ")).append(overlay));
+    }
+
+    /** Uses the same HUD renderer immediately on fishing transitions, no extra task. */
+    public void refreshHud(Player player) {
+        Component overlay = actionbarOverlay.apply(player);
+        if (Component.empty().equals(overlay)) return; // Active minigame has priority.
+        if (overlay == null) player.sendActionBar(balanceHud(player));
+        else showOverlay(player, overlay);
+    }
+
+    private Component balanceHud(Player player) {
+        return mm.deserialize("<gold>✦ "
+                + String.format(Locale.GERMANY, "%,d", lumis.balance(player.getUniqueId()))
+                + " Lumis</gold>");
     }
 
     private String formatReward(double value) {

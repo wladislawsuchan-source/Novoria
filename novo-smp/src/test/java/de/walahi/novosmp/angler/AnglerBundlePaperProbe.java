@@ -229,23 +229,26 @@ public final class AnglerBundlePaperProbe extends SMPCorePlugin {
     }
 
     private void runAfkLifecycleProbe() {
-        int[] calls = new int[3]; // valid, reset count, held wait ticks
+        int[] calls = new int[3]; // valid, reset count, actual approach ticks
         calls[0] = 1;
         FishHook hook = (FishHook) Proxy.newProxyInstance(getClass().getClassLoader(),
                 new Class<?>[] {FishHook.class}, (proxy, method, args) -> switch (method.getName()) {
                     case "isValid" -> calls[0] == 1;
                     case "resetFishingState" -> { calls[1]++; yield null; }
-                    case "setWaitTime" -> { calls[2] = (Integer) args[0]; yield null; }
-                    case "getWaitTime" -> calls[2];
+                    case "setWaitTime", "setLureTime", "setApplyLure", "setRainInfluenced", "setSkyInfluenced" -> null;
+                    case "setTimeUntilBite" -> { calls[2] = (Integer) args[0]; yield null; }
+                    case "getTimeUntilBite" -> calls[2];
+                    case "getWaitTime" -> 0;
                     default -> throw new UnsupportedOperationException(method.getName());
                 });
-        AnglerFishingService.holdVanillaHook(hook, 30, true);
+        AnglerFishingService.prepareAfkHook(hook, 30);
         boolean enter = calls[1] == 1 && calls[2] == 600;
-        AnglerFishingService.holdVanillaHook(hook, 15, false);
-        boolean refresh = calls[1] == 1 && calls[2] == 300;
+        AnglerFishingService.prepareAfkHook(hook, 15);
+        boolean refresh = calls[1] == 2 && calls[2] == 300
+                && AnglerFishingService.afkSecondsRemaining(hook) == 15;
         calls[0] = 0;
-        AnglerFishingService.holdVanillaHook(hook, 15, true);
-        boolean invalid = calls[1] == 1 && calls[2] == 300;
+        AnglerFishingService.prepareAfkHook(hook, 15);
+        boolean invalid = calls[1] == 2 && calls[2] == 300;
         boolean automaticEvents = !AnglerFishingService.playerFishingAction(PlayerFishEvent.State.LURED,
                 EquipmentSlot.HAND)
                 && !AnglerFishingService.playerFishingAction(PlayerFishEvent.State.BITE, EquipmentSlot.HAND)
@@ -255,7 +258,7 @@ public final class AnglerBundlePaperProbe extends SMPCorePlugin {
                 EquipmentSlot.HAND)
                 && AnglerFishingService.playerFishingAction(PlayerFishEvent.State.REEL_IN, EquipmentSlot.HAND)
                 && !AnglerFishingService.playerFishingAction(PlayerFishEvent.State.CAUGHT_FISH, null);
-        getLogger().info("AFK_VANILLA_HOLD=" + (enter && refresh && invalid ? "PASS" : "FAIL"));
+        getLogger().info("AFK_HOOK_CYCLE=" + (enter && refresh && invalid ? "PASS" : "FAIL"));
         getLogger().info("AFK_EVENT_ACTIVITY=" + (automaticEvents && manualEvents ? "PASS" : "FAIL"));
     }
 

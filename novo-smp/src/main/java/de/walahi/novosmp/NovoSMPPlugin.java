@@ -819,6 +819,7 @@ public final class NovoSMPPlugin extends SMPCorePlugin {
                         ? 1.0D
                         : professionManager.boosters().multiplier(playerId, BoosterCategory.LUMI));
         lumiAfkZoneManager.actionbarOverlay(anglerFishingService::fishingHud);
+        anglerFishingService.hudRefresh(lumiAfkZoneManager::refreshHud);
         lumiAfkZoneManager.start();
         commands.register("setafkpos1", new SetAfkPositionCommand(this, lumiAfkZoneManager, 1));
         commands.register("setafkpos2", new SetAfkPositionCommand(this, lumiAfkZoneManager, 2));
