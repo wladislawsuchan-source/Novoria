@@ -13,6 +13,9 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.World;
+import org.bukkit.Location;
+import org.bukkit.block.Block;
+import org.bukkit.block.data.Waterlogged;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -232,7 +235,7 @@ public final class AnglerFishingService implements Listener {
                     }
                 } catch (RuntimeException exception) {
                     plugin.getLogger().log(Level.SEVERE, "AFK-Angelfang fehlgeschlagen", exception);
-                    endSession(session.playerId, true);
+                    endSession(session.playerId, true, "CATCH_FAILED");
                 } finally {
                     session.afkResolving = false;
                 }
@@ -257,7 +260,7 @@ public final class AnglerFishingService implements Listener {
                 event.setCancelled(true);
                 if (playerFishingAction(event.getState(), event.getHand()))
                     plugin.getAfkManager().markActivity(player);
-                endSession(session.playerId, true);
+                endSession(session.playerId, true, "PLAYER_ACTIVITY_" + event.getState());
             }
             default -> { }
         }
@@ -281,7 +284,7 @@ public final class AnglerFishingService implements Listener {
             event.setUseItemInHand(Event.Result.DENY);
             event.setCancelled(true);
             plugin.getAfkManager().markActivity(event.getPlayer());
-            endSession(session.playerId, true);
+            endSession(session.playerId, true, "PLAYER_ACTIVITY");
             return;
         }
         if (session.state.phase() == FishingAttemptState.Phase.BITTEN) {
@@ -515,18 +518,59 @@ public final class AnglerFishingService implements Listener {
 
     public void onLeaveAfk(UUID playerId) {
         Session session = sessions.get(playerId);
-        if (session != null && session.mode == FishingMode.AFK) endSession(playerId, true);
+        if (session != null && session.mode == FishingMode.AFK)
+            endSession(playerId, true, "GLOBAL_AFK_ENDED");
     }
 
     private boolean validAfk(Player player, Session session) {
-        if (sessions.get(session.playerId) != session || !valid(player, session) || !isActiveAngler(player)
-                || !plugin.getAfkManager().isAfk(player)
-                || session.state.phase() == FishingAttemptState.Phase.PLAYING
-                || session.state.phase() == FishingAttemptState.Phase.RESOLVING
-                || player.getInventory().getItemInMainHand().getType() != Material.FISHING_ROD
-                || !sameRod(session.castRod, player.getInventory().getItemInMainHand())
-                || !hookReady(player, session)) return false;
-        return true;
+        return afkInvalidReason(player, session) == null;
+    }
+
+    private String afkInvalidReason(Player player, Session session) {
+        if (player == null || !player.isOnline()) return "QUIT";
+        if (player.isDead()) return "DEATH";
+        if (!plugin.configs().angler().getBoolean("fishing.active.enabled", true)) return "FISHING_DISABLED";
+        if (player.getGameMode() != GameMode.SURVIVAL) return "GAME_MODE_CHANGED";
+        if (registry.definitions().isEmpty()) return "FISH_REGISTRY_EMPTY";
+        if (!player.getWorld().equals(session.world)) return "WORLD_CHANGE";
+        if (sessions.get(session.playerId) != session) return "SESSION_REPLACED";
+        if (!isActiveAngler(player)) return "PROFESSION_CHANGED";
+        if (!plugin.getAfkManager().isAfk(player)) return "GLOBAL_AFK_ENDED";
+        if (session.state.phase() == FishingAttemptState.Phase.PLAYING
+                || session.state.phase() == FishingAttemptState.Phase.RESOLVING) return "ACTIVE_MINIGAME";
+        if (player.getInventory().getItemInMainHand().getType() != Material.FISHING_ROD
+                || !sameRod(session.castRod, player.getInventory().getItemInMainHand())) return "ROD_INVALID";
+        // Starting still requires the strict settled-in-water check. Once owned by
+        // AFK, surface bobbing must not be mistaken for leaving the pond.
+        if (session.mode == FishingMode.NORMAL && !hookReady(player, session)) return "HOOK_NOT_READY";
+        return afkHookInvalidReason(player, session.hook, session.hookId);
+    }
+
+    static String afkHookInvalidReason(Player player, FishHook hook, UUID hookId) {
+        if (!hook.isValid() || hook.isDead()) return "HOOK_INVALID";
+        if (!hookId.equals(hook.getUniqueId())) return "HOOK_REPLACED";
+        FishHook current = player.getFishHook();
+        if (current == null || !hookId.equals(current.getUniqueId())) return "HOOK_OWNER_MISMATCH";
+        if (hook.getHookedEntity() != null) return "HOOK_CAUGHT_ENTITY";
+        if (hook.getState() != FishHook.HookState.BOBBING) return "HOOK_STATE_CHANGED";
+        if (!hook.isInWater() && !hookTouchesWaterSurface(hook)) return "HOOK_NOT_IN_WATER";
+        return null;
+    }
+
+    private static boolean hookTouchesWaterSurface(FishHook hook) {
+        // Paper's entity water flag can briefly be false above the surface while
+        // the same BOBBING hook is still fishing. Check physical water contact,
+        // including the small part of its bounding box over the block below.
+        Location location = hook.getLocation();
+        if (waterBlock(location.getBlock())) return true;
+        double aboveBlock = location.getY() - Math.floor(location.getY());
+        return aboveBlock <= hook.getHeight()
+                && waterBlock(location.getBlock().getRelative(0, -1, 0));
+    }
+
+    private static boolean waterBlock(Block block) {
+        return block.getType() == Material.WATER || block.getType() == Material.BUBBLE_COLUMN
+                || block.getBlockData() instanceof Waterlogged waterlogged && waterlogged.isWaterlogged();
     }
 
     private boolean hookReady(Player player, Session session) {
@@ -611,11 +655,11 @@ public final class AnglerFishingService implements Listener {
                 FishingGame.Quality.RED, session.luckLevel, random);
         if (loot.main() == null) {
             plugin.getLogger().warning("Kein AFK-Fishing-Loot-Pool konfiguriert; Session beendet.");
-            endSession(session.playerId, true);
+            endSession(session.playerId, true, "LOOT_UNAVAILABLE");
             return;
         }
         if (!deliverAfkPool(player, fish, loot.main())) {
-            endSession(session.playerId, true);
+            endSession(session.playerId, true, "LOOT_DELIVERY_FAILED");
             return;
         }
         professions.recordAfkAnglerCatch(player, 25L);
@@ -629,7 +673,7 @@ public final class AnglerFishingService implements Listener {
         // Paper applies Mending as with collected XP; profession XP never repairs the rod.
         player.giveExp(random.nextInt(1, 7), true);
         if (damaged.isEmpty() || damaged.getType() != Material.FISHING_ROD) {
-            endSession(session.playerId, true);
+            endSession(session.playerId, true, "ROD_BROKEN");
         }
     }
 
@@ -691,12 +735,26 @@ public final class AnglerFishingService implements Listener {
     }
 
     private void endSession(UUID playerId, boolean removeHook) {
-        endSession(playerId, removeHook, true);
+        Session session = sessions.get(playerId);
+        String reason = session == null ? null : afkInvalidReason(Bukkit.getPlayer(playerId), session);
+        endSession(playerId, removeHook, true, reason == null ? "SESSION_REPLACED" : reason);
     }
 
-    private void endSession(UUID playerId, boolean removeHook, boolean notify) {
+    private void endSession(UUID playerId, boolean removeHook, String reason) {
+        endSession(playerId, removeHook, true, reason);
+    }
+
+    private void endSession(UUID playerId, boolean removeHook, boolean notify, String reason) {
         Session old = sessions.remove(playerId);
         boolean wasAfk = old != null && old.mode == FishingMode.AFK;
+        if (wasAfk && plugin.configs().main().getBoolean("debug.afk-fishing", false)) {
+            Player owner = Bukkit.getPlayer(playerId);
+            plugin.getLogger().info("[AFK-Fishing] STOP player=" + (owner == null ? playerId : owner.getName())
+                    + " reason=" + reason + " globalAfk=" + plugin.getAfkManager().isAfk(owner)
+                    + " hookValid=" + old.hook.isValid() + " hookState=" + old.hook.getState()
+                    + " inWater=" + old.hook.isInWater() + " wait=" + old.hook.getWaitTime()
+                    + " untilBite=" + old.hook.getTimeUntilBite());
+        }
         // Remove ownership before hook callbacks or HUD refresh can re-enter us.
         if (old != null && (removeHook || wasAfk) && old.hook.isValid()) old.hook.remove();
         stopTaskIfIdle();
@@ -1014,7 +1072,8 @@ public final class AnglerFishingService implements Listener {
     }
 
     public void shutdown() {
-        for (UUID playerId : new ArrayList<>(sessions.keySet())) endSession(playerId, true, false);
+        for (UUID playerId : new ArrayList<>(sessions.keySet()))
+            endSession(playerId, true, false, "PLUGIN_DISABLE");
         if (activeTask != null) { activeTask.cancel(); activeTask = null; }
     }
 
@@ -1031,21 +1090,27 @@ public final class AnglerFishingService implements Listener {
                 continue;
             }
             if (session.state.phase() == FishingAttemptState.Phase.PLAYING) combos.reset(session.playerId);
-            endSession(session.playerId, false);
+            endSession(session.playerId, false, "HOOK_REMOVED");
         }
     }
 
-    @EventHandler public void onDeath(PlayerDeathEvent event) { reset(event.getEntity().getUniqueId()); }
+    @EventHandler public void onDeath(PlayerDeathEvent event) {
+        combos.reset(event.getEntity().getUniqueId());
+        endSession(event.getEntity().getUniqueId(), true, "DEATH");
+    }
     @EventHandler public void onQuit(PlayerQuitEvent event) {
         combos.reset(event.getPlayer().getUniqueId());
-        endSession(event.getPlayer().getUniqueId(), true, false);
+        endSession(event.getPlayer().getUniqueId(), true, false, "QUIT");
     }
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onKick(PlayerKickEvent event) {
         combos.reset(event.getPlayer().getUniqueId());
-        endSession(event.getPlayer().getUniqueId(), true, false);
+        endSession(event.getPlayer().getUniqueId(), true, false, "KICK");
     }
-    @EventHandler public void onWorld(PlayerChangedWorldEvent event) { reset(event.getPlayer().getUniqueId()); }
+    @EventHandler public void onWorld(PlayerChangedWorldEvent event) {
+        combos.reset(event.getPlayer().getUniqueId());
+        endSession(event.getPlayer().getUniqueId(), true, "WORLD_CHANGE");
+    }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onHeld(PlayerItemHeldEvent event) { endAfkRodSession(event.getPlayer()); }
@@ -1061,6 +1126,7 @@ public final class AnglerFishingService implements Listener {
 
     private void endAfkRodSession(Player player) {
         Session session = sessions.get(player.getUniqueId());
-        if (session != null && session.mode == FishingMode.AFK) endSession(session.playerId, true);
+        if (session != null && session.mode == FishingMode.AFK)
+            endSession(session.playerId, true, "ROD_INVALID");
     }
 }
