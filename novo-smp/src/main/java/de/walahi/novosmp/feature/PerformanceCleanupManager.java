@@ -151,6 +151,7 @@ public final class PerformanceCleanupManager implements Listener {
         if (entity instanceof ArmorStand || entity instanceof Mannequin || entity instanceof Hanging
                 || entity instanceof Display || entity instanceof Interaction || entity instanceof Marker
                 || entity instanceof EnderCrystal) return true;
+        if (entity.getType() == EntityType.ENDER_PEARL) return true;
         // Deliberately concrete: only actual boats and minecarts are technical vehicles.
         if (entity instanceof Boat || entity instanceof Minecart) return true;
         if (hasExternalPluginData(entity.getPersistentDataContainer())) return true;
