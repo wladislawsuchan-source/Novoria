@@ -46,6 +46,7 @@ import de.walahi.novosmp.integrations.SMPCorePlaceholderExpansion;
 import de.walahi.novosmp.afk.AfkManager;
 import de.walahi.novosmp.commands.AfkCommand;
 import de.walahi.novosmp.feature.GameplayPolishListener;
+import de.walahi.novosmp.feature.DragonEggBundleListener;
 import de.walahi.novosmp.feature.InvisibilityAnonymityService;
 import de.walahi.novosmp.feature.StarterGearListener;
 import de.walahi.novosmp.feature.NightVisionManager;
@@ -590,6 +591,7 @@ public final class NovoSMPPlugin extends SMPCorePlugin {
         worldDamageProtectionListener = new WorldDamageProtectionListener(this);
         Bukkit.getPluginManager().registerEvents(worldDamageProtectionListener, this);
         Bukkit.getPluginManager().registerEvents(new GameplayPolishListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new DragonEggBundleListener(this), this);
         Bukkit.getPluginManager().registerEvents(new SoulSpeedExploitFixListener(this), this);
         invisibilityAnonymityService = new InvisibilityAnonymityService(this);
         Bukkit.getPluginManager().registerEvents(invisibilityAnonymityService, this);
