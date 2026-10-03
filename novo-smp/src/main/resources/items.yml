@@ -45,35 +45,35 @@ items:
     max-stack-size: 1
     custom-enchantments:
       magnet: 1
-  # Angler-Bücher: eindeutige custom_item_id, Effekte werden erst in einem späteren Block ergänzt.
-  angler_buch_ausdauer_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige I</dark_gray>', '<gray>Verkürzt das AFK-Fangintervall.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ausdauer: 1}}
-  angler_buch_ruhige_hand_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige I</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ruhige_hand: 1}}
-  angler_buch_ausdauer_2: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige II</dark_gray>', '<gray>Verkürzt das AFK-Fangintervall.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ausdauer: 2}}
-  angler_buch_ruhige_hand_2: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige II</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ruhige_hand: 2}}
-  angler_buch_nachfassen_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige II</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {nachfassen: 1}}
-  angler_buch_ausdauer_3: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige III</dark_gray>', '<gray>Verkürzt das AFK-Fangintervall.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ausdauer: 3}}
-  angler_buch_konzentration_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige III</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {konzentration: 1}}
-  angler_buch_ausdauer_4: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige IV</dark_gray>', '<gray>Verkürzt das AFK-Fangintervall.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ausdauer: 4}}
-  angler_buch_ruhige_hand_3: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige IV</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ruhige_hand: 3}}
-  angler_buch_nachfassen_2: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige IV</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {nachfassen: 2}}
-  angler_buch_konzentration_2: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige IV</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {konzentration: 2}}
-  angler_buch_meistergriff_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige IV</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {meistergriff: 1}}
-  angler_buch_ausdauer_5: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige V</dark_gray>', '<gray>Verkürzt das AFK-Fangintervall.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ausdauer: 5}}
-  angler_buch_konzentration_3: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige V</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {konzentration: 3}}
-  angler_buch_meistergriff_2: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige V</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {meistergriff: 2}}
-  angler_buch_totembindung_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Legendär / Prestige V</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {totembindung: 1}}
-  angler_buch_spawnergriff_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Legendär / Prestige V</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {spawnergriff: 1}}
-  angler_buch_seelenbindung_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Legendär / Prestige V</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {seelenbindung: 1}}
+  # Angler-Bücher mit stufenspezifischen Beschreibungen.
+  angler_buch_ausdauer_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige I</dark_gray>', '<gray>Verkürzt die Wartezeit beim AFK-Angeln.</gray>', '<gray>AFK-Fangintervall: 27 Sekunden.</gray>', '<gray>Köder beeinflusst diese Zeit nicht.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ausdauer: 1}}
+  angler_buch_ruhige_hand_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige I</dark_gray>', '<gray>Größere Trefferzonen beim aktiven Angeln.</gray>', '<gray>Grün +10 %, Gelb +5 %.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ruhige_hand: 1}}
+  angler_buch_ausdauer_2: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige II</dark_gray>', '<gray>Verkürzt die Wartezeit beim AFK-Angeln.</gray>', '<gray>AFK-Fangintervall: 24 Sekunden.</gray>', '<gray>Köder beeinflusst diese Zeit nicht.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ausdauer: 2}}
+  angler_buch_ruhige_hand_2: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige II</dark_gray>', '<gray>Größere Trefferzonen beim aktiven Angeln.</gray>', '<gray>Grün +20 %, Gelb +10 %.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ruhige_hand: 2}}
+  angler_buch_nachfassen_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige II</dark_gray>', '<gray>Bei Grau: ein zusätzlicher Stoppversuch.</gray>', '<gray>Andere Trefferfarben zählen sofort.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {nachfassen: 1}}
+  angler_buch_ausdauer_3: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige III</dark_gray>', '<gray>Verkürzt die Wartezeit beim AFK-Angeln.</gray>', '<gray>AFK-Fangintervall: 21 Sekunden.</gray>', '<gray>Köder beeinflusst diese Zeit nicht.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ausdauer: 3}}
+  angler_buch_konzentration_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige III</dark_gray>', '<gray>Erreiche Combo-Boni früher.</gray>', '<gray>Maximaler Combo-Bonus ×1,20 ab Combo 27.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {konzentration: 1}}
+  angler_buch_ausdauer_4: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige IV</dark_gray>', '<gray>Verkürzt die Wartezeit beim AFK-Angeln.</gray>', '<gray>AFK-Fangintervall: 18 Sekunden.</gray>', '<gray>Köder beeinflusst diese Zeit nicht.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ausdauer: 4}}
+  angler_buch_ruhige_hand_3: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige IV</dark_gray>', '<gray>Größere Trefferzonen beim aktiven Angeln.</gray>', '<gray>Grün +30 %, Gelb +15 %.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ruhige_hand: 3}}
+  angler_buch_nachfassen_2: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige IV</dark_gray>', '<gray>Bei Grau: zwei zusätzliche Stoppversuche.</gray>', '<gray>Andere Trefferfarben zählen sofort.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {nachfassen: 2}}
+  angler_buch_konzentration_2: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige IV</dark_gray>', '<gray>Erreiche Combo-Boni früher.</gray>', '<gray>Maximaler Combo-Bonus ×1,20 ab Combo 24.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {konzentration: 2}}
+  angler_buch_meistergriff_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige IV</dark_gray>', '<gray>Bei einem grünen Treffer:</gray>', '<gray>15 % Chance auf +2 statt +1 Combo.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {meistergriff: 1}}
+  angler_buch_ausdauer_5: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige V</dark_gray>', '<gray>Verkürzt die Wartezeit beim AFK-Angeln.</gray>', '<gray>AFK-Fangintervall: 15 Sekunden.</gray>', '<gray>Köder beeinflusst diese Zeit nicht.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ausdauer: 5}}
+  angler_buch_konzentration_3: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige V</dark_gray>', '<gray>Erreiche Combo-Boni früher.</gray>', '<gray>Maximaler Combo-Bonus ×1,20 ab Combo 21.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {konzentration: 3}}
+  angler_buch_meistergriff_2: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige V</dark_gray>', '<gray>Bei einem grünen Treffer:</gray>', '<gray>30 % Chance auf +2 statt +1 Combo.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {meistergriff: 2}}
+  angler_buch_totembindung_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Legendär / Prestige V</dark_gray>', '<gray>Nur für Schilde: speichert ein Totem.</gray>', '<gray>Schützt bei tödlichem Schaden, wenn du</gray>', '<gray>das Schild in Haupt- oder Nebenhand hältst.</gray>', '<gray>Ein gehaltenes Totem hat Vorrang.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {totembindung: 1}}
+  angler_buch_spawnergriff_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Legendär / Prestige V</dark_gray>', '<gray>Für Spitzhacken: baut Mob-Spawner</gray>', '<gray>ohne Behutsamkeit ab. Der Mobtyp bleibt erhalten.</gray>', '<gray>Bis zu 3 Spawner pro Verzauberung.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {spawnergriff: 1}}
+  angler_buch_seelenbindung_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Legendär / Prestige V</dark_gray>', '<gray>Dein Werkzeug oder deine Waffe bleibt</gray>', '<gray>beim Tod erhalten – samt Verzauberung.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {seelenbindung: 1}}
   reparaturkern:
     material: ECHO_SHARD
     display-name: '<aqua>Reparaturkern</aqua>'
-    lore: ['<dark_gray>Angler-Spezialitem</dark_gray>', '<gray>Für vollständige Haltbarkeitsreparatur.</gray>', '<dark_gray>Im Amboss mit beschädigtem Item: 1 Level.</dark_gray>']
+    lore: ['<dark_gray>Angler-Spezialitem</dark_gray>', '<gray>Repariert ein beschädigtes haltbares Item</gray>', '<gray>im Amboss vollständig.</gray>', '<dark_gray>Kosten: 1 Reparaturkern und 1 XP-Level.</dark_gray>']
     glow: true
     max-stack-size: 64
   bibliothekarsiegel:
     material: PAPER
     display-name: '<light_purple>Bibliothekarsiegel</light_purple>'
-    lore: ['<dark_gray>Angler-Spezialitem</dark_gray>', '<gray>Würfelt alle Angebote eines ungetradeten Bibliothekars neu.</gray>']
+    lore: ['<dark_gray>Angler-Spezialitem</dark_gray>', '<gray>Rechtsklick auf einen Bibliothekar, mit dem</gray>', '<gray>noch nie gehandelt wurde: würfelt Angebote neu.</gray>', '<gray>Das Siegel wird nicht verbraucht.</gray>']
     glow: true
     max-stack-size: 1
   werkzeugfragment:
