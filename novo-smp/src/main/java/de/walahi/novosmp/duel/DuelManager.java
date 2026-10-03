@@ -310,6 +310,14 @@ public final class DuelManager {
     }
 
     public DuelRequest findRequest(UUID target, String challengerName) {
+        // Chat links identify the exact request, independently of names and
+        // other challenges arriving after the notification was sent.
+        if (challengerName != null) {
+            try {
+                DuelRequest exact = requests.get(UUID.fromString(challengerName));
+                return exact != null && exact.target().equals(target) && !exact.expired() ? exact : null;
+            } catch (IllegalArgumentException ignored) { /* Existing challenger-name syntax. */ }
+        }
         DuelRequest newest = null;
         for (DuelRequest request : requests.values()) {
             if (!request.target().equals(target) || request.expired()) continue;
@@ -360,8 +368,11 @@ public final class DuelManager {
     }
 
     public void accept(Player target, DuelRequest request) {
-        if (request == null || !requests.containsKey(request.id()) || request.expired()) {
-            if (request != null) requests.remove(request.id());
+        if (target == null || !target.isOnline()) return;
+        if (request == null || !request.target().equals(target.getUniqueId())
+                || requests.get(request.id()) != request || request.expired()) {
+            if (request != null && request.target().equals(target.getUniqueId()) && request.expired()
+                    && requests.remove(request.id(), request)) lifecycle.onRequestRemoved(request);
             send(target, config.message("requests.invalid", "<red>Diese Duellanfrage ist nicht mehr gültig.</red>"));
             return;
         }
@@ -398,11 +409,16 @@ public final class DuelManager {
             send(target, config.message("requests.invalid", "<red>Diese Duellanfrage ist nicht mehr gültig.</red>"));
             return;
         }
+        lifecycle.onRequestAccepted(request);
 
-        requests.values().removeIf(other -> other.challenger().equals(challenger.getUniqueId())
+        requests.values().removeIf(other -> {
+            boolean removed = other.challenger().equals(challenger.getUniqueId())
                 || other.target().equals(challenger.getUniqueId())
                 || other.challenger().equals(target.getUniqueId())
-                || other.target().equals(target.getUniqueId()));
+                || other.target().equals(target.getUniqueId());
+            if (removed) lifecycle.onRequestRemoved(other);
+            return removed;
+        });
 
         DuelMatch match = new DuelMatch(request, map);
         clearArenaLeaveWarnings(challenger.getUniqueId(), target.getUniqueId());
@@ -411,6 +427,7 @@ public final class DuelManager {
         matchesByPlayer.put(target.getUniqueId(), match);
 
         if (!escrow.withdraw(match, challenger, target)) {
+            lifecycle.onTechnicalAbort(request);
             releaseMatch(match);
             return;
         }

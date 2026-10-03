@@ -189,8 +189,11 @@ public final class DragonEggKingService implements Listener, DuelLifecycleHook {
                 "%cost%", MenuFormat.integer(config.mandatoryCost()),
                 "%king%", king == null ? request.target().toString() : esc(king.getName()));
         if (king != null) send(king, mandatory ? "mandatory-received" : "voluntary-received",
-                mandatory ? "<gold>⚔ Pflichtduell von <white>%player%</white>.</gold> <gray>Auto-Annahme in <yellow>%seconds%s</yellow>. <click:run_command:'/duel requests'><yellow>[Öffnen]</yellow></click></gray>"
-                        : "<yellow>⚔ Freiwilliges King-Duell von <white>%player%</white>.</yellow> <gray><click:run_command:'/duel requests'><yellow>[Öffnen]</yellow></click></gray>",
+                mandatory ? "<gold>⚔ Pflichtduell von <white>%player%</white>.</gold> <gray>Auto-Annahme in <yellow>%seconds%s</yellow>. <click:run_command:'/duel open %request%'><yellow>[Öffnen]</yellow></click></gray>"
+                        : "<yellow>⚔ Freiwilliges King-Duell von <white>%player%</white>.</yellow> <gray><click:run_command:'/duel open %request%'><yellow>[Öffnen]</yellow></click></gray>",
+                // Also repair the shipped legacy link in existing server configs.
+                "/duel requests", "/duel open " + request.id(),
+                "%request%", request.id().toString(),
                 "%player%", challenger == null ? request.challenger().toString() : esc(challenger.getName()),
                 "%seconds%", Integer.toString(config.acceptTimeoutSeconds()));
     }
@@ -231,6 +234,11 @@ public final class DragonEggKingService implements Listener, DuelLifecycleHook {
             return false;
         }
         return true;
+    }
+
+    @Override public synchronized void onRequestAccepted(DuelRequest request) {
+        Challenge challenge = challenges.get(request.id());
+        if (challenge != null) challenge.accepted = true;
     }
 
     @Override
@@ -408,7 +416,7 @@ public final class DragonEggKingService implements Listener, DuelLifecycleHook {
 
     private void tickChallenges() {
         long now = System.currentTimeMillis(); cooldowns.entrySet().removeIf(e -> e.getValue() <= now);
-        List<Challenge> mandatory = challenges.values().stream().filter(c -> c.mandatory && !c.started)
+        List<Challenge> mandatory = challenges.values().stream().filter(c -> c.mandatory && !c.accepted && !c.started)
                 .sorted(Comparator.comparingLong(c -> c.created)).toList();
         for (Challenge challenge : mandatory) {
             Player king = Bukkit.getPlayer(challenge.request.target());
@@ -680,7 +688,7 @@ public final class DragonEggKingService implements Listener, DuelLifecycleHook {
     private void trackNearbyBlock(Location l){if(state.kind()!=KingLocationKind.BLOCK&&state.kind()!=KingLocationKind.PORTAL)return;for(int x=-16;x<=16;x++)for(int y=-8;y<=8;y++)for(int z=-16;z<=16;z++){Block b=l.getWorld().getBlockAt(l.getBlockX()+x,l.getBlockY()+y,l.getBlockZ()+z);if(b.getType()==Material.DRAGON_EGG){locateBlock(b.getLocation(),KingLocationKind.BLOCK,"bewegtes Ei");return;}}}
 
     private static final class Challenge {
-        final DuelRequest request; final boolean mandatory; final long created; final long autoAcceptAt; boolean charged; boolean started;
+        final DuelRequest request; final boolean mandatory; final long created; final long autoAcceptAt; boolean accepted; boolean charged; boolean started;
         Challenge(DuelRequest request,boolean mandatory,long created,long autoAcceptAt){this.request=request;this.mandatory=mandatory;this.created=created;this.autoAcceptAt=autoAcceptAt;}
     }
 }

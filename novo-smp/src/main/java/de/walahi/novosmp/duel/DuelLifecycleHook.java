@@ -12,6 +12,7 @@ public interface DuelLifecycleHook {
     default boolean handlesRequestCreatedMessages(DuelRequest request) { return false; }
     default boolean isSpecializedRequest(DuelRequest request) { return false; }
     default boolean beforeAccept(DuelRequest request, Player challenger, Player target) { return true; }
+    default void onRequestAccepted(DuelRequest request) { }
     default boolean mayDeny(DuelRequest request, Player target) { return true; }
     default boolean beforeStart(DuelRequest request, Player challenger, Player target) { return true; }
     default void afterSnapshotsCaptured(DuelRequest request, Player challenger, Player target) { }
