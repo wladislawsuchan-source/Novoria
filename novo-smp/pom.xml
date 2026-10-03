@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"><modelVersion>4.0.0</modelVersion>
+<parent><groupId>de.walahi</groupId><artifactId>novo-server-parent</artifactId><version>1.53.60</version></parent>
+<artifactId>novo-smp</artifactId>
+<dependencies>
+<dependency><groupId>de.walahi</groupId><artifactId>novo-common</artifactId><version>${project.version}</version></dependency>
+<dependency><groupId>io.papermc.paper</groupId><artifactId>paper-api</artifactId><scope>provided</scope></dependency>
+<dependency><groupId>net.luckperms</groupId><artifactId>api</artifactId><scope>provided</scope></dependency>
+<dependency><groupId>net.dmulloy2</groupId><artifactId>ProtocolLib</artifactId><scope>provided</scope></dependency>
+<dependency><groupId>me.clip</groupId><artifactId>placeholderapi</artifactId><scope>provided</scope></dependency>
+<dependency><groupId>com.sk89q.worldedit</groupId><artifactId>worldedit-bukkit</artifactId><version>7.4.3</version><scope>provided</scope></dependency>
+<dependency>
+  <groupId>net.citizensnpcs</groupId><artifactId>citizens-main</artifactId><scope>provided</scope>
+  <exclusions><exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion></exclusions>
+</dependency>
+</dependencies>
+<build><finalName>NovoSMP</finalName><plugins>
+<plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version><configuration><release>21</release></configuration></plugin>
+<plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-shade-plugin</artifactId><version>3.6.0</version><executions><execution><phase>package</phase><goals><goal>shade</goal></goals><configuration><createDependencyReducedPom>false</createDependencyReducedPom><minimizeJar>false</minimizeJar><filters><filter><artifact>*:*</artifact><excludes><exclude>META-INF/*.SF</exclude><exclude>META-INF/*.DSA</exclude><exclude>META-INF/*.RSA</exclude></excludes></filter></filters></configuration></execution></executions></plugin>
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId><artifactId>maven-antrun-plugin</artifactId><version>3.1.0</version>
+  <executions><execution><id>verify-and-stage-complete-jar</id><phase>package</phase><goals><goal>run</goal></goals>
+    <configuration><target>
+      <resourcecount property="novosmp.compiled.class.count"><fileset dir="${project.build.outputDirectory}" includes="de/walahi/novosmp/**/*.class"/></resourcecount>
+      <resourcecount property="novosmp.packaged.class.count"><zipfileset src="${project.build.directory}/${project.build.finalName}.jar" includes="de/walahi/novosmp/**/*.class"/></resourcecount>
+      <resourcecount property="common.compiled.class.count"><fileset dir="${maven.multiModuleProjectDirectory}/novo-common/target/classes" includes="de/walahi/smpcore/**/*.class"/></resourcecount>
+      <resourcecount property="common.packaged.class.count"><zipfileset src="${project.build.directory}/${project.build.finalName}.jar" includes="de/walahi/smpcore/**/*.class"/></resourcecount>
+      <fail message="NovoSMP.jar ist unvollständig: eigene NovoSMP-Klassen fehlen."><condition><not><equals arg1="${novosmp.compiled.class.count}" arg2="${novosmp.packaged.class.count}"/></not></condition></fail>
+      <fail message="NovoSMP.jar ist unvollständig: NovoCommon-Klassen fehlen."><condition><not><equals arg1="${common.compiled.class.count}" arg2="${common.packaged.class.count}"/></not></condition></fail>
+      <delete dir="${project.build.directory}/packaging-check"/>
+      <mkdir dir="${project.build.directory}/packaging-check"/>
+      <unzip src="${project.build.directory}/${project.build.finalName}.jar" dest="${project.build.directory}/packaging-check">
+        <patternset>
+          <include name="de/walahi/novosmp/professions/ProfessionManager$MinedProgressKey.class"/>
+          <include name="de/walahi/smpcore/gui/GuiHolder.class"/>
+          <include name="de/walahi/novosmp/orders/OrderDeliveryListener$DeliveryHolder.class"/>
+          <include name="de/walahi/smpcore/commands/StaffCommands$InvSeeHolder.class"/>
+          <include name="org/mariadb/jdbc/type/GeometryCollection.class"/>
+        </patternset>
+      </unzip>
+      <available file="${project.build.directory}/packaging-check/de/walahi/novosmp/professions/ProfessionManager$MinedProgressKey.class" property="check.mined"/>
+      <available file="${project.build.directory}/packaging-check/de/walahi/smpcore/gui/GuiHolder.class" property="check.gui"/>
+      <available file="${project.build.directory}/packaging-check/de/walahi/novosmp/orders/OrderDeliveryListener$DeliveryHolder.class" property="check.delivery"/>
+      <available file="${project.build.directory}/packaging-check/de/walahi/smpcore/commands/StaffCommands$InvSeeHolder.class" property="check.invsee"/>
+      <available file="${project.build.directory}/packaging-check/org/mariadb/jdbc/type/GeometryCollection.class" property="check.mariadb"/>
+      <fail unless="check.mined" message="NovoSMP.jar fehlt ProfessionManager$MinedProgressKey."/>
+      <fail unless="check.gui" message="NovoSMP.jar fehlt GuiHolder."/>
+      <fail unless="check.delivery" message="NovoSMP.jar fehlt OrderDeliveryListener$DeliveryHolder."/>
+      <fail unless="check.invsee" message="NovoSMP.jar fehlt StaffCommands$InvSeeHolder."/>
+      <fail unless="check.mariadb" message="NovoSMP.jar fehlt MariaDB GeometryCollection."/>
+      <mkdir dir="${maven.multiModuleProjectDirectory}/build"/>
+      <copy file="${project.build.directory}/${project.build.finalName}.jar" tofile="${maven.multiModuleProjectDirectory}/build/NovoSMP.jar" overwrite="true"/>
+      <echo message="Verifizierte NovoSMP.jar: ${novosmp.packaged.class.count} NovoSMP- und ${common.packaged.class.count} NovoCommon-Klassen; Runtime-Prüfklassen vollständig."/>
+    </target></configuration>
+  </execution></executions>
+</plugin>
+</plugins></build>
+</project>

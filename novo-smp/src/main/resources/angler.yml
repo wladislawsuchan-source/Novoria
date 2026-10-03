@@ -1,0 +1,876 @@
+enabled: true
+
+# Die Größe wird immer aus dem aktuellen Angler-Prestige berechnet.
+storage:
+  rows-by-prestige:
+    '0': 3
+    '1': 3
+    '2': 4
+    '3': 5
+    '4': 5
+    '5': 6
+
+# Gewichte gelten nur innerhalb des Fish-Pools, nicht als direkte Prozentchance.
+fish:
+  river_perch:
+    weight: 100
+    difficulty: easy
+    biome-multiplier: 2.0
+    display-name: Flussbarsch
+    material: COD
+    rarity: common
+    rarity-display: Häufig
+    preferred-biomes: Fluss
+    biome-tags: [river]
+    best-conditions: Keine
+    exclusive: false
+    sell-price: 4
+    color: '<green>'
+    lore: ['<gray>Ein Fisch aus dem Fluss.</gray>']
+  silver_carp:
+    weight: 100
+    difficulty: easy
+    biome-multiplier: 2.0
+    display-name: Silberkarpfen
+    material: COD
+    rarity: common
+    rarity-display: Häufig
+    preferred-biomes: Ebene / Süßwasser
+    biome-tags: [plains, river]
+    best-conditions: Keine
+    exclusive: false
+    sell-price: 4
+    color: '<green>'
+    lore: ['<gray>Ein häufiger Süßwasserfisch.</gray>']
+  forest_trout:
+    weight: 90
+    difficulty: easy
+    biome-multiplier: 2.0
+    display-name: Waldforelle
+    material: SALMON
+    rarity: common
+    rarity-display: Häufig
+    preferred-biomes: Wald
+    biome-tags: [forest]
+    best-conditions: Keine
+    exclusive: false
+    sell-price: 5
+    color: '<green>'
+    lore: ['<gray>Eine Forelle aus bewaldeten Gewässern.</gray>']
+  sea_bass:
+    weight: 70
+    difficulty: medium
+    biome-multiplier: 2.0
+    display-name: Seebarsch
+    material: COD
+    rarity: ordinary
+    rarity-display: Gewöhnlich
+    preferred-biomes: Ozean
+    biome-tags: [ocean]
+    best-conditions: Keine
+    exclusive: false
+    sell-price: 6
+    color: '<aqua>'
+    lore: ['<gray>Im offenen Meer zuhause.</gray>']
+  swamp_carp:
+    weight: 70
+    difficulty: medium
+    biome-multiplier: 2.0
+    display-name: Moorkarpfen
+    material: COD
+    rarity: ordinary
+    rarity-display: Gewöhnlich
+    preferred-biomes: Sumpf
+    biome-tags: [swamp]
+    best-conditions: Keine
+    exclusive: false
+    sell-price: 6
+    color: '<aqua>'
+    lore: ['<gray>Ein Bewohner stiller Sumpfgewässer.</gray>']
+  night_catfish:
+    weight: 40
+    difficulty: medium
+    biome-multiplier: 2.0
+    night-multiplier: 1.75
+    display-name: Nachtwels
+    material: COD
+    rarity: uncommon
+    rarity-display: Ungewöhnlich
+    preferred-biomes: Fluss / Sumpf
+    biome-tags: [river, swamp]
+    best-conditions: Nacht
+    condition-tags: [night]
+    exclusive: false
+    sell-price: 8
+    color: '<blue>'
+    lore: ['<gray>Nachts besonders aktiv.</gray>']
+  moon_trout:
+    weight: 40
+    difficulty: medium
+    biome-multiplier: 2.0
+    night-multiplier: 1.75
+    display-name: Mondforelle
+    material: SALMON
+    rarity: uncommon
+    rarity-display: Ungewöhnlich
+    preferred-biomes: Wald
+    biome-tags: [forest]
+    best-conditions: Nacht
+    condition-tags: [night]
+    exclusive: false
+    sell-price: 8
+    color: '<blue>'
+    lore: ['<gray>Glänzt im Mondlicht.</gray>']
+  rain_carp:
+    weight: 40
+    difficulty: medium
+    biome-multiplier: 2.0
+    rain-multiplier: 1.75
+    display-name: Regenkarpfen
+    material: COD
+    rarity: uncommon
+    rarity-display: Ungewöhnlich
+    preferred-biomes: Fluss / Ebene
+    biome-tags: [river, plains]
+    best-conditions: Regen
+    condition-tags: [rain]
+    exclusive: false
+    sell-price: 9
+    color: '<blue>'
+    lore: ['<gray>Zeigt sich besonders bei Regen.</gray>']
+  storm_catfish:
+    weight: 20
+    difficulty: hard
+    biome-multiplier: 2.0
+    rain-multiplier: 1.75
+    display-name: Sturmwels
+    material: COD
+    rarity: rare
+    rarity-display: Selten
+    preferred-biomes: Sumpf
+    biome-tags: [swamp]
+    best-conditions: Regen
+    condition-tags: [rain]
+    exclusive: false
+    sell-price: 12
+    color: '<light_purple>'
+    lore: ['<gray>Ein Wels aus stürmischen Sümpfen.</gray>']
+  storm_mackerel:
+    weight: 15
+    difficulty: hard
+    biome-multiplier: 2.0
+    night-multiplier: 1.75
+    rain-multiplier: 1.75
+    display-name: Sturmmakrele
+    material: COD
+    rarity: rare
+    rarity-display: Selten
+    preferred-biomes: Ozean
+    biome-tags: [ocean]
+    best-conditions: Nacht + Regen
+    condition-tags: [night, rain]
+    exclusive: false
+    sell-price: 16
+    color: '<light_purple>'
+    lore: ['<gray>Nacht und Regen begünstigen diesen Fang.</gray>']
+  coral_fish:
+    weight: 30
+    difficulty: medium
+    exclusive-biomes: [warm_ocean]
+    display-name: Korallenfisch
+    material: TROPICAL_FISH
+    rarity: rare
+    rarity-display: Selten
+    preferred-biomes: Warmer Ozean
+    biome-tags: [ocean]
+    best-conditions: Keine
+    exclusive: true
+    sell-price: 15
+    color: '<light_purple>'
+    lore: ['<gray>Nur in warmen Ozeanen heimisch.</gray>']
+  mangrove_catfish:
+    weight: 25
+    difficulty: hard
+    exclusive-biomes: [mangrove_swamp]
+    display-name: Mangrovenwels
+    material: COD
+    rarity: rare
+    rarity-display: Selten
+    preferred-biomes: Mangrovensumpf
+    biome-tags: [swamp]
+    best-conditions: Keine
+    exclusive: true
+    sell-price: 18
+    color: '<light_purple>'
+    lore: ['<gray>Nur im Mangrovensumpf heimisch.</gray>']
+  frost_trout:
+    weight: 25
+    difficulty: hard
+    exclusive-biomes: [frozen_river, frozen_ocean, deep_frozen_ocean]
+    display-name: Frostforelle
+    material: SALMON
+    rarity: rare
+    rarity-display: Selten
+    preferred-biomes: Gefrorener Fluss / kalte Gewässer
+    biome-tags: [river, cold]
+    best-conditions: Keine
+    exclusive: true
+    sell-price: 18
+    color: '<light_purple>'
+    lore: ['<gray>Nur in echt kalten Gewässern heimisch.</gray>']
+  deep_mackerel:
+    weight: 20
+    difficulty: hard
+    exclusive-biomes: [deep_ocean, deep_lukewarm_ocean, deep_cold_ocean, deep_frozen_ocean]
+    display-name: Tiefenmakrele
+    material: COD
+    rarity: very_rare
+    rarity-display: Sehr selten
+    preferred-biomes: Tiefsee
+    biome-tags: [ocean]
+    best-conditions: Keine
+    exclusive: true
+    sell-price: 22
+    color: '<gold>'
+    lore: ['<gray>Nur in Tiefsee-Biomen heimisch.</gray>']
+
+gui:
+  fish:
+    title: '<dark_aqua>Novoria • Fische</dark_aqua>'
+    filler: CYAN_STAINED_GLASS_PANE
+    rarity-line: '<gray>Seltenheit: <white>%value%</white></gray>'
+    preferred-line: '<gray>Bevorzugt: <white>%value%</white></gray>'
+    location-line: '<gray>Fundort: <white>%value%</white></gray>'
+    condition-line: '<gray>Beste Bedingungen: <white>%value%</white></gray>'
+    exclusive-line: '<gray>Exklusiv: <white>%value%</white></gray>'
+    back-name: '<yellow>Zurück zum Angler</yellow>'
+    previous-name: '<yellow>Vorherige Seite</yellow>'
+    next-name: '<yellow>Nächste Seite</yellow>'
+    page-name: '<aqua>Seite %page%/%pages%</aqua>'
+    filters:
+      all: Alle
+      common: Häufig
+      rare: Selten
+      night: Nacht
+      rain: Regen
+      biome: Biom
+      exclusive: Exklusiv
+    biome-labels:
+      river: Fluss
+      plains: Ebene
+      forest: Wald
+      ocean: Ozean
+      swamp: Sumpf
+      cold: Kaltes Gewässer
+  storage:
+    title: '<dark_aqua>Novoria • Fanglager</dark_aqua>'
+  profession:
+    storage-slot: 48
+    storage-material: BARREL
+    storage-name: '<aqua>Fanglager</aqua>'
+    storage-lore: ['<gray>Deine gespeicherten Fänge.</gray>', '<yellow>Klicken zum Öffnen</yellow>']
+    fish-slot: 50
+    fish-material: COD
+    fish-name: '<aqua>Fische</aqua>'
+    fish-lore: ['<gray>Alle bekannten Fischarten ansehen.</gray>', '<yellow>Klicken zum Öffnen</yellow>']
+  skills:
+    green_hits:
+      name: Grüne Treffer erzielen
+      material: LIME_DYE
+    max_combo:
+      name: Höchste Combo erreichen
+      material: FISHING_ROD
+
+messages:
+  player-only: '<red>Dieser Befehl ist nur für Spieler.</red>'
+  disabled: '<red>Angler ist derzeit deaktiviert.</red>'
+  storage-locked: '<red>Das Fanglager ist nur mit dem Beruf <aqua>Angler</aqua> verfügbar.</red>'
+  storage-error: '<red>Dein Fanglager ist wegen eines Speicherfehlers vorübergehend gesperrt.</red>'
+  admin-storecatch: '<green>%stored%x %fish% im Fanglager von %player% gespeichert. <yellow>%dropped%x Überlauf vor dem Spieler gedroppt.</yellow></green>'
+  admin-pool-preview: '<green>Test-Pool %pool% für %player% angezeigt (ohne Belohnung).</green>'
+  admin-roll-header: '<aqua>Fishing-Roll Simulation (%count% / %quality% / %tier%)</aqua>'
+  admin-roll-line: '<gray>%pool%: <yellow>%count%</yellow></gray>'
+  admin-bundle-test: '<green>Vanilla-Bundle %case% an %player%: %actual-stacks%/%expected-stacks% Stacks, %actual%/%expected% Items im Data-Component-Readback. Client-Anzeige/Entnahme bitte prüfen.</green>'
+  admin-bundle-test-failed: '<red>Bundle-Test %case% gescheitert: %reason%</red>'
+  admin-test-usage: '<yellow>/angler testbook|testcustomitem|testlumi|testloot <Spieler> <ID|Menge|treasure|junk|rare|epic|legendary> [Anzahl|Entry-ID]</yellow>'
+  admin-test-player-offline: '<red>Spieler <white>%player%</white> ist nicht online.</red>'
+  admin-test-book-unknown: '<red>Unbekannte Overlevel-Buch-ID: <white>%id%</white>.</red>'
+  admin-test-book-invalid: '<red>Overlevel-Buch <white>%id%</white> ist in angler.yml ungültig konfiguriert (Enchant/Level).</red>'
+  admin-test-custom-unknown: '<red>Unbekannte Custom-Item-ID: <white>%id%</white>.</red>'
+  admin-test-book-given: '<green>Angler-Testbuch <yellow>%id%</yellow> an <white>%player%</white> vergeben.%overflow%</green>'
+  admin-test-custom-given: '<green>Angler-Custom-Item <yellow>%id%</yellow> an <white>%player%</white> vergeben.%overflow%</green>'
+  admin-test-item-failed: '<red>Angler-Testitem <white>%id%</white> konnte nicht erzeugt werden. Server-Log prüfen.</red>'
+  admin-test-lumi-invalid: '<red>Die Lumi-Menge muss eine positive ganze Zahl sein.</red>'
+  admin-test-lumi-failed: '<red>Lumi-Gutschrift für <white>%player%</white> fehlgeschlagen. Server-Log prüfen.</red>'
+  admin-test-lumi-given: '<green>%amount% Lumis an %player% gutgeschrieben.</green>'
+  admin-test-loot-usage: '<yellow>/angler testloot <Spieler> <treasure|junk|rare|epic|legendary> [Anzahl bis 1000|Entry-ID]</yellow>'
+  admin-test-loot-legendary-prestige-required: '<red>%player% benötigt Angler-Prestige V für Legendary-Loot.</red>'
+  admin-test-loot-unavailable: '<red>%pool%-Loot ist nicht vollständig konfiguriert. Server-Log prüfen.</red>'
+  admin-test-loot-failed: '<red>%pool%-Test konnte nicht ausgegeben werden. Server-Log prüfen.</red>'
+  admin-test-loot-angler-required: '<red>%player% muss Angler als aktiven Beruf haben.</red>'
+  admin-test-loot-entry-unknown: '<red>Unbekannte Rare-Entry-ID: <white>%entry%</white>.</red>'
+  admin-test-loot-prestige-locked: '<red>Für %player%s aktuelles Angler-Prestige ist kein Overlevel-Buch freigeschaltet.</red>'
+  admin-test-loot-given: '<green>%pool%-Test an <white>%player%</white>: <yellow>%entry%</yellow>.</green>'
+  admin-test-loot-header: '<aqua>%pool%-Simulation für %player%: %count% interne Rolls, keine Items ausgegeben.</aqua>'
+  admin-test-loot-line: '<gray>%entry%: <yellow>%count%</yellow></gray>'
+
+# Aktives Angeln verwendet den normalen Vanilla-Hook und gilt für alle Spieler.
+fishing:
+  active:
+    enabled: true
+  night:
+    start-tick: 13000
+    end-tick: 23000
+  biome-groups:
+    river: ['*river']
+    plains: [plains, sunflower_plains]
+    forest: ['*forest']
+    ocean: ['*ocean']
+    swamp: [swamp, mangrove_swamp]
+    cold: [frozen_river, frozen_ocean, deep_frozen_ocean]
+  xp:
+    base: 25
+    color-multipliers:
+      red: 1.0
+      orange: 1.25
+      yellow: 1.6
+      green: 2.0
+  combo:
+    timeout-seconds: 60
+    tiers:
+      '5': 1.05
+      '10': 1.10
+      '20': 1.15
+      '30': 1.20
+  minigame:
+    timeout-seconds: 5
+    bar-width: 41
+    easy:
+      travel-time-seconds: 1.8
+      green: 10.0
+      yellow-each: 6.0
+      orange-each: 8.0
+      red-each: 12.0
+    medium:
+      travel-time-seconds: 1.4
+      green: 8.0
+      yellow-each: 4.0
+      orange-each: 6.0
+      red-each: 10.0
+    hard:
+      travel-time-seconds: 1.1
+      green: 5.0
+      yellow-each: 3.0
+      orange-each: 4.5
+      red-each: 8.0
+  actionbar:
+    pointer: '◆'
+    segment: '▌'
+    start: '<aqua>Ein Biss! Rechtsklick stoppt den Zeiger.</aqua>'
+    gray: '<gray>GRAU • %fish% verfehlt | Combo: 0</gray>'
+    red: '<red>ROT • %fish% • <aqua>+%xp% XP</aqua> | Combo: %combo% | Lager: %stored%/%capacity% | /fanglager</red>'
+    orange: '<gold>ORANGE • %fish% • <aqua>+%xp% XP</aqua> | Combo: %combo% | Lager: %stored%/%capacity% | /fanglager</gold>'
+    yellow: '<yellow>GELB • %fish% • <aqua>+%xp% XP</aqua> | Combo: %combo% | Lager: %stored%/%capacity% | /fanglager</yellow>'
+    green: '<green>GRÜN • %fish% • <aqua>+%xp% XP</aqua> | Combo: %combo% | Lager: %stored%/%capacity% | /fanglager</green>'
+    non-angler:
+      red: '<red>ROT • %fish% | Combo: %combo%</red>'
+      orange: '<gold>ORANGE • %fish% | Combo: %combo%</gold>'
+      yellow: '<yellow>GELB • %fish% | Combo: %combo%</yellow>'
+      green: '<green>GRÜN • %fish% | Combo: %combo%</green>'
+    timeout: '<gray>Zeit abgelaufen • Combo zurückgesetzt.</gray>'
+
+# Äußere Pool-Auswahl. Die Prestige-V-Legendary-Chance bleibt 0.01 %.
+loot:
+  test-message: '<gray>[Fishing-Test] Pool: <yellow>%pool%</yellow></gray>'
+  extra-test-message: '<gray>[Fishing-Test] Luck-Zusatzroll: <yellow>%pool%</yellow></gray>'
+  empty-message: '<red>Kein Fishing-Loot-Pool konfiguriert.</red>'
+  pools:
+    no-angler: {fish: 70.0, junk: 20.0, treasure: 10.0, rare: 0.0, epic: 0.0, legendary: 0.0}
+    prestige-0: {fish: 90.0, junk: 7.5, treasure: 2.5, rare: 0.0, epic: 0.0, legendary: 0.0}
+    prestige-1: {fish: 89.4, junk: 7.0, treasure: 3.0, rare: 0.6, epic: 0.0, legendary: 0.0}
+    prestige-2: {fish: 88.7, junk: 6.5, treasure: 3.2, rare: 1.6, epic: 0.0, legendary: 0.0}
+    prestige-3: {fish: 88.0, junk: 6.0, treasure: 3.3, rare: 2.1, epic: 0.6, legendary: 0.0}
+    prestige-4: {fish: 87.0, junk: 5.5, treasure: 3.5, rare: 2.8, epic: 1.2, legendary: 0.0}
+    prestige-5: {fish: 86.0, junk: 5.0, treasure: 3.5, rare: 3.4, epic: 2.09, legendary: 0.01}
+  junk:
+    received-message: '<gray>Beifang: <white>%entry%</white> erhalten.</gray>'
+    unavailable-message: '<red>Junk-Loot ist derzeit nicht vollständig konfiguriert.</red>'
+    failed-message: '<red>Dein Beifang konnte nicht ausgegeben werden. Das Team wurde informiert.</red>'
+    entries:
+      stick: {weight: 18, type: NORMAL_ITEM, material: STICK, min-amount: 1, max-amount: 3, display-name: 'Stock'}
+      string: {weight: 16, type: NORMAL_ITEM, material: STRING, min-amount: 1, max-amount: 3, display-name: 'Faden'}
+      leather: {weight: 12, type: NORMAL_ITEM, material: LEATHER, min-amount: 1, max-amount: 2, display-name: 'Leder'}
+      bowl: {weight: 10, type: NORMAL_ITEM, material: BOWL, min-amount: 1, max-amount: 2, display-name: 'Schüssel'}
+      bone: {weight: 10, type: NORMAL_ITEM, material: BONE, min-amount: 1, max-amount: 3, display-name: 'Knochen'}
+      rotten_flesh: {weight: 10, type: NORMAL_ITEM, material: ROTTEN_FLESH, min-amount: 1, max-amount: 3, display-name: 'Verrottetes Fleisch'}
+      kelp: {weight: 8, type: NORMAL_ITEM, material: KELP, min-amount: 2, max-amount: 6, display-name: 'Seetang'}
+      ink_sac: {weight: 6, type: NORMAL_ITEM, material: INK_SAC, min-amount: 1, max-amount: 2, display-name: 'Tintensack'}
+      glass_bottle: {weight: 5, type: NORMAL_ITEM, material: GLASS_BOTTLE, min-amount: 1, max-amount: 2, display-name: 'Glasflasche'}
+      damaged_fishing_rod: {weight: 3, type: NORMAL_ITEM, material: FISHING_ROD, amount: 1, min-durability-percent: 10, max-durability-percent: 35, display-name: 'Beschädigte Angel'}
+      damaged_leather_boots: {weight: 2, type: NORMAL_ITEM, material: LEATHER_BOOTS, amount: 1, min-durability-percent: 10, max-durability-percent: 35, display-name: 'Beschädigte Lederstiefel'}
+  treasure:
+    received-message: '<aqua>Schatzfund: <white>%entry%</white> erhalten.</aqua>'
+    unavailable-message: '<red>Treasure-Loot ist derzeit nicht vollständig konfiguriert.</red>'
+    failed-message: '<red>Dein Schatzfund konnte nicht ausgegeben werden. Das Team wurde informiert.</red>'
+    entries:
+      enchanted_book: {weight: 45, type: ENCHANTED_BOOK, display-name: 'Verzaubertes Buch'}
+      name_tag: {weight: 12, type: NORMAL_ITEM, material: NAME_TAG, amount: 1, display-name: 'Namensschild'}
+      xp_bottles: {weight: 10, type: NORMAL_ITEM, material: EXPERIENCE_BOTTLE, amount: 16, display-name: '16 XP-Flaschen'}
+      saddle: {weight: 8, type: NORMAL_ITEM, material: SADDLE, amount: 1, display-name: 'Sattel'}
+      nautilus_shell: {weight: 8, type: NORMAL_ITEM, material: NAUTILUS_SHELL, amount: 1, display-name: 'Nautilusschale'}
+      small_ore_bundle:
+        weight: 7
+        type: BUNDLE
+        display-name: 'Kleines Erz-Bundle'
+        contents:
+          - {material: IRON_INGOT, amount: 12}
+          - {material: GOLD_INGOT, amount: 8}
+          - {material: COPPER_INGOT, amount: 16}
+          - {material: COAL, amount: 16}
+          - {material: REDSTONE, amount: 8}
+          - {material: LAPIS_LAZULI, amount: 8}
+      ender_pearls: {weight: 6, type: NORMAL_ITEM, material: ENDER_PEARL, amount: 4, display-name: '4 Enderperlen'}
+      small_trim_bundle:
+        weight: 4
+        type: RANDOM_TRIM_BUNDLE
+        display-name: 'Kleines Armor-Trim-Bundle'
+        count: 2
+        # Jede Ziehung erfolgt mit Zurücklegen; Duplikate sind erlaubt.
+        templates:
+          SENTRY_ARMOR_TRIM_SMITHING_TEMPLATE: 1
+          DUNE_ARMOR_TRIM_SMITHING_TEMPLATE: 1
+          COAST_ARMOR_TRIM_SMITHING_TEMPLATE: 1
+          WILD_ARMOR_TRIM_SMITHING_TEMPLATE: 1
+    enchanted-books:
+      groups:
+        useful:
+          weight: 60
+          books:
+            mending: {enchantment: minecraft:mending, level: 1, weight: 1}
+            lure: {enchantment: minecraft:lure, level: 3, weight: 1}
+            luck_of_the_sea: {enchantment: minecraft:luck_of_the_sea, level: 3, weight: 1}
+            unbreaking: {enchantment: minecraft:unbreaking, level: 3, weight: 1}
+            efficiency: {enchantment: minecraft:efficiency, level: 4, weight: 1}
+            fortune: {enchantment: minecraft:fortune, level: 3, weight: 1}
+            silk_touch: {enchantment: minecraft:silk_touch, level: 1, weight: 1}
+        medium:
+          weight: 30
+          books:
+            protection: {enchantment: minecraft:protection, level: 4, weight: 1}
+            sharpness: {enchantment: minecraft:sharpness, level: 4, weight: 1}
+            power: {enchantment: minecraft:power, level: 4, weight: 1}
+            feather_falling: {enchantment: minecraft:feather_falling, level: 4, weight: 1}
+        niche:
+          weight: 10
+          books:
+            binding_curse: {enchantment: minecraft:binding_curse, level: 1, weight: 1}
+            vanishing_curse: {enchantment: minecraft:vanishing_curse, level: 1, weight: 1}
+  rare:
+    received-message: '<light_purple>Seltener Fang: <white>%entry%</white> erhalten.</light_purple>'
+    unavailable-message: '<red>Rare-Loot ist derzeit nicht vollständig konfiguriert.</red>'
+    failed-message: '<red>Dein seltener Fang konnte nicht ausgegeben werden. Das Team wurde informiert.</red>'
+    angler-required-message: '<red>Für Rare-Loot muss Angler aktiv sein.</red>'
+    entries:
+      ore_bundle_1:
+        weight: 12
+        type: BUNDLE
+        display-name: 'Erz-Bundle I'
+        contents:
+          - {material: IRON_INGOT, amount: 32}
+          - {material: GOLD_INGOT, amount: 24}
+          - {material: COPPER_INGOT, amount: 48}
+          - {material: REDSTONE, amount: 16}
+          - {material: LAPIS_LAZULI, amount: 16}
+      ore_bundle_2:
+        weight: 8
+        type: BUNDLE
+        display-name: 'Erz-Bundle II'
+        contents:
+          - {material: IRON_INGOT, amount: 48}
+          - {material: GOLD_INGOT, amount: 16}
+          - {material: COPPER_INGOT, amount: 32}
+          - {material: DIAMOND, amount: 8}
+          - {material: EMERALD, amount: 8}
+      xp_bundle:
+        weight: 8
+        type: BUNDLE
+        display-name: 'XP-Bundle'
+        contents:
+          - {material: EXPERIENCE_BOTTLE, amount: 32}
+      gem_bundle:
+        weight: 7
+        type: BUNDLE
+        display-name: 'Edelstein-Bundle'
+        contents:
+          - {material: DIAMOND, amount: 12}
+          - {material: EMERALD, amount: 16}
+          - {material: AMETHYST_SHARD, amount: 24}
+      redstone_bundle:
+        weight: 7
+        type: BUNDLE
+        display-name: 'Redstone-Bundle'
+        contents:
+          - {material: REDSTONE, amount: 32}
+          - {material: OBSERVER, amount: 8}
+          - {material: PISTON, amount: 8}
+          - {material: STICKY_PISTON, amount: 4}
+          - {material: COMPARATOR, amount: 4}
+      build_bundle:
+        weight: 7
+        type: BUNDLE
+        display-name: 'Bau-Bundle'
+        contents:
+          - {material: QUARTZ_BLOCK, amount: 64}
+          - {material: DEEPSLATE_BRICKS, amount: 64}
+          - {material: SEA_LANTERN, amount: 32}
+          - {material: GLOWSTONE, amount: 16}
+      nether_bundle:
+        weight: 6
+        type: BUNDLE
+        display-name: 'Nether-Bundle'
+        contents:
+          - {material: ANCIENT_DEBRIS, amount: 2}
+          - {material: QUARTZ, amount: 16}
+          - {material: GOLD_INGOT, amount: 8}
+          - {material: OBSIDIAN, amount: 8}
+      nautilus_bundle:
+        weight: 6
+        type: BUNDLE
+        display-name: 'Nautilus-Bundle'
+        contents:
+          - {material: NAUTILUS_SHELL, amount: 4}
+          - {material: PRISMARINE_CRYSTALS, amount: 8}
+          - {material: PRISMARINE_SHARD, amount: 16}
+      vanilla_book_bundle: {weight: 6, type: VANILLA_BOOK_BUNDLE, count: 2, display-name: 'Vanilla-Buchpaket'}
+      repair_core: {weight: 5, type: CUSTOM_ITEM, item-id: reparaturkern, amount: 1, display-name: 'Reparaturkern'}
+      end_bundle:
+        weight: 5
+        type: BUNDLE
+        display-name: 'End-Bundle'
+        contents:
+          - {material: ENDER_PEARL, amount: 8}
+          - {material: CHORUS_FRUIT, amount: 4}
+          - {material: SHULKER_SHELL, amount: 2}
+      trim_bundle:
+        weight: 5
+        type: UNIQUE_TRIM_BUNDLE
+        display-name: 'Armor-Trim-Bundle'
+        min-types: 3
+        max-types: 5
+        min-amount-per-type: 1
+        max-amount-per-type: 2
+        templates:
+          SENTRY_ARMOR_TRIM_SMITHING_TEMPLATE: 1
+          DUNE_ARMOR_TRIM_SMITHING_TEMPLATE: 1
+          COAST_ARMOR_TRIM_SMITHING_TEMPLATE: 1
+          WILD_ARMOR_TRIM_SMITHING_TEMPLATE: 1
+          VEX_ARMOR_TRIM_SMITHING_TEMPLATE: 1
+      large_xp_bundle:
+        weight: 4
+        type: BUNDLE
+        display-name: 'Großes XP-Bundle'
+        contents:
+          - {material: EXPERIENCE_BOTTLE, amount: 64}
+      diamond_pickaxe_bundle:
+        weight: 4
+        type: EQUIPMENT_BUNDLE
+        display-name: 'Diamantspitzhacken-Bundle'
+        items:
+          - {material: DIAMOND_PICKAXE, amount: 1, enchantments: {efficiency: 5, unbreaking: 3, fortune: 3}}
+          - {material: DIAMOND_PICKAXE, amount: 1, enchantments: {efficiency: 5, unbreaking: 3, silk_touch: 1}}
+      diamond_axe_bundle:
+        weight: 3
+        type: EQUIPMENT_BUNDLE
+        display-name: 'Diamantaxt-Bundle'
+        items:
+          - {material: DIAMOND_AXE, amount: 1, enchantments: {efficiency: 5, unbreaking: 3, fortune: 3}}
+          - {material: DIAMOND_AXE, amount: 1, enchantments: {efficiency: 5, unbreaking: 3, silk_touch: 1}}
+      diamond_shovel_bundle:
+        weight: 3
+        type: EQUIPMENT_BUNDLE
+        display-name: 'Diamantschaufel-Bundle'
+        items:
+          - {material: DIAMOND_SHOVEL, amount: 1, enchantments: {efficiency: 5, unbreaking: 3, fortune: 3}}
+          - {material: DIAMOND_SHOVEL, amount: 1, enchantments: {efficiency: 5, unbreaking: 3, silk_touch: 1}}
+      overlevel_book: {weight: 4, type: OVERLEVEL_BOOK, display-name: 'Overlevel-Buch'}
+  legendary:
+    min-prestige: 5
+    received-message: '<gold>Legendärer Fang: <white>%entry%</white> erhalten.</gold>'
+    unavailable-message: '<red>Legendary-Loot ist derzeit nicht vollständig konfiguriert.</red>'
+    failed-message: '<red>Dein legendärer Fang konnte nicht ausgegeben werden. Das Team wurde informiert.</red>'
+    angler-required-message: '<red>Für Legendary-Loot muss Angler aktiv sein.</red>'
+    prestige-required-message: '<red>Legendary-Loot erfordert Angler-Prestige V.</red>'
+    entries:
+      totem_binding: {weight: 12, type: CUSTOM_ITEM, item-id: angler_buch_totembindung_1, amount: 1, display-name: 'Totembindung I'}
+      spawner_grip: {weight: 10, type: CUSTOM_ITEM, item-id: angler_buch_spawnergriff_1, amount: 1, display-name: 'Spawnergriff I'}
+      soul_binding: {weight: 12, type: CUSTOM_ITEM, item-id: angler_buch_seelenbindung_1, amount: 1, display-name: 'Seelenbindung I'}
+      netherite_armor_bundle:
+        weight: 10
+        type: EQUIPMENT_BUNDLE
+        display-name: 'Netherite-Rüstungs-Bundle'
+        items:
+          - {material: NETHERITE_HELMET, amount: 1, enchantments: {protection: 4, unbreaking: 3, mending: 1, respiration: 3, aqua_affinity: 1}}
+          - {material: NETHERITE_CHESTPLATE, amount: 1, enchantments: {protection: 4, unbreaking: 3, mending: 1}}
+          - {material: NETHERITE_LEGGINGS, amount: 1, enchantments: {protection: 4, unbreaking: 3, mending: 1, swift_sneak: 3}}
+          - {material: NETHERITE_BOOTS, amount: 1, enchantments: {protection: 4, unbreaking: 3, mending: 1, feather_falling: 4, depth_strider: 3}}
+      netherite_tool_bundle:
+        weight: 10
+        type: EQUIPMENT_BUNDLE
+        display-name: 'Netherite-Tool-Bundle'
+        items:
+          - {material: NETHERITE_PICKAXE, amount: 1, enchantments: {efficiency: 5, unbreaking: 3, fortune: 3, mending: 1}}
+          - {material: NETHERITE_AXE, amount: 1, enchantments: {efficiency: 5, unbreaking: 3, fortune: 3, mending: 1}}
+          - {material: NETHERITE_SHOVEL, amount: 1, enchantments: {efficiency: 5, unbreaking: 3, silk_touch: 1, mending: 1}}
+      large_netherite_bundle:
+        weight: 10
+        type: BUNDLE
+        display-name: 'Großes Netherite-Bundle'
+        contents:
+          - {material: NETHERITE_INGOT, amount: 4}
+          - {material: ANCIENT_DEBRIS, amount: 8}
+          - {material: DIAMOND, amount: 16}
+      legendary_enchantment_bundle:
+        weight: 12
+        type: BOOK_BUNDLE
+        display-name: 'Legendäres Verzauberungs-Bundle'
+        # Unabhängige Ziehungen, Duplikate erlaubt. Overlevel nutzt loot.overlevel-books.
+        overlevel-count: 3
+        vanilla-count: 2
+        vanilla-books:
+          mending: {enchantment: minecraft:mending, level: 1, weight: 1}
+          unbreaking: {enchantment: minecraft:unbreaking, level: 3, weight: 1}
+          efficiency: {enchantment: minecraft:efficiency, level: 5, weight: 1}
+          fortune: {enchantment: minecraft:fortune, level: 3, weight: 1}
+          silk_touch: {enchantment: minecraft:silk_touch, level: 1, weight: 1}
+          protection: {enchantment: minecraft:protection, level: 4, weight: 1}
+          sharpness: {enchantment: minecraft:sharpness, level: 5, weight: 1}
+          power: {enchantment: minecraft:power, level: 5, weight: 1}
+          feather_falling: {enchantment: minecraft:feather_falling, level: 4, weight: 1}
+          looting: {enchantment: minecraft:looting, level: 3, weight: 1}
+          respiration: {enchantment: minecraft:respiration, level: 3, weight: 1}
+      repair_master_bundle:
+        weight: 8
+        type: BUNDLE
+        display-name: 'Reparaturmeister-Bundle'
+        contents:
+          - {item-id: reparaturkern, amount: 1}
+          - {item-id: reparaturkern, amount: 1}
+          - {item-id: reparaturkern, amount: 1}
+          - {item-id: reparaturkern, amount: 1}
+      gem_jackpot:
+        weight: 8
+        type: BUNDLE
+        display-name: 'Edelstein-Jackpot'
+        contents:
+          - {material: DIAMOND, amount: 64}
+          - {material: EMERALD, amount: 64}
+          - {material: ANCIENT_DEBRIS, amount: 8}
+      legendary_lumi: {weight: 8, type: LUMI, amount: 50, display-name: '50 Lumis'}
+  epic:
+    received-message: '<gold>Epischer Fang: <white>%entry%</white> erhalten.</gold>'
+    unavailable-message: '<red>Epic-Loot ist derzeit nicht vollständig konfiguriert.</red>'
+    failed-message: '<red>Dein epischer Fang konnte nicht ausgegeben werden. Das Team wurde informiert.</red>'
+    angler-required-message: '<red>Für Epic-Loot muss Angler aktiv sein.</red>'
+    entries:
+      large_ore_bundle:
+        weight: 10
+        type: BUNDLE
+        display-name: 'Großes Erz-Bundle'
+        contents:
+          - {material: IRON_INGOT, amount: 64}
+          - {material: GOLD_INGOT, amount: 48}
+          - {material: COPPER_INGOT, amount: 64}
+          - {material: DIAMOND, amount: 16}
+          - {material: EMERALD, amount: 16}
+          - {material: REDSTONE, amount: 32}
+          - {material: LAPIS_LAZULI, amount: 32}
+      large_gem_bundle:
+        weight: 8
+        type: BUNDLE
+        display-name: 'Großes Edelstein-Bundle'
+        contents:
+          - {material: DIAMOND, amount: 24}
+          - {material: EMERALD, amount: 32}
+          - {material: AMETHYST_SHARD, amount: 48}
+      ocean_bundle:
+        weight: 7
+        type: BUNDLE
+        display-name: 'Ocean-Bundle'
+        contents:
+          - {material: NAUTILUS_SHELL, amount: 8}
+          - {material: PRISMARINE_CRYSTALS, amount: 16}
+          - {material: PRISMARINE_SHARD, amount: 32}
+          - {material: SEA_LANTERN, amount: 16}
+      end_plus_bundle:
+        weight: 6
+        type: BUNDLE
+        display-name: 'End-Bundle+'
+        contents:
+          - {material: ENDER_PEARL, amount: 16}
+          - {material: POPPED_CHORUS_FRUIT, amount: 16}
+          - {material: SHULKER_SHELL, amount: 4}
+          - {material: DRAGON_BREATH, amount: 1}
+      xp_plus_bundle:
+        weight: 7
+        type: BUNDLE
+        display-name: 'XP-Bundle+'
+        contents:
+          - {material: EXPERIENCE_BOTTLE, amount: 64}
+          - {material: EXPERIENCE_BOTTLE, amount: 64}
+      enchantment_plus:
+        weight: 12
+        type: BOOK_BUNDLE
+        display-name: 'Verzauberung+'
+        count: 3
+        # Jede der drei Ziehungen erfolgt separat. Gewichte gelten pro Kandidat.
+        vanilla-books:
+          mending: {enchantment: minecraft:mending, level: 1, weight: 4}
+          unbreaking: {enchantment: minecraft:unbreaking, level: 3, weight: 4}
+          efficiency: {enchantment: minecraft:efficiency, level: 5, weight: 4}
+          fortune: {enchantment: minecraft:fortune, level: 3, weight: 4}
+          silk_touch: {enchantment: minecraft:silk_touch, level: 1, weight: 4}
+          protection: {enchantment: minecraft:protection, level: 4, weight: 4}
+          sharpness: {enchantment: minecraft:sharpness, level: 5, weight: 4}
+          power: {enchantment: minecraft:power, level: 5, weight: 4}
+          feather_falling: {enchantment: minecraft:feather_falling, level: 4, weight: 4}
+          lure: {enchantment: minecraft:lure, level: 3, weight: 4}
+          luck_of_the_sea: {enchantment: minecraft:luck_of_the_sea, level: 3, weight: 4}
+        custom-books:
+          ausdauer_1: {item-id: angler_buch_ausdauer_1, min-prestige: 1, weight: 1}
+          ruhige_hand_1: {item-id: angler_buch_ruhige_hand_1, min-prestige: 1, weight: 1}
+          ausdauer_2: {item-id: angler_buch_ausdauer_2, min-prestige: 2, weight: 1}
+          ruhige_hand_2: {item-id: angler_buch_ruhige_hand_2, min-prestige: 2, weight: 1}
+          nachfassen_1: {item-id: angler_buch_nachfassen_1, min-prestige: 2, weight: 1}
+          ausdauer_3: {item-id: angler_buch_ausdauer_3, min-prestige: 3, weight: 1}
+          konzentration_1: {item-id: angler_buch_konzentration_1, min-prestige: 3, weight: 1}
+          ausdauer_4: {item-id: angler_buch_ausdauer_4, min-prestige: 4, weight: 1}
+          ruhige_hand_3: {item-id: angler_buch_ruhige_hand_3, min-prestige: 4, weight: 1}
+          nachfassen_2: {item-id: angler_buch_nachfassen_2, min-prestige: 4, weight: 1}
+          konzentration_2: {item-id: angler_buch_konzentration_2, min-prestige: 4, weight: 1}
+          meistergriff_1: {item-id: angler_buch_meistergriff_1, min-prestige: 4, weight: 1}
+          ausdauer_5: {item-id: angler_buch_ausdauer_5, min-prestige: 5, weight: 1}
+          konzentration_3: {item-id: angler_buch_konzentration_3, min-prestige: 5, weight: 1}
+          meistergriff_2: {item-id: angler_buch_meistergriff_2, min-prestige: 5, weight: 1}
+      trim_plus_bundle:
+        weight: 5
+        type: RANDOM_TRIM_BUNDLE
+        display-name: 'Armor-Trim-Bundle+'
+        min-count: 6
+        max-count: 8
+        # Mit Zurücklegen: gleiche Templates können mehrfach erscheinen.
+        templates:
+          SENTRY_ARMOR_TRIM_SMITHING_TEMPLATE: 1
+          DUNE_ARMOR_TRIM_SMITHING_TEMPLATE: 1
+          COAST_ARMOR_TRIM_SMITHING_TEMPLATE: 1
+          WILD_ARMOR_TRIM_SMITHING_TEMPLATE: 1
+          VEX_ARMOR_TRIM_SMITHING_TEMPLATE: 1
+          RIB_ARMOR_TRIM_SMITHING_TEMPLATE: 1
+      diamond_tool_bundle:
+        weight: 6
+        type: EQUIPMENT_BUNDLE
+        display-name: 'Diamant-Tool-Bundle'
+        items:
+          - {material: DIAMOND_PICKAXE, amount: 1, enchantments: {efficiency: 5, unbreaking: 3, fortune: 3, mending: 1}}
+          - {material: DIAMOND_AXE, amount: 1, enchantments: {efficiency: 5, unbreaking: 3, fortune: 3, mending: 1}}
+          - {material: DIAMOND_SHOVEL, amount: 1, enchantments: {efficiency: 5, unbreaking: 3, silk_touch: 1, mending: 1}}
+      netherite_tool:
+        weight: 3
+        type: RANDOM_TOOL
+        display-name: 'Netherite-Tool'
+        tools:
+          - {material: NETHERITE_PICKAXE, amount: 1, weight: 1, enchantments: {efficiency: 5, unbreaking: 3, fortune: 3, mending: 1}}
+          - {material: NETHERITE_AXE, amount: 1, weight: 1, enchantments: {efficiency: 5, unbreaking: 3, fortune: 3, mending: 1}}
+          - {material: NETHERITE_SHOVEL, amount: 1, weight: 1, enchantments: {efficiency: 5, unbreaking: 3, silk_touch: 1, mending: 1}}
+      netherite_bundle_1:
+        weight: 6
+        type: BUNDLE
+        display-name: 'Netherite-Bundle I'
+        contents:
+          - {material: NETHERITE_INGOT, amount: 2}
+          - {material: ANCIENT_DEBRIS, amount: 4}
+          - {material: DIAMOND, amount: 8}
+      netherite_bundle_2:
+        weight: 3
+        type: BUNDLE
+        display-name: 'Netherite-Bundle II'
+        contents:
+          - {material: NETHERITE_INGOT, amount: 3}
+          - {material: ANCIENT_DEBRIS, amount: 6}
+          - {material: DIAMOND, amount: 12}
+      repair_core_bundle:
+        weight: 5
+        type: BUNDLE
+        display-name: 'Reparaturkern-Paket'
+        contents:
+          - {item-id: reparaturkern, amount: 1}
+          - {item-id: reparaturkern, amount: 1}
+      crystal_bundle:
+        weight: 5
+        type: BUNDLE
+        display-name: 'Crystal-Bundle'
+        contents:
+          - {material: END_CRYSTAL, amount: 4}
+          - {material: OBSIDIAN, amount: 16}
+          - {material: ENDER_PEARL, amount: 8}
+      large_crystal_bundle:
+        weight: 2
+        type: BUNDLE
+        display-name: 'Großes Crystal-Bundle'
+        contents:
+          - {material: END_CRYSTAL, amount: 8}
+          - {material: OBSIDIAN, amount: 32}
+          - {material: ENDER_PEARL, amount: 16}
+      lumi_1: {weight: 4, type: LUMI, amount: 10, display-name: '10 Lumis'}
+      lumi_2: {weight: 1, type: LUMI, amount: 25, display-name: '25 Lumis'}
+      magnet_1: {weight: 4, type: CUSTOM_ITEM, item-id: magnet_buch, amount: 1, display-name: 'Magnet I'}
+      librarian_seal: {weight: 2, type: CUSTOM_ITEM, item-id: bibliothekarsiegel, amount: 1, display-name: 'Bibliothekarsiegel'}
+      overlevel_book: {weight: 4, type: OVERLEVEL_BOOK, display-name: 'Overlevel-Buch'}
+  quality-modifiers:
+    red: {fish: 1.0, junk: 1.0, treasure: 1.0, rare: 1.0, epic: 1.0, legendary: 1.0}
+    orange: {fish: 0.99, junk: 0.90, treasure: 1.10, rare: 1.15, epic: 1.20, legendary: 1.25}
+    yellow: {fish: 0.97, junk: 0.75, treasure: 1.20, rare: 1.35, epic: 1.50, legendary: 1.75}
+    green: {fish: 0.94, junk: 0.50, treasure: 1.35, rare: 1.65, epic: 2.00, legendary: 2.50}
+  # Vanilla Luck of the Sea wird an der verwendeten Angel beim Auswerfen erfasst.
+  # Chance auf genau einen unabhängigen Zusatzroll nach einem erfolgreichen Hauptroll.
+  luck-of-the-sea:
+    extra-roll-chance: {'1': 0.02, '2': 0.04, '3': 0.06, '4': 0.08, '5': 0.10}
+  # Rare-Roll mit kumulativer Prestige-Freischaltung. Optionales weight je Buch: Standard 1.
+  overlevel-books:
+    lure_4: {enchantment: minecraft:lure, level: 4, min-prestige: 1}
+    luck_of_the_sea_4: {enchantment: minecraft:luck_of_the_sea, level: 4, min-prestige: 1}
+    unbreaking_4: {enchantment: minecraft:unbreaking, level: 4, min-prestige: 1}
+    lure_5: {enchantment: minecraft:lure, level: 5, min-prestige: 2}
+    luck_of_the_sea_5: {enchantment: minecraft:luck_of_the_sea, level: 5, min-prestige: 2}
+    fortune_4: {enchantment: minecraft:fortune, level: 4, min-prestige: 2}
+    efficiency_6: {enchantment: minecraft:efficiency, level: 6, min-prestige: 3}
+    fortune_5: {enchantment: minecraft:fortune, level: 5, min-prestige: 4}
+    efficiency_7: {enchantment: minecraft:efficiency, level: 7, min-prestige: 5}
+afk:
+  waiting-actionbar: '<aqua>🎣 AFK-Angeln</aqua> <dark_gray>•</dark_gray> <gray>Warte auf AFK...</gray>'
+  actionbar: '<aqua>🎣 AFK-Angeln</aqua> <dark_gray>•</dark_gray> <gray>Nächster Fang: <white>%seconds%s</white> <dark_gray>•</dark_gray> Lager: <white>%stored%/%capacity%</white></gray>'
+enchants:
+  ausdauer:
+    afk-interval-seconds:
+      '0': 30
+      '1': 27
+      '2': 24
+      '3': 21
+      '4': 18
+      '5': 15
+  spawnergriff:
+    max-uses: 3
+  ruhige-hand:
+    levels:
+      '1': {green-multiplier: 1.10, yellow-multiplier: 1.05}
+      '2': {green-multiplier: 1.20, yellow-multiplier: 1.10}
+      '3': {green-multiplier: 1.30, yellow-multiplier: 1.15}
+  konzentration:
+    levels:
+      '1': [5, 9, 18, 27]
+      '2': [4, 8, 16, 24]
+      '3': [4, 7, 14, 21]
+  meistergriff:
+    levels:
+      '1': {double-combo-chance: 0.15}
+      '2': {double-combo-chance: 0.30}
+feedback: {}

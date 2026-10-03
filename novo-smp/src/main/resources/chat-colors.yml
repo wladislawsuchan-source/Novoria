@@ -1,0 +1,31 @@
+# Chatfarben für /chatfarbe.
+# Die Reihenfolge dieser Liste entspricht der Anzeige im Chat.
+#
+# id:    eindeutiger interner Name; bestehende IDs nicht nachträglich ändern
+# code:  Eingabe hinter /chatfarbe; bei Vanilla-Farben ohne & eintragen
+# name:  sichtbarer deutscher Name
+# color: tatsächliche Textfarbe als Hex-Code
+#
+# Beispiel für eine spätere zusätzliche Farbe:
+# - id: novoria_lila
+#   code: '#9646FF'
+#   name: Novoria-Lila
+#   color: '#9646FF'
+
+colors:
+  - { id: black,        code: '0', name: Schwarz,     color: '#000000' }
+  - { id: dark_blue,    code: '1', name: Dunkelblau,  color: '#0000AA' }
+  - { id: dark_green,   code: '2', name: Dunkelgrün,  color: '#00AA00' }
+  - { id: dark_aqua,    code: '3', name: Dunkelaqua,  color: '#00AAAA' }
+  - { id: dark_red,     code: '4', name: Dunkelrot,   color: '#AA0000' }
+  - { id: dark_purple,  code: '5', name: Dunkellila,  color: '#AA00AA' }
+  - { id: gold,         code: '6', name: Gold,         color: '#FFAA00' }
+  - { id: gray,         code: '7', name: Grau,         color: '#AAAAAA' }
+  - { id: dark_gray,    code: '8', name: Dunkelgrau,   color: '#555555' }
+  - { id: blue,         code: '9', name: Blau,         color: '#5555FF' }
+  - { id: green,        code: 'a', name: Grün,         color: '#55FF55' }
+  - { id: aqua,         code: 'b', name: Aqua,         color: '#55FFFF' }
+  - { id: red,          code: 'c', name: Rot,          color: '#FF5555' }
+  - { id: light_purple, code: 'd', name: Helllila,     color: '#FF55FF' }
+  - { id: yellow,       code: 'e', name: Gelb,         color: '#FFFF55' }
+  - { id: white,        code: 'f', name: Weiß,         color: '#FFFFFF' }

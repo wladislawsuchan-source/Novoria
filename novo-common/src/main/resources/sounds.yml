@@ -1,0 +1,38 @@
+
+sounds:
+  enabled: true
+  countdown: BLOCK_NOTE_BLOCK_HAT
+  success: ENTITY_ENDERMAN_TELEPORT
+  tpa-request: BLOCK_NOTE_BLOCK_PLING
+  volume: 1.0
+  pitch: 1.0
+  # Sound beim Erhalt einer privaten Nachricht (/msg, /tell, /w).
+  private-message:
+    enabled: true
+    name: ENTITY_VILLAGER_WORK_CARTOGRAPHER
+    volume: 1.0
+    pitch: 1.0
+
+  # Sound, wenn der eigene Name im öffentlichen Chat erwähnt wird.
+  chat-mention:
+    enabled: true
+    name: BLOCK_NOTE_BLOCK_PLING
+    volume: 0.8
+    pitch: 1.6
+
+  economy:
+    coins-received:
+      enabled: true
+      name: ENTITY_EXPERIENCE_ORB_PICKUP
+      volume: 0.8
+      pitch: 1.2
+    coins-sent:
+      enabled: true
+      name: BLOCK_NOTE_BLOCK_HAT
+      volume: 0.8
+      pitch: 1.0
+    coins-sold:
+      enabled: true
+      name: ENTITY_PLAYER_LEVELUP
+      volume: 0.7
+      pitch: 1.4

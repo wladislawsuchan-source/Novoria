@@ -1,0 +1,54 @@
+# NovoSMP-Kits
+# Diese Datei wird automatisch als plugins/NovoSMP/kits.yml angelegt.
+
+# Starter-Kit beim allerersten Join auf NovoSMP.
+starter-kit:
+  enabled: true
+  armor-color: "#9646FF"
+  armor:
+    helmet:
+      enabled: true
+      material: LEATHER_HELMET
+      amount: 1
+      name: "<light_purple>Novoria Starterrüstung"
+    chestplate:
+      enabled: true
+      material: LEATHER_CHESTPLATE
+      amount: 1
+      name: "<light_purple>Novoria Starterrüstung"
+    leggings:
+      enabled: true
+      material: LEATHER_LEGGINGS
+      amount: 1
+      name: "<light_purple>Novoria Starterrüstung"
+    boots:
+      enabled: true
+      material: LEATHER_BOOTS
+      amount: 1
+      name: "<light_purple>Novoria Starterrüstung"
+  items:
+    stone-sword:
+      enabled: true
+      material: STONE_SWORD
+      amount: 1
+      name: "<light_purple>Starter-Schwert"
+    stone-pickaxe:
+      enabled: true
+      material: STONE_PICKAXE
+      amount: 1
+      name: "<light_purple>Starter-Spitzhacke"
+    stone-axe:
+      enabled: true
+      material: STONE_AXE
+      amount: 1
+      name: "<light_purple>Starter-Axt"
+    stone-shovel:
+      enabled: true
+      material: STONE_SHOVEL
+      amount: 1
+      name: "<light_purple>Starter-Schaufel"
+    food:
+      enabled: true
+      material: COOKED_BEEF
+      amount: 16
+      name: ""

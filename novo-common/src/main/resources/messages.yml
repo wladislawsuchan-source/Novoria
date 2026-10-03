@@ -1,0 +1,131 @@
+
+message-api:
+  prefixes:
+    smp: '<dark_gray>[<green>SMP</green>]</dark_gray> '
+    team: '<dark_gray>[<red>Team</red>]</dark_gray> '
+    spawn: '<dark_gray>[<gold>Spawn</gold>]</dark_gray> '
+    auction-house: '<dark_gray>[<gold>AH</gold>]</dark_gray> '
+    order: '<dark_gray>[<aqua>Order</aqua>]</dark_gray> '
+    shop: '<dark_gray>[<gold>Shop</gold>]</dark_gray> '
+    duel: '<dark_gray>[<light_purple>Duel</light_purple>]</dark_gray> '
+    friends: '<dark_gray>[<light_purple>Freunde</light_purple>]</dark_gray> '
+    crate: '<dark_gray>[<gold>Kiste</gold>]</dark_gray> '
+    ender-chest: '<dark_gray>[<light_purple>EC</light_purple>]</dark_gray> '
+    novoria: '<dark_gray>[<light_purple>Novoria</light_purple>]</dark_gray> '
+death-messages:
+  enabled: true
+chat:
+  messages:
+    no-permission: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Dafür hast du keine Berechtigung.</red>
+    player-only: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Dieser Befehl ist nur für Spieler verfügbar.</red>
+    player-not-found: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Spieler wurde nicht gefunden.</red>
+    msg-usage: '<dark_gray>[<green>SMP</green>]</dark_gray> <gray>Benutzung: <yellow>/msg <Spieler> <Nachricht></yellow></gray>'
+    reply-usage: '<dark_gray>[<green>SMP</green>]</dark_gray> <gray>Benutzung: <yellow>/reply <Nachricht></yellow></gray>'
+    message-yourself: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Du kannst dir nicht selbst schreiben.</red>
+    no-reply-target: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Du hast niemanden, dem du antworten kannst.</red>
+    socialspy-usage: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Benutzung: <yellow>/socialspy</yellow></gray>'
+    socialspy-enabled: <dark_gray>[<red>Team</red>]</dark_gray> <green>SocialSpy aktiviert.</green>
+    socialspy-disabled: <dark_gray>[<red>Team</red>]</dark_gray> <red>SocialSpy deaktiviert.</red>
+chat-separation:
+  enabled: true
+announcements:
+  join:
+    enabled: false
+    text: <gray><player> hat den Server betreten.</gray>
+  quit:
+    enabled: false
+    text: <gray><player> hat den Server verlassen.</gray>
+  advancements:
+    public-chat: false
+messages:
+  not-available-on-this-server: <red>Dieser Befehl ist auf diesem Server nicht verfügbar.</red>
+  void-rescue-hub: <dark_gray>[<gold>Spawn</gold>]</dark_gray> <green>Du wurdest vor dem Void gerettet und zum Spawn teleportiert.</green>
+  void-rescue-spawn: <prefix><green>Du wurdest vor dem Void gerettet und zum Spawn teleportiert.
+  prefix: '<dark_gray>[<green>SMP</green>]</dark_gray> '
+  prefix_spawn: '<dark_gray>[<green>SMP</green>]</dark_gray> '
+  teleport-countdown: <prefix><green>Teleport in <yellow><seconds>s</yellow>...
+  teleported-to-hub: <dark_gray>[<gold>Spawn</gold>]</dark_gray> <green>Du wurdest zum Spawn teleportiert.</green>
+  teleported-to-smp: <prefix><green>Du wurdest ins SMP teleportiert.
+  teleported-to-spawn: <dark_gray>[<green>SMP</green>]</dark_gray> <green>Du wurdest zum Spawn teleportiert.
+  spawn-teleport-cancelled: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Teleport abgebrochen, weil du dich bewegt hast.
+  teleport-cancelled: <prefix><red>Teleport abgebrochen, weil du dich bewegt hast.
+  location-set-hub: <dark_gray>[<red>Team</red>]</dark_gray> <green>Hub-Position wurde gespeichert.
+  location-set-smp: <dark_gray>[<red>Team</red>]</dark_gray> <green>SMP-Spawn wurde gespeichert.
+  config-reloaded: <dark_gray>[<red>Team</red>]</dark_gray> <green>Konfiguration wurde neu geladen.
+  smp-restart: <dark_gray>[<green>SMP</green>]</dark_gray> <yellow>Der SMP wird neugestartet...</yellow>
+  missing-location: <prefix><red>Die Zielposition wurde noch nicht gesetzt.
+  missing-world: <prefix><red>Die Welt <yellow><world></yellow> ist nicht geladen.
+  no-permission: <prefix><red>Dafür hast du keine Berechtigung.
+  admin-info: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Hub: <yellow><hub></yellow> | SMP-Spawn: <yellow><smp></yellow>
+    | gespeicherte Spieler: <yellow><players></yellow>'
+  rtp-searching: ''
+  rtp-success: <dark_gray>[<green>SMP</green>]</dark_gray> <green>Du wurdest zufällig teleportiert.
+  rtp-cancelled: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Teleport abgebrochen, weil du dich bewegt hast.
+  rtp-failed: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Es konnte kein sicherer Ort gefunden werden. Versuche es erneut.
+  rtp-cooldown: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Du musst noch <yellow><seconds>s</yellow> warten.
+  rtp-disabled: <dark_gray>[<green>SMP</green>]</dark_gray> <red>RTP ist momentan deaktiviert.
+  rtp-already-searching: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Es wird bereits ein Ort für dich gesucht.
+  home-set: <dark_gray>[<green>SMP</green>]</dark_gray> <green>Das Home <yellow><home></yellow> wurde gesetzt.
+  home-updated: <dark_gray>[<green>SMP</green>]</dark_gray> <green>Das Home <yellow><home></yellow> wurde aktualisiert.
+  home-already-exists: '<dark_gray>[<green>SMP</green>]</dark_gray> <red>Du besitzt bereits ein Home mit dem Namen <yellow>"<home>"</yellow>.</red>'
+  home-deleted: <dark_gray>[<green>SMP</green>]</dark_gray> <green>Das Home <yellow><home></yellow> wurde gelöscht.
+  home-teleported: <dark_gray>[<green>SMP</green>]</dark_gray> <green>Du wurdest zu <yellow><home></yellow> teleportiert.
+  home-not-found: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Das Home <yellow><home></yellow> existiert nicht.
+  home-limit-reached: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Du hast dein Limit von <yellow><limit></yellow> Homes
+    erreicht.
+  home-list: '<dark_gray>[<green>SMP</green>]</dark_gray> <gray>Deine Homes: <yellow><homes></yellow>'
+  home-list-empty: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Du hast noch keine Homes gesetzt.
+  home-wrong-world: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Homes können nur in den SMP-Welten gesetzt werden.
+  home-invalid-name: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Der Name darf nur Buchstaben, Zahlen, _ und - enthalten.
+  home-set-usage: '<dark_gray>[<green>SMP</green>]</dark_gray> <yellow>Benutzung: /sethome <Name>'
+  home-usage: '<dark_gray>[<green>SMP</green>]</dark_gray> <yellow>Benutzung: /home <Name>'
+  home-delete-usage: '<dark_gray>[<green>SMP</green>]</dark_gray> <yellow>Benutzung: /delhome <Name>'
+  home-teleport-cancelled: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Teleport abgebrochen, weil du dich bewegt hast.
+  home-unsafe-warning: '<dark_gray>[<green>SMP</green>]</dark_gray> <yellow>⚠ Achtung: Dieses Home befindet sich möglicherweise an einer unsicheren Position.</yellow>'
+  tpa-prefix: '<dark_gray>[<green>SMP</green>]</dark_gray> '
+  tpa-sent: <dark_gray>[<green>SMP</green>]</dark_gray> <green>Du hast <yellow><player></yellow> eine Teleportanfrage gesendet.
+  tpa-received: <dark_gray>[<green>SMP</green>]</dark_gray> <yellow><player></yellow> <green>hat dir eine Teleportanfrage
+    gesendet.
+  tpa-click-intro: <gray>Klicke zum </gray>
+  tpa-accept-button: <green>[Annehmen]</green>
+  tpa-deny-button: <red>[Ablehnen]</red>
+  tpa-bedrock-hint: '<dark_gray>[<green>SMP</green>]</dark_gray> <gray>Bedrock: <green>/tpaccept <player></green> oder <red>/tpdeny
+    <player></red>'
+  tpa-accepted-sender: <dark_gray>[<green>SMP</green>]</dark_gray> <yellow><player></yellow> <green>hat deine Teleportanfrage
+    angenommen.
+  tpa-denied-sender: <dark_gray>[<green>SMP</green>]</dark_gray> <yellow><player></yellow> <red>hat deine Teleportanfrage
+    abgelehnt.
+  tpa-denied-target: <dark_gray>[<green>SMP</green>]</dark_gray> <green>Du hast die Teleportanfrage abgelehnt.
+  tpa-teleported: <dark_gray>[<green>SMP</green>]</dark_gray> <green>Du wurdest teleportiert.
+  tpa-teleport-cancelled: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Teleport abgebrochen, weil du dich bewegt hast.
+  tpa-teleport-failed: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Der Teleport ist fehlgeschlagen.
+  tpa-no-request: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Du hast keine offene Teleportanfrage.
+  tpa-no-request-from: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Du hast keine Anfrage von <yellow><player></yellow>.
+  tpa-player-not-found: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Der Spieler <yellow><player></yellow> wurde nicht
+    gefunden.
+  tpa-player-left: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Der Spieler ist nicht mehr online.
+  tpa-self: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Du kannst dir selbst keine Anfrage senden.
+  tpa-vanish-blocked: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Du kannst im Vanish keine TPA-Anfragen senden.</red>
+  tpa-already-sent: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Du hast diesem Spieler bereits eine Teleportanfrage gesendet.</red>
+  tpa-wrong-world: <dark_gray>[<green>SMP</green>]</dark_gray> <red>TPA funktioniert nur innerhalb der SMP-Welten.
+  tpa-expired-sender: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Deine Anfrage an <yellow><player></yellow> ist abgelaufen.
+  tpa-expired-target: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Die Anfrage von <yellow><player></yellow> ist abgelaufen.
+  tpa-cancelled-sender: <dark_gray>[<green>SMP</green>]</dark_gray> <green>Du hast deine Teleportanfrage abgebrochen.
+  tpa-cancelled-target: <dark_gray>[<green>SMP</green>]</dark_gray> <yellow><player></yellow> <red>hat die Teleportanfrage
+    abgebrochen.
+  tpa-nothing-to-cancel: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Du hast keine offene Anfrage gesendet.
+  tpa-usage: '<dark_gray>[<green>SMP</green>]</dark_gray> <yellow>Benutzung: /tpa <Spieler>'
+  tpa-accept-usage: '<dark_gray>[<green>SMP</green>]</dark_gray> <yellow>Benutzung: /tpaccept [Spieler]'
+
+
+auction-house:
+  messages:
+    player-only: '<dark_gray>[<gold>AH</gold>]</dark_gray> <red>Dieser Befehl ist nur für Spieler verfügbar.</red>'
+    usage: '<dark_gray>[<gold>AH</gold>]</dark_gray> <gray>Benutzung: <yellow>/ah [sell|listings|collect|history|stats]</yellow></gray>'
+    foundation-ready: '<dark_gray>[<gold>AH</gold>]</dark_gray> <green>AH-Basis ist aktiv.</green> <gray>Angebote: <yellow>%active%/%limit%</yellow> | Collect: <yellow>%collect%</yellow>. Die Menüs folgen im nächsten Update.</gray>'
+    database-error: '<dark_gray>[<gold>AH</gold>]</dark_gray> <red>Das Auktionshaus ist momentan nicht verfügbar.</red>'
+    item-blocked: '<dark_gray>[<gold>AH</gold>]</dark_gray> <red>Dieses Item darf nicht im Auktionshaus angeboten werden.</red>'
+    sell-usage: '<dark_gray>[<gold>AH</gold>]</dark_gray> <gray>Benutzung: <yellow>/ah sell <Preis></yellow></gray>'
+    invalid-price: '<dark_gray>[<gold>AH</gold>]</dark_gray> <red>Gib einen gültigen Preis ein.</red>'
+    price-range: '<dark_gray>[<gold>AH</gold>]</dark_gray> <red>Der Preis muss zwischen %min% und %max% Coins liegen.</red>'
+    hold-item: '<dark_gray>[<gold>AH</gold>]</dark_gray> <red>Halte zuerst einen Gegenstand in deiner Hand.</red>'

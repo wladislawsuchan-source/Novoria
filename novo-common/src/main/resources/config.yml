@@ -1,0 +1,945 @@
+
+gameplay:
+  chat-mention:
+    enabled: true
+    # Nur der erwähnte Spieler sieht seinen Namen als gelbes @Name.
+    highlight:
+      enabled: true
+      prefix: "@"
+  invisibility-anonymity:
+    enabled: true
+    # Solange der Spieler unsichtbar ist, sehen Nicht-Freunde diesen anonymen Namen im öffentlichen Chat.
+    # Freunde sehen die echte Identität immer. Zusätzlich deckt eine Wasserflasche den Spieler nur für den Werfer auf.
+    chat-name: "<gray>Anonym</gray>"
+economy:
+  messages:
+    no-permission: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Dafür hast 
+      du keine Berechtigung.</red>
+    unavailable: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Die Economy 
+      ist momentan nicht verfügbar.</red>
+  balance:
+    messages:
+      player-only: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Dieser 
+        Befehl ist nur für Spieler verfügbar.</red>
+      usage: '<dark_gray>[<green>SMP</green>]</dark_gray> <gray>Benutzung: <yellow>/balance</yellow></gray>'
+      result: <dark_gray>[<green>SMP</green>]</dark_gray> <gray>Du besitzt 
+        <green>%balance% Coins</green>.</gray>
+  pay:
+    messages:
+      player-only: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Dieser 
+        Befehl ist nur für Spieler verfügbar.</red>
+      usage: '<dark_gray>[<green>SMP</green>]</dark_gray> <gray>Benutzung: <yellow>/pay
+        <Spieler> <Betrag></yellow></gray>'
+      player-not-found: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Dieser 
+        Spieler ist nicht online.</red>
+      self: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Du kannst dir nicht
+        selbst Coins senden.</red>
+      invalid-amount: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Der 
+        Betrag muss eine positive ganze Zahl sein.</red>
+      insufficient-funds: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Du 
+        besitzt nicht genügend Coins.</red>
+      storage-error: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Die 
+        Überweisung konnte nicht gespeichert werden.</red>
+      sent: <dark_gray>[<green>SMP</green>]</dark_gray> <gray>Du hast 
+        <yellow>%player%</yellow> <green>%amount% Coins</green> gesendet.</gray>
+      received: <dark_gray>[<green>SMP</green>]</dark_gray> <gray>Du hast von 
+        <yellow>%player%</yellow> <green>%amount% Coins</green> erhalten.</gray>
+  admin:
+    messages:
+      usage: '<dark_gray>[<red>TEAM</red>]</dark_gray> <gray>Benutzung: <yellow>/eco
+        <give|take|set> <Spieler> <Betrag></yellow></gray>'
+      player-not-found: '<dark_gray>[<red>TEAM</red>]</dark_gray> <red>Der Spieler
+        <yellow>%player%</yellow> wurde nicht gefunden.</red>'
+      invalid-amount: '<dark_gray>[<red>TEAM</red>]</dark_gray> <red>Der Betrag muss
+        eine gültige ganze Zahl sein.</red>'
+      insufficient-funds: '<dark_gray>[<red>TEAM</red>]</dark_gray> <red><yellow>%player%</yellow>
+        besitzt nicht genügend Coins.</red>'
+      storage-error: '<dark_gray>[<red>TEAM</red>]</dark_gray> <red>Die Änderung konnte
+        wegen eines Datenbankfehlers nicht gespeichert werden.</red>'
+      give-success: '<dark_gray>[<red>TEAM</red>]</dark_gray> <green>Du hast <yellow>%player%</yellow>
+        <yellow>%amount% Coins</yellow> gegeben. Neuer Kontostand: <yellow>%balance%
+        Coins</yellow>.</green>'
+      take-success: '<dark_gray>[<red>TEAM</red>]</dark_gray> <green>Du hast <yellow>%player%</yellow>
+        <yellow>%amount% Coins</yellow> abgezogen. Neuer Kontostand: <yellow>%balance%
+        Coins</yellow>.</green>'
+      set-success: '<dark_gray>[<red>TEAM</red>]</dark_gray> <green>Du hast den Kontostand
+        von <yellow>%player%</yellow> auf <yellow>%balance% Coins</yellow> gesetzt.</green>'
+      target-give: '<dark_gray>[<green>SMP</green>]</dark_gray> <gray>Dir wurden <green>%amount%
+        Coins</green> gutgeschrieben.</gray>'
+      target-take: '<dark_gray>[<green>SMP</green>]</dark_gray> <gray>Dir wurden <red>%amount%
+        Coins</red> abgezogen.</gray>'
+      target-set: '<dark_gray>[<green>SMP</green>]</dark_gray> <gray>Dein Kontostand
+        wurde auf <green>%balance% Coins</green> gesetzt.</gray>'
+  sell:
+    messages:
+      player-only: '<dark_gray>[<green>SMP</green>]</dark_gray> <red>Dieser Befehl
+        ist nur für Spieler verfügbar.</red>'
+      usage: '<dark_gray>[<green>SMP</green>]</dark_gray> <gray>Benutzung: <yellow>/sell</yellow></gray>'
+      nothing-to-sell: '<dark_gray>[<green>SMP</green>]</dark_gray> <red>Es befinden
+        sich keine verkaufbaren Items im Menü.</red>'
+      failed: '<dark_gray>[<green>SMP</green>]</dark_gray> <red>Der Verkauf konnte
+        nicht gespeichert werden.</red>'
+      success: '<dark_gray>[<green>SMP</green>]</dark_gray> <gray>Du hast <yellow>%items%</yellow>
+        Items für <green>%coins% Coins</green> verkauft.</gray>'
+
+kill:
+  messages:
+    usage: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Benutzung: <yellow>/kill
+      [Spieler]</yellow></gray>'
+    no-permission-others: <dark_gray>[<red>Team</red>]</dark_gray> <red>Du 
+      darfst keine anderen Spieler töten.</red>
+    player-not-found: <dark_gray>[<red>Team</red>]</dark_gray> <red>Dieser 
+      Spieler ist nicht online.</red>
+ping:
+  messages:
+    player-only: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Dieser Befehl 
+      ist nur für Spieler verfügbar.</red>
+    usage: '<dark_gray>[<green>SMP</green>]</dark_gray> <gray>Benutzung: <yellow>/ping</yellow></gray>'
+    result: <dark_gray>[<green>SMP</green>]</dark_gray> <gray>Dein Ping beträgt 
+      <green>%ping% ms</green>.</gray>
+afk:
+  automatic:
+    enabled: true
+    minutes: 5
+  check-interval-ticks: 200
+  tab:
+    enabled: true
+    format: '<gray>(ᴀꜰᴋ)</gray> '
+  messages:
+    player-only: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Dieser Befehl 
+      ist nur für Spieler verfügbar.</red>
+    usage: '<dark_gray>[<green>SMP</green>]</dark_gray> <gray>Benutzung: <yellow>/afk</yellow></gray>'
+    enabled: <dark_gray>[<green>SMP</green>]</dark_gray> <gray>Du bist jetzt 
+      AFK.</gray>
+    automatic-enabled: <dark_gray>[<green>SMP</green>]</dark_gray> <gray>Du 
+      wurdest wegen Inaktivität auf AFK gesetzt.</gray>
+    disabled: <dark_gray>[<green>SMP</green>]</dark_gray> <gray>Du bist nicht 
+      mehr AFK.</gray>
+moderation:
+  history:
+    messages:
+      usage: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Benutzung: <yellow>/history
+        <Spieler> [Seite]</yellow></gray>'
+      not-found: <dark_gray>[<red>Team</red>]</dark_gray> <red>Der Spieler 
+        <yellow>%player%</yellow> wurde nicht gefunden.</red>
+      empty: <dark_gray>[<red>Team</red>]</dark_gray> <gray>Für 
+        <yellow>%player%</yellow> wurden keine Einträge gefunden.</gray>
+      invalid-page: <dark_gray>[<red>Team</red>]</dark_gray> <red>Diese Seite 
+        ist ungültig.</red>
+  mute:
+    default-reason: Kein Grund angegeben
+    blocked-message: '<dark_gray>[<green>SMP</green>]</dark_gray> <red>Du bist %remaining%
+      gemutet.</red> <gray>Grund: <white>%reason%</white></gray>'
+    # Ein normaler Mute sperrt den öffentlichen Chat und alle hier eingetragenen
+    # Kommunikationsbefehle. Befehle mit Namespace (z. B. /minecraft:tell) werden
+    # ebenfalls anhand ihres eigentlichen Befehlsnamens erkannt.
+    communication:
+      block-public-chat: true
+      block-commands: true
+      commands:
+      - msg
+      - message
+      - tell
+      - whisper
+      - w
+      - reply
+      - r
+      - cc
+    messages:
+      usage: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Benutzung: <yellow>/mute
+        <Spieler> [Grund]</yellow></gray>'
+      not-found: <dark_gray>[<red>Team</red>]</dark_gray> <red>Der Spieler 
+        <yellow>%player%</yellow> wurde nicht gefunden.</red>
+      success: <dark_gray>[<red>Team</red>]</dark_gray> 
+        <green><yellow>%player%</yellow> wurde permanent gemutet.</green>
+      already-muted: <dark_gray>[<red>Team</red>]</dark_gray> 
+        <red><yellow>%player%</yellow> ist bereits gemutet.</red>
+      self: <dark_gray>[<red>Team</red>]</dark_gray> <red>Du kannst dich nicht 
+        selbst muten.</red>
+      hierarchy: <dark_gray>[<red>Team</red>]</dark_gray> <red>Du kannst 
+        <yellow>%player%</yellow> aufgrund der Ranghierarchie nicht muten.</red>
+      storage-error: <dark_gray>[<red>Team</red>]</dark_gray> <red>Der Mute 
+        konnte wegen eines Datenbankfehlers nicht gespeichert werden.</red>
+  tempmute:
+    default-reason: Kein Grund angegeben
+    messages:
+      usage: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Benutzung: <yellow>/tempmute
+        <Spieler> <Zeit> [Grund]</yellow></gray>'
+      invalid-duration: '<dark_gray>[<red>Team</red>]</dark_gray> <red>Ungültige Zeit.
+        Beispiele: <yellow>30m, 2h, 7d, 3w, 6mo, 1y</yellow></red>'
+      not-found: <dark_gray>[<red>Team</red>]</dark_gray> <red>Der Spieler 
+        <yellow>%player%</yellow> wurde nicht gefunden.</red>
+      success: <dark_gray>[<red>Team</red>]</dark_gray> 
+        <green><yellow>%player%</yellow> wurde für <yellow>%duration%</yellow> 
+        gemutet.</green>
+      already-muted: <dark_gray>[<red>Team</red>]</dark_gray> 
+        <red><yellow>%player%</yellow> ist bereits gemutet.</red>
+      self: <dark_gray>[<red>Team</red>]</dark_gray> <red>Du kannst dich nicht 
+        selbst muten.</red>
+      hierarchy: <dark_gray>[<red>Team</red>]</dark_gray> <red>Du kannst 
+        <yellow>%player%</yellow> aufgrund der Ranghierarchie nicht muten.</red>
+      storage-error: <dark_gray>[<red>Team</red>]</dark_gray> <red>Der Tempmute 
+        konnte wegen eines Datenbankfehlers nicht gespeichert werden.</red>
+  unmute:
+    messages:
+      usage: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Benutzung: <yellow>/unmute
+        <Spieler></yellow></gray>'
+      not-found: <dark_gray>[<red>Team</red>]</dark_gray> <red>Der Spieler 
+        <yellow>%player%</yellow> wurde nicht gefunden.</red>
+      success: <dark_gray>[<red>Team</red>]</dark_gray> 
+        <green><yellow>%player%</yellow> wurde erfolgreich entmutet.</green>
+      not-muted: <dark_gray>[<red>Team</red>]</dark_gray> 
+        <red><yellow>%player%</yellow> ist nicht gemutet.</red>
+      storage-error: <dark_gray>[<red>Team</red>]</dark_gray> <red>Der Mute 
+        konnte wegen eines Datenbankfehlers nicht aufgehoben werden.</red>
+  tempban:
+    default-reason: Kein Grund angegeben
+    screen: '<red><bold>Du bist temporär von diesem Server ausgeschlossen.</bold></red>
+
+
+      <gray>Grund:</gray>
+
+      <white>%reason%</white>
+
+
+      <gray>Gebannt von:</gray>
+
+      <white>%moderator%</white>
+
+
+      <gray>Verbleibende Zeit:</gray>
+
+      <white>%remaining%</white>'
+    messages:
+      usage: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Benutzung: <yellow>/tempban
+        <Spieler> <Zeit> [Grund]</yellow></gray>'
+      invalid-duration: '<dark_gray>[<red>Team</red>]</dark_gray> <red>Ungültige Zeit.
+        Beispiele: <yellow>30m, 2h, 7d, 3w, 6mo, 1y</yellow></red>'
+      not-found: <dark_gray>[<red>Team</red>]</dark_gray> <red>Der Spieler 
+        <yellow>%player%</yellow> wurde nicht gefunden.</red>
+      success: <dark_gray>[<red>Team</red>]</dark_gray> 
+        <green><yellow>%player%</yellow> wurde für <yellow>%duration%</yellow> 
+        gebannt.</green>
+      already-banned: <dark_gray>[<red>Team</red>]</dark_gray> 
+        <red><yellow>%player%</yellow> ist bereits gebannt.</red>
+      self: <dark_gray>[<red>Team</red>]</dark_gray> <red>Du kannst dich nicht 
+        selbst bannen.</red>
+      hierarchy: <dark_gray>[<red>Team</red>]</dark_gray> <red>Du kannst 
+        <yellow>%player%</yellow> aufgrund der Ranghierarchie nicht 
+        bannen.</red>
+      storage-error: <dark_gray>[<red>Team</red>]</dark_gray> <red>Der Tempban 
+        konnte wegen eines Datenbankfehlers nicht gespeichert werden.</red>
+  unban:
+    messages:
+      usage: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Benutzung: <yellow>/unban
+        <Spieler></yellow></gray>'
+      not-found: <dark_gray>[<red>Team</red>]</dark_gray> <red>Der Spieler 
+        <yellow>%player%</yellow> wurde nicht gefunden.</red>
+      success: <dark_gray>[<red>Team</red>]</dark_gray> 
+        <green><yellow>%player%</yellow> wurde erfolgreich entbannt.</green>
+      not-banned: <dark_gray>[<red>Team</red>]</dark_gray> 
+        <red><yellow>%player%</yellow> ist nicht gebannt.</red>
+      storage-error: <dark_gray>[<red>Team</red>]</dark_gray> <red>Der Ban 
+        konnte wegen eines Datenbankfehlers nicht aufgehoben werden.</red>
+  ban:
+    default-reason: Kein Grund angegeben
+    screen: '<red><bold>Du bist von diesem Server ausgeschlossen.</bold></red>
+
+
+      <gray>Grund:</gray>
+
+      <white>%reason%</white>
+
+
+      <gray>Gebannt von:</gray>
+
+      <white>%moderator%</white>
+
+
+      <dark_gray>────────────────────</dark_gray>
+
+      <gray>Hylonia SMP</gray>'
+    messages:
+      usage: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Benutzung: <yellow>/ban
+        <Spieler> [Grund]</yellow></gray>'
+      not-found: <dark_gray>[<red>Team</red>]</dark_gray> <red>Der Spieler 
+        <yellow>%player%</yellow> wurde nicht gefunden.</red>
+      success: <dark_gray>[<red>Team</red>]</dark_gray> 
+        <green><yellow>%player%</yellow> wurde erfolgreich permanent 
+        gebannt.</green>
+      already-banned: <dark_gray>[<red>Team</red>]</dark_gray> 
+        <red><yellow>%player%</yellow> ist bereits permanent gebannt.</red>
+      self: <dark_gray>[<red>Team</red>]</dark_gray> <red>Du kannst dich nicht 
+        selbst bannen.</red>
+      hierarchy: <dark_gray>[<red>Team</red>]</dark_gray> <red>Du kannst 
+        <yellow>%player%</yellow> aufgrund der Ranghierarchie nicht 
+        bannen.</red>
+      storage-error: <dark_gray>[<red>Team</red>]</dark_gray> <red>Der Ban 
+        konnte wegen eines Datenbankfehlers nicht gespeichert werden.</red>
+  kick:
+    default-reason: Kein Grund angegeben
+    screen: '<red><bold>Du wurdest vom Server entfernt.</bold></red>
+
+
+      <gray>Grund:</gray>
+
+      <white>%reason%</white>
+
+
+      <dark_gray>────────────────────</dark_gray>
+
+      <gray>Hylonia SMP</gray>'
+    messages:
+      usage: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Benutzung: <yellow>/kick
+        <Spieler> [Grund]</yellow></gray>'
+      not-online: <dark_gray>[<red>Team</red>]</dark_gray> <red>Der Spieler 
+        <yellow>%player%</yellow> ist nicht online.</red>
+      success: <dark_gray>[<red>Team</red>]</dark_gray> 
+        <green><yellow>%player%</yellow> wurde erfolgreich gekickt.</green>
+      self: <dark_gray>[<red>Team</red>]</dark_gray> <red>Du kannst dich nicht 
+        selbst kicken.</red>
+      hierarchy: <dark_gray>[<red>Team</red>]</dark_gray> <red>Du kannst 
+        <yellow>%player%</yellow> aufgrund der Ranghierarchie nicht 
+        kicken.</red>
+world-protection:
+  feedback:
+    mode: SILENT
+    message: <gray>Das kannst du hier nicht machen.</gray>
+    cooldown-milliseconds: 1000
+    sound:
+      enabled: false
+      name: BLOCK_NOTE_BLOCK_BASS
+      volume: 0.5
+      pitch: 1.0
+  hub:
+    other-explosions: false
+    fire-spread: false
+    entity-block-change: false
+    mob-spawning: false
+    enabled: true
+    pvp: false
+    block-break: false
+    block-place: false
+    interact: false
+    chest-access: false
+    damage-animals: false
+    sleep: false
+    respawn-anchors: false
+    tnt: false
+  smp-spawn:
+    other-explosions: false
+    fire-spread: false
+    entity-block-change: false
+    mob-spawning: false
+    enabled: true
+    pvp: false
+    block-break: false
+    block-place: false
+    interact: false
+    chest-access: false
+    damage-animals: false
+    sleep: false
+    respawn-anchors: false
+    tnt: false
+vanish:
+  visuals:
+    tab:
+      enabled: true
+      name-color: '#777777'
+      italic: true
+    nametag:
+      enabled: true
+      marker: '<red><bold>V</bold></red> '
+debug:
+  tablist-visibility: false
+void-rescue:
+  message:
+    enabled: false
+    text: <red>Du wurdest aus dem Void gerettet.
+  enabled: true
+  hub-min-y: 50
+  smp-spawn-min-y: -10
+settings:
+  send-to-hub-on-join: true
+  save-last-smp-location: true
+  use-smp-spawn-as-fallback: true
+  teleport-delay-seconds: 0
+  cancel-on-move: false
+spawn:
+  heal-on-teleport: true
+  restore-food-on-teleport: true
+  clear-fire-on-teleport: true
+  delay-seconds: 3
+  cancel-on-move: true
+  actionbar: <yellow>Teleport in <green>%seconds%s</green>...
+homes:
+  default-limit: 3
+  # Creator ist der frühere Content-Rang. Er erhält 7 Homes.
+  group-limits:
+    creator: 7
+  max-name-length: 16
+  delay-seconds: 3
+  cancel-on-move: true
+  actionbar: <yellow>Teleport in <green>%seconds%s</green>...
+  safety-warning:
+    enabled: true
+    # Der Teleport wird NICHT blockiert. Der Spieler bekommt nur eine Warnung.
+    dangerous-blocks:
+      - LAVA
+      - FIRE
+      - SOUL_FIRE
+      - MAGMA_BLOCK
+      - CACTUS
+      - CAMPFIRE
+      - SOUL_CAMPFIRE
+      - POWDER_SNOW
+      - SWEET_BERRY_BUSH
+      - WITHER_ROSE
+      - POINTED_DRIPSTONE
+tpa:
+  request-timeout-seconds: 60
+  friends-bypass-teleport-delay: true
+  delay-seconds: 3
+  cancel-on-move: true
+  actionbar: <yellow>Teleport in <green>%seconds%s</green>...
+staff:
+  messages:
+    smp-no-permission: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Dafür 
+      hast du keine Berechtigung.</red>
+    smp-player-only: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Dieser 
+      Befehl ist nur für Spieler verfügbar.</red>
+    tp-usage: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Benutzung: <yellow>/tp <Spieler|x y z></yellow>, <yellow>/tp <Welt> <x> <y> <z></yellow>, <yellow>/tp <Spieler> <Spieler|x y z></yellow> oder <yellow>/tp <Spieler> <Welt> <x> <y> <z></yellow></gray>'
+    tp-invalid-coordinates: <dark_gray>[<red>Team</red>]</dark_gray> <red>Diese 
+      Koordinaten sind ungültig.</red>
+    tp-invalid-world: <dark_gray>[<red>Team</red>]</dark_gray> <red>Die Welt <yellow>%world%</yellow> wurde nicht gefunden.</red>
+    tp-failed: <dark_gray>[<red>Team</red>]</dark_gray> <red>Der Teleport ist 
+      fehlgeschlagen.</red>
+    tp-success: <dark_gray>[<red>Team</red>]</dark_gray> <green>Du wurdest zu 
+      <yellow>%destination%</yellow> teleportiert.</green>
+    tp-success-other: <dark_gray>[<red>Team</red>]</dark_gray> 
+      <green><yellow>%player%</yellow> wurde zu <yellow>%destination%</yellow> 
+      teleportiert.</green>
+    no-permission: <dark_gray>[<red>Team</red>]</dark_gray> <red>Dafür hast du 
+      keine Berechtigung.</red>
+    player-only: <dark_gray>[<red>Team</red>]</dark_gray> <red>Dieser Befehl ist
+      nur für Spieler verfügbar.</red>
+    player-not-found: <dark_gray>[<red>Team</red>]</dark_gray> <red>Der Spieler 
+      <yellow>%player%</yellow> ist nicht online.</red>
+    smp-only: <dark_gray>[<green>SMP</green>]</dark_gray> <gray>Dieser Befehl 
+      ist nur im SMP verfügbar.</gray>
+    fly-usage: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Benutzung: <yellow>/fly
+      [Spieler]</yellow></gray>'
+    fly-enabled: <dark_gray>[<red>Team</red>]</dark_gray> <green>Flugmodus 
+      aktiviert.</green>
+    fly-disabled: <dark_gray>[<red>Team</red>]</dark_gray> <red>Flugmodus 
+      deaktiviert.</red>
+    fly-enabled-other: <dark_gray>[<red>Team</red>]</dark_gray> <green>Flugmodus
+      für <yellow>%player%</yellow> aktiviert.</green>
+    fly-disabled-other: <dark_gray>[<red>Team</red>]</dark_gray> <red>Flugmodus 
+      für <yellow>%player%</yellow> deaktiviert.</red>
+    vanish-usage: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Benutzung: <yellow>/vanish
+      [Spieler]</yellow> oder <yellow>/vanish friendnotify </yellow><white>on</white><gray>|</gray><white>off</white></gray>'
+    vanish-enabled: <dark_gray>[<red>Team</red>]</dark_gray> <green>Vanish 
+      aktiviert.</green>
+    vanish-disabled: <dark_gray>[<red>Team</red>]</dark_gray> <red>Vanish 
+      deaktiviert.</red>
+    vanish-enabled-other: <dark_gray>[<red>Team</red>]</dark_gray> <green>Vanish
+      für <yellow>%player%</yellow> aktiviert.</green>
+    vanish-disabled-other: <dark_gray>[<red>Team</red>]</dark_gray> <red>Vanish 
+      für <yellow>%player%</yellow> deaktiviert.</red>
+    vanish-friendnotify-usage: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Benutzung: <yellow>/vanish friendnotify </yellow><white>on</white><gray>|</gray><white>off</white></gray>'
+    vanish-friendnotify-enabled: <dark_gray>[<red>Team</red>]</dark_gray> <green>Freundesmeldungen bei Vanish-Wechseln aktiviert.</green>
+    vanish-friendnotify-disabled: <dark_gray>[<red>Team</red>]</dark_gray> <red>Freundesmeldungen bei Vanish-Wechseln deaktiviert.</red>
+    dnd-usage: '<dark_gray>[<light_purple>Novoria</light_purple>]</dark_gray> <gray>Benutzung: <yellow>/dnd</yellow></gray>'
+    dnd-enabled: '<dark_gray>[<light_purple>Novoria</light_purple>]</dark_gray> <green>DND aktiviert – Du bist für Spieler unsichtbar und kannst ungestört normal weiterspielen.</green>'
+    dnd-disabled: '<dark_gray>[<light_purple>Novoria</light_purple>]</dark_gray> <gray>DND deaktiviert – Du bist für Spieler wieder sichtbar.</gray>'
+    online-list: '<dark_gray>[<light_purple>Novoria</light_purple>]</dark_gray> <gray>Online (<yellow>%count%</yellow>): <white>%players%</white></gray>'
+    head-give-usage: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Benutzung: <yellow>/head give <Mob> <Spieler></yellow></gray>'
+    head-give-unavailable: <dark_gray>[<red>Team</red>]</dark_gray> <red>Die Novoria-Kopfsammlung ist momentan nicht verfügbar.</red>
+    head-give-player-not-found: <dark_gray>[<red>Team</red>]</dark_gray> <red>Der Spieler <yellow>%player%</yellow> ist nicht online.</red>
+    head-give-invalid-mob: <dark_gray>[<red>Team</red>]</dark_gray> <red>Für den Mob-Typ <yellow>%mob%</yellow> ist kein Kopf verfügbar.</red>
+    head-give-success: <dark_gray>[<red>Team</red>]</dark_gray> <green>Du hast <yellow>%player%</yellow> den Kopf <yellow>%mob%</yellow> wiederhergestellt.</green>
+    head-give-received: <dark_gray>[<green>SMP</green>]</dark_gray> <green>Ein Teammitglied hat dir den Kopf <yellow>%mob%</yellow> wiederhergestellt.</green>
+    gamemode-usage: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Benutzung: <yellow>/gamemode
+      <Modus> [Spieler]</yellow></gray>'
+    gamemode-invalid: <dark_gray>[<red>Team</red>]</dark_gray> <red>Unbekannter 
+      Spielmodus.</red>
+    gamemode-changed: <dark_gray>[<red>Team</red>]</dark_gray> <green>Spielmodus
+      auf <yellow>%mode%</yellow> gesetzt.</green>
+    gamemode-changed-other: <dark_gray>[<red>Team</red>]</dark_gray> 
+      <green>Spielmodus von <yellow>%player%</yellow> auf 
+      <yellow>%mode%</yellow> gesetzt.</green>
+    ecsee-usage: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Benutzung: <yellow>/ecsee
+      <Spieler></yellow></gray>'
+    ecsee-opened: <dark_gray>[<red>Team</red>]</dark_gray> <gray>Enderchest von 
+      <yellow>%player%</yellow> geöffnet.</gray>
+    invsee-usage: '<dark_gray>[<red>Team</red>]</dark_gray> <gray>Benutzung: <yellow>/invsee
+      <Spieler></yellow></gray>'
+    invsee-opened: <dark_gray>[<red>Team</red>]</dark_gray> <gray>Inventar von 
+      <yellow>%player%</yellow> geöffnet.</gray>
+    invsee-title: '<dark_gray>Inventar: <white>%player%</white>'
+
+
+# Auktionshaus 11.9.0 – Basis
+auction-house:
+  enabled: true
+  default-listing-limit: 5
+  listing-limits: [5, 10, 15, 25]
+  listing-duration-hours: 48
+  expiry-check-seconds: 60
+  expiry-batch-size: 250
+  minimum-price: 1
+  maximum-price: 1000000000
+  close-navigation:
+    enabled: true
+    reopen-delay-ticks: 1
+  sounds:
+    enabled: true
+    open:
+      name: BLOCK_CHEST_OPEN
+      volume: 0.55
+      pitch: 1.15
+    click:
+      name: UI_BUTTON_CLICK
+      volume: 0.6
+      pitch: 1.25
+    buy:
+      name: ENTITY_PLAYER_LEVELUP
+      volume: 0.75
+      pitch: 1.4
+    sell:
+      name: ENTITY_EXPERIENCE_ORB_PICKUP
+      volume: 0.75
+      pitch: 1.2
+    collect:
+      name: ENTITY_ITEM_PICKUP
+      volume: 0.7
+      pitch: 1.15
+
+
+# Container-Protokollierung
+chestlog:
+  max-entries-per-container: 100
+
+
+# 11.10.0 Order-System
+orders:
+  expiry-check-ticks: 1200
+  expiry-batch-size: 100
+  collect-batch-size: 1000
+  default-order-limit: 5
+  order-limits: [10, 15, 25]
+  expiry-hours: 168
+  minimum-amount: 1
+  maximum-amount: 1000000
+  minimum-price-per-item: 5
+  maximum-price-per-item: 1000000000
+  messages:
+    player-only: "<dark_gray>[<aqua>Order</aqua>]</dark_gray> <red>Nur für Spieler.</red>"
+    usage: "<dark_gray>[<aqua>Order</aqua>]</dark_gray> <gray>Benutzung: <yellow>/order</yellow></gray>"
+    database-error: "<dark_gray>[<aqua>Order</aqua>]</dark_gray> <red>Das Order-System
+      ist momentan nicht verfügbar.</red>"
+    item-blocked: "<dark_gray>[<aqua>Order</aqua>]</dark_gray> <red>Dieses Item ist für Aufträge gesperrt.</red>"
+
+# 11.13.4 Crate-Animation
+crates:
+  idle-effects:
+    enabled: true
+    # Partikel werden nur an Spieler innerhalb dieser Distanz gesendet.
+    view-distance: 18.0
+    # Kleiner = flüssiger, größer = sparsamer. 2 Ticks ist ein guter Standard.
+    period-ticks: 2
+    # Entfernung der Aura vom Mittelpunkt der Shulkerbox.
+    # Die vorherigen festen Werte lagen teilweise innerhalb des Blocks.
+    radius:
+      min: 0.95
+      max: 1.35
+    # Vertikale Abweichung relativ zum Aura-Mittelpunkt.
+    height:
+      min-offset: -0.48
+      max-offset: 0.68
+    # Die Kreisbahn kippt ständig zwischen diesen Winkeln.
+    tilt:
+      min-degrees: 10.0
+      max-degrees: 42.0
+    # Mehrere passende Farben wechseln sich auf leicht verschiedenen Bahnen ab.
+    # Farben können hier jederzeit als Hex-Werte angepasst werden.
+    colors:
+      lumi: ["#F5C437", "#FFE36A", "#F39A2E", "#FFF4C2"]
+      vanta: ["#74131F", "#A51F2D", "#D13A43", "#4A1620"]
+      daily: ["#975B30", "#D77A2B", "#C99A3D", "#F1B84B"]
+    particles:
+      # Drei unterschiedlich geneigte Ringe mit jeweils mehreren Punkten.
+      rings: 3
+      normal-per-ring: 7
+      with-key-per-ring: 10
+      # Zusätzliche Partikel schweben frei zwischen den Ringen.
+      floating: 4
+      floating-with-key: 6
+      size: 0.82
+      key-size: 1.00
+      # Kleiner, privater Partikelstoß in regelmäßigen Abständen.
+      # 0 deaktiviert die jeweilige Funktion.
+      burst-interval-ticks: 60
+      burst-count: 8
+    key-boost:
+      speed-multiplier: 1.30
+  animation:
+    item-display:
+      # Position relativ zur unteren Ecke der Shulkerbox.
+      offset-x: 0.5
+      offset-y: 1.05
+      offset-z: 0.5
+      # 1.0 = normale ItemDisplay-Größe. Kleinerer Wert = kleineres Item.
+      scale: 0.60
+      view-range: 0.60
+
+# 11.13.9 Konfigurierbare mehrfarbige Crate-Aura
+# Diese Werte werden jetzt wirklich vom Code ausgelesen.
+# Radius ist die Entfernung vom Mittelpunkt der Shulkerbox.
+crates-idle-effects-reference:
+  note: "Die aktiven Werte stehen unter crates.idle-effects. Dieser Abschnitt ist
+    nur ein Hinweis und kann entfernt werden."
+
+
+# 11.14.2 Vollständiger Coin-Shop
+shop:
+  title: "<dark_gray>Shop</dark_gray>"
+  rows: 3
+  filler: GRAY_STAINED_GLASS_PANE
+  buy-menu:
+    title: "<dark_gray>Kaufen</dark_gray>"
+    rows: 3
+    filler: GRAY_STAINED_GLASS_PANE
+    product:
+      slot: 13
+      lore:
+        - "<gray>Menge: <white>%amount%</white></gray>"
+        - "<gray>Einzelpreis: <gold>%unit_price% Coins</gold></gray>"
+        - "<gray>Gesamt: <gold>%total_price% Coins</gold></gray>"
+    amount-buttons:
+      minus-64: {slot: 9, material: RED_STAINED_GLASS_PANE, name: "<red>-64</red>", lore: ["<gray>Menge anpassen</gray>"]}
+      minus-10: {slot: 10, material: RED_STAINED_GLASS_PANE, name: "<red>-10</red>", lore: ["<gray>Menge anpassen</gray>"]}
+      minus-1: {slot: 11, material: RED_STAINED_GLASS_PANE, name: "<red>-1</red>", lore: ["<gray>Menge anpassen</gray>"]}
+      plus-1: {slot: 15, material: LIME_STAINED_GLASS_PANE, name: "<green>+1</green>", lore: ["<gray>Menge anpassen</gray>"]}
+      plus-10: {slot: 16, material: LIME_STAINED_GLASS_PANE, name: "<green>+10</green>", lore: ["<gray>Menge anpassen</gray>"]}
+      plus-64: {slot: 17, material: LIME_STAINED_GLASS_PANE, name: "<green>+64</green>", lore: ["<gray>Menge anpassen</gray>"]}
+    cancel:
+      slot: 21
+      material: RED_DYE
+      name: "<red>Abbrechen</red>"
+      lore: ["<gray>Zurück zu %category%</gray>"]
+    confirm:
+      slot: 23
+      material: LIME_DYE
+      name: "<green>Kaufen</green>"
+      lore:
+        - "<gray>%amount%x für <gold>%total_price% Coins</gold></gray>"
+        - "<yellow>Klicke zum Bestätigen</yellow>"
+  messages:
+    player-only: "<dark_gray>[<gold>Shop</gold>]</dark_gray> <red>Nur für Spieler.</red>"
+    success: "<dark_gray>[<gold>Shop</gold>]</dark_gray> <green>Du hast <yellow>%amount%x
+      %item%</yellow> für <gold>%price% Coins</gold> gekauft.</green>"
+    not-enough-coins: "<dark_gray>[<gold>Shop</gold>]</dark_gray> <red>Du hast nicht
+      genug Coins.</red>"
+    inventory-full: "<dark_gray>[<gold>Shop</gold>]</dark_gray> <red>Du hast nicht
+      genug Platz im Inventar.</red>"
+    failed: "<dark_gray>[<gold>Shop</gold>]</dark_gray> <red>Der Kauf konnte nicht
+      abgeschlossen werden.</red>"
+  categories:
+    blocks:
+      enabled: true
+      slot: 11
+      material: GRASS_BLOCK
+      name: "<green>Blöcke</green>"
+      lore: ["<gray>Baublöcke kaufen</gray>", "<yellow>Klicke zum Öffnen</yellow>"]
+      menu-title: "<green>Blöcke</green> <gray>(Seite 1)</gray>"
+      rows: 3
+      filler: GRAY_STAINED_GLASS_PANE
+      products:
+        grass_block: {enabled: true, slot: 10, material: GRASS_BLOCK, display: "Grasblock",
+          name: "<green>Grasblock</green>", price: 12}
+        dirt: {enabled: true, slot: 11, material: DIRT, display: "Erde", name: "<gold>Erde</gold>",
+          price: 5}
+        sand: {enabled: true, slot: 12, material: SAND, display: "Sand", name: "<yellow>Sand</yellow>",
+          price: 10}
+        stone: {enabled: true, slot: 13, material: STONE, display: "Stein", name: "<gray>Stein</gray>",
+          price: 15}
+        deepslate: {enabled: true, slot: 14, material: DEEPSLATE, display: "Tiefenschiefer",
+          name: "<dark_gray>Tiefenschiefer</dark_gray>", price: 10}
+        cobbled_deepslate: {enabled: true, slot: 15, material: COBBLED_DEEPSLATE,
+          display: "Bruchtiefenschiefer", name: "<dark_gray>Bruchtiefenschiefer</dark_gray>",
+          price: 10}
+        obsidian: {enabled: true, slot: 16, material: OBSIDIAN, display: "Obsidian",
+          name: "<dark_purple>Obsidian</dark_purple>", price: 30}
+    decoration:
+      enabled: true
+      slot: 12
+      material: TORCHFLOWER
+      name: "<light_purple>Dekoration</light_purple>"
+      lore: ["<gray>Pflanzen und Lichtblöcke</gray>", "<yellow>Klicke zum Öffnen</yellow>"]
+      menu-title: "<light_purple>Deko</light_purple> <gray>(Seite 1)</gray>"
+      rows: 3
+      filler: GRAY_STAINED_GLASS_PANE
+      products:
+        flowering_azalea_leaves: {enabled: true, slot: 10, material: 
+            FLOWERING_AZALEA_LEAVES, display: "Blühende Azaleenblätter", name: "<green>Blühende
+            Azaleenblätter</green>", price: 5}
+        lily_pad: {enabled: true, slot: 11, material: LILY_PAD, display: "Seerosenblatt",
+          name: "<green>Seerosenblatt</green>", price: 5}
+        torchflower: {enabled: true, slot: 12, material: TORCHFLOWER, display: "Fackellilie",
+          name: "<gold>Fackellilie</gold>", price: 5}
+        spore_blossom: {enabled: true, slot: 13, material: SPORE_BLOSSOM, 
+            display: "Sporenblüte", name: "<light_purple>Sporenblüte</light_purple>",
+          price: 5}
+        ochre_froglight: {enabled: true, slot: 14, material: OCHRE_FROGLIGHT, 
+            display: "Ockerfroschlicht", name: "<yellow>Ockerfroschlicht</yellow>",
+          price: 15}
+        pearlescent_froglight: {enabled: true, slot: 15, material: 
+            PEARLESCENT_FROGLIGHT, display: "Perlmuttfroschlicht", name: "<light_purple>Perlmuttfroschlicht</light_purple>",
+          price: 15}
+        verdant_froglight: {enabled: true, slot: 16, material: VERDANT_FROGLIGHT,
+          display: "Grünes Froschlicht", name: "<green>Grünes Froschlicht</green>",
+          price: 15}
+    technology:
+      enabled: true
+      slot: 14
+      material: REDSTONE
+      name: "<red>Technik</red>"
+      lore: ["<gray>Redstone und Mechanik</gray>", "<yellow>Klicke zum Öffnen</yellow>"]
+      menu-title: "<red>Technik</red> <gray>(Seite 1)</gray>"
+      rows: 3
+      filler: GRAY_STAINED_GLASS_PANE
+      products:
+        redstone: {enabled: true, slot: 10, material: REDSTONE, display: "Redstone",
+          name: "<red>Redstone</red>", price: 10}
+        redstone_torch: {enabled: true, slot: 11, material: REDSTONE_TORCH, 
+            display: "Redstone-Fackel", name: "<red>Redstone-Fackel</red>", 
+            price: 12}
+        repeater: {enabled: true, slot: 12, material: REPEATER, display: "Redstone-Verstärker",
+          name: "<red>Redstone-Verstärker</red>", price: 15}
+        comparator: {enabled: true, slot: 13, material: COMPARATOR, display: "Redstone-Komparator",
+          name: "<red>Redstone-Komparator</red>", price: 20}
+        piston: {enabled: true, slot: 14, material: PISTON, display: "Kolben", 
+            name: "<gold>Kolben</gold>", price: 25}
+        sticky_piston: {enabled: true, slot: 15, material: STICKY_PISTON, 
+            display: "Klebriger Kolben", name: "<green>Klebriger Kolben</green>",
+          price: 25}
+        observer: {enabled: true, slot: 16, material: OBSERVER, display: "Beobachter",
+          name: "<gray>Beobachter</gray>", price: 50}
+    food:
+      enabled: true
+      slot: 15
+      material: COOKED_BEEF
+      name: "<gold>Essen</gold>"
+      lore: ["<gray>Nahrung kaufen</gray>", "<yellow>Klicke zum Öffnen</yellow>"]
+      menu-title: "<gold>Essen</gold> <gray>(Seite 1)</gray>"
+      rows: 3
+      filler: GRAY_STAINED_GLASS_PANE
+      products:
+        apple: {enabled: true, slot: 10, material: APPLE, display: "Apfel", name: "<red>Apfel</red>",
+          price: 25}
+        golden_apple: {enabled: true, slot: 11, material: GOLDEN_APPLE, display: "Goldener
+            Apfel", name: "<gold>Goldener Apfel</gold>", price: 150}
+        cooked_beef: {enabled: true, slot: 12, material: COOKED_BEEF, display: "Steak",
+          name: "<gold>Steak</gold>", price: 25}
+        bread: {enabled: true, slot: 13, material: BREAD, display: "Brot", name: "<yellow>Brot</yellow>",
+          price: 15}
+        cooked_chicken: {enabled: true, slot: 14, material: COOKED_CHICKEN, 
+            display: "Gebratenes Hähnchen", name: "<gold>Gebratenes Hähnchen</gold>",
+          price: 25}
+        golden_carrot: {enabled: true, slot: 15, material: GOLDEN_CARROT, 
+            display: "Goldene Karotte", name: "<gold>Goldene Karotte</gold>", 
+            price: 150}
+        carrot: {enabled: true, slot: 16, material: CARROT, display: "Karotte", 
+            name: "<gold>Karotte</gold>", price: 15}
+
+# 11.14.2 Kaufbare Enderchest-Erweiterungen. Das Menü öffnet nur der konfigurierte Citizens-NPC.
+enderchest-upgrades:
+  rows: 3
+  owned-texture-url: "https://textures.minecraft.net/texture/4312ca4632def5ffaf2eb0d9d7cc7b55a50c4e3920d90372aab140781f5dfbc4"
+  owned-profile-name: "ECGreenCheck"
+  title: "<dark_gray>Enderchest-Erweiterungen</dark_gray>"
+  filler: PURPLE_STAINED_GLASS_PANE
+  filler-name: " "
+  locked-lore:
+    - "<gray>Benötigt zum Kauf:</gray>"
+    - "<red>Erweiterung %previous_level%</red>"
+  npc:
+    enabled: true
+    id: -1
+    name: "EC Erweiterung"
+    entity-uuid: ""
+  messages:
+    already-owned: "<dark_gray>[<light_purple>EC</light_purple>]</dark_gray> <green>Diese
+      Erweiterung besitzt du bereits.</green>"
+    previous-required: "<dark_gray>[<light_purple>EC</light_purple>]</dark_gray> <red>Du
+      musst zuerst die vorherige Erweiterung kaufen.</red>"
+    not-enough-coins: "<dark_gray>[<light_purple>EC</light_purple>]</dark_gray> <red>Du
+      hast nicht genug Coins.</red>"
+    failed: "<dark_gray>[<light_purple>EC</light_purple>]</dark_gray> <red>Der Kauf
+      konnte nicht abgeschlossen werden.</red>"
+    success: "<dark_gray>[<light_purple>EC</light_purple>]</dark_gray> <green>Deine
+      Enderchest wurde auf <yellow>%rows% Reihen</yellow> erweitert.</green>"
+  upgrades:
+    upgrade-1:
+      enabled: true
+      level: 1
+      slot: 11
+      price: 50000
+      material: ENDER_CHEST
+      name: "<light_purple>4. Enderchest-Reihe</light_purple>"
+      lore: ["<gray>Schaltet eine zusätzliche Reihe frei.</gray>", "<gold>Preis: %price%
+          Coins</gold>", "<yellow>Klicke zum Kaufen</yellow>"]
+      owned-material: PLAYER_HEAD
+      owned-name: "<green>4. Reihe freigeschaltet</green>"
+      owned-lore: ["<green>Bereits gekauft</green>"]
+    upgrade-2:
+      enabled: true
+      level: 2
+      slot: 13
+      price: 100000
+      material: ENDER_CHEST
+      name: "<light_purple>5. Enderchest-Reihe</light_purple>"
+      lore: ["<gray>Schaltet eine weitere Reihe frei.</gray>", "<gold>Preis: %price%
+          Coins</gold>", "<yellow>Klicke zum Kaufen</yellow>"]
+      owned-material: PLAYER_HEAD
+      owned-name: "<green>5. Reihe freigeschaltet</green>"
+      owned-lore: ["<green>Bereits gekauft</green>"]
+    upgrade-3:
+      enabled: true
+      level: 3
+      slot: 15
+      price: 150000
+      material: ENDER_CHEST
+      name: "<light_purple>6. Enderchest-Reihe</light_purple>"
+      lore: ["<gray>Schaltet die maximale Größe frei.</gray>", "<gold>Preis: %price%
+          Coins</gold>", "<yellow>Klicke zum Kaufen</yellow>"]
+      owned-material: PLAYER_HEAD
+      owned-name: "<green>6. Reihe freigeschaltet</green>"
+      owned-lore: ["<green>Bereits gekauft</green>"]
+
+# Refer-a-Friend (/ref)
+referral:
+  enabled: true
+  # Ein Referral-Code kann nur verwendet werden, solange der Spieler weniger als diese Spielzeit hat.
+  # 3600 = 1 Stunde. 0 deaktiviert die Zeitgrenze.
+  max-redeem-playtime-seconds: 3600
+  novo-crate-id: novo
+
+  # Der Code wird zuerst nur vorgemerkt. Erfolgreich wird die Empfehlung erst,
+  # wenn der neue Spieler ALLE drei Aktivitätswerte erreicht hat.
+  verification:
+    blocks-mined: 100
+    mob-kills: 10
+    advancements: 3
+
+  menu:
+    title: "<dark_gray>Refer a Friend</dark_gray>"
+  point-shop:
+    # 1 erfolgreicher Referral = 1 Punkt, 1 Punkt = 1 Novo-Key.
+    novo-key-price: 1
+  reward-tiers:
+    '1': {enabled: true, invites: 1, novo-keys: 1}
+    '2': {enabled: true, invites: 2, novo-keys: 2}
+    '3': {enabled: true, invites: 3, novo-keys: 3}
+    '4': {enabled: true, invites: 5, novo-keys: 4}
+    '5': {enabled: true, invites: 7, novo-keys: 5}
+  messages:
+    player-only: "<red>Nur Spieler können /ref verwenden.</red>"
+    redeem-pending: "<green>Referral-Code gespeichert.</green> <gray>Die Empfehlung zählt, sobald du <white>%blocks% Blöcke</white>, <white>%mobs% Mobs</white> und <white>%advancements% Advancements</white> erreicht hast.</gray>"
+    redeem-verified: "<green>Referral erfolgreich bestätigt. Du hast <dark_purple>1 Novo-Key</dark_purple> erhalten.</green>"
+    referrer-pending: "<gold>Novoria</gold> <dark_gray>»</dark_gray> <yellow>%player% hat deinen Referral-Code eingetragen. Die Empfehlung wird nach der Aktivitätsprüfung bestätigt.</yellow>"
+    referred-verified: "<gold>Novoria</gold> <dark_gray>»</dark_gray> <green>Deine Empfehlung wurde bestätigt. Du erhältst <dark_purple>1 Novo-Key</dark_purple>.</green>"
+    referrer-verified: "<gold>Novoria</gold> <dark_gray>»</dark_gray> <green>%player% wurde als Empfehlung bestätigt. <aqua>+1 Punkt</aqua> und <dark_purple>+1 Novo-Key</dark_purple>.</green>"
+    pending-keys-delivered: "<gold>Novoria</gold> <dark_gray>»</dark_gray> <green>Du hast <dark_purple>%amount%x Novo-Key</dark_purple> aus ausstehenden Referral-Belohnungen erhalten.</green>"
+    invalid-code: "<red>Dieser Referral-Code existiert nicht.</red>"
+    own-code: "<red>Du kannst deinen eigenen Referral-Code nicht verwenden.</red>"
+    already-redeemed: "<red>Du hast bereits einen Referral-Code verwendet.</red>"
+    too-old: "<red>Referral-Codes können nur in deinen ersten %hours% Spielstunden verwendet werden.</red>"
+
+placeholder-commands:
+  message: "<gold><bold>Novoria</bold></gold> <dark_gray>»</dark_gray> <yellow>Wird
+    noch hinzugefügt.</yellow>"
+
+# Lumi-System und eigene AFK-Zone (ohne WorldGuard)
+lumi:
+  pay:
+    messages:
+      player-only: "<dark_gray>[<gold>Novoria</gold>]</dark_gray> <red>Dieser Befehl ist nur für Spieler verfügbar.</red>"
+      usage: "<dark_gray>[<gold>Novoria</gold>]</dark_gray> <gray>Benutzung: <yellow>/lumi pay <Spieler> <Menge></yellow></gray>"
+      player-not-found: "<dark_gray>[<gold>Novoria</gold>]</dark_gray> <red>Dieser Spieler ist nicht online.</red>"
+      self: "<dark_gray>[<gold>Novoria</gold>]</dark_gray> <red>Du kannst dir nicht selbst Lumis senden.</red>"
+      invalid-amount: "<dark_gray>[<gold>Novoria</gold>]</dark_gray> <red>Die Menge muss eine positive ganze Zahl sein.</red>"
+      insufficient-funds: "<dark_gray>[<gold>Novoria</gold>]</dark_gray> <red>Du besitzt nicht genügend Lumis.</red>"
+      storage-error: "<dark_gray>[<gold>Novoria</gold>]</dark_gray> <red>Die Lumi-Überweisung konnte nicht gespeichert werden.</red>"
+      sent: "<dark_gray>[<gold>Novoria</gold>]</dark_gray> <gray>Du hast <yellow>%player%</yellow> <gold>%amount% Lumis</gold> gesendet.</gray>"
+      received: "<dark_gray>[<gold>Novoria</gold>]</dark_gray> <gray>Du hast von <yellow>%player%</yellow> <gold>%amount% Lumis</gold> erhalten.</gray>"
+  afk-zone:
+    enabled: true
+    # Position 1 und 2 definieren immer einen echten 3D-Bereich (X/Y/Z).
+    reward-interval-seconds: 60
+    reward-amount: 1
+    countdown-actionbar: true
+    countdown: "<gold>%reward% Lumi</gold> <gray>in</gray> <yellow>%seconds%s</yellow>"
+    reward-actionbar: "<gold>+%amount% Lumi</gold> <dark_gray>•</dark_gray> <yellow>%balance% Lumis</yellow>"
+    boosters:
+      duration-seconds: 3600
+      items:
+        lumi_booster_15:
+          category: LUMI
+          multiplier: 1.5
+          display: '<gold>1,5× Lumi-Booster</gold>'
+        lumi_booster_20:
+          category: LUMI
+          multiplier: 2.0
+          display: '<yellow>2× Lumi-Booster</yellow>'
+    messages:
+      player-only: "<red>Nur Spieler können die Position setzen.</red>"
+      position-set: "<gold>Novoria</gold> <dark_gray>»</dark_gray> <green>AFK-Position %position% wurde gesetzt.</green>"
+  shop:
+    title: "<dark_gray>Lumi-Shop</dark_gray>"
+    rows: 3
+    filler: GRAY_STAINED_GLASS_PANE
+    filler-name: " "
+    key:
+      slot: 13
+      price: 1000
+      material: TRIAL_KEY
+      name: "<gold>Lumi-Key</gold>"
+      lore:
+        - "<gray>Preis: <yellow>%price% Lumis</yellow></gray>"
+        - "<gray>Deine Lumis: <white>%balance%</white></gray>"
+        - ""
+        - "<green>Klicke zum Kaufen</green>"
+    messages:
+      player-only: "<red>Nur für Spieler.</red>"
+      key-unavailable: "<red>Der Lumi-Key ist momentan nicht verfügbar.</red>"
+      inventory-full: "<red>Dein Inventar ist voll.</red>"
+      not-enough: "<red>Du hast nicht genug Lumis.</red>"
+      success: "<green>Du hast einen Lumi-Key gekauft.</green>"
+      failed: "<red>Der Kauf konnte nicht abgeschlossen werden.</red>"
+
+
+# Anzahl einzelner Leerzeilen für /chatclear.
+# Separate Einträge verdrängen den alten Vanilla-Chatverlauf.
+chat-clear:
+  lines: 200
+
+
+ranks:
+  premium:
+    price: 1000000
+    duration-days: 30
+  premium-plus:
+    price: 2000000
+    duration-days: 30
+
+rtp:
+  cooldown-by-rank:
+    premium: 40
+    premium-plus: 20
+
+# Workarounds für bekannte Vanilla/Paper-Spielmechanik-Bugs.
+gameplay-fixes:
+  soul-speed-stuck-effect: true

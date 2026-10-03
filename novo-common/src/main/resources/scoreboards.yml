@@ -1,0 +1,96 @@
+
+tablist:
+  prefix-style:
+    bold: true
+    mode: compact
+    separator: ' '
+  separate-hub-and-smp: true
+  simulation:
+    max-players: 100
+    fake-ping: 35
+  layout:
+    minimum-width-characters: 42
+    header-gap-lines: 1
+    footer-gap-lines: 1
+    width: wide
+    custom-padding: 20
+  enabled: true
+  update-ticks: 20
+  lifesteal-worlds: []
+  hub:
+    header:
+    - <gold><bold>Lobby</bold></gold>
+    - <gray>DEINSERVER.NET</gray>
+    footer:
+    - <gold><bold>ѕᴜʀᴠɪᴠᴀʟ:</bold></gold> <white>%smp_online%</white> <green>👤</green>
+  smp:
+    header:
+    - <gold><bold>ѕᴜʀᴠɪᴠᴀʟ</bold></gold>
+    - <gray>DEINSERVER.NET</gray>
+    footer:
+    - <gold><bold>ѕᴜʀᴠɪᴠᴀʟ:</bold></gold> <white>%smp_online%</white> <green>👤</green>
+  ranks:
+    admin:
+      enabled: true
+      permission: smpcore.rank.admin
+      format: <dark_red><bold>ADMIN</bold></dark_red> <dark_red>%player%</dark_red>
+    moderator:
+      enabled: true
+      permission: smpcore.rank.moderator
+      format: <red><bold>SR.MODERATOR</bold></red> <red>%player%</red>
+    content:
+      enabled: true
+      permission: smpcore.rank.content
+      format: <light_purple><bold>CONTENT</bold></light_purple> <light_purple>%player%</light_purple>
+    premium:
+      enabled: true
+      permission: smpcore.rank.premium
+      format: <green><bold>PREMIUM</bold></green> <green>%player%</green>
+    default:
+      enabled: true
+      permission: ''
+      format: <gray>%player%</gray>
+  default-player-format: <gray>%player%</gray>
+stats:
+  title: <dark_gray>Deine Statistiken</dark_gray>
+  autosave-ticks: 1200
+  playtime-period-ticks: 20
+  last-seen-touch-interval-millis: 30000
+leaderboards:
+  title: <dark_gray>Bestenlisten</dark_gray>
+  max-entries: 10
+  show-zero-values: true
+  player-heads:
+    # Neue, noch nicht gecachte Skins werden kontrolliert mit ca. 4 Profilen/Sekunde geladen.
+    lookup-interval-millis: 250
+    retry-after-failure-seconds: 300
+    # Erfolgreiche Skins bleiben über Neustarts erhalten und sind danach sofort verfügbar.
+    persistent-cache: true
+    # Begrenzte Caches verhindern dauerhaftes Wachstum; entfernte Skins werden bei Bedarf neu geladen.
+    max-memory-profiles: 128
+    max-persistent-profiles: 256
+smp-scoreboard:
+  enabled: true
+  title: <gradient:#F6D365:#FDA085><bold>SURVIVAL</bold></gradient>
+  update-ticks: 20
+  lines:
+  - '<yellow> ⛃ <white>Coins: <green>%coins%</green>'
+  - '<light_purple> ✦ <white>Lumis: <yellow>%lumis%</yellow>'
+  - ''
+  - '<green> ⚔ <white>Kills: <green>%kills%</green>'
+  - '<red> ☠ <white>Tode: <red>%deaths%</red>'
+  - '<aqua> ⌛ <white>Spielzeit: <aqua>%playtime%  </aqua>'
+  - ''
+  - <yellow>  play.deinserver.de</yellow>
+hub-scoreboard:
+  enabled: true
+  title: <gradient:#F6D365:#FDA085><bold>LOBBY</bold></gradient>
+  update-ticks: 20
+  lines:
+  - <gray>Spieler im SMP</gray>
+  - <green>%smp_online%</green>
+  - ''
+  - <gray>Spieler online</gray>
+  - <green>%online%</green>
+  - ''
+  - <yellow>play.deinserver.de</yellow>

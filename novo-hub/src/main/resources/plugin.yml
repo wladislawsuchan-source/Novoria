@@ -1,0 +1,127 @@
+name: NovoHub
+version: ${project.version}
+main: de.walahi.novohub.NovoHubPlugin
+api-version: '1.21'
+author: Walahi
+description: Novoria Hub-System
+
+depend: [LuckPerms, ProtocolLib]
+softdepend: [Citizens, PlaceholderAPI]
+
+commands:
+  discord:
+    description: Zeigt den konfigurierbaren Discord-Einladungslink
+    usage: /discord
+    permission: smpcore.discord
+  smp:
+    description: Betritt das SMP
+    usage: /smp [Spieler]
+    permission: smpcore.smp
+  hub:
+    description: Teleportiert zum Hub
+    usage: /hub
+    permission: smpcore.hub
+  kill:
+    description: Tötet dich selbst oder einen Spieler ohne Vanilla-Feedback
+    usage: /kill [Spieler]
+  history:
+    description: Zeigt den Moderationsverlauf eines Spielers
+    usage: /history <Spieler> [Seite]
+  ping:
+    description: Zeigt deinen aktuellen Ping
+    usage: /ping
+  afk:
+    description: Aktiviert oder deaktiviert deinen AFK-Status
+    usage: /afk
+  ban:
+    description: Bannt einen Spieler permanent
+    usage: /ban <Spieler> [Grund]
+  tempban:
+    description: Bannt einen Spieler zeitweise
+    usage: /tempban <Spieler> <Zeit> [Grund]
+  unban:
+    description: Hebt einen Ban auf
+    usage: /unban <Spieler>
+  mute:
+    description: Schaltet einen Spieler permanent stumm
+    usage: /mute <Spieler> [Grund]
+  tempmute:
+    description: Schaltet einen Spieler zeitweise stumm
+    usage: /tempmute <Spieler> <Zeit> [Grund]
+  unmute:
+    description: Hebt einen Mute auf
+    usage: /unmute <Spieler>
+  kick:
+    description: Entfernt einen Spieler vom Server
+    usage: /kick <Spieler> [Grund]
+  fly:
+    description: Aktiviert oder deaktiviert den Flugmodus
+    usage: /fly [Spieler]
+  vanish:
+    description: Aktiviert oder deaktiviert Vanish
+    usage: /vanish [Spieler] | /vanish friendnotify <on|off>
+  gamemode:
+    description: Ändert den Spielmodus
+    usage: /gamemode <Modus> [Spieler]
+  tp:
+    description: Teleportiert Spieler
+    usage: /tp <Ziel>
+  msg:
+    aliases: [message, tell, whisper, w]
+    description: Sendet eine private Nachricht
+    usage: /msg <Spieler> <Nachricht>
+  reply:
+    aliases: [r]
+    description: Antwortet dem letzten Gesprächspartner
+    usage: /reply <Nachricht>
+  socialspy:
+    description: Zeigt private Nachrichten anderer Spieler
+    usage: /socialspy
+  invsee:
+    description: Öffnet das Inventar eines Spielers
+    usage: /invsee <Spieler>
+  bau:
+    description: Verwaltet den temporären Baumodus
+    usage: /bau <Spieler>
+  tabtest:
+    description: Simuliert Spieler in der Tablist
+    usage: /tabtest <Anzahl|off>
+    permission: smpcore.tabtest
+  smpcore:
+    aliases: [smpportal]
+    description: Verwaltung von NovoHub
+    usage: /smpcore <reload|sethub|info|hologram>
+    permission: smpcore.admin
+
+permissions:
+  smpcore.discord:
+    default: true
+  smpcore.smp: {default: true}
+  smpcore.smp.others: {default: op}
+  smpcore.hub: {default: true}
+  smpcore.command.kill: {default: op}
+  smpcore.command.kill.others: {default: op}
+  smpcore.command.history: {default: op}
+  smpcore.command.ping: {default: true}
+  smpcore.command.afk: {default: true}
+  smpcore.command.ban: {default: op}
+  smpcore.command.tempban: {default: op}
+  smpcore.command.unban: {default: op}
+  smpcore.command.mute: {default: op}
+  smpcore.command.tempmute: {default: op}
+  smpcore.command.unmute: {default: op}
+  smpcore.command.kick: {default: op}
+  smpcore.command.fly: {default: op}
+  smpcore.command.fly.others: {default: op}
+  smpcore.command.vanish: {default: op}
+  smpcore.command.vanish.others: {default: op}
+  smpcore.command.gamemode: {default: op}
+  smpcore.command.gamemode.others: {default: op}
+  smpcore.command.tp: {default: op}
+  smpcore.command.tp.others: {default: op}
+  smpcore.command.msg: {default: true}
+  smpcore.command.reply: {default: true}
+  smpcore.command.socialspy: {default: op}
+  smpcore.command.invsee: {default: op}
+  smpcore.tabtest: {default: op}
+  smpcore.admin: {default: op}

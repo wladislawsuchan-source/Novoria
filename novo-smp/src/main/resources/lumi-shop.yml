@@ -1,0 +1,41 @@
+# Zusätzliche Custom-Item-Angebote im bestehenden Lumi-Shop.
+# Der Lumi-Key und das Menüdesign bleiben weiterhin unter lumi.shop in der globalen config.yml.
+
+lore-suffix:
+  - ''
+  - '<gray>Preis: <yellow>%price% Lumis</yellow></gray>'
+  - '<gray>Dein Guthaben: <white>%balance% Lumis</white></gray>'
+  - ''
+  - '<green>Klicke zum Kaufen</green>'
+
+messages:
+  unavailable: '<red>Dieses Angebot ist momentan nicht verfügbar.</red>'
+  inventory-full: '<red>Dein Inventar ist voll.</red>'
+  not-enough: '<red>Du hast nicht genug Lumis.</red>'
+  success: '<green>Du hast <yellow>%amount%x %item%</yellow> für <gold>%price% Lumis</gold> gekauft.</green>'
+  failed: '<red>Der Kauf konnte nicht abgeschlossen werden.</red>'
+
+custom-items:
+  werkzeugfragment:
+    enabled: true
+    slot: 11
+    item: werkzeugfragment
+    display: Werkzeugfragmente ×5
+    price: 500
+    amount: 5
+
+# Zusätzliche echte Crate-Keys gegen Lumis.
+crate-keys:
+  novo-key:
+    enabled: true
+    slot: 15
+    crate: novo
+    display: Novo-Key
+    display-name: '<dark_purple>Novo-Key</dark_purple>'
+    price: 2500
+    amount: 1
+    lore:
+      - '<gray>Preis: <yellow>%price% Lumis</yellow></gray>'
+      - '<gray>Deine Lumis: <white>%balance%</white></gray>'
+      - ''
+      - '<green>Klicke zum Kaufen</green>'

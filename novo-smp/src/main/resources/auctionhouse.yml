@@ -1,0 +1,252 @@
+# Darstellung und Texte des Auktionshauses.
+# Geschäftsregeln wie Limits, Preise, Laufzeit und Sounds bleiben aus Kompatibilitätsgründen
+# unter "auction-house" in der globalen config.yml.
+auction-ui:
+  menus:
+    # Einheitliche Navigationsleiste am unteren Rand aller AH-Menüs.
+    bottom-filler:
+      material: BLACK_STAINED_GLASS_PANE
+      name: " "
+      lore: []
+
+    main:
+      rows: 6
+      title: "<dark_gray>Auktionshaus • Seite %page%/%pages%</dark_gray>"
+      content-slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]
+      empty-slot: 22
+      empty:
+        material: BARRIER
+        name: "<yellow>Keine Angebote</yellow>"
+        lore: ["<gray>Aktuell sind keine Gegenstände im Auktionshaus.</gray>"]
+      own-slot: 45
+      own:
+        material: CHEST
+        name: "<gold>Meine Angebote</gold>"
+        lore: ["<gray>Aktiv: <yellow>%active%</yellow>/<yellow>%limit%</yellow></gray>"]
+      collect-slot: 46
+      collect:
+        material: HOPPER
+        name: "<yellow>Collect</yellow>"
+        lore: ["<gray>Abzuholen: <yellow>%count%</yellow></gray>"]
+      previous-slot: 48
+      refresh-slot: 49
+      next-slot: 50
+      sell-slot: 53
+
+    listings:
+      rows: 6
+      title: "<dark_gray>Meine Angebote • Seite %page%/%pages%</dark_gray>"
+      content-slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]
+      empty-slot: 22
+      empty:
+        material: CHEST
+        name: "<yellow>Keine aktiven Angebote</yellow>"
+        lore: ["<gray>Stelle ein Item über den Verkaufsknopf ein.</gray>"]
+      back-slot: 45
+      history-slot: 47
+      previous-slot: 48
+      refresh-slot: 49
+      next-slot: 50
+      sell-slot: 52
+      stats-slot: 53
+
+    collect:
+      rows: 6
+      title: "<dark_gray>Collect • Seite %page%/%pages%</dark_gray>"
+      content-slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]
+      empty-slot: 22
+      empty:
+        material: HOPPER
+        name: "<yellow>Collect ist leer</yellow>"
+        lore: ["<gray>Hier landen abgelaufene oder nicht zustellbare Items.</gray>"]
+      back-slot: 45
+      previous-slot: 48
+      refresh-slot: 49
+      next-slot: 50
+      collect-all-slot: 53
+
+    history:
+      rows: 6
+      title: "<dark_gray>AH-Verlauf • Seite %page%/%pages%</dark_gray>"
+      content-slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]
+      empty-slot: 22
+      empty:
+        material: WRITABLE_BOOK
+        name: "<yellow>Noch kein Verlauf</yellow>"
+        lore: ["<gray>Käufe und Verkäufe erscheinen später hier.</gray>"]
+      back-slot: 45
+      previous-slot: 48
+      refresh-slot: 49
+      next-slot: 50
+      stats-slot: 53
+
+    stats:
+      rows: 3
+      title: "<dark_gray>Deine AH-Statistiken</dark_gray>"
+      listings-created-slot: 4
+      earned-slot: 10
+      spent-slot: 12
+      active-slot: 13
+      sold-slot: 14
+      bought-slot: 16
+      back-slot: 22
+
+    sell-confirm:
+      rows: 3
+      title: "<dark_gray>Angebot bestätigen</dark_gray>"
+      preview-slot: 13
+      cancel-slot: 11
+      confirm-slot: 15
+
+    buy-confirm:
+      rows: 3
+      title: "<dark_gray>Kauf bestätigen</dark_gray>"
+      preview-slot: 13
+      confirm-slot: 11
+      cancel-slot: 15
+
+  buttons:
+    back:
+      material: ARROW
+      name: "<yellow>Zurück</yellow>"
+      lore: ["<gray>Zum vorherigen Menü</gray>"]
+    previous:
+      material: ARROW
+      name: "<yellow>Vorherige Seite</yellow>"
+    next:
+      material: ARROW
+      name: "<yellow>Nächste Seite</yellow>"
+    refresh:
+      material: BLAZE_POWDER
+      name: "<green>Aktualisieren</green>"
+      lore: ["<gray>%status%</gray>"]
+    sell:
+      material: MAP
+      name: "<green>Gegenstand verkaufen</green>"
+      lore:
+        - "<gray>Item in der Hand auswählen</gray>"
+        - "<dark_gray>Preis anschließend auf dem Schild eingeben</dark_gray>"
+    history:
+      material: WRITABLE_BOOK
+      name: "<gold>Verlauf</gold>"
+      lore: ["<gray>Käufe, Verkäufe und abgelaufene Angebote</gray>"]
+    stats:
+      material: BOOK
+      name: "<aqua>AH-Statistiken</aqua>"
+      lore: ["<gray>Deine Marktübersicht</gray>"]
+    collect-all:
+      material: CHEST_MINECART
+      name: "<green>Alles einsammeln</green>"
+      lore: ["<gray>Sammelt so viele Items wie möglich ein.</gray>"]
+    sell-cancel:
+      material: RED_CONCRETE
+      name: "<red>Abbrechen</red>"
+      lore: ["<gray>Das Item bleibt in deiner Hand.</gray>"]
+    sell-confirm:
+      material: LIME_CONCRETE
+      name: "<green>Angebot einstellen</green>"
+      lore: ["<gold>%price% Coins</gold>"]
+    buy-confirm:
+      material: LIME_CONCRETE
+      name: "<green>Kaufen</green>"
+      lore: ["<gold>%price% Coins</gold>"]
+    buy-cancel:
+      material: RED_CONCRETE
+      name: "<red>Abbrechen</red>"
+
+  stats-items:
+    listings-created: {material: WRITABLE_BOOK, name: "<gold>Erstellte Angebote</gold>", lore: ["<white>%value%</white>"]}
+    earned: {material: GOLD_INGOT, name: "<green>Verdient</green>", lore: ["<gold>%value% Coins</gold>"]}
+    spent: {material: REDSTONE, name: "<red>Ausgegeben</red>", lore: ["<gold>%value% Coins</gold>"]}
+    active: {material: PAPER, name: "<green>Aktive Angebote</green>", lore: ["<white>%value%</white>"]}
+    sold: {material: CHEST, name: "<yellow>Verkaufte Items</yellow>", lore: ["<white>%value%</white>"]}
+    bought: {material: HOPPER, name: "<aqua>Gekaufte Items</aqua>", lore: ["<white>%value%</white>"]}
+
+  icons:
+    listing-lore:
+      - ""
+      - "<gray>Preis: <gold>%price% Coins</gold></gray>"
+      - "<gray>Verkäufer: <yellow>%seller%</yellow></gray>"
+      - "<dark_gray>Läuft ab in: %expires%</dark_gray>"
+      - ""
+      - "%action%"
+    listing-action-buy: "<green>Klicke zum Kaufen</green>"
+    listing-action-own: "<yellow>Klicke für deine Angebote</yellow>"
+    own-listing-lore:
+      - ""
+      - "<gray>Preis: <gold>%price% Coins</gold></gray>"
+      - ""
+      - "<red>Klicke, um das Angebot zurückzunehmen.</red>"
+    collect-lore:
+      - ""
+      - "<yellow>%reason%</yellow>"
+      - "<green>Klicke zum Einsammeln.</green>"
+    collect-reasons:
+      EXPIRED: "Angebot abgelaufen"
+      CANCELLED: "Angebot zurückgenommen"
+      PURCHASE_DELIVERY: "Gekaufter Gegenstand"
+      DELIVERY_FALLBACK: "Nicht zustellbarer Gegenstand"
+    sell-preview-lore:
+      - ""
+      - "<gray>Verkaufspreis: <gold>%price% Coins</gold></gray>"
+      - "<gray>Anzahl: %amount%</gray>"
+    history:
+      SOLD:
+        - ""
+        - "<green>%counterpart% hat deinen Gegenstand gekauft.</green>"
+        - "<gray>Verkauft für: <gold>%price% Coins</gold></gray>"
+        - "<dark_gray>%time%</dark_gray>"
+      BOUGHT:
+        - ""
+        - "<aqua>Von %counterpart% gekauft.</aqua>"
+        - "<gray>Bezahlt: <gold>%price% Coins</gold></gray>"
+        - "<dark_gray>%time%</dark_gray>"
+      EXPIRED:
+        - ""
+        - "<yellow>Dein Angebot ist abgelaufen.</yellow>"
+        - "<gray>Preis: <gold>%price% Coins</gold></gray>"
+        - "<dark_gray>%time%</dark_gray>"
+      CANCELLED:
+        - ""
+        - "<red>Du hast das Angebot zurückgenommen.</red>"
+        - "<gray>Preis: <gold>%price% Coins</gold></gray>"
+        - "<dark_gray>%time%</dark_gray>"
+      default:
+        - ""
+        - "<gray>%event%</gray>"
+        - "<dark_gray>%time%</dark_gray>"
+
+  input:
+    timeout-ticks: 1200
+    material: OAK_SIGN
+    line-index: 0
+    lines: ["", "Preis eingeben", "Gesamtpreis", "Coins"]
+
+  messages:
+    dynamic: "%message%"
+    database-error: "<red>Das Auktionshaus ist momentan nicht verfügbar.</red>"
+    item-blocked: "<red>Dieses Item darf nicht im Auktionshaus angeboten werden.</red>"
+    hold-item: "<red>Halte zuerst einen Gegenstand in deiner Hand.</red>"
+    item-changed: "<red>Das Item in deiner Hand wurde verändert. Starte den Verkauf erneut.</red>"
+    limit-reached: "<red>Du hast dein Angebotslimit erreicht.</red>"
+    invalid-price: "<red>Dieser Preis ist nicht gültig.</red>"
+    input-invalid: "<red>Gib einen gültigen Preis ein, zum Beispiel 2500, 2.5k oder 1m.</red>"
+    input-range: "<red>Der Preis muss zwischen <yellow>%min%</yellow> und <yellow>%max%</yellow> Coins liegen.</red>"
+    input-timeout: "<yellow>Die Preiseingabe ist abgelaufen.</yellow>"
+    create-success: "<green>Du hast den Gegenstand für <gold>%price% Coins</gold> eingestellt.</green>"
+    listing-unavailable: "<red>Dieses Angebot ist nicht mehr verfügbar.</red>"
+    cancel-failed: "<red>Das Angebot konnte nicht zurückgenommen werden.</red>"
+    cancel-inventory: "<green>Das Angebot wurde zurückgenommen und direkt in dein Inventar gelegt.</green>"
+    cancel-collect: "<yellow>Dein Inventar ist voll. Das Item liegt sicher in Collect.</yellow>"
+    inventory-full: "<red>Du hast nicht genug Platz im Inventar.</red>"
+    collect-already: "<red>Dieses Item wurde bereits eingesammelt.</red>"
+    collect-success: "<green>Du hast den Gegenstand eingesammelt.</green>"
+    collect-all-empty: "<yellow>Dein Inventar ist voll oder es gibt nichts abzuholen.</yellow>"
+    collect-all-success: "<green>Du hast <yellow>%count%</yellow> Collect-Einträge eingesammelt.</green>"
+    buy-self: "<red>Du kannst dein eigenes Angebot nicht kaufen.</red>"
+    not-enough-coins: "<red>Du hast nicht genug Coins.</red>"
+    purchase-race: "<red>Jemand war schneller.</red>"
+    purchase-failed: "<red>Der Kauf konnte nicht abgeschlossen werden.</red>"
+    purchase-success: "<green>Du hast den Gegenstand für <gold>%price% Coins</gold> gekauft.</green>"
+    purchase-collect: "<yellow>Der Kauf war erfolgreich. Das Item liegt sicher in Collect.</yellow>"
+    operation-running: "<yellow>Bitte warte, bis die laufende AH-Aktion abgeschlossen ist.</yellow>"

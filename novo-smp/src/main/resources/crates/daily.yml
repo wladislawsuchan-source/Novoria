@@ -1,0 +1,31 @@
+id: daily
+display-name: Daily-Kiste
+key-material: NAME_TAG
+enabled: true
+rewards:
+  empty_spawner: {type: ITEM, display-name: "Leerer Spawner", material: SPAWNER, amount: 1, chance: 0.02}
+  creeper_egg: {type: ITEM, display-name: "Creeper-Spawn-Ei", material: CREEPER_SPAWN_EGG, amount: 1, chance: 0.02}
+
+  coins_15000: {type: COINS, display-name: "15.000 Coins", coins: 15000, chance: 0.50}
+  vanta_key: {type: KEY, display-name: "Vanta-Key", crate: vanta, amount: 1, chance: 1.50}
+  lumi_key: {type: KEY, display-name: "Lumi-Key", crate: lumi, amount: 1, chance: 2.50}
+
+  enchanted_gapple: {type: ITEM, display-name: "Verzauberter Goldapfel", material: ENCHANTED_GOLDEN_APPLE, amount: 1, chance: 0.50}
+  gapples: {type: ITEM, display-name: "Goldapfel ×4", material: GOLDEN_APPLE, amount: 4, chance: 6.50}
+  totem: {type: ITEM, display-name: "Totem der Unsterblichkeit", material: TOTEM_OF_UNDYING, amount: 1, chance: 6.50}
+  xp_bottles: {type: ITEM, display-name: "Erfahrungsflaschen ×16", material: EXPERIENCE_BOTTLE, amount: 16, chance: 9.00}
+
+  coins_5000: {type: COINS, display-name: "5.000 Coins", coins: 5000, chance: 9.00}
+  rockets:
+    type: ITEM
+    display-name: "Feuerwerksraketen ×32"
+    material: FIREWORK_ROCKET
+    amount: 32
+    chance: 13.00
+    firework:
+      flight: 3
+  golden_carrots: {type: ITEM, display-name: "Goldene Karotten ×16", material: GOLDEN_CARROT, amount: 16, chance: 13.00}
+  pearls: {type: ITEM, display-name: "Enderperlen ×8", material: ENDER_PEARL, amount: 8, chance: 13.00}
+
+  coins_2500: {type: COINS, display-name: "2.500 Coins", coins: 2500, chance: 14.00}
+  coins_1000: {type: COINS, display-name: "1.000 Coins", coins: 1000, chance: 11.96}

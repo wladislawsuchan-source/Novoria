@@ -1,0 +1,220 @@
+# Novoria Command-System
+# Diese Datei steuert ausschließlich, welche Befehle auf welchem Backend sichtbar
+# und ausführbar sind. Dauerhafte Rechte/Ränge bleiben bei LuckPerms.
+schema-version: 2
+
+command-filter:
+  enabled: true
+  hide-tab-completion: true
+  remove-namespaced-commands: true
+  blocked-message: <gray>Dieser Befehl konnte nicht gefunden werden.</gray>
+  # Absichtlich leer: Auch Team-Ränge bekommen auf dem Hub nur die dort freigegebenen Befehle.
+  bypass-groups: []
+
+# Private Nachrichten existieren nur auf dem SMP, weil sie im Hub-Profil nicht freigegeben sind.
+private-messages:
+  enabled: true
+  cross-world-message: <gray>Dieser Spieler befindet sich nicht im selben Bereich.</gray>
+  direct-commands: [msg, message, tell, whisper, w]
+  reply-commands: [reply, r]
+
+# Baumodus ist SMP-spezifisch. WorldEdit/Citizens werden nur während einer aktiven
+# Bau-Session zusätzlich freigeschaltet.
+build-mode:
+  enabled: true
+  managers: [owner, admin]
+  builders: [owner, admin, creator]
+  allowed-worlds: [world, build, smp_spawn]
+  gamemode: CREATIVE
+  fly: true
+  restore-gamemode: true
+  restore-flight: true
+  allowed-command-plugins: [WorldEdit, Citizens]
+  temporary-permissions:
+    - worldedit.*
+    - citizens.*
+  messages:
+    usage: '<gray>Benutzung: <yellow>/bau <Spieler></yellow>'
+    no-permission: <red>Du darfst den Baumodus nicht verwalten.</red>
+    player-not-found: <red>Der Spieler <yellow>%player%</yellow> ist nicht online.</red>
+    not-a-builder: <red>%player% besitzt keinen Creator-Rang.</red>
+    wrong-world: <red>%player% befindet sich in <yellow>%world%</yellow>. Dort kann der Baumodus nicht aktiviert werden.</red>
+    enabled-target: <green>Der Baumodus wurde von <yellow>%manager%</yellow> aktiviert.</green>
+    enabled-manager: <green>Baumodus für <yellow>%player%</yellow> aktiviert.</green>
+    disabled-target: <red>Der Baumodus wurde von <yellow>%manager%</yellow> beendet.</red>
+    disabled-manager: <red>Baumodus für <yellow>%player%</yellow> beendet.</red>
+  sounds:
+    enabled:
+      enabled: true
+      sound: BLOCK_NOTE_BLOCK_PLING
+      volume: 1.0
+      pitch: 1.6
+    disabled:
+      enabled: true
+      sound: BLOCK_NOTE_BLOCK_BASS
+      volume: 1.0
+      pitch: 0.8
+
+server-groups:
+  # Auf dem Hub gibt es für Spieler genau EINEN Befehl: /smp.
+  # Alle Ränge erhalten zusätzlich automatisch die default-Liste, daher sind hier
+  # keine doppelten Premium-/Team-Gruppen nötig.
+  hub:
+    default:
+      allowed: [smp]
+
+  # Sämtliche übrigen Spielerbefehle gehören zum SMP.
+  smp:
+    default:
+      allowed:
+        - hub
+        - list
+        - discord
+        - spawn
+        - rtp
+        - back
+        - duel
+        - duell
+        - berufe
+        - beruf
+        - abgabe
+        - koepfe
+        - köpfe
+        - heads
+        - kopfsammlung
+        - friend
+        - friends
+        - fl
+        - fhome
+        - sethome
+        - home
+        - delhome
+        - homes
+        - tpa
+        - tpaccept
+        - tpdeny
+        - tpacancel
+        - stats
+        - leaderboards
+        - ec
+        - enderchest
+        - ecupgrade
+        - msg
+        - message
+        - tell
+        - whisper
+        - w
+        - reply
+        - r
+        - ping
+        - afk
+        - balance
+        - bal
+        - money
+        - pay
+        - nachtsicht
+        - nv
+        - sell
+        - worth
+        - shop
+        - ah
+        - auctionhouse
+        - order
+        - orders
+        - ranks
+        - rankshop
+        - ref
+        - bounty
+        - playtime
+        - spielzeit
+        - daily
+        - vote
+        - clan
+        - csethome
+        - chome
+        - cdelhome
+        - cc
+        - cp
+        - lumishop
+        - lumi
+        - crate
+        - crates
+
+    premium:
+      allowed:
+        - craft
+        - condense
+        - chatfarbe
+
+    # Premium+ erhält alle Premium-Komfortbefehle kumulativ.
+    premiumplus:
+      inherit: premium
+
+    # Partner bleibt ein normaler Spieler-Rang und bekommt nur /stream zusätzlich.
+    partner:
+      allowed: [stream]
+
+    supporter:
+      allowed:
+        - kick
+        - mute
+        - tempmute
+        - unmute
+        - vanish
+        - fly
+        - invsee
+        - ecsee
+        - seen
+        - tp
+        - chatclear
+        - cc
+        - entityclear
+        - eclear
+        - dropclear
+        - dclear
+        - itemclear
+
+    moderator:
+      inherit: supporter
+      allowed:
+        - tempban
+        - unban
+        - clearinventory
+        - history
+
+    srmoderator:
+      inherit: moderator
+      allowed: [ban]
+
+    developer:
+      inherit: moderator
+      allowed:
+        - smpcore
+        - gamemode
+        - gm
+        - eco
+        - lumi
+        - setafkpos1
+        - setafkpos2
+        - setspawn
+        - ip
+        - crate
+        - lp
+        - luckperms
+
+    admin:
+      inherit: [srmoderator, developer]
+      allowed:
+        - dnd
+        - exposeore
+        - smprestart
+        - ahome
+        - chestlog
+        - bau
+        - socialspy
+        - head
+        - lp
+        - luckperms
+
+    owner:
+      allowed: ['*']

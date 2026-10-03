@@ -1,0 +1,58 @@
+enabled: true
+display-name: Holzschlag
+color: '<gray>'
+max-level: 5
+disable-while-sneaking: true
+respect-protection: true
+
+leaves:
+  ignore-player-placed: true
+
+durability-safety:
+  enabled: true
+  confirmation-seconds: 10
+
+messages:
+  cooldown: '<red>Holzschlag ist noch %seconds%s im Cooldown.</red>'
+  cooldown-actionbar: true
+  tool-would-break: '<red>Deine Axt würde bei diesem Holzschlag zerbrechen. Baue innerhalb von <white>%seconds%</white> Sekunden erneut ab, wenn sie trotzdem zerbrechen darf.</red>'
+
+
+levels:
+  1:
+    max-blocks: 8
+    cooldown-seconds: 0
+    break-leaves: false
+    durability-per-block: 1
+    same-material-only: true
+    include-diagonals: true
+  2:
+    max-blocks: 16
+    cooldown-seconds: 0
+    break-leaves: false
+    durability-per-block: 1
+    same-material-only: true
+    include-diagonals: true
+  3:
+    max-blocks: 32
+    cooldown-seconds: 0
+    break-leaves: false
+    durability-per-block: 1
+    same-material-only: true
+    include-diagonals: true
+  4:
+    max-blocks: 64
+    cooldown-seconds: 2
+    break-leaves: true
+    max-leaves: 512
+    durability-per-block: 1
+    same-material-only: true
+    include-diagonals: true
+  5:
+    max-blocks: 128
+    cooldown-seconds: 2
+    break-leaves: true
+    max-leaves: 512
+    durability-per-block: 1
+    same-material-only: true
+    include-diagonals: true

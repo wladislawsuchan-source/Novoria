@@ -1,0 +1,261 @@
+# Darstellung und Texte des Order-Systems.
+# Geschäftsregeln wie Limits, Mindestpreis und Laufzeit bleiben unter "orders" in der globalen config.yml.
+order-ui:
+  filler:
+    material: BLACK_STAINED_GLASS_PANE
+    name: " "
+
+  menus:
+    main:
+      rows: 6
+      title: "<dark_gray>Orders</dark_gray>"
+      content-size: 45
+      empty-slot: 22
+      empty:
+        material: PAPER
+        name: "<gray>Keine aktiven Aufträge</gray>"
+        lore:
+          - "<dark_gray>Aktuell gibt es keine offenen Aufträge.</dark_gray>"
+      own-orders-slot: 49
+      own-orders:
+        material: CHEST
+        name: "<gold>Meine Aufträge</gold>"
+        lore:
+          - "<gray>Aktiv: <yellow>%active%</yellow>/<yellow>%limit%</yellow></gray>"
+          - "<dark_gray>Klicke, um Aufträge zu erstellen und zu verwalten.</dark_gray>"
+
+    own:
+      rows: 3
+      title: "<dark_gray>Meine Aufträge</dark_gray>"
+      listing-slots: [1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22]
+      create-slot: 0
+      create:
+        material: PAPER
+        name: "<green>Auftrag erstellen</green>"
+        lore:
+          - "<gray>Wähle den gewünschten Gegenstand aus.</gray>"
+          - "<dark_gray>Menge und Stückpreis stellst du danach ein.</dark_gray>"
+      collect-slot: 18
+      collect:
+        material: CHEST
+        name: "<aqua>Order Collect</aqua>"
+        lore:
+          - "<gray>Wartende Lieferungen: <yellow>%count%</yellow></gray>"
+          - "<dark_gray>Klicke, um bestellte Items abzuholen.</dark_gray>"
+
+    collect:
+      rows: 6
+      title: "<dark_gray>Order Collect</dark_gray>"
+      page-size: 45
+      empty-slot: 22
+      empty:
+        material: CHEST
+        name: "<gray>Keine Lieferungen</gray>"
+        lore:
+          - "<dark_gray>Aktuell warten keine bestellten Items.</dark_gray>"
+      collect-all-slot: 49
+      collect-all:
+        material: HOPPER
+        name: "<green>Alles abholen</green>"
+        lore:
+          - "<gray>Nimmt so viele Items wie möglich.</gray>"
+          - "<dark_gray>Nicht abgeholte Items bleiben sicher gespeichert.</dark_gray>"
+
+    details:
+      rows: 3
+      title: "<dark_gray>Auftrag verwalten</dark_gray>"
+      item-slot: 13
+      cancel-slot: 11
+      cancel:
+        material: RED_STAINED_GLASS_PANE
+        name: "<red>Auftrag abbrechen</red>"
+        lore:
+          - "<gray>Offene Coins werden zurückgezahlt.</gray>"
+          - "<dark_gray>Bereits erfüllte Teile bleiben abgeschlossen.</dark_gray>"
+          - ""
+          - "<red>Klicke zum Abbrechen.</red>"
+
+    selection:
+      rows: 6
+      title: "<dark_gray>Order erstellen • Items %page%/%pages%</dark_gray>"
+      page-size: 45
+      previous-slot: 45
+      filter-slot: 48
+      sort-slot: 49
+      search-slot: 50
+      next-slot: 53
+      empty-slot: 22
+      empty:
+        material: BARRIER
+        name: "<red>Keine passenden Items</red>"
+        lore:
+          - "<gray>Ändere Filter oder Suche.</gray>"
+      previous:
+        material: ARROW
+        name: "<yellow>Vorherige Seite</yellow>"
+      next:
+        material: ARROW
+        name: "<yellow>Nächste Seite</yellow>"
+      filter:
+        material: HOPPER
+        name: "<aqua>Filter</aqua>"
+      sort:
+        material: HOPPER_MINECART
+        name: "<green>Sortieren</green>"
+      search:
+        material: OAK_SIGN
+        name: "<yellow>Suche</yellow>"
+        lore:
+          - "<yellow>%search%</yellow>"
+          - "<gray>Klicke und gib den Itemnamen ein.</gray>"
+          - "<dark_gray>Leere Eingabe setzt die Suche zurück.</dark_gray>"
+      item-lore:
+        normal:
+          - "<gray>Klicke, um dieses Item zu bestellen.</gray>"
+        enchanted-book:
+          - "<gray>Drücke im nächsten Menü auf das Buch,</gray>"
+          - "<gray>um die Stufe zu ändern.</gray>"
+        ominous-bottle:
+          - "<gray>Drücke im nächsten Menü auf die Flasche,</gray>"
+          - "<gray>um die Stufe zu ändern.</gray>"
+
+    editor:
+      rows: 3
+      title: "<dark_gray>Neuen Auftrag erstellen</dark_gray>"
+      cancel-slot: 10
+      item-slot: 12
+      amount-slot: 13
+      price-slot: 14
+      confirm-slot: 16
+      cancel:
+        material: RED_STAINED_GLASS_PANE
+        name: "<red>Abbrechen</red>"
+        lore:
+          - "<gray>Auftrag verwerfen</gray>"
+      amount:
+        material: CHEST
+        name: "<gold>Menge</gold>"
+        lore:
+          - "%status%"
+          - "<dark_gray>Klicke, um die Menge einzugeben.</dark_gray>"
+      price:
+        material: EMERALD
+        name: "<green>Preis pro Stück</green>"
+        lore:
+          - "%status%"
+          - "<dark_gray>Mindestpreis: %minimum% Coins pro Stück</dark_gray>"
+          - "<dark_gray>Klicke, um den Stückpreis einzugeben.</dark_gray>"
+      confirm:
+        material: LIME_STAINED_GLASS_PANE
+        name: "<green>Bestätigen</green>"
+        complete-lore:
+          - "<gray>Gesamtpreis: <gold>%total% Coins</gold></gray>"
+          - "<green>Klicke, um den Auftrag zu erstellen.</green>"
+        incomplete-lore:
+          - "<red>Lege zuerst Menge und Stückpreis fest.</red>"
+
+    delivery:
+      rows: 6
+      title: "<dark_gray>Liefern • %item%</dark_gray>"
+
+  input:
+    timeout-ticks: 1200
+    amount:
+      sign-lines: ["", "Menge eingeben", "%minimum% - %maximum%", "Items"]
+    price:
+      sign-lines: ["", "Preis eingeben", "pro Item", "mind. %minimum% Coins"]
+    search:
+      sign-lines: ["", "Item suchen", "leer = alles", ""]
+
+  filters:
+    all: "Alle"
+    blocks: "Blöcke"
+    tools: "Werkzeuge"
+    food: "Nahrung"
+    combat: "Kampf"
+    books: "Bücher"
+    ingredients: "Zutaten"
+    useful: "Nützliches"
+  sorts:
+    a_to_z: "A bis Z"
+    z_to_a: "Z bis A"
+    blocks_first: "Blöcke zuerst"
+
+  labels:
+    no-search: "Keine Suche aktiv"
+    search-prefix: "Suche: %search%"
+    not-set: "Noch nicht festgelegt"
+
+  messages:
+    dynamic: "%message%"
+    database-error: "<red>Das Order-System ist momentan nicht verfügbar.</red>"
+    own-order-delivery: "<red>Du kannst deinen eigenen Auftrag nicht selbst erfüllen.</red>"
+    order-inactive: "<red>Dieser Auftrag ist nicht mehr aktiv.</red>"
+    cancel-success: "<green>Dein Auftrag wurde abgebrochen und die offenen Coins wurden zurückgezahlt.</green>"
+    cancel-collect: "<yellow>Der Auftrag wurde abgebrochen. Die Rückzahlung liegt sicher in Collect.</yellow>"
+    cancel-error: "<red>Der Auftrag konnte gerade nicht abgebrochen werden.</red>"
+    collect-success: "<green>Du hast <yellow>%amount% Items</yellow> abgeholt.</green>"
+    collect-partial: "<yellow>%amount% Items abgeholt. Der Rest bleibt sicher in Order Collect.</yellow>"
+    collect-not-found: "<red>Diese Lieferung wurde bereits abgeholt.</red>"
+    collect-error: "<red>Die Lieferung konnte nicht abgeholt werden.</red>"
+    collect-all-error: "<red>Order Collect konnte nicht vollständig verarbeitet werden.</red>"
+    collect-all-empty: "<yellow>Dein Inventar ist voll oder es warten keine Items.</yellow>"
+    collect-all-partial: "<yellow>%amount% Items abgeholt. Der Rest bleibt sicher gespeichert.</yellow>"
+    collect-all-success: "<green>Du hast alle wartenden Items abgeholt.</green>"
+    draft-missing: "<red>Der Erstellungsentwurf ist nicht mehr vorhanden.</red>"
+    draft-incomplete: "<red>Lege eine gültige Menge und mindestens %minimum% Coins pro Stück fest.</red>"
+    create-success: "<green>Dein Auftrag für <yellow>%amount%x %item%</yellow> wurde erstellt.</green>"
+    create-limit: "<red>Du hast dein Order-Limit erreicht.</red>"
+    create-funds: "<red>Du hast nicht genug Coins für diesen Auftrag.</red>"
+    create-invalid: "<red>Die Menge ist ungültig oder der Stückpreis liegt unter %minimum% Coins.</red>"
+    create-storage: "<red>Der Auftrag konnte nicht gespeichert werden.</red>"
+    delivery-instructions: "<gray>Lege passende Items hinein und schließe das Inventar. Falsche Items und Überschüsse erhältst du zurück.</gray>"
+    delivery-no-match: "<red>Es waren keine passenden Items im Lieferinventar.</red>"
+    delivery-success: "<green>%amount% Items geliefert. Du hast <gold>%payout% Coins</gold> erhalten.</green>"
+    delivery-completed: "<green>Der Auftrag ist vollständig erfüllt.</green>"
+    delivery-collect: "<yellow>%amount% Items geliefert. Deine Auszahlung liegt sicher in Order-Collect.</yellow>"
+    delivery-inactive: "<red>Der Auftrag war nicht mehr aktiv. Alle Items wurden zurückgegeben.</red>"
+    delivery-rejected: "<red>Es wurden keine passenden Items angenommen.</red>"
+    delivery-storage: "<red>Die Lieferung konnte nicht gespeichert werden. Alle Items wurden zurückgegeben.</red>"
+    input-timeout: "<yellow>Die Eingabe ist abgelaufen.</yellow>"
+    input-amount-invalid: "<red>Gib eine gültige Menge zwischen %minimum% und %maximum% ein.</red>"
+    input-price-invalid: "<red>Gib einen gültigen Stückpreis zwischen %minimum% und %maximum% Coins ein, zum Beispiel 25, 2.5k oder 1m.</red>"
+
+  icons:
+    public-order:
+      lore:
+        - "<gray>Auftraggeber: <white>%owner%</white></gray>"
+        - "<gray>Noch benötigt: <yellow>%remaining%/%requested%</yellow></gray>"
+        - "<gray>Stückpreis: <gold>%price% Coins</gold></gray>"
+        - "<dark_gray>Läuft ab in: %expires%</dark_gray>"
+        - ""
+      own-extra:
+        - "<red>Dein eigener Auftrag</red>"
+        - "<dark_gray>Du kannst ihn dir nicht selbst liefern.</dark_gray>"
+      deliver-extra:
+        - "<green>Klicke, um Gegenstände zu liefern.</green>"
+    owned-order:
+      lore:
+        - "<gray>Geliefert: <yellow>%delivered%/%requested%</yellow></gray>"
+        - "<gray>Stückpreis: <gold>%price% Coins</gold></gray>"
+        - "<gray>Reserviert: <gold>%escrow% Coins</gold></gray>"
+        - "<dark_gray>Läuft ab in: %expires%</dark_gray>"
+    details:
+      lore:
+        - "<gray>Noch benötigt: <yellow>%remaining%/%requested%</yellow></gray>"
+        - "<gray>Noch offen: <yellow>%remaining%</yellow></gray>"
+        - "<gray>Stückpreis: <gold>%price% Coins</gold></gray>"
+        - "<gray>Rückzahlung bei Abbruch: <gold>%escrow% Coins</gold></gray>"
+        - "<dark_gray>Läuft ab in: %expires%</dark_gray>"
+    collect:
+      lore:
+        - "<gray>Menge: <yellow>%amount%</yellow></gray>"
+        - "<gray>Seit: <dark_gray>%age%</dark_gray></gray>"
+        - ""
+        - "<green>Klicke zum Abholen.</green>"
+    selected:
+      lore:
+        - "<gray>Ausgewählter Gegenstand</gray>"
+      level-line: "<aqua>Klicke, um die Stufe zu ändern.</aqua>"
+      amount-line: "<yellow>Menge: %amount%</yellow>"
+      price-line: "<gold>Stückpreis: %price% Coins</gold>"

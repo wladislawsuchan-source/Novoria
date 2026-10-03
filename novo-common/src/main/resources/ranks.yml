@@ -1,0 +1,92 @@
+
+# LuckPerms ist die einzige Quelle für Rangzuweisungen.
+# Die niedrigste priority steht in der Tablist am höchsten.
+# Innerhalb desselben Rangs sortiert Minecraft alphabetisch.
+ranks:
+  owner:
+    enabled: true
+    priority: 1
+    group: owner
+    display: OWNER
+    team: true
+    tab-format: '<#780000>OWNER</#780000> <#B00000>%player%</#B00000>'
+
+  admin:
+    enabled: true
+    priority: 2
+    group: admin
+    display: ADMIN
+    team: true
+    tab-format: '<#aa0000>ADMIN</#aa0000> <#B00000>%player%</#B00000>'
+
+  developer:
+    enabled: true
+    priority: 3
+    group: developer
+    display: DEVELOPER
+    team: true
+    tab-format: '<aqua>DEVELOPER</aqua> <aqua>%player%</aqua>'
+
+  creator:
+    enabled: true
+    priority: 4
+    group: creator
+    display: CREATOR
+    team: true
+    tab-format: '<#ff7ac8>CREATOR</#ff7ac8> <#ff9ed8>%player%</#ff9ed8>'
+
+  sr-moderator:
+    enabled: true
+    priority: 5
+    group: srmoderator
+    display: SR.MODERATOR
+    team: true
+    tab-format: '<#E63946>SR.MODERATOR</#E63946> <#E63946>%player%</#E63946>'
+
+  moderator:
+    enabled: true
+    priority: 6
+    group: moderator
+    display: MODERATOR
+    team: true
+    tab-format: '<#E63946>MODERATOR</#E63946> <#E63946>%player%</#E63946>'
+
+  supporter:
+    enabled: true
+    priority: 7
+    group: supporter
+    display: SUPPORTER
+    team: true
+    tab-format: '<#5555FF>SUPPORTER</#5555FF> <#5555FF>%player%</#5555FF>'
+
+  partner:
+    enabled: true
+    priority: 8
+    group: partner
+    display: PARTNER
+    team: false
+    tab-format: '<#8A2BE2>PARTNER</#8A2BE2> <#8A2BE2>%player%</#8A2BE2>'
+
+  premium-plus:
+    enabled: true
+    priority: 9
+    group: premiumplus
+    display: PREMIUM+
+    team: false
+    tab-format: '<dark_green>PREMIUM+</dark_green> <#22aa55>%player%</#22aa55>'
+
+  premium:
+    enabled: true
+    priority: 10
+    group: premium
+    display: PREMIUM
+    team: false
+    tab-format: '<green>PREMIUM</green> <#7dff7d>%player%</#7dff7d>'
+
+  player:
+    enabled: true
+    priority: 999
+    group: default
+    display: ""
+    team: false
+    tab-format: '<gray>%player%</gray>'

@@ -1,0 +1,24 @@
+id: vanta
+display-name: Vanta-Kiste
+key-material: OMINOUS_TRIAL_KEY
+enabled: true
+rewards:
+  shulker_box: {type: ITEM, display-name: "Shulkerbox", material: SHULKER_BOX, amount: 1, chance: 0.45}
+  diamond_blocks: {type: ITEM, display-name: "Diamantblock ×4", material: DIAMOND_BLOCK, amount: 4, chance: 1.35}
+  emerald_blocks: {type: ITEM, display-name: "Smaragdblock ×8", material: EMERALD_BLOCK, amount: 8, chance: 0.90}
+  netherite_template: {type: ITEM, display-name: "Netherite Upgrade Template", material: NETHERITE_UPGRADE_SMITHING_TEMPLATE, amount: 1, chance: 2.25}
+  netherite_ingot: {type: ITEM, display-name: "Netherite Ingot", material: NETHERITE_INGOT, amount: 4, chance: 0.90}
+  enchanted_gapple: {type: ITEM, display-name: "Verzauberter Goldapfel", material: ENCHANTED_GOLDEN_APPLE, amount: 1, chance: 1.80}
+  gold_blocks: {type: ITEM, display-name: "Goldblock ×10", material: GOLD_BLOCK, amount: 10, chance: 5.41}
+  iron_blocks: {type: ITEM, display-name: "Eisenblock ×10", material: IRON_BLOCK, amount: 10, chance: 5.41}
+  redstone_blocks: {type: ITEM, display-name: "Redstoneblock ×12", material: REDSTONE_BLOCK, amount: 12, chance: 5.41}
+  lapis_blocks: {type: ITEM, display-name: "Lapisblock ×12", material: LAPIS_BLOCK, amount: 12, chance: 5.41}
+  ice: {type: ITEM, display-name: "Eis ×64", material: ICE, amount: 64, chance: 7.66}
+  blue_ice: {type: ITEM, display-name: "Blaues Eis ×32", material: BLUE_ICE, amount: 32, chance: 7.66}
+  slime_blocks: {type: ITEM, display-name: "Schleimblock ×4", material: SLIME_BLOCK, amount: 4, chance: 8.11}
+  cactus: {type: ITEM, display-name: "Kaktus ×16", material: CACTUS, amount: 16, chance: 8.11}
+  sugar_cane: {type: ITEM, display-name: "Zuckerrohr ×16", material: SUGAR_CANE, amount: 16, chance: 8.11}
+  bamboo: {type: ITEM, display-name: "Bambus ×16", material: BAMBOO, amount: 16, chance: 8.11}
+  moss: {type: ITEM, display-name: "Moosblock ×32", material: MOSS_BLOCK, amount: 32, chance: 8.11}
+  cobblestone: {type: ITEM, display-name: "Bruchstein ×48", material: COBBLESTONE, amount: 48, chance: 8.98}
+  oak_logs: {type: ITEM, display-name: "Eichenstämme ×48", material: OAK_LOG, amount: 48, chance: 5.86}

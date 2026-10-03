@@ -1,0 +1,514 @@
+config-version: 5
+currency-id: werkzeugfragment
+custom-items:
+  messages:
+    player-not-found: <red>Spieler <white>%player%</white> ist nicht online.</red>
+    unknown-item: '<red>Unbekanntes Item: <white>%item%</white></red>'
+    count: <green><white>%player%</white> hat <yellow>%amount%x</yellow> <white>%item%</white>.</green>
+    invalid-amount: <red>Ungültige Anzahl.</red>
+    given: <green><yellow>%amount%x</yellow> <white>%item%</white> an <white>%player%</white> vergeben.%dropped%</green>
+    not-enough: <red><white>%player%</white> hat nicht genug <white>%item%</white>.</red>
+    taken: <green><yellow>%amount%x</yellow> <white>%item%</white> von <white>%player%</white> entfernt.</green>
+    list-empty: <yellow>Es sind keine Custom-Items konfiguriert.</yellow>
+    list: '<green>Custom-Items (%count%): %items%</green>'
+    reloaded: <green>Custom-Items und Custom-Verzauberungen wurden neu geladen.</green>
+    usage: <yellow>/%label% give|take <spieler>%item% [anzahl] • /%label% count <spieler>%item% • /%label% list • /%label% reload</yellow>
+    librarian-seal-wrong-profession: <red>Das Bibliothekarsiegel funktioniert nur bei Bibliothekaren.</red>
+    librarian-seal-already-traded: <red>Dieser Bibliothekar kann nicht mehr neu gewürfelt werden.</red>
+
+infinite-rocket:
+  enabled: true
+  show-boost-actionbar: true
+  menu:
+    title: <dark_gray>Unendliche Rakete %level%</dark_gray>
+  tiers:
+    1:
+      capacity: 2304
+      flight-duration: 1
+      combine-cost-levels: 5
+    2:
+      capacity: 4608
+      flight-duration: 2
+      combine-cost-levels: 10
+    3:
+      capacity: 6912
+      flight-duration: 3
+
+items:
+  magnet_buch:
+    material: ENCHANTED_BOOK
+    display-name: <aqua>Magnet-Buch</aqua>
+    lore:
+    - <gray>Legt endgültige Drops direkt ins Inventar.</gray>
+    - <gray>Überlauf fällt am Ursprungsort zu Boden.</gray>
+    glow: true
+    max-stack-size: 1
+    custom-enchantments:
+      magnet: 1
+  # Angler-Bücher: eindeutige custom_item_id, Effekte werden erst in einem späteren Block ergänzt.
+  angler_buch_ausdauer_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige I</dark_gray>', '<gray>Verkürzt das AFK-Fangintervall.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ausdauer: 1}}
+  angler_buch_ruhige_hand_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige I</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ruhige_hand: 1}}
+  angler_buch_ausdauer_2: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige II</dark_gray>', '<gray>Verkürzt das AFK-Fangintervall.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ausdauer: 2}}
+  angler_buch_ruhige_hand_2: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige II</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ruhige_hand: 2}}
+  angler_buch_nachfassen_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige II</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {nachfassen: 1}}
+  angler_buch_ausdauer_3: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige III</dark_gray>', '<gray>Verkürzt das AFK-Fangintervall.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ausdauer: 3}}
+  angler_buch_konzentration_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige III</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {konzentration: 1}}
+  angler_buch_ausdauer_4: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige IV</dark_gray>', '<gray>Verkürzt das AFK-Fangintervall.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ausdauer: 4}}
+  angler_buch_ruhige_hand_3: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige IV</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ruhige_hand: 3}}
+  angler_buch_nachfassen_2: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige IV</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {nachfassen: 2}}
+  angler_buch_konzentration_2: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige IV</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {konzentration: 2}}
+  angler_buch_meistergriff_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige IV</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {meistergriff: 1}}
+  angler_buch_ausdauer_5: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige V</dark_gray>', '<gray>Verkürzt das AFK-Fangintervall.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {ausdauer: 5}}
+  angler_buch_konzentration_3: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige V</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {konzentration: 3}}
+  angler_buch_meistergriff_2: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Prestige V</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {meistergriff: 2}}
+  angler_buch_totembindung_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Legendär / Prestige V</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {totembindung: 1}}
+  angler_buch_spawnergriff_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Legendär / Prestige V</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {spawnergriff: 1}}
+  angler_buch_seelenbindung_1: {material: ENCHANTED_BOOK, lore: ['<dark_gray>Angler-Verzauberung • Legendär / Prestige V</dark_gray>', '<gray>Aktuell ohne Effekt.</gray>'], glow: true, max-stack-size: 1, custom-enchantments: {seelenbindung: 1}}
+  reparaturkern:
+    material: ECHO_SHARD
+    display-name: '<aqua>Reparaturkern</aqua>'
+    lore: ['<dark_gray>Angler-Spezialitem</dark_gray>', '<gray>Für vollständige Haltbarkeitsreparatur.</gray>', '<dark_gray>Im Amboss mit beschädigtem Item: 1 Level.</dark_gray>']
+    glow: true
+    max-stack-size: 64
+  bibliothekarsiegel:
+    material: PAPER
+    display-name: '<light_purple>Bibliothekarsiegel</light_purple>'
+    lore: ['<dark_gray>Angler-Spezialitem</dark_gray>', '<gray>Würfelt alle Angebote eines ungetradeten Bibliothekars neu.</gray>']
+    glow: true
+    max-stack-size: 1
+  werkzeugfragment:
+    # RECOVERY_COMPASS ist nur die neutrale Basis; sichtbar bleibt über item-model
+    # weiterhin das Vanilla-Disc-Fragment.
+    material: RECOVERY_COMPASS
+    item-model: minecraft:disc_fragment_5
+    max-stack-size: 64
+    display-name: <gold>Werkzeugfragment</gold>
+    lore:
+    - <dark_gray>Währung</dark_gray>
+    - ''
+    - <gray>Ein Splitter aus altem Werkzeug.</gray>
+    - <gray>Wird zum Erhalten besonderer</gray>
+    - <gray>Ausrüstung benötigt.</gray>
+    glow: false
+  eisenaxt_holzschlag1:
+    material: IRON_AXE
+    display-name: <white>Eisenaxt</white>
+    lore:
+    - ''
+    - <gray>Fällt ganze Bäume auf einen Schlag.</gray>
+    custom-enchantments:
+      holzschlag: 1
+  eisenaxt_holzschlag2:
+    material: IRON_AXE
+    display-name: <white>Eisenaxt</white>
+    lore:
+    - ''
+    - <gray>Fällt ganze Bäume auf einen Schlag.</gray>
+    custom-enchantments:
+      holzschlag: 2
+  eisenaxt_holzschlag3:
+    material: IRON_AXE
+    display-name: <white>Eisenaxt</white>
+    lore:
+    - ''
+    - <gray>Fällt ganze Bäume auf einen Schlag.</gray>
+    custom-enchantments:
+      holzschlag: 3
+  diamantaxt_holzschlag4:
+    material: DIAMOND_AXE
+    display-name: <aqua>Diamantaxt</aqua>
+    lore:
+    - ''
+    - <gray>Fällt ganze Bäume auf einen Schlag.</gray>
+    custom-enchantments:
+      holzschlag: 4
+  netheritaxt_holzschlag5:
+    material: NETHERITE_AXE
+    display-name: <dark_purple>Netherite-Axt</dark_purple>
+    lore:
+    - ''
+    - <gray>Fällt ganze Bäume auf einen Schlag.</gray>
+    custom-enchantments:
+      holzschlag: 5
+  eisenspitzhacke_3x3:
+    material: IRON_PICKAXE
+    display-name: <white>3×3-Eisenspitzhacke</white>
+    lore:
+    - ''
+    - <gray>Baut eine 3×3-Fläche entsprechend</gray>
+    - <gray>der angeschlagenen Blockseite ab.</gray>
+    custom-enchantments:
+    - dreixdrei
+  diamantspitzhacke_3x3:
+    material: DIAMOND_PICKAXE
+    display-name: <aqua>3×3-Diamantspitzhacke</aqua>
+    lore:
+    - ''
+    - <gray>Baut eine 3×3-Fläche entsprechend</gray>
+    - <gray>der angeschlagenen Blockseite ab.</gray>
+    custom-enchantments:
+    - dreixdrei
+  netheritespitzhacke_3x3:
+    material: NETHERITE_PICKAXE
+    display-name: <dark_purple>3×3-Netheritespitzhacke</dark_purple>
+    lore:
+    - ''
+    - <gray>Baut eine 3×3-Fläche entsprechend</gray>
+    - <gray>der angeschlagenen Blockseite ab.</gray>
+    custom-enchantments:
+    - dreixdrei
+  eisenschaufel_3x3:
+    material: IRON_SHOVEL
+    display-name: <white>3×3-Eisenschaufel</white>
+    lore:
+    - ''
+    - <gray>Baut eine 3×3-Fläche entsprechend</gray>
+    - <gray>der angeschlagenen Blockseite ab.</gray>
+    custom-enchantments:
+    - dreixdrei
+  diamantschaufel_3x3:
+    material: DIAMOND_SHOVEL
+    display-name: <aqua>3×3-Diamantschaufel</aqua>
+    lore:
+    - ''
+    - <gray>Baut eine 3×3-Fläche entsprechend</gray>
+    - <gray>der angeschlagenen Blockseite ab.</gray>
+    - ''
+    - <green>✓ Mending bereits enthalten</green>
+    enchantments:
+      mending: 1
+    custom-enchantments:
+    - dreixdrei
+  netheriteschaufel_3x3:
+    material: NETHERITE_SHOVEL
+    display-name: <dark_purple>3×3-Netheriteschaufel</dark_purple>
+    lore:
+    - ''
+    - <gray>Baut eine 3×3-Fläche entsprechend</gray>
+    - <gray>der angeschlagenen Blockseite ab.</gray>
+    custom-enchantments:
+    - dreixdrei
+  eisenspitzhacke_veinminer:
+    material: IRON_PICKAXE
+    display-name: <dark_aqua>Veinminer-Eisenspitzhacke</dark_aqua>
+    lore:
+    - ''
+    - <gray>Baut eine zusammenhängende Erzader</gray>
+    - <gray>mit bis zu 32 Blöcken ab.</gray>
+    - ''
+    - <gold>✓ Mit Schmelzer kombinierbar</gold>
+    custom-enchantments:
+    - veinminer
+  eisenspitzhacke_schmelzer:
+    material: IRON_PICKAXE
+    display-name: <gold>Schmelzer-Eisenspitzhacke</gold>
+    lore:
+    - ''
+    - <gray>Schmilzt Eisen, Gold, Kupfer und</gray>
+    - <gray>Antiken Schrott direkt beim Abbau.</gray>
+    - ''
+    - <dark_aqua>✓ Mit Veinminer kombinierbar</dark_aqua>
+    custom-enchantments:
+    - schmelzer
+  diamantspitzhacke_veinminer:
+    material: DIAMOND_PICKAXE
+    display-name: <dark_aqua>Veinminer-Spitzhacke</dark_aqua>
+    lore:
+    - ''
+    - <gray>Baut eine zusammenhängende Erzader</gray>
+    - <gray>mit bis zu 32 Blöcken ab.</gray>
+    custom-enchantments:
+    - veinminer
+  diamantspitzhacke_schmelzer:
+    material: DIAMOND_PICKAXE
+    display-name: <gold>Schmelzer-Spitzhacke</gold>
+    lore:
+    - ''
+    - <gray>Schmilzt Eisen, Gold, Kupfer und</gray>
+    - <gray>Antiken Schrott direkt beim Abbau.</gray>
+    custom-enchantments:
+    - schmelzer
+  diamantspitzhacke_veinminer_schmelzer:
+    material: DIAMOND_PICKAXE
+    display-name: <light_purple>Veinminer-Schmelzer-Diamantspitzhacke</light_purple>
+    lore:
+    - ''
+    - <gray>Baut zusammenhängende Erzadern ab</gray>
+    - <gray>und schmilzt passende Erze direkt.</gray>
+    custom-enchantments:
+    - veinminer
+    - schmelzer
+  netheritespitzhacke_tnt:
+    material: NETHERITE_PICKAXE
+    display-name: <red>TNT-Spitzhacke</red>
+    lore:
+    - ''
+    - <gray>Erzeugt beim Abbau eine echte</gray>
+    - '<gray>TNT-Explosion. Cooldown: 3 Sekunden.</gray>'
+    custom-enchantments:
+    - tnt
+  netheritespitzhacke_veinminer_schmelzer:
+    material: NETHERITE_PICKAXE
+    display-name: <dark_purple>Veinminer-Schmelzer-Spitzhacke</dark_purple>
+    lore:
+    - ''
+    - <gray>Baut zusammenhängende Erzadern ab</gray>
+    - <gray>und schmilzt passende Erze direkt.</gray>
+    custom-enchantments:
+    - veinminer
+    - schmelzer
+  novo_baumfaeller_axt:
+    material: NETHERITE_AXE
+    display-name: <light_purple>Baumfäller-Axt</light_purple>
+    lore:
+    - <dark_gray>Novo-Kisten-Item</dark_gray>
+    - ''
+    - <gray>Fällt ganze Bäume mit</gray>
+    - <yellow>Holzschlag IV</yellow><gray>.</gray>
+    - ''
+    - <red>⚠ Nicht mit Mending verzauberbar</red>
+    custom-enchantments:
+      holzschlag: 4
+    mending-blocked: true
+  novo_veinminer_spitzhacke:
+    material: NETHERITE_PICKAXE
+    display-name: <dark_aqua>Vein-Miner-Spitzhacke</dark_aqua>
+    lore:
+    - <dark_gray>Novo-Kisten-Item</dark_gray>
+    - ''
+    - <gray>Baut eine zusammenhängende Erzader</gray>
+    - <gray>mit bis zu 32 Blöcken ab.</gray>
+    - ''
+    - <red>⚠ Nicht mit Mending verzauberbar</red>
+    custom-enchantments:
+    - veinminer
+    mending-blocked: true
+  novo_schmelzer_spitzhacke:
+    material: NETHERITE_PICKAXE
+    display-name: <gold>Schmelzer-Spitzhacke</gold>
+    lore:
+    - <dark_gray>Novo-Kisten-Item</dark_gray>
+    - ''
+    - <gray>Schmilzt Eisen, Gold, Kupfer und</gray>
+    - <gray>Antiken Schrott direkt beim Abbau.</gray>
+    - ''
+    - <red>⚠ Nicht mit Mending verzauberbar</red>
+    custom-enchantments:
+    - schmelzer
+    mending-blocked: true
+  novo_3x3_spitzhacke:
+    material: NETHERITE_PICKAXE
+    display-name: <aqua>3×3-Spitzhacke</aqua>
+    lore:
+    - <dark_gray>Novo-Kisten-Item</dark_gray>
+    - ''
+    - <gray>Baut eine 3×3-Fläche entsprechend</gray>
+    - <gray>der angeschlagenen Blockseite ab.</gray>
+    - ''
+    - <red>⚠ Nicht mit Mending verzauberbar</red>
+    custom-enchantments:
+    - dreixdrei
+    mending-blocked: true
+  novo_effizienz6_spitzhacke:
+    material: NETHERITE_PICKAXE
+    display-name: <light_purple>Effizienz-VI-Spitzhacke</light_purple>
+    lore:
+    - <dark_gray>Novo-Kisten-Item</dark_gray>
+    - ''
+    - <gray>Eine besonders schnelle Netherite-Spitzhacke</gray>
+    - <gray>mit <yellow>Effizienz VI</yellow><gray>.</gray>
+    enchantments:
+      efficiency: 6
+    mending-blocked: false
+  jaeger_trophaehenklinge:
+    material: DIAMOND_SWORD
+    display-name: <red>Jäger-Schwert</red>
+    lore:
+    - ''
+    - <gray>Ein besonderes Schwert für den Jäger-Beruf.</gray>
+    - <gray>Vereint drei normalerweise inkompatible</gray>
+    - <gray>Schadensverzauberungen.</gray>
+    enchantments:
+      sharpness: 5
+      smite: 5
+      bane_of_arthropods: 5
+      looting: 3
+      unbreaking: 3
+  jaeger_hetzjaegerspeer:
+    material: DIAMOND_SPEAR
+    display-name: <dark_red>Hetzjägerspeer</dark_red>
+    lunge-hunger-reduction-percent: 75
+    lore:
+    - ''
+    - <gray>Jagdserie: <yellow>+20% XP</yellow>, <gold>+12% Beute</gold>.</gray>
+    - <green>Lunge III: 75% weniger Hunger.</green>
+    - <dark_gray>Spezialdrops und Köpfe ausgenommen.</dark_gray>
+    enchantments:
+      sharpness: 5
+      smite: 5
+      bane_of_arthropods: 5
+      looting: 3
+      lunge: 3
+      unbreaking: 5
+  jaeger_jagdbogen:
+    material: BOW
+    display-name: <gold>Jäger-Bogen</gold>
+    lore:
+    - ''
+    - <gray>Ein besonderer Bogen mit</gray>
+    - <gray><aqua>Unendlichkeit + Reparatur</aqua> gleichzeitig.</gray>
+    - <gray>Bei Kopf-Drops zählt er wie <yellow>Plünderung III</yellow>.</gray>
+    enchantments:
+      power: 6
+      infinity: 1
+      mending: 1
+      unbreaking: 5
+      flame: 1
+  jaeger_grosswild_mace:
+    material: MACE
+    display-name: <dark_purple>Jäger-Mace</dark_purple>
+    lore:
+    - ''
+    - <gray>Eine starke Mace für den Jäger-Beruf</gray>
+    - <gray>für erfahrene Jäger.</gray>
+    enchantments:
+      density: 5
+      wind_burst: 3
+      looting: 4
+      unbreaking: 5
+  jaeger_meisterbrustplatte:
+    material: DIAMOND_CHESTPLATE
+    display-name: <light_purple>Jäger-Brustplatte</light_purple>
+    lore:
+    - ''
+    - <gray>Die Prestige-V-Brustplatte des Jägers.</gray>
+    - <red>❤ +2 Herzen</red> <gray>beim Tragen</gray>
+    - <dark_gray>Kann zu Netherite aufgewertet werden.</dark_gray>
+    enchantments:
+      protection: 4
+      unbreaking: 3
+  infinite_rocket_1:
+    material: FIREWORK_ROCKET
+    display-name: <light_purple><bold>Unendliche Rakete I</bold></light_purple>
+    lore:
+    - <dark_gray>Crate-exklusives Custom-Item</dark_gray>
+    - ''
+    - <gray>Speichert normale Feuerwerksraketen und</gray>
+    - <gray>verbraucht pro Elytra-Boost eine Ladung.</gray>
+    - <gray>Der Launcher selbst wird nie verbraucht.</gray>
+    - ''
+    - <aqua>Flugdauer:</aqua> <white>I</white>
+    - <aqua>Speicher:</aqua> <white>0 / 2.304</white>
+    - ''
+    - <yellow>Shift + Rechtsklick:</yellow> <gray>Raketen einlagern</gray>
+    - <dark_gray>Amboss: I + I → II</dark_gray>
+    glow: true
+    max-stack-size: 1
+  infinite_rocket_2:
+    material: FIREWORK_ROCKET
+    display-name: <light_purple><bold>Unendliche Rakete II</bold></light_purple>
+    lore:
+    - <dark_gray>Crate-exklusives Custom-Item</dark_gray>
+    - ''
+    - <gray>Speichert normale Feuerwerksraketen und</gray>
+    - <gray>verbraucht pro Elytra-Boost eine Ladung.</gray>
+    - <gray>Der Launcher selbst wird nie verbraucht.</gray>
+    - ''
+    - <aqua>Flugdauer:</aqua> <white>II</white>
+    - <aqua>Speicher:</aqua> <white>0 / 4.608</white>
+    - ''
+    - <yellow>Shift + Rechtsklick:</yellow> <gray>Raketen einlagern</gray>
+    - <dark_gray>Amboss: II + II → III</dark_gray>
+    glow: true
+    max-stack-size: 1
+  infinite_rocket_3:
+    material: FIREWORK_ROCKET
+    display-name: <light_purple><bold>Unendliche Rakete III</bold></light_purple>
+    lore:
+    - <dark_gray>Crate-exklusives Custom-Item</dark_gray>
+    - ''
+    - <gray>Speichert normale Feuerwerksraketen und</gray>
+    - <gray>verbraucht pro Elytra-Boost eine Ladung.</gray>
+    - <gray>Der Launcher selbst wird nie verbraucht.</gray>
+    - ''
+    - <aqua>Flugdauer:</aqua> <white>III</white>
+    - <aqua>Speicher:</aqua> <white>0 / 6.912</white>
+    - ''
+    - <yellow>Shift + Rechtsklick:</yellow> <gray>Raketen einlagern</gray>
+    - <light_purple>Maximale Stufe</light_purple>
+    glow: true
+    max-stack-size: 1
+  merge_helm:
+    material: DIAMOND_HELMET
+    display-name: <light_purple>Merge-Helm</light_purple>
+    lore:
+    - ''
+    - <gray>Im Amboss mit einem gesammelten Mobkopf</gray>
+    - <gray>kombinieren, um dessen Optik zu übernehmen.</gray>
+    - <gray>Der verwendete Kopf wird dabei verbraucht.</gray>
+    - ''
+    - <dark_gray>Auch nach dem Merge weiter verzauberbar.</dark_gray>
+    - <dark_gray>Kann im Schmiedetisch zu Netherite aufgewertet werden.</dark_gray>
+    glow: true
+    max-stack-size: 1
+  master_merge_helm:
+    material: NETHERITE_HELMET
+    display-name: <light_purple><bold>Master-Merge-Helm</bold></light_purple>
+    lore:
+    - <dark_gray>100%-Belohnung der Kopfsammlung</dark_gray>
+    - ''
+    - <gray>Rechtsklick öffnet deine komplette Kopfsammlung.</gray>
+    - <gray>Wähle jeden selbst gesammelten Kopf kostenlos</gray>
+    - <gray>als neue Helm-Optik aus.</gray>
+    - ''
+    - <light_purple>Keine Köpfe werden dabei verbraucht.</light_purple>
+    glow: true
+    max-stack-size: 1
+  berufe_booster_15:
+    material: EXPERIENCE_BOTTLE
+    display-name: <green>1,5× Berufe-Booster</green>
+    lore:
+    - <dark_gray>Verbrauchsitem</dark_gray>
+    - ''
+    - <gray>Erhöht deine Berufs-XP für</gray>
+    - <gray><yellow>60 Minuten Onlinezeit</yellow> auf <green>×1,5</green>.</gray>
+    - ''
+    - <yellow>Rechtsklick zum Aktivieren</yellow>
+    glow: true
+    max-stack-size: 64
+  berufe_booster_20:
+    material: ENCHANTED_GOLDEN_APPLE
+    display-name: <aqua>2× Berufe-Booster</aqua>
+    lore:
+    - <dark_gray>Verbrauchsitem</dark_gray>
+    - ''
+    - <gray>Verdoppelt deine Berufs-XP für</gray>
+    - <gray><yellow>60 Minuten Onlinezeit</yellow>.</gray>
+    - ''
+    - <yellow>Rechtsklick zum Aktivieren</yellow>
+    glow: true
+    max-stack-size: 64
+  lumi_booster_15:
+    material: GLOWSTONE_DUST
+    display-name: <gold>1,5× Lumi-Booster</gold>
+    lore:
+    - <dark_gray>Verbrauchsitem</dark_gray>
+    - ''
+    - <gray>Erhöht AFK-Lumi für</gray>
+    - <gray><yellow>60 Minuten Onlinezeit</yellow> auf <gold>×1,5</gold>.</gray>
+    - ''
+    - <yellow>Rechtsklick zum Aktivieren</yellow>
+    glow: true
+    max-stack-size: 64
+  lumi_booster_20:
+    material: ECHO_SHARD
+    display-name: <yellow>2× Lumi-Booster</yellow>
+    lore:
+    - <dark_gray>Verbrauchsitem</dark_gray>
+    - ''
+    - <gray>Verdoppelt AFK-Lumi für</gray>
+    - <gray><yellow>60 Minuten Onlinezeit</yellow>.</gray>
+    - ''
+    - <yellow>Rechtsklick zum Aktivieren</yellow>
+    glow: true
+    max-stack-size: 64

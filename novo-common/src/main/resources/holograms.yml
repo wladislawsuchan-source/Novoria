@@ -1,0 +1,32 @@
+
+# SMPCore-Hologramme
+# STATIC + FIXED = feste Position und feste Ausrichtung im Hub.
+# Billboard: FIXED, CENTER, VERTICAL oder HORIZONTAL.
+
+holograms:
+  smp:
+    enabled: true
+    type: NPC_ATTACHED
+    billboard: FIXED
+    shadowed: true
+    see-through: false
+    background: false
+    line-width: 200
+    view-range: 48.0
+    update-interval-ticks: 20
+    line-spacing: 0.3
+    lines:
+    - <gold><bold>Survival</bold>
+    - <green>●</green> <white>%smp_online% Spieler online</white>
+    location:
+      world: world
+      x: -0.5
+      y: 104.0
+      z: 5
+      yaw: 0
+      pitch: 0
+    npc-id: 0
+    offset:
+      x: 0.0
+      y: 2.0
+      z: 0.25

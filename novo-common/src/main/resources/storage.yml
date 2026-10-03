@@ -1,0 +1,20 @@
+
+# Diese Datei liegt serverlokal in plugins/NovoHub bzw. plugins/NovoSMP.
+# Dadurch kann NovoHub lokal mit SQLite laufen, während NovoSMP MariaDB verwendet.
+storage:
+  type: sqlite
+  # Bei MariaDB/MySQL automatisch novosmp_ bzw. novohub_, solange dieses Feld leer bleibt.
+  table-prefix: ''
+
+  sqlite:
+    file: database.db
+
+  mysql:
+    host: localhost
+    port: 3306
+    database: novoria
+    username: root
+    password: ''
+    pool-size: 10
+    use-ssl: false
+

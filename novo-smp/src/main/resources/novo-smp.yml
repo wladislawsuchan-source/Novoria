@@ -1,0 +1,421 @@
+
+# NovoSMP - nur SMP-spezifische Einstellungen
+shared-folder: ../shared/NovoCore
+spawn-world: smp_spawn
+survival-worlds:
+  - smp_world
+  - smp_nether
+  - smp_end
+
+# Diese vier Welten bilden EINEN gemeinsamen SMP-Bereich (Tab, Chat, PM, Teleports).
+worlds:
+  smp:
+    - smp_spawn
+    - smp_world
+    - smp_nether
+    - smp_end
+
+# Spielerschaden pro Welt steuern.
+# true = normaler Schaden, false = diese Schadensart wird verhindert.
+world-damage:
+  smp_spawn:
+    FLY_INTO_WALL: false
+    # Verhindert sämtlichen Erstickungsschaden am Spawn – unabhängig von der Ursache.
+    SUFFOCATION: false
+
+# Komfortvorteile auf dem SMP. Premium und Premium+ nutzen absichtlich dieselbe Farbauswahl.
+premium-features:
+  chat-item:
+    # Jeder Spieler darf sein gehaltenes Item mit [item] im Chat zeigen.
+    enabled: true
+
+velocity:
+  this-server: smp
+  hub-server: hub
+
+crates:
+  auto-recovery-enabled: false
+  auto-recovery-radius: 128
+
+# Einzigartiges, frei bewegliches Enderdrachen-Ei und King-Duelle.
+dragon-egg-king:
+  enabled: true
+  world: smp_end
+  time-zone: Europe/Berlin
+  mandatory-duels-per-day: 3
+  mandatory-challenge-cost: 20000
+  mandatory-accept-timeout-seconds: 60
+  challenge-timeout-seconds: 90
+  challenger-cooldown-minutes: 5
+  require-free-inventory-slot: true
+  elytra-no-durability: true
+  block-challenge-while-afk: true
+  messages:
+    disabled: '<red>Das King-System ist deaktiviert.</red>'
+    no-active-king: '<red>Das Drachenei befindet sich aktuell nicht im Inventar eines Kings.</red>'
+    duel-kit-missing: '<red>Das ausgewählte King-Duell-Kit ist nicht mehr verfügbar.</red>'
+    self: '<red>Der King kann sich nicht selbst herausfordern.</red>'
+    cooldown: '<red>Du kannst den King in <yellow>%seconds%</yellow> Sekunden erneut herausfordern.</red>'
+    free-slot: '<red>Du brauchst mindestens einen freien Inventarplatz, um den King herauszufordern.</red>'
+    king-afk: '<red>Der aktuelle King ist AFK und kann nicht herausgefordert werden.</red>'
+    mandatory-sent: '<gold>⚔ Pflichtduell an <white>%king%</white> gesendet.</gold> <gray>Einsatz: <yellow>%cost% Coins</yellow></gray>'
+    voluntary-sent: '<green>⚔ Freiwilliges King-Duell an <white>%king%</white> gesendet.</green>'
+    mandatory-received: '<gold>⚔ Pflichtduell von <white>%player%</white>.</gold> <gray>Auto-Annahme in <yellow>%seconds%s</yellow>. <click:run_command:''/duel requests''><yellow>[Öffnen]</yellow></click></gray>'
+    voluntary-received: '<yellow>⚔ Freiwilliges King-Duell von <white>%player%</white>.</yellow> <gray><click:run_command:''/duel requests''><yellow>[Öffnen]</yellow></click></gray>'
+    combat-wait: '<yellow>Das King-Duell wartet, bis der normale Combat beendet ist.</yellow>'
+    mandatory-no-deny: '<red>Ein offenes Pflichtduell kann nicht abgelehnt werden.</red>'
+    limit-reached: '<red>Die Pflichtduelle dieser Regentschaft sind bereits erfüllt.</red>'
+    insufficient: '<red>Du benötigst <yellow>%cost% Coins</yellow> für dieses Pflichtduell.</red>'
+    king-changed: '<red>Das Drachenei befindet sich nicht mehr bei diesem King.</red>'
+    won: '<gold>Du hast das kanonische Drachenei gewonnen und bist jetzt King.</gold>'
+    lost: '<red>Du hast das Drachenei im King-Duell verloren.</red>'
+    declined-target: '<gray>Du hast das freiwillige King-Duell abgelehnt.</gray>'
+    declined-challenger: '<red>Der King hat deine freiwillige Herausforderung abgelehnt.</red>'
+    expired-challenger: '<gray>Deine King-Herausforderung ist abgelaufen.</gray>'
+    expired-king: '<gray>Die King-Herausforderung ist abgelaufen.</gray>'
+    technical-abort: '<red>Das King-Duell wurde technisch abgebrochen. Dein Einsatz wurde erstattet.</red>'
+    technical-abort-king: '<red>Das King-Duell wurde technisch abgebrochen.</red>'
+    technical-refund-failed: '<red>Das King-Duell wurde technisch abgebrochen. Die Erstattung ist fehlgeschlagen – bitte melde dich beim Team.</red>'
+
+# PvP-Combat und Citizens-Logout-Dummy. Trefferzustand bleibt ausschließlich im RAM;
+# nur tatsächlich ausgeloggte Combat-Spieler werden bis zu ihrem nächsten Join gespeichert.
+combat:
+  duration-seconds: 20
+  dummy-duration-seconds: 30
+  actionbar:
+    enabled: true
+    update-ticks: 10
+    text: '<red>⚔ Combat: <yellow>%seconds%s</yellow></red>'
+  messages:
+    command-blocked: '<dark_gray>[<red>Combat</red>]</dark_gray> <red>Dieser Befehl ist im Kampf noch <yellow>%seconds%s</yellow> gesperrt.</red>'
+    dummy-killed: '<dark_gray>[<red>Combat</red>]</dark_gray> <red>Dein Combat-Dummy wurde getötet.</red>'
+    dummy-friendly: '<dark_gray>[<red>Combat</red>]</dark_gray> <red>Du kannst den Combat-Dummy eines Freundes nicht angreifen.</red>'
+  blocked-commands:
+    - spawn
+    - home
+    - homes
+    - fhome
+    - back
+    - rtp
+    - hub
+    - lobby
+    - server
+    - smp
+    - tpa
+    - tpaccept
+    - tpyes
+    - tp
+    - ec
+    - enderchest
+    - ecupgrade
+    - sell
+    - ah
+    - auctionhouse
+    - order
+    - orders
+    - craft
+    - condense
+    - duel
+    - duell
+    - fly
+    - gamemode
+    - vanish
+    - bau
+    - invsee
+    - invswap
+
+# Persistente, vollständig durch Spielergeld finanzierte Kopfgelder.
+bounty:
+  enabled: true
+  minimum-amount: 1000
+  # -1 bedeutet unbegrenzt. Der Wert begrenzt eine einzelne Einzahlung.
+  maximum-amount: -1
+  allow-self-bounty: false
+  allow-offline-targets: true
+  payout:
+    friends-can-claim: false
+    duel-kills-can-claim: false
+  gui:
+    title: '<dark_gray>Kopfgelder</dark_gray>'
+    rows: 6
+    sort: HIGHEST_FIRST
+    entry-name: '<yellow><bold>%player%</bold></yellow>'
+    entry-lore:
+      - ''
+      - '<gray>Kopfgeld:</gray> <gold>%amount% Coins</gold>'
+      - '<gray>Status:</gray> %status%'
+    empty-name: '<gray>Keine Kopfgelder</gray>'
+    empty-lore:
+      - '<dark_gray>Momentan ist auf niemanden ein Kopfgeld ausgesetzt.</dark_gray>'
+  announcements:
+    enabled: true
+    new-bounty: true
+    bounty-increased: true
+    bounty-claimed: true
+  messages:
+    new-bounty: '<dark_red>☠</dark_red> <red>Auf <yellow>%player%</yellow> wurde ein Kopfgeld von <gold>%amount% Coins</gold> ausgesetzt!</red>'
+    bounty-increased: '<dark_red>☠</dark_red> <red>Das Kopfgeld auf <yellow>%player%</yellow> wurde auf <gold>%amount% Coins</gold> erhöht!</red>'
+    bounty-claimed: '<dark_red>☠</dark_red> <red><yellow>%killer%</yellow> hat das Kopfgeld auf <yellow>%player%</yellow> kassiert: <gold>%amount% Coins</gold>!</red>'
+  command:
+    usage: '<dark_gray>[<dark_red>Bounty</dark_red>]</dark_gray> <gray>Benutzung: <yellow>/bounty [Spieler Betrag]</yellow></gray>'
+    admin-usage: '<dark_gray>[<dark_red>Bounty</dark_red>]</dark_gray> <gray>Benutzung: <yellow>/bounty admin <set|add|remove|get> <Spieler> [Betrag]</yellow></gray>'
+    success: '<dark_gray>[<dark_red>Bounty</dark_red>]</dark_gray> <green>Das Kopfgeld auf <yellow>%player%</yellow> beträgt jetzt <gold>%amount% Coins</gold>.</green>'
+    target-not-found: '<dark_gray>[<dark_red>Bounty</dark_red>]</dark_gray> <red>Dieser Spieler hat Novoria noch nie betreten.</red>'
+    offline-not-allowed: '<dark_gray>[<dark_red>Bounty</dark_red>]</dark_gray> <red>Das Ziel muss momentan online sein.</red>'
+    self-not-allowed: '<dark_gray>[<dark_red>Bounty</dark_red>]</dark_gray> <red>Du kannst kein Kopfgeld auf dich selbst setzen.</red>'
+    below-minimum: '<dark_gray>[<dark_red>Bounty</dark_red>]</dark_gray> <red>Der Mindestbetrag beträgt <gold>%amount% Coins</gold>.</red>'
+    above-maximum: '<dark_gray>[<dark_red>Bounty</dark_red>]</dark_gray> <red>Der maximale Einzelbetrag beträgt <gold>%amount% Coins</gold>.</red>'
+    insufficient-funds: '<dark_gray>[<dark_red>Bounty</dark_red>]</dark_gray> <red>Du besitzt nicht genügend Coins.</red>'
+    invalid-amount: '<dark_gray>[<dark_red>Bounty</dark_red>]</dark_gray> <red>Der Betrag muss eine gültige positive ganze Zahl sein.</red>'
+    storage-error: '<dark_gray>[<dark_red>Bounty</dark_red>]</dark_gray> <red>Die Bounty konnte wegen eines Datenbankfehlers nicht geändert werden.</red>'
+    disabled: '<dark_gray>[<dark_red>Bounty</dark_red>]</dark_gray> <red>Das Bounty-System ist momentan deaktiviert.</red>'
+    player-only: '<red>Dieser Befehl ist nur für Spieler verfügbar.</red>'
+    admin-get: '<dark_gray>[<dark_red>Bounty</dark_red>]</dark_gray> <gray>Kopfgeld auf <yellow>%player%</yellow>: <gold>%amount% Coins</gold>.</gray>'
+    admin-success: '<dark_gray>[<dark_red>Bounty</dark_red>]</dark_gray> <green>Kopfgeld auf <yellow>%player%</yellow> %action%: <gold>%amount% Coins</gold>.</green>'
+    admin-not-found: '<dark_gray>[<dark_red>Bounty</dark_red>]</dark_gray> <red>Auf diesem Spieler liegt kein Kopfgeld.</red>'
+
+clan:
+  enabled: true
+  creation-cost: 75000
+  required-create-rank: premium
+  rename-cost: 100000
+  tag-cost: 25000
+  rename-cooldown-days: 14
+  tag-cooldown-days: 14
+  invite-timeout-seconds: 60
+  names:
+    min-length: 3
+    max-length: 16
+  tags:
+    max-length: 5
+  homes:
+    max-name-length: 16
+    premium-plus-bonus: 1
+  friendly-fire:
+    unlock-level: 4
+    default: false
+  party:
+    unlock-level: 5
+    max-size: 4
+    profession:
+      shared-1-5: 0.05
+      shared-2-0: 0.10
+      max-shared: 0.30
+    lumi:
+      reward-min: 1
+      reward-max: 5
+      interval-1-5-seconds: 600
+      interval-2-0-seconds: 300
+  levels:
+    1: {members: 5, cost: 0, prestige: 0, playtime-hours: 0, officers: 0, homes: 0, chest-rows: 3}
+    2: {members: 7, cost: 100000, prestige: 1, playtime-hours: 20, officers: 1, homes: 0, chest-rows: 3}
+    3: {members: 9, cost: 250000, prestige: 3, playtime-hours: 50, officers: 1, homes: 1, chest-rows: 3}
+    4: {members: 11, cost: 500000, prestige: 5, playtime-hours: 100, officers: 1, homes: 1, chest-rows: 4}
+    5: {members: 13, cost: 750000, prestige: 8, playtime-hours: 180, officers: 1, homes: 1, chest-rows: 4}
+    6: {members: 15, cost: 1200000, prestige: 12, playtime-hours: 300, officers: 2, homes: 1, chest-rows: 4}
+    7: {members: 18, cost: 1800000, prestige: 17, playtime-hours: 450, officers: 2, homes: 2, chest-rows: 5}
+    8: {members: 20, cost: 2500000, prestige: 23, playtime-hours: 650, officers: 2, homes: 2, chest-rows: 5}
+    9: {members: 23, cost: 3500000, prestige: 30, playtime-hours: 900, officers: 3, homes: 2, chest-rows: 5}
+    10: {members: 25, cost: 5000000, prestige: 40, playtime-hours: 1200, officers: 3, homes: 2, chest-rows: 6}
+  announcements:
+    level-10-global: true
+  gui:
+    title: '<dark_gray>Clan</dark_gray>'
+
+
+
+# /stream ist für Partner gedacht; Owner/OP können weiterhin über die Permission zugreifen.
+stream:
+  allowed-groups: [partner]
+
+# Einmaliger /back-Teleport nach einem Tod.
+death-back:
+  # Ein ungenutzter Todespunkt bleibt auch nach Logout/Restart so viele Tage gespeichert.
+  expiry-days: 5
+  # Zufälliger sicherer Zielort innerhalb dieses Radius um den Todespunkt.
+  respawn-radius: 2000
+  # Anzahl der Versuche, einen sicheren Rückkehrpunkt zu finden.
+  max-attempts: 64
+  # Wird nur dem gestorbenen Spieler nach der normalen Todesnachricht angezeigt.
+  # /stream blendet diese Nachricht vollständig aus.
+  death-message: '<red>Du bist bei <aqua>%x% %y% %z%</aqua> in <aqua>%world%</aqua> gestorben. Nutze <green>/back</green>, um dich einmalig in einem Radius von <yellow>%radius% Blöcken</yellow> um deinen Todespunkt teleportieren zu lassen.</red>'
+
+
+# Manueller und automatischer Entity-Clear verwenden dieselbe zentrale Policy.
+# Es werden ausschließlich Entities in bereits geladenen Chunks geprüft; es werden
+# für den Clear keine Chunks geladen.
+performance-cleanup:
+  enabled: true
+  interval-seconds: 5400
+  debug: false
+  # Der Countdown erscheint ausschließlich in der Actionbar.
+  # Alte "warning-seconds"-Einträge werden absichtlich nicht mehr verwendet.
+  actionbar-enabled: true
+  actionbar-warning-seconds: [600, 300, 180, 60, 30, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+  # Nur das Ergebnis nach dem Clear wird im Chat angezeigt.
+  result-message: true
+  # Markiert ausschließlich LivingEntities, die Paper direkt während der natürlichen
+  # Strukturerzeugung hinzufügt. Bestehende Chunks werden nicht nachträglich geraten.
+  structure-entity-protection:
+    enabled: true
+  remove:
+    drops: true
+    experience-orbs: true
+    projectiles: true
+    # Nur ältere Projektile entfernen (60 Sekunden bei 20 Ticks/Sekunde).
+    projectile-min-age-ticks: 1200
+    area-effect-clouds: true
+    primed-tnt: true
+    falling-blocks: false
+
+  # true = grundsätzlich clearbar. Technischer Schutz, aktiver Raid/Trial-Kontext,
+  # konkreter Spielerbezug und direkte Strukturerzeugung werden immer vorher geprüft.
+  # Fehlt ein neuer Living-EntityType, bleibt er sicherheitshalber bestehen und
+  # beim Start wird eine Warnung ausgegeben.
+  entity-types:
+    # Hostile
+    BLAZE: true
+    BOGGED: true
+    BREEZE: true
+    CAMEL_HUSK: true
+    CAVE_SPIDER: true
+    CREEPER: true
+    DROWNED: true
+    ENDERMITE: true
+    GHAST: true
+    GUARDIAN: true
+    HOGLIN: true
+    HUSK: true
+    MAGMA_CUBE: true
+    PARCHED: true
+    PHANTOM: true
+    SILVERFISH: true
+    SKELETON: true
+    SLIME: true
+    SPIDER: true
+    STRAY: true
+    VEX: true
+    WITHER_SKELETON: true
+    ZOGLIN: true
+    ZOMBIE: true
+    ZOMBIFIED_PIGLIN: true
+
+    # Passive/Farmtiere
+    ARMADILLO: true
+    CAT: true
+    CHICKEN: true
+    COW: true
+    FOX: true
+    GOAT: true
+    MOOSHROOM: true
+    OCELOT: true
+    PANDA: true
+    PARROT: true
+    PIG: true
+    RABBIT: true
+    SHEEP: true
+
+    # Neutral
+    BEE: true
+    ENDERMAN: true
+    PIGLIN: true
+    POLAR_BEAR: true
+    STRIDER: true
+    WOLF: true
+
+    # Water/Ambient
+    AXOLOTL: true
+    BAT: true
+    COD: true
+    DOLPHIN: true
+    FROG: true
+    GLOW_SQUID: true
+    NAUTILUS: true
+    PUFFERFISH: true
+    SALMON: true
+    SQUID: true
+    TADPOLE: true
+    TROPICAL_FISH: true
+    TURTLE: true
+    ZOMBIE_NAUTILUS: true
+
+    # Rare/Structure
+    ALLAY: false
+    CREAKING: false
+    ELDER_GUARDIAN: false
+    PIGLIN_BRUTE: false
+    SHULKER: false
+    SNIFFER: false
+
+    # Illager/Raid
+    EVOKER: false
+    ILLUSIONER: false
+    PILLAGER: true
+    RAVAGER: true
+    VINDICATOR: false
+    WITCH: true
+
+    # Golems
+    COPPER_GOLEM: false
+    IRON_GOLEM: false
+    SNOW_GOLEM: false
+
+    # Pferdeartige/Reittiere
+    CAMEL: false
+    DONKEY: true
+    HORSE: true
+    LLAMA: true
+    MULE: false
+    SKELETON_HORSE: true
+    TRADER_LLAMA: false
+    ZOMBIE_HORSE: true
+
+    # Boss/Special
+    ENDER_DRAGON: false
+    GIANT: false
+    HAPPY_GHAST: false
+    WARDEN: false
+    WITHER: false
+
+    # Sonstige LivingEntities
+    ARMOR_STAND: false
+    MANNEQUIN: false
+    PLAYER: false
+    VILLAGER: false
+    WANDERING_TRADER: false
+    ZOMBIE_VILLAGER: false
+
+  player-protection:
+    # Diese Spawnursachen setzen dauerhaft novosmp:entity_player_protected.
+    spawn-reasons:
+      - BREEDING
+      - EGG
+      - SPAWNER_EGG
+      - DISPENSE_EGG
+      - BUILD_SNOWMAN
+      - BUILD_IRONGOLEM
+      - BUILD_COPPERGOLEM
+      - BUILD_WITHER
+      - COMMAND
+      - CUSTOM
+      - BUCKET
+      - SHOULDER_ENTITY
+      - DUPLICATION
+
+# Automatische Chat-Events zu festen Uhrzeiten: jede volle und halbe Stunde (xx:00 / xx:30).
+# Bei 0 Spielern wird der jeweilige feste Slot still übersprungen.
+
+
+# /discord - Link kann hier jederzeit geändert werden.
+discord:
+  invite-link: "https://discord.gg/DEIN-LINK"
+  messages:
+    invite: '<dark_gray>[<light_purple>Novoria</light_purple>]</dark_gray> <gray>Discord: <light_purple><u>%link%</u></light_purple></gray>'
+    not-configured: '<dark_gray>[<light_purple>Novoria</light_purple>]</dark_gray> <red>Der Discord-Link ist noch nicht eingerichtet.</red>'
+
+night-vision:
+  messages:
+    enabled: '<dark_gray>[<light_purple>Novoria</light_purple>]</dark_gray> <green>Nachtsicht wurde aktiviert.</green>'
+    disabled: '<dark_gray>[<light_purple>Novoria</light_purple>]</dark_gray> <yellow>Nachtsicht wurde deaktiviert.</yellow>'
+    usage: '<gray>Benutzung: <yellow>/nachtsicht</yellow></gray>'
+    player-only: '<red>Dieser Befehl ist nur für Spieler verfügbar.</red>'

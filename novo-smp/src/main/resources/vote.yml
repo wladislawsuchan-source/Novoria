@@ -1,0 +1,197 @@
+# NovoSMP Vote-System (NuVotifier -> NovoSMP)
+# Alle Vote-Einstellungen und alle spielersichtbaren Vote-Texte liegen nur in dieser Datei.
+# MiniMessage-Farben werden unterstützt, z. B. <light_purple>, <gray>, <gold>, <bold>.
+schema-version: 5
+
+# Direkte Belohnung für jeden gültigen Vote.
+rewards:
+  coins:
+    enabled: true
+    amount: 500
+  key:
+    enabled: true
+    # ID einer vorhandenen Crate aus plugins/NovoSMP/crates/.
+    crate-id: daily
+    # Pro Vote, maximal 64 Keys. 0 deaktiviert die Key-Belohnung ebenfalls.
+    amount: 1
+
+# Wiederkehrende Langzeit-Belohnung: 70, 140, 210, ... Votes.
+milestones:
+  enabled: true
+  every-votes: 70
+  key:
+    crate-id: novo
+    amount: 1
+
+# Komplett anpassbares /vote-GUI.
+menu:
+  title: '<dark_gray>Votes</dark_gray>'
+  # Für die Anzeige "Heute x/7".
+  time-zone: Europe/Berlin
+
+  filler:
+    material: GRAY_STAINED_GLASS_PANE
+    name: ' '
+    lore: []
+
+  # Platzhalter: %site%, %site_id%
+  # "completed" wird nur nach einem echten NuVotifier-Eingang dieser Seite angezeigt.
+  # Eine erledigte Seite ist bis zum nächsten Kalendertag nicht erneut anklickbar/belohnbar.
+  site-button:
+    pending:
+      material: PAPER
+      name: '<light_purple><bold>%site%</bold></light_purple>'
+      lore:
+        - ''
+        - '<yellow>Heute noch offen</yellow>'
+        - '<gray>Klicke für den Link.</gray>'
+    completed:
+      material: PAPER
+      name: '<gray><bold>%site%</bold></gray>'
+      lore:
+        - ''
+        - '<green>✔ Heute erfolgreich gevotet</green>'
+        - '<dark_gray>Morgen wieder verfügbar.</dark_gray>'
+
+  # Platzhalter: %total_votes%, %today_votes%, %site_count%
+  total:
+    material: BOOK
+    name: '<light_purple><bold>Deine Votes</bold></light_purple>'
+    lore:
+      - ''
+      - '<gray>Votes insgesamt:</gray> <white>%total_votes%</white>'
+      - '<gray>Heute erledigt:</gray> <white>%today_votes% / %site_count%</white>'
+      - ''
+      - '<dark_gray>Jeder Vote unterstützt Novoria.</dark_gray>'
+
+  # Platzhalter:
+  # %interval%, %milestone_key_amount%, %milestone_key_name%, %progress_votes%,
+  # %next_milestone%, %votes_until_next%, %milestones_pending%, %total_votes%, %progress_bar%
+  milestone:
+    material: TRIPWIRE_HOOK
+    name: '<light_purple><bold>Novo-Key Meilenstein</bold></light_purple>'
+    lore:
+      - ''
+      - '<gray>Alle <white>%interval% Votes</white> erhältst du:</gray>'
+      - '<dark_gray>• <light_purple>%milestone_key_amount%x %milestone_key_name%</light_purple>'
+      - ''
+      - '%progress_bar%'
+      - '<gray>Fortschritt:</gray> <white>%progress_votes% / %interval%</white>'
+      - '<gray>Nächster Novo-Key bei:</gray> <light_purple>%next_milestone% Votes</light_purple>'
+      - '<gray>Noch benötigt:</gray> <yellow>%votes_until_next% Votes</yellow>'
+    pending-lore:
+      - ''
+      - '<yellow><bold>Ausstehend:</bold> %milestones_pending% Meilenstein(e)</yellow>'
+      - '<dark_gray>Schaffe Inventarplatz und öffne /vote erneut.</dark_gray>'
+    glint-when-pending: true
+    glint-last-votes: 5
+    progress-bar:
+      length: 14
+      filled: '<light_purple>■</light_purple>'
+      empty: '<dark_gray>■</dark_gray>'
+
+  # Zusätzliche Platzhalter: %coins%, %key_amount%, %key_name%
+  rewards:
+    material: EMERALD
+    name: '<gold><bold>Vote-Belohnungen</bold></gold>'
+    lore-before:
+      - ''
+      - '<gray>Pro gültigem Vote:</gray>'
+    coins-line: '<dark_gray>• <gold>%coins% Coins</gold>'
+    key-line: '<dark_gray>• <yellow>%key_amount%x %key_name%</yellow>'
+    no-direct-reward-line: '<dark_gray>• <gray>Keine direkte Belohnung</gray>'
+    lore-after:
+      - ''
+      - '<gray>Alle <white>%interval% Votes</white>:</gray>'
+      - '<dark_gray>• <light_purple>%milestone_key_amount%x %milestone_key_name%</light_purple>'
+
+  close:
+    material: BARRIER
+    name: '<red><bold>Schließen</bold></red>'
+    lore: []
+
+# Intelligente Vote-Erinnerungen.
+# Der Spieler wird nur erinnert, wenn er seit Tagesbeginn (menu.time-zone) noch keinen Vote abgegeben hat.
+# Nach dem Join kommt der erste Check nach join-delay-seconds, danach alle interval-minutes.
+# Offline-Spieler werden nie angeschrieben; beim Quit wird der persönliche Reminder-Task beendet.
+reminders:
+  enabled: true
+  join-delay-seconds: 25
+  interval-minutes: 30
+  # Platzhalter: %player%, %command%
+  # Der Klick auf "Klicke hier" führt /vote aus und öffnet das Vote-GUI.
+  message: "<dark_gray>[</dark_gray><light_purple>VOTE</light_purple><dark_gray>]</dark_gray> <gray>Du hast heute noch nicht gevotet! <click:run_command:'/vote'><hover:show_text:'<gray>/vote öffnen</gray>'><light_purple><underlined>Klicke hier</underlined></light_purple></hover></click> <gray>oder nutze <light_purple>/vote</light_purple>.</gray>"
+
+# Globale Nachricht, sobald ein Spieler an einem Tag alle aktivierten Vote-Seiten erledigt hat.
+# Bei der Standardkonfiguration entspricht das 7/7 Votes. Die Nachricht wird nur beim Übergang
+# von unvollständig -> vollständig gesendet und deshalb nicht durch weitere Vote-Pakete wiederholt.
+daily-completion:
+  enabled: true
+  # Platzhalter: %player%, %votes%, %site_count%
+  message: '<dark_gray>[</dark_gray><light_purple>VOTE</light_purple><dark_gray>]</dark_gray> <light_purple>%player%</light_purple> <gray>hat heute alle <white>%site_count% Votes</white> gemacht!</gray>'
+
+# Alle spielersichtbaren Vote-Nachrichten.
+messages:
+  # Beim Klick auf ein Papier bleibt das GUI offen. Pro Seite wird nur EINE Chat-Zeile gesendet.
+  # Nur clickable-text ist anklickbar und öffnet die Webseite.
+  # Platzhalter: %site%, %site_id%, %url%, %player%
+  vote-link:
+    prefix: '<dark_gray>[</dark_gray><light_purple>VOTE</light_purple><dark_gray>]</dark_gray> '
+    clickable-text: '<aqua><underlined>%url%</underlined></aqua>'
+    hover: '<gray>Klicken, um auf %site% zu voten.</gray>'
+  invalid-link: '<dark_gray>[</dark_gray><light_purple>VOTE</light_purple><dark_gray>]</dark_gray> <red>Für %site% ist kein gültiger Vote-Link konfiguriert.</red>'
+
+  # Belohnungsnachrichten. Leer lassen ('') = Nachricht deaktivieren.
+  # Platzhalter: %player%, %coins%, %key_amount%, %key_name%, %reward_summary%,
+  # %milestone_key_amount%, %milestone_key_name%
+  reward-paid: '<green><bold>✔ Danke fürs Voten!</bold></green> <gray>Du hast %reward_summary%<gray> erhalten.</gray>'
+  key-inventory-full: '<yellow>Deine ausstehende Key-Belohnung (%key_name%) konnte nicht ausgezahlt werden, weil dein Inventar voll ist. Sie wird beim nächsten Join erneut versucht.</yellow>'
+  key-unavailable: '<yellow>Deine Key-Belohnung (%key_name%) ist gespeichert, konnte aber gerade nicht erzeugt werden. Die Belohnung bleibt ausstehend.</yellow>'
+  milestone-paid: '<light_purple><bold>★ Vote-Meilenstein!</bold></light_purple> <gray>Du hast <gold>%milestone_key_amount%x %milestone_key_name%</gold> für deine Votes erhalten.</gray>'
+  milestone-inventory-full: '<yellow>Dein ausstehender Vote-Meilenstein (%milestone_key_name%) konnte nicht ausgezahlt werden, weil dein Inventar voll ist. Er bleibt gespeichert.</yellow>'
+  milestone-unavailable: '<yellow>Dein Vote-Meilenstein ist erreicht, aber der konfigurierte Key konnte gerade nicht erzeugt werden. Die Belohnung bleibt ausstehend.</yellow>'
+
+  reward-summary:
+    coins: '<yellow>%coins% Coins</yellow>'
+    key: '<gold>%key_amount%x %key_name%</gold>'
+    separator: ' <gray>und</gray> '
+
+# Die ersten sieben aktivierten Einträge werden im /vote-GUI als Papier angezeigt.
+# %player% wird beim Anklicken URL-sicher durch den Minecraft-Namen des Spielers ersetzt.
+# service-names sind mögliche Namen, die NuVotifier von der jeweiligen Serverliste meldet.
+sites:
+  minecraft-server-eu:
+    enabled: true
+    name: 'minecraft-server.eu'
+    url: 'https://minecraft-server.eu/vote/index/23A25/%player%'
+    service-names: ['minecraft-server.eu', 'Minecraft-Server.eu', 'Minecraft Server EU']
+  mc-liste:
+    enabled: true
+    name: 'MC-Liste.de'
+    url: 'https://www.mc-liste.de/server/267/vote?username=%player%'
+    service-names: ['MC-Liste.de', 'MC-Liste', 'mc-liste.de']
+  minecraft-mp:
+    enabled: true
+    name: 'Minecraft-MP.com'
+    url: 'https://minecraft-mp.com/server/361482/vote/?username=%player%'
+    service-names: ['Minecraft-MP.com', 'Minecraft-MP', 'minecraft-mp.com']
+  topg:
+    enabled: true
+    name: 'TopG.org'
+    url: 'https://topg.org/Minecraft/server-684566-%player%#vote'
+    service-names: ['TopG.org', 'TopG', 'topg.org']
+  minecraft-server-list:
+    enabled: true
+    name: 'Minecraft-Server-List.com'
+    url: 'https://minecraft-server-list.com/server/522622/vote/'
+    service-names: ['Minecraft-Server-List.com', 'Minecraft Server List', 'minecraft-server-list.com', 'MCSL']
+  mcserv:
+    enabled: true
+    name: 'McServ.org'
+    url: 'https://mcserv.org/de/vote/novoria'
+    service-names: ['McServ.org', 'McServ', 'mcserv.org']
+  serverliste-net:
+    enabled: true
+    name: 'serverliste.net'
+    url: 'https://serverliste.net/vote/5658'
+    service-names: ['serverliste.net', 'Serverliste.net', 'Serverliste']

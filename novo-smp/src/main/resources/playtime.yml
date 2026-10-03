@@ -1,0 +1,246 @@
+enabled: true
+crate-id: playtime
+
+menu:
+  title: "<dark_gray>Spielzeit (Seite %page%)</dark_gray>"
+  claimed-material: GRAY_DYE
+  claimable-material: LIME_DYE
+  locked-material: CLOCK
+  filler-material: GRAY_STAINED_GLASS_PANE
+  previous-material: ARROW
+  next-material: ARROW
+
+messages:
+  storage-error: "<red>Deine Spielzeit-Belohnung konnte nicht gespeichert werden.</red>"
+  not-ready: "<red>Diese Spielzeit-Stufe ist noch nicht freigeschaltet.</red>"
+  already-claimed: "<gray>Diese Spielzeit-Stufe hast du bereits abgeholt.</gray>"
+  claimed: "<green>Spielzeit Level %level% abgeholt: <gold>%coins% Coins</gold>, <aqua>%xp% XP</aqua> und <yellow>1× Spielzeit-Key</yellow>.</green>"
+
+# Genau 28 Meilensteine pro Seite. Die sichtbaren Werte aus der Vorlage bleiben
+# als Balancing-Anker erhalten: Level 1 = 1h/1.000/10, Level 20 = 220h/2.400/240,
+# Level 28 = 362h/3.600/360. Danach steigen Coins und XP bis 1.500 Stunden weiter.
+milestones:
+  1:
+    hours: 1
+    coins: 1000
+    xp: 10
+  2:
+    hours: 3
+    coins: 1050
+    xp: 20
+  3:
+    hours: 5
+    coins: 1150
+    xp: 30
+  4:
+    hours: 10
+    coins: 1200
+    xp: 50
+  5:
+    hours: 15
+    coins: 1300
+    xp: 60
+  6:
+    hours: 20
+    coins: 1350
+    xp: 70
+  7:
+    hours: 30
+    coins: 1450
+    xp: 80
+  8:
+    hours: 40
+    coins: 1500
+    xp: 90
+  9:
+    hours: 50
+    coins: 1600
+    xp: 110
+  10:
+    hours: 60
+    coins: 1650
+    xp: 120
+  11:
+    hours: 75
+    coins: 1750
+    xp: 130
+  12:
+    hours: 90
+    coins: 1800
+    xp: 140
+  13:
+    hours: 105
+    coins: 1900
+    xp: 160
+  14:
+    hours: 120
+    coins: 1950
+    xp: 170
+  15:
+    hours: 135
+    coins: 2050
+    xp: 180
+  16:
+    hours: 150
+    coins: 2100
+    xp: 190
+  17:
+    hours: 165
+    coins: 2200
+    xp: 200
+  18:
+    hours: 180
+    coins: 2250
+    xp: 220
+  19:
+    hours: 200
+    coins: 2350
+    xp: 230
+  20:
+    hours: 220
+    coins: 2400
+    xp: 240
+  21:
+    hours: 240
+    coins: 2550
+    xp: 260
+  22:
+    hours: 260
+    coins: 2700
+    xp: 270
+  23:
+    hours: 280
+    coins: 2850
+    xp: 280
+  24:
+    hours: 300
+    coins: 3000
+    xp: 300
+  25:
+    hours: 320
+    coins: 3150
+    xp: 320
+  26:
+    hours: 340
+    coins: 3300
+    xp: 330
+  27:
+    hours: 350
+    coins: 3450
+    xp: 340
+  28:
+    hours: 362
+    coins: 3600
+    xp: 360
+  29:
+    hours: 375
+    coins: 3800
+    xp: 380
+  30:
+    hours: 400
+    coins: 4000
+    xp: 410
+  31:
+    hours: 425
+    coins: 4200
+    xp: 430
+  32:
+    hours: 450
+    coins: 4400
+    xp: 450
+  33:
+    hours: 475
+    coins: 4600
+    xp: 480
+  34:
+    hours: 500
+    coins: 4800
+    xp: 500
+  35:
+    hours: 550
+    coins: 5200
+    xp: 550
+  36:
+    hours: 600
+    coins: 5600
+    xp: 600
+  37:
+    hours: 650
+    coins: 6000
+    xp: 650
+  38:
+    hours: 700
+    coins: 6400
+    xp: 700
+  39:
+    hours: 750
+    coins: 6800
+    xp: 750
+  40:
+    hours: 800
+    coins: 7200
+    xp: 800
+  41:
+    hours: 850
+    coins: 7600
+    xp: 850
+  42:
+    hours: 900
+    coins: 8000
+    xp: 900
+  43:
+    hours: 950
+    coins: 8400
+    xp: 950
+  44:
+    hours: 1000
+    coins: 8800
+    xp: 1000
+  45:
+    hours: 1050
+    coins: 9300
+    xp: 1040
+  46:
+    hours: 1100
+    coins: 9850
+    xp: 1080
+  47:
+    hours: 1150
+    coins: 10350
+    xp: 1120
+  48:
+    hours: 1200
+    coins: 10850
+    xp: 1170
+  49:
+    hours: 1250
+    coins: 11400
+    xp: 1210
+  50:
+    hours: 1300
+    coins: 11900
+    xp: 1250
+  51:
+    hours: 1350
+    coins: 12400
+    xp: 1290
+  52:
+    hours: 1400
+    coins: 12950
+    xp: 1330
+  53:
+    hours: 1425
+    coins: 13450
+    xp: 1380
+  54:
+    hours: 1450
+    coins: 13950
+    xp: 1420
+  55:
+    hours: 1475
+    coins: 14500
+    xp: 1460
+  56:
+    hours: 1500
+    coins: 15000
+    xp: 1500

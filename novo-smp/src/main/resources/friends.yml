@@ -1,0 +1,268 @@
+settings:
+  cache-ttl-millis: 30000
+  request-poll-ticks: 20
+  glow-refresh-ticks: 20
+  movement-refresh-distance: 4.0
+
+menus:
+  list:
+    title: '<white>Freunde</white>'
+    size: 54
+    page-size: 45
+    slots:
+      defaults: 45
+      previous: 48
+      requests: 49
+      next: 50
+      summary: 53
+  requests:
+    title: '<white>Freundesanfragen</white>'
+    size: 54
+    content-limit: 45
+    back-slot: 45
+  profile:
+    title: '<white>Freund: <player></white>'
+    size: 36
+    slots:
+      tpa: 4
+      glow: 10
+      chat: 12
+      join-leave: 14
+      friendly-fire: 16
+      homes: 22
+      reset: 25
+      back: 27
+      remove: 31
+    materials:
+      tpa: ENDER_PEARL
+      glow: GLOW_INK_SAC
+      chat: NAME_TAG
+      join-leave: BELL
+      friendly-fire: IRON_SWORD
+      homes: RED_BED
+      reset: REPEATER
+  defaults:
+    title: '<white>Freunde: Standard</white>'
+    size: 27
+    slots:
+      allow-glow: 4
+      glow: 10
+      chat: 12
+      join-leave: 14
+      friendly-fire: 16
+      back: 22
+    materials:
+      allow-glow: GLOW_BERRIES
+      glow: GLOW_INK_SAC
+      chat: NAME_TAG
+      join-leave: BELL
+      friendly-fire: IRON_SWORD
+  homes:
+    title: '<white>Home-Zugriff</white>'
+    size: 27
+    home-slots: [10, 11, 12, 13, 14, 15, 16]
+    info-slot: 18
+    back-slot: 22
+    empty-slot: 13
+    allowed-material: LIME_BED
+    denied-material: RED_BED
+  admin-players:
+    title: '<white>Admin-Spieler</white>'
+    size: 54
+    page-size: 45
+    slots:
+      previous: 48
+      summary: 49
+      next: 50
+  admin-homes:
+    title: '<white>Admin-Homes: <player></white>'
+    size: 27
+    home-slots: [10, 11, 12, 13, 14, 15, 16]
+    owner-slot: 18
+    close-slot: 22
+    empty-slot: 13
+
+items:
+  list:
+    online:
+      name: '<white><player></white>'
+      lore:
+        - '<green>Online</green>'
+        - '<gray>Welt: <white><world></white></gray>'
+        - '<dark_gray>Klicken für Einstellungen</dark_gray>'
+    offline:
+      material: SKELETON_SKULL
+      name: '<white><player></white>'
+      lore:
+        - '<gray>Offline</gray>'
+        - '<dark_gray>Klicken für Einstellungen</dark_gray>'
+    defaults:
+      name: '<white><player></white>'
+      lore:
+        - '<gray>Allgemeine Einstellungen</gray>'
+        - '<dark_gray>Klicken zum Öffnen</dark_gray>'
+    previous:
+      material: ARROW
+      name: '<white>Vorherige Seite</white>'
+      lore: ['<gray>Seite <page> von <pages></gray>']
+    requests:
+      material: PAPER
+      name: '<white>Freundesanfragen</white>'
+      lore:
+        - '<gray>Offene Anfragen: <white><count></white></gray>'
+        - '<dark_gray>Klicken zum Öffnen</dark_gray>'
+    next:
+      material: ARROW
+      name: '<white>Nächste Seite</white>'
+      lore: ['<gray>Seite <page> von <pages></gray>']
+    summary:
+      material: BOOK
+      name: '<white>Übersicht</white>'
+      lore:
+        - '<gray>Freunde: <white><count></white></gray>'
+        - '<gray>Seite: <white><page>/<pages></white></gray>'
+  request:
+    name: '<white><player></white>'
+    lore:
+      - '<green>Linksklick: Annehmen</green>'
+      - '<red>Rechtsklick: Ablehnen</red>'
+  toggle:
+    enabled:
+      name: '<white><label></white>'
+      lore:
+        - '<green>Aktiviert</green>'
+        - '<gray><description></gray>'
+        - '<dark_gray>Klicken zum Umschalten</dark_gray>'
+    disabled:
+      name: '<white><label></white>'
+      lore:
+        - '<red>Deaktiviert</red>'
+        - '<gray><description></gray>'
+        - '<dark_gray>Klicken zum Umschalten</dark_gray>'
+  tpa:
+    name: '<white>TPA senden</white>'
+    lore:
+      - '<gray>Sendet diesem Freund eine</gray>'
+      - '<gray>Teleportanfrage.</gray>'
+  homes:
+    name: '<white>Home-Zugriffe</white>'
+    lore: ['<gray>Jedes Home einzeln erlauben</gray>']
+  reset:
+    name: '<white>Standards übernehmen</white>'
+    lore:
+      - '<gray>Setzt alle Einstellungen dieses Freundes</gray>'
+      - '<gray>auf deine aktuellen allgemeinen Standards.</gray>'
+  back:
+    material: ARROW
+    name: '<white>Zurück</white>'
+    lore: ['<gray><destination></gray>']
+  remove:
+    material: BARRIER
+    name: '<white>Freund entfernen</white>'
+    lore: ['<red>Klicken zum Entfernen</red>']
+  home:
+    allowed:
+      name: '<white><home></white>'
+      lore:
+        - '<green>Erlaubt</green>'
+        - '<gray>Klicken zum Umschalten</gray>'
+    denied:
+      name: '<white><home></white>'
+      lore:
+        - '<red>Verboten</red>'
+        - '<gray>Klicken zum Umschalten</gray>'
+    empty:
+      material: BARRIER
+      name: '<white>Keine Homes vorhanden</white>'
+      lore: ['<gray>Erstelle zuerst ein Home mit /sethome.</gray>']
+    info:
+      material: BOOK
+      name: '<white>Home-Freigaben</white>'
+      lore:
+        - '<gray>Jedes Home gilt nur für</gray>'
+        - '<gray>diesen einen Freund.</gray>'
+  admin-player:
+    enabled:
+      name: '<white><player></white>'
+      lore:
+        - '<green>Glow: Aktiv</green>'
+        - '<gray>Linksklick: Glow umschalten</gray>'
+        - '<gray>Rechtsklick: Homes öffnen</gray>'
+        - '<dark_gray>Welt: <world></dark_gray>'
+    disabled:
+      name: '<white><player></white>'
+      lore:
+        - '<red>Glow: Inaktiv</red>'
+        - '<gray>Linksklick: Glow umschalten</gray>'
+        - '<gray>Rechtsklick: Homes öffnen</gray>'
+        - '<dark_gray>Welt: <world></dark_gray>'
+  admin-summary:
+    material: BOOK
+    name: '<white>Spielerübersicht</white>'
+    lore:
+      - '<gray>Online: <white><count></white></gray>'
+      - '<gray>Seite: <white><page>/<pages></white></gray>'
+  admin-home:
+    material: RED_BED
+    name: '<white><home></white>'
+    lore:
+      - '<gray>Klicken zum Teleportieren</gray>'
+      - '<dark_gray>Freigabe wird als Admin umgangen</dark_gray>'
+  admin-home-empty:
+    material: BARRIER
+    name: '<white>Keine Homes vorhanden</white>'
+    lore: ['<gray>Dieser Spieler besitzt keine Homes.</gray>']
+  admin-owner:
+    material: PLAYER_HEAD
+    name: '<white><player></white>'
+    lore: ['<gray>Homes: <white><count></white></gray>']
+  close:
+    material: BARRIER
+    name: '<white>Schließen</white>'
+    lore: ['<gray>Menü schließen</gray>']
+
+messages:
+  prefix: '<dark_gray>[<light_purple>Freunde</light_purple>]</dark_gray> '
+  request-prompt: '<light_purple><player></light_purple><gray> hat dir eine Freundesanfrage gesendet.</gray>'
+  request-click-prefix: '<gray>Klicke: </gray>'
+  request-accept-label: '<green>[Annehmen]</green>'
+  request-accept-hover: '<green>Freundesanfrage annehmen</green>'
+  request-deny-label: '<red>[Ablehnen]</red>'
+  request-deny-hover: '<red>Freundesanfrage ablehnen</red>'
+  no-permission: '<red>Dafür hast du keine Berechtigung.</red>'
+  request-denied: '<gray>Freundesanfrage abgelehnt.</gray>'
+  now-friends: '<green>Ihr seid jetzt Freunde.</green>'
+  friend-not-online: '<red>Dieser Freund ist nicht online.</red>'
+  player-not-online: '<red>Dieser Spieler ist nicht mehr online.</red>'
+  admin-glow-enabled: '<green>Admin-Glow aktiviert.</green>'
+  admin-glow-disabled: '<red>Admin-Glow deaktiviert.</red>'
+  admin-home-missing: '<red>Dieses Home existiert nicht mehr oder seine Welt ist nicht geladen.</red>'
+  admin-home-success: '<green>Du wurdest zum Admin-Home teleportiert.</green>'
+  teleport-failed: '<red>Der Teleport ist fehlgeschlagen.</red>'
+  friend-removed: '<red>Freund entfernt.</red>'
+  settings-reset: '<green>Freundeseinstellungen auf Standard zurückgesetzt.</green>'
+  setting-saved: '<green>Einstellung gespeichert.</green>'
+  glow-allowed: '<green>Freunde dürfen dich jetzt hervorheben.</green>'
+  glow-denied: '<red>Freunde dürfen dich nicht mehr hervorheben.</red>'
+  defaults-saved: '<green>Allgemeiner Standard gespeichert.</green>'
+  home-access-saved: '<green>Home-Zugriff gespeichert.</green>'
+  friendly-fire-disabled: '<red>Friendly Fire ist deaktiviert.</red>'
+  friend-online: '<dark_gray>[<light_purple>Freunde</light_purple>]</dark_gray> <green><player> ist nun online.</green>'
+  friend-offline: '<dark_gray>[<light_purple>Freunde</light_purple>]</dark_gray> <gray><player> ist nun offline.</gray>'
+  usage-friend: '<red>/friend \<add|accept|deny|remove\> \<Spieler\></red>'
+  player-not-found: '<red>Spieler nicht gefunden.</red>'
+  request-sent: '<green>Freundesanfrage an <player> gesendet.</green>'
+  request-auto-accepted: '<green>Ihr seid jetzt Freunde, weil bereits eine Anfrage von <player> offen war.</green>'
+  request-accepted-other: '<green><player> hat deine Freundesanfrage angenommen.</green>'
+  already-friends: '<red>Ihr seid bereits Freunde.</red>'
+  request-already-sent: '<red>Du hast diesem Spieler bereits eine Freundesanfrage gesendet.</red>'
+  request-save-failed: '<red>Die Freundesanfrage konnte nicht gespeichert werden.</red>'
+  no-request: '<red>Keine Anfrage von diesem Spieler.</red>'
+  not-in-list: '<red>Dieser Spieler ist nicht in deiner Freundesliste.</red>'
+  removed-player: '<red><player> wurde aus deiner Freundesliste entfernt.</red>'
+  removed-by-player: '<gray><player> hat dich aus der Freundesliste entfernt.</gray>'
+  usage-fhome: '<red>Verwendung: /fhome \<Spieler\> \<Home\></red>'
+  not-your-friend: '<red>Dieser Spieler ist nicht dein Freund.</red>'
+  home-not-shared: '<red>Dieses Home wurde dir nicht freigegeben.</red>'
+  friend-home-missing: '<red>Dieses Home existiert nicht mehr oder seine Welt ist nicht geladen.</red>'
+  usage-ahome: '<red>Verwendung: /ahome [Spieler] [Home]</red>'

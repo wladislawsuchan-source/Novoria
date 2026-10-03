@@ -1,0 +1,570 @@
+
+hub:
+  player-state:
+    health: 20.0
+    food-level: 20
+    saturation: 20.0
+  disable-hunger: true
+  compass:
+    enabled: true
+    slot: 5
+    select-on-give: true
+    material: COMPASS
+    name: <gradient:#F6D365:#FDA085>Spielmodus wählen</gradient>
+    lore: ''
+  menu:
+    title: <dark_gray>Wähle einen Spielmodus</dark_gray>
+    rows: 5
+    filler:
+      material: GRAY_STAINED_GLASS_PANE
+      enabled: false
+      name: <reset>
+      lore: []
+    items:
+      smp:
+        slot: 13
+        material: GRASS_BLOCK
+        name: <green>Survival</green>
+        lore:
+        - <gray>Starte dein Abenteuer.</gray>
+        - ''
+        - <green>▶ Klicken</green>
+      hub:
+        slot: 31
+        material: NETHER_STAR
+        name: <gold>Hub</gold>
+        lore:
+        - <gray>Zurück zur Lobby.</gray>
+rtp:
+  enabled: true
+  world: smp_world
+  min-radius: 2500
+  max-radius: 20000
+  max-attempts: 64
+  # Lädt mehrere Kandidaten parallel und verkürzt dadurch die Suchzeit deutlich.
+  search-batch-size: 4
+  # Kleine Queue aus vorab geprüften RTP-Zielen. Speichert nur Locations, keine Chunks.
+  prepared-locations: 8
+  prepared-search-attempts: 32
+  prepared-refill-delay-ticks: 10
+  preload-chunk-radius: 1
+  preload-hold-ticks: 80
+  cooldown-seconds: 60
+  delay-seconds: 3
+  cancel-on-move: true
+  actionbar: <yellow>Teleport in <green>%seconds%s</green>
+  search-actionbar: <yellow>Sicherer Ort wird gesucht...</yellow>
+  unsafe-blocks:
+  - WATER
+  - LAVA
+  - FIRE
+  - SOUL_FIRE
+  - MAGMA_BLOCK
+  - CACTUS
+  - SWEET_BERRY_BUSH
+  - POWDER_SNOW
+  - CAMPFIRE
+  - SOUL_CAMPFIRE
+  worlds:
+    overworld: smp_world
+    nether: smp_nether
+    end: smp_end
+  menu:
+    title: '&8RTP-Auswahl'
+    rows: 3
+    filler:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+    items:
+      overworld:
+        slot: 11
+        material: GRASS_BLOCK
+        name: '&a&lOverworld'
+        lore:
+        - '&7Grenze: &e100.000 x 100.000'
+        - ''
+        - '&aKlicke, um zufällig teleportiert zu werden'
+      nether:
+        slot: 13
+        material: NETHERRACK
+        name: '&c&lNether'
+        lore:
+        - '&7Grenze: &e100.000 x 100.000'
+        - ''
+        - '&aKlicke, um zufällig teleportiert zu werden'
+      end:
+        slot: 15
+        material: END_STONE
+        name: '&d&lEnd'
+        lore:
+        - '&7Grenze: &e100.000 x 100.000'
+        - ''
+        - '&aKlicke, um zufällig teleportiert zu werden'
+
+# Persönliches Statistikmenü (/stats)
+stats:
+  menu:
+    title: '<dark_gray>Deine Statistiken</dark_gray>'
+    other-title: '<dark_gray>Statistiken von <white>%player%</white></dark_gray>'
+    rows: 4
+
+    # Kompakte Anzeige: 1.500 -> 1.5K, 1.500.000 -> 1.5M
+    number-format:
+      compact: true
+      decimals: 1
+      decimal-separator: '.'
+      suffixes:
+        thousand: 'K'
+        million: 'M'
+        billion: 'B'
+        trillion: 'T'
+
+    filler:
+      enabled: false
+      material: GRAY_STAINED_GLASS_PANE
+
+    # Die sichtbaren Stats werden AUSSCHLIESSLICH hier definiert.
+    # Entfernst du einen Block oder setzt enabled: false, verschwindet der Stat aus /stats.
+    # Java verschiebt keine Slots mehr und fügt keine Kategorien automatisch hinzu.
+    #
+    # stat-Datenquellen:
+    # coins, lumis, active-days, kills, deaths, mobs-killed, blocks-mined,
+    # blocks-placed, playtime-seconds, sell-earnings, advancements, prestige, heads-collected
+    # format: number | playtime
+    items:
+      coins:
+        stat: coins
+        format: number
+        slot: 10
+        material: SUNFLOWER
+        name: '<gold>Coins</gold>'
+        lore:
+          - '<gray>Coins: <gold>%value%'
+          - '<gray>Rang: <yellow>#%rank% <dark_gray>/ %total%'
+      kills:
+        stat: kills
+        format: number
+        slot: 11
+        material: IRON_SWORD
+        name: '<red>Kills</red>'
+        lore:
+          - '<gray>Kills: <red>%value%'
+          - '<gray>Rang: <yellow>#%rank% <dark_gray>/ %total%'
+      mob-kills:
+        stat: mobs-killed
+        format: number
+        slot: 12
+        material: CREEPER_HEAD
+        name: '<green>Mob-Kills</green>'
+        lore:
+          - '<gray>Mob-Kills: <green>%value%'
+          - '<gray>Rang: <yellow>#%rank% <dark_gray>/ %total%'
+      blocks-broken:
+        stat: blocks-mined
+        format: number
+        slot: 13
+        material: DIAMOND_PICKAXE
+        name: '<aqua>Abgebaute Blöcke</aqua>'
+        lore:
+          - '<gray>Abgebaut: <aqua>%value%'
+          - '<gray>Rang: <yellow>#%rank% <dark_gray>/ %total%'
+      blocks-placed:
+        stat: blocks-placed
+        format: number
+        slot: 14
+        material: OAK_LOG
+        name: '<yellow>Platzierte Blöcke</yellow>'
+        lore:
+          - '<gray>Platziert: <yellow>%value%'
+          - '<gray>Rang: <yellow>#%rank% <dark_gray>/ %total%'
+      playtime:
+        stat: playtime-seconds
+        format: playtime
+        slot: 15
+        material: CLOCK
+        name: '<yellow>Spielzeit</yellow>'
+        lore:
+          - '<gray>Spielzeit: <yellow>%value%'
+          - '<gray>Rang: <yellow>#%rank% <dark_gray>/ %total%'
+      sell-earnings:
+        stat: sell-earnings
+        format: number
+        slot: 16
+        material: GOLD_INGOT
+        name: '<gold>Mit /sell verdient</gold>'
+        lore:
+          - '<gray>Verdient: <gold>%value%'
+          - '<gray>Rang: <yellow>#%rank% <dark_gray>/ %total%'
+
+      # Untere Reihe. Ab dem Sensor wie gewünscht eine Position weiter links.
+      lumis:
+        stat: lumis
+        format: number
+        slot: 20
+        material: AMETHYST_SHARD
+        name: '<light_purple>Lumis</light_purple>'
+        lore:
+          - '<gray>Lumis: <light_purple>%value%'
+          - '<gray>Rang: <yellow>#%rank% <dark_gray>/ %total%'
+      active-days:
+        stat: active-days
+        format: number
+        slot: 21
+        material: DAYLIGHT_DETECTOR
+        name: '<light_purple>Aktive Tage</light_purple>'
+        lore:
+          - '<gray>Aktive Tage: <light_purple>%value%'
+          - '<gray>Rang: <yellow>#%rank% <dark_gray>/ %total%'
+      prestige:
+        stat: prestige
+        format: number
+        slot: 22
+        material: BEACON
+        name: '<gold>Prestige</gold>'
+        lore:
+          - '<gray>Prestige insgesamt: <gold>%value%'
+          - '<gray>Rang: <yellow>#%rank% <dark_gray>/ %total%'
+      heads-collected:
+        stat: heads-collected
+        format: number
+        slot: 23
+        material: PLAYER_HEAD
+        name: '<light_purple>Köpfe gesammelt</light_purple>'
+        lore:
+          - '<gray>Einzigartige Köpfe: <light_purple>%value%'
+          - '<gray>Rang: <yellow>#%rank% <dark_gray>/ %total%'
+      advancements:
+        stat: advancements
+        format: number
+        slot: 24
+        material: NETHER_STAR
+        name: '<light_purple>Advancements</light_purple>'
+        lore:
+          - '<gray>Abgeschlossen: <light_purple>%value%'
+          - '<gray>Rang: <yellow>#%rank% <dark_gray>/ %total%'
+      deaths:
+        stat: deaths
+        format: number
+        slot: 25
+        material: SKELETON_SKULL
+        name: '<red>Tode</red>'
+        lore:
+          - '<gray>Tode: <red>%value%'
+          - '<gray>Rang: <yellow>#%rank% <dark_gray>/ %total%'
+
+# Verfügbare Platzhalter in name/lore:
+# %value% = formatierter Wert, %rank% = eigener Rang, %total% = Spieleranzahl
+
+
+# Texte der Clan-Menüs. Command-Argumente in <...> sind normaler Text;
+# echte MiniMessage-Farben und -Formatierungen bleiben weiterhin möglich.
+clans:
+  menu:
+    main:
+      deposit:
+        material: SUNFLOWER
+        name: '<gold>Coins einzahlen</gold>'
+        lore:
+          - '<gray>Nutze <white>/clan deposit <Betrag></white>.</gray>'
+    homes:
+      free-slot:
+        material: LIME_STAINED_GLASS_PANE
+        name: '<green>Freier Home-Slot</green>'
+        lore:
+          - '<gray>Setzen mit <white>/csethome <Name></white>.</gray>'
+      free-premium-slot:
+        material: LIME_STAINED_GLASS_PANE
+        name: '<green>Freier Home-Slot</green>'
+        lore:
+          - '<gray>Zusätzlicher PremiumPlus Clan-Home-Slot.</gray>'
+          - '<gray>Setzen mit <white>/csethome <Name></white>.</gray>'
+    party:
+      status:
+        material: TOTEM_OF_UNDYING
+        name: '<green>Party-Status</green>'
+        lore:
+          - '<white>%status%</white>'
+          - ''
+          - '<gray>/cp invite <Spieler></gray>'
+          - '<gray>/cp accept | deny | leave | kick</gray>'
+    settings:
+      identity:
+        material: NAME_TAG
+        name: '<gold>Name und Tag</gold>'
+        lore:
+          - '<gray>/clan rename <Name></gray>'
+          - '<gray>/clan tag <Tag></gray>'
+          - '<gray>/clan tagcolor #RRGGBB</gray>'
+
+
+# Hauptmenü der Bestenlisten (/leaderboards)
+leaderboards:
+  # Namen oder UUIDs, die in keiner Bestenliste erscheinen sollen.
+  hidden-players: []
+  # Spieler mit weniger SMP-Spielzeit erscheinen in keiner Bestenliste.
+  minimum-playtime-seconds: 60
+  menu:
+    title: '<dark_gray>Bestenlisten</dark_gray>'
+    rows: 4
+    filler:
+      enabled: false
+      material: GRAY_STAINED_GLASS_PANE
+
+    # Auch die Bestenlisten-Kategorien werden ausschließlich hier definiert.
+    # Entfernen/disabled = keine Kategorie im Menü. Slot/Material/Name/Lore kommen 1:1 aus dieser Datei.
+    items:
+      coins:
+        stat: coins
+        format: number
+        slot: 10
+        material: SUNFLOWER
+        name: '<gold>Coins</gold>'
+        lore:
+          - '<gray>Klicke, um die reichsten Spieler zu sehen.'
+      kills:
+        stat: kills
+        format: number
+        slot: 11
+        material: IRON_SWORD
+        name: '<red>Kills</red>'
+        lore:
+          - '<gray>Klicke, um die meisten Kills zu sehen.'
+      mob-kills:
+        stat: mobs-killed
+        format: number
+        slot: 12
+        material: CREEPER_HEAD
+        name: '<green>Mob-Kills</green>'
+        lore:
+          - '<gray>Klicke, um die meisten Mob-Kills zu sehen.'
+      blocks-broken:
+        stat: blocks-mined
+        format: number
+        slot: 13
+        material: DIAMOND_PICKAXE
+        name: '<aqua>Abgebaute Blöcke</aqua>'
+        lore:
+          - '<gray>Klicke, um die fleißigsten Miner zu sehen.'
+      blocks-placed:
+        stat: blocks-placed
+        format: number
+        slot: 14
+        material: OAK_LOG
+        name: '<yellow>Platzierte Blöcke</yellow>'
+        lore:
+          - '<gray>Klicke, um die fleißigsten Builder zu sehen.'
+      playtime:
+        stat: playtime-seconds
+        format: playtime
+        slot: 15
+        material: CLOCK
+        name: '<yellow>Spielzeit</yellow>'
+        lore:
+          - '<gray>Klicke, um die längste Spielzeit zu sehen.'
+      sell-earnings:
+        stat: sell-earnings
+        format: number
+        slot: 16
+        material: GOLD_INGOT
+        name: '<gold>Mit /sell verdient</gold>'
+        lore:
+          - '<gray>Klicke, um die höchsten Einnahmen zu sehen.'
+
+      lumis:
+        stat: lumis
+        format: number
+        slot: 20
+        material: AMETHYST_SHARD
+        name: '<light_purple>Lumis</light_purple>'
+        lore:
+          - '<gray>Klicke, um die meisten Lumis zu sehen.'
+      active-days:
+        stat: active-days
+        format: number
+        slot: 21
+        material: DAYLIGHT_DETECTOR
+        name: '<light_purple>Aktive Tage</light_purple>'
+        lore:
+          - '<gray>Klicke, um die meisten aktiven Tage zu sehen.'
+      prestige:
+        stat: prestige
+        format: number
+        slot: 22
+        material: BEACON
+        name: '<gold>Prestige</gold>'
+        lore:
+          - '<gray>Klicke, um die meisten Prestige-Aufstiege zu sehen.'
+      heads-collected:
+        stat: heads-collected
+        format: number
+        slot: 23
+        material: PLAYER_HEAD
+        name: '<light_purple>Köpfe gesammelt</light_purple>'
+        lore:
+          - '<gray>Klicke, um die größten Kopfsammler zu sehen.'
+      advancements:
+        stat: advancements
+        format: number
+        slot: 24
+        material: NETHER_STAR
+        name: '<light_purple>Advancements</light_purple>'
+        lore:
+          - '<gray>Klicke, um die meisten Fortschritte zu sehen.'
+
+  list:
+    title: '<dark_gray>%category% <gray>(Seite %page%/%pages%)</gray>'
+    rows: 6
+    content-slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]
+
+    # true = Spieler mit einem Wert von 0 werden nicht angezeigt.
+    hide-zero-values: false
+
+    player-head:
+      name: '<yellow>#%rank% <white>%player%</white>'
+      lore:
+        - '<gray>Wert: <yellow>%value%'
+
+    own-head:
+      slot: 49
+      name: '<gold>Deine Statistik</gold>'
+      lore:
+        - '<gray>Wert: <yellow>%value%'
+        - '<gray>Platz: <green>%rank% <dark_gray>/ %total%'
+
+    back:
+      slot: 45
+      material: BARRIER
+      name: '<red>Zurück</red>'
+    previous:
+      slot: 48
+      material: ARROW
+      name: '<yellow>Vorherige Seite</yellow>'
+    next:
+      slot: 53
+      material: ARROW
+      name: '<yellow>Nächste Seite</yellow>'
+
+    sounds:
+      open:
+        enabled: true
+        sound: BLOCK_CHEST_OPEN
+        volume: 0.7
+        pitch: 1.2
+      page:
+        enabled: true
+        sound: UI_BUTTON_CLICK
+        volume: 1.0
+        pitch: 1.0
+      back:
+        enabled: true
+        sound: UI_BUTTON_CLICK
+        volume: 1.0
+        pitch: 0.8
+
+# Gemeinsame GUI-Grundlage für /worth.
+worth:
+  menu:
+    title: '<dark_gray>Worth • %page%/%pages%</dark_gray>'
+    content-slots:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+      - 26
+      - 27
+      - 28
+      - 29
+      - 30
+      - 31
+      - 32
+      - 33
+      - 34
+      - 35
+      - 36
+      - 37
+      - 38
+      - 39
+      - 40
+      - 41
+      - 42
+      - 43
+      - 44
+    filler:
+      material: BLACK_STAINED_GLASS_PANE
+      name: ' '
+      lore: []
+    controls:
+      previous:
+        slot: 45
+        material: ARROW
+        name: '<yellow>Vorherige Seite</yellow>'
+        lore: []
+      filter:
+        slot: 48
+        material: HOPPER
+        name: '<aqua>Filter</aqua>'
+      sort:
+        slot: 49
+        material: HOPPER_MINECART
+        name: '<green>Sortierung</green>'
+      search:
+        slot: 50
+        material: OAK_SIGN
+        name: '<yellow>Suche</yellow>'
+        empty: 'Keine Suche'
+      next:
+        slot: 53
+        material: ARROW
+        name: '<yellow>Nächste Seite</yellow>'
+        lore: []
+
+# /ranks verwendet nun dieselbe holder-basierte GUI wie die übrigen Menüs.
+ranks:
+  menu:
+    title: '<dark_gray>Ränge kaufen</dark_gray>'
+    rows: 3
+    filler:
+      material: GRAY_STAINED_GLASS_PANE
+      name: ' '
+      lore: []
+    items:
+      premium:
+        slot: 11
+        material: EMERALD
+        name: '<green><bold>Premium</bold></green>'
+        lore:
+          - '<gray>Preis: <green>%price% Coins</green></gray>'
+          - '<gray>Laufzeit: <yellow>%duration% Tage</yellow></gray>'
+          - ''
+          - '<yellow>Klicken zum Kaufen</yellow>'
+      premium-plus:
+        slot: 15
+        material: EMERALD_BLOCK
+        name: '<dark_green><bold>Premium+</bold></dark_green>'
+        lore:
+          - '<gray>Preis: <green>%price% Coins</green></gray>'
+          - '<gray>Laufzeit: <yellow>%duration% Tage</yellow></gray>'
+          - ''
+          - '<yellow>Klicken zum Kaufen</yellow>'

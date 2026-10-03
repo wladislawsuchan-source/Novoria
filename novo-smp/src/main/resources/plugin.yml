@@ -1,0 +1,638 @@
+name: NovoSMP
+version: ${project.version}
+main: de.walahi.novosmp.NovoSMPPlugin
+api-version: '1.21'
+author: Walahi
+description: Zentrales SMP-System mit Command-Filter und Baumodus
+depend: [LuckPerms, ProtocolLib, WorldEdit, Citizens]
+softdepend: [Multiverse-Core, PlaceholderAPI, MoreMobHeads, Votifier]
+
+commands:
+  nachtsicht:
+    aliases: [nv]
+    description: Schaltet permanente Nachtsicht an oder aus
+    usage: /nachtsicht
+    permission: smpcore.nightvision
+  berufe:
+    aliases: [beruf]
+    description: Öffnet das Berufssystem
+    usage: /berufe [holzfaeller|bergarbeiter|jaeger|angler]
+    permission: smpcore.professions.use
+  abgabe:
+    description: Zeigt offene Abgaben und Berufsziele im Chat
+    usage: /abgabe [holzfaeller|bergarbeiter|jaeger|angler]
+    permission: smpcore.professions.use
+  fische:
+    description: Öffnet die Angler-Fischübersicht
+    usage: /fische
+    permission: smpcore.professions.use
+  fanglager:
+    description: Öffnet dein persistentes Fanglager
+    usage: /fanglager
+    permission: smpcore.professions.use
+  craft:
+    description: Öffnet eine mobile Werkbank für Premium und Premium+
+    usage: /craft
+  condense:
+    description: Verdichtet erlaubte Vanilla-Ressourcen sicher zu Blöcken
+    usage: /condense
+  chatfarbe:
+    description: Zeigt oder setzt die Nachrichtenfarbe für Premium und Premium+
+    usage: /chatfarbe [Code]
+  koepfe:
+    aliases: [köpfe, heads, kopfsammlung]
+    description: Öffnet deine persönliche Mobkopf-Sammlung
+    usage: /koepfe
+    permission: smpcore.heads.use
+  head:
+    description: Stellt einen signierten Novoria-Mobkopf wieder her
+    usage: /head give <Mob> <Spieler>
+    permission: smpcore.heads.admin
+  customitem:
+    description: Verwaltet konfigurierbare Custom-Items
+    usage: /customitem <give|take|count|list|reload>
+    permission: novosmp.customitem.admin
+  angler:
+    description: Testet vorbereitete Angler-Loot-Belohnungen
+    usage: /angler <testbook|testcustomitem|testlumi|testloot> <Spieler> <ID|Menge|treasure|junk|rare> [Anzahl|Rare-Entry-ID]
+    permission: novosmp.customitem.admin
+  fragmente:
+    description: Verwaltet Werkzeugfragmente
+    usage: /fragmente <give|take|count> <Spieler> [Anzahl]
+    permission: novosmp.customitem.admin
+  holzschlag:
+    description: Setzt oder entfernt die Verzauberung Holzschlag
+    usage: /holzschlag <1-5|entfernen> [Spieler]
+    permission: novosmp.enchant.admin
+  flaechenabbau:
+    aliases: [3x3]
+    description: Setzt oder entfernt die Verzauberung 3x3
+    usage: /flaechenabbau [Spieler] | /flaechenabbau entfernen [Spieler]
+    permission: novosmp.enchant.admin
+  veinminer:
+    description: Setzt oder entfernt die Verzauberung Veinminer
+    usage: /veinminer [Spieler] | /veinminer entfernen [Spieler]
+    permission: novosmp.enchant.admin
+  schmelzer:
+    description: Setzt oder entfernt die Verzauberung Schmelzer
+    usage: /schmelzer [Spieler] | /schmelzer entfernen [Spieler]
+    permission: novosmp.enchant.admin
+  tntspitzhacke:
+    aliases: [tntpickaxe]
+    description: Setzt oder entfernt die Verzauberung TNT
+    usage: /tntspitzhacke [Spieler] | /tntspitzhacke entfernen [Spieler]
+    permission: novosmp.enchant.admin
+  duel:
+    aliases: [duell]
+    description: Erstellt Duellanfragen oder öffnet die persönliche Kit-Sortierung
+    usage: /duel [Spieler|open|accept|deny|leave]
+    permission: smpcore.duel.use
+  dueladmin:
+    description: Verwaltet Duell-Kits und Duell-Maps
+    usage: /dueladmin <kit|map|reload>
+    permission: smpcore.duel.admin
+  king:
+    description: Zeigt den Novoria-King oder startet und verwaltet King-Duelle
+    usage: /king [duel|locate|reset|setholder]
+    permission: smpcore.king.use
+  discord:
+    description: Zeigt den konfigurierbaren Discord-Einladungslink
+    usage: /discord
+    permission: smpcore.discord
+  friend:
+    aliases: [friends]
+    description: Verwaltet deine Freunde
+    usage: /friend <add|accept|deny|remove|list> [Spieler]
+    permission: smpcore.friend.use
+  fl:
+    description: Öffnet die Freundesliste
+    usage: /fl
+    permission: smpcore.friend.use
+  fhome:
+    description: Teleportiert zu einem freigegebenen Freundes-Home
+    usage: /fhome <Spieler> <Home>
+    permission: smpcore.friend.home
+  ahome:
+    description: Teleportiert als Admin zu einem Spieler-Home
+    usage: /ahome [Spieler] [Home]
+    permission: novosmp.admin.home
+  back:
+    description: Teleportiert einmalig nach einem Tod zufällig in einem konfigurierbaren Radius
+    usage: /back
+    permission: smpcore.back
+  stream:
+    description: Blendet eigene Todeskoordinaten im Chat aus
+    usage: /stream
+    permission: smpcore.command.stream
+  chatevent:
+    description: Verwaltet die automatischen Chat-Events
+    usage: /chatevent <start|stop|skip|reload>
+    permission: smpcore.chatevent.admin
+  ref:
+    description: Öffnet das Refer-a-Friend-System oder löst einen Referral-Code ein
+    usage: /ref [Code]
+    permission: smpcore.ref.use
+  bounty:
+    description: Öffnet und verwaltet das Kopfgeld-System
+    usage: /bounty [Spieler Betrag] | /bounty admin <set|add|remove|get>
+  playtime:
+    aliases: [spielzeit]
+    description: Öffnet die Spielzeit-Belohnungen
+    usage: /spielzeit
+    permission: smpcore.playtime.use
+  daily:
+    description: Öffnet die täglichen Belohnungen
+    usage: /daily
+    permission: smpcore.daily.use
+  vote:
+    aliases: [votes]
+    description: Öffnet die Vote-Übersicht
+    usage: /vote [get|set|add|remove]
+    permission: smpcore.vote.use
+  clan:
+    description: Öffnet und verwaltet das Clan-System
+    usage: /clan [help|create|list|invite|accept|deny|leave|kick|promote|demote|transfer|deposit|bank|rename|tag|tagcolor|ff|snitch|unsnitch|chest|upgrade|disband]
+  csethome:
+    description: Setzt ein Clan-Home
+    usage: /csethome <Name>
+    permission: smpcore.clan.use
+  chome:
+    description: Teleportiert zu einem Clan-Home
+    usage: /chome <Name>
+    permission: smpcore.clan.use
+  cdelhome:
+    description: Löscht ein Clan-Home
+    usage: /cdelhome <Name>
+    permission: smpcore.clan.use
+  cc:
+    description: Sendet eine Clan-Chat-Nachricht
+    usage: /cc <Nachricht>
+    permission: smpcore.clan.use
+  cp:
+    description: Verwaltet die Clan-Party
+    usage: /cp <invite|accept|deny|leave|kick|info>
+    permission: smpcore.clan.use
+  lumishop:
+    description: Öffnet den Lumi-Shop
+    usage: /lumishop
+    permission: smpcore.lumishop.use
+  lumi:
+    description: Sendet Lumis oder verwaltet Lumi-Konten
+    usage: /lumi pay <Spieler> <Menge>
+    permission: smpcore.command.lumi
+  setafkpos1:
+    description: Setzt die erste Ecke der Lumi-AFK-Zone
+    usage: /setafkpos1 [Zone]
+    permission: smpcore.admin
+  setafkpos2:
+    description: Setzt die zweite Ecke der Lumi-AFK-Zone
+    usage: /setafkpos2 [Zone]
+    permission: smpcore.admin
+  shop:
+    description: Öffnet den Novoria-Shop
+    usage: /shop
+    permission: smpcore.shop.use
+  crate:
+    aliases: [crates, kiste, kisten]
+    description: Verwaltet und öffnet Novoria-Kisten
+    usage: /crate <keys|givekey|takekey|set|remove|reload>
+  kill:
+    description: Tötet dich selbst oder einen Spieler ohne Vanilla-Feedback
+    usage: /kill [Spieler]
+  history:
+    description: Zeigt den Moderationsverlauf eines Spielers
+    usage: /history <Spieler> [Seite]
+  ping:
+    description: Zeigt deinen aktuellen Ping
+    usage: /ping
+  balance:
+    aliases: [bal, money]
+    description: Zeigt deinen eigenen Kontostand
+    usage: /balance
+    permission: smpcore.economy.balance
+  eco:
+    description: Verwaltet Spielerkonten
+    usage: /eco <give|take|set> <Spieler> <Betrag>
+    permission: smpcore.economy.admin
+  pay:
+    description: Sendet einem Spieler Coins
+    usage: /pay <Spieler> <Betrag>
+    permission: smpcore.economy.pay
+  sell:
+    description: Öffnet das Verkaufsmenü
+    usage: /sell
+    permission: smpcore.economy.sell
+  worth:
+    description: Zeigt alle Itemwerte an
+    usage: /worth
+    permission: smpcore.economy.worth
+  ah:
+    aliases: [auctionhouse]
+    description: Öffnet das Auktionshaus
+    usage: /ah [sell|listings|collect|history|stats]
+    permission: smpcore.ah.use
+  order:
+    aliases: [orders]
+    description: Öffnet den Order-Markt
+    usage: /order
+    permission: smpcore.order.use
+  afk:
+    description: Aktiviert oder deaktiviert deinen AFK-Status
+    usage: /afk
+  ban:
+    description: Bannt einen Spieler permanent vom Server
+    usage: /ban <Spieler> [Grund]
+  tempban:
+    description: Bannt einen Spieler für eine bestimmte Zeit
+    usage: /tempban <Spieler> <Zeit> [Grund]
+  unban:
+    description: Hebt einen aktiven Ban auf
+    usage: /unban <Spieler>
+  mute:
+    description: Schaltet einen Spieler permanent stumm
+    usage: /mute <Spieler> [Grund]
+  tempmute:
+    description: Schaltet einen Spieler für eine bestimmte Zeit stumm
+    usage: /tempmute <Spieler> <Zeit> [Grund]
+  unmute:
+    description: Hebt einen aktiven Mute auf
+    usage: /unmute <Spieler>
+  kick:
+    description: Entfernt einen Spieler vom Server
+    usage: /kick <Spieler> [Grund]
+  fly:
+    description: Aktiviert oder deaktiviert den Flugmodus
+    usage: /fly [Spieler]
+  vanish:
+    description: Aktiviert oder deaktiviert Vanish
+    usage: /vanish [Spieler] | /vanish friendnotify <on|off>
+  dnd:
+    description: Aktiviert oder deaktiviert den privaten Spielmodus
+    usage: /dnd
+    permission: smpcore.command.dnd
+  list:
+    aliases: [players]
+    description: Zeigt die für dich sichtbaren Spieler an
+    usage: /list
+  gamemode:
+    description: Ändert den Spielmodus
+    usage: /gamemode <Modus> [Spieler]
+  tp:
+    description: Teleportiert Spieler zu Spielern oder Koordinaten
+    usage: /tp <Spieler|x y z> | /tp <Welt> <x> <y> <z> | /tp <Spieler> <Welt> <x> <y> <z>
+  msg:
+    aliases: [message, tell, whisper, w]
+    description: Sendet einem Spieler eine private Nachricht
+    usage: /msg <Spieler> <Nachricht>
+  reply:
+    aliases: [r]
+    description: Antwortet dem letzten privaten Gesprächspartner
+    usage: /reply <Nachricht>
+  socialspy:
+    description: Zeigt private Nachrichten anderer Spieler an
+    usage: /socialspy
+  ecupgrade:
+    description: Öffnet das Enderchest-Erweiterungsmenü
+    usage: /ecupgrade
+    permission: smpcore.ecupgrade.use
+  ec:
+    aliases: [enderchest]
+    description: Öffnet deine Enderchest
+    usage: /ec
+  ecsee:
+    description: Öffnet die Enderchest eines Spielers
+    usage: /ecsee <Spieler>
+  invsee:
+    description: Öffnet das Inventar eines Spielers
+    usage: /invsee <Spieler>
+  invswap:
+    description: Tauscht dein Inventar mit dem eines Online-Spielers
+    usage: /invswap <Spieler>
+    permission: smpcore.admin.invswap
+  bau:
+    description: Verwaltet den temporären Baumodus
+    usage: /bau <Spieler>
+  smp:
+    description: Betritt das SMP
+    usage: /smp
+    permission: smpcore.smp
+  hub:
+    description: Teleportiert zum Hub
+    usage: /hub
+    permission: smpcore.hub
+  spawn:
+    description: Teleportiert zum SMP-Spawn
+    usage: /spawn
+    permission: smpcore.spawn
+  rtp:
+    description: Öffnet die RTP-Auswahl
+    usage: /rtp
+    permission: smpcore.rtp
+  sethome:
+    description: Setzt ein Home
+    usage: /sethome <Name>
+    permission: smpcore.home.set
+  home:
+    description: Teleportiert zu einem Home
+    usage: /home <Name>
+    permission: smpcore.home.use
+  delhome:
+    description: Löscht ein Home
+    usage: /delhome <Name>
+    permission: smpcore.home.delete
+  homes:
+    description: Zeigt deine Homes
+    usage: /homes
+    permission: smpcore.home.list
+  tpa:
+    description: Sendet eine Teleportanfrage
+    usage: /tpa <Spieler>
+    permission: smpcore.tpa.use
+  tpaccept:
+    description: Nimmt eine Teleportanfrage an
+    usage: /tpaccept [Spieler]
+    permission: smpcore.tpa.accept
+  tpdeny:
+    description: Lehnt eine Teleportanfrage ab
+    usage: /tpdeny [Spieler]
+    permission: smpcore.tpa.deny
+  tpacancel:
+    description: Bricht deine Teleportanfrage ab
+    usage: /tpacancel
+    permission: smpcore.tpa.use
+  stats:
+    description: Zeigt deine Statistiken
+    usage: /stats [Spieler]
+    permission: smpcore.stats
+  leaderboards:
+    description: Öffnet die Bestenlisten
+    usage: /leaderboards
+    permission: smpcore.leaderboards
+  tabtest:
+    description: Simuliert viele Spieler in deiner Tablist
+    usage: /tabtest <Anzahl|off>
+    permission: smpcore.tabtest
+  setspawn:
+    description: Setzt den SMP-Spawn
+    usage: /setspawn
+    permission: smpcore.admin
+  smpcore:
+    aliases: [smpportal]
+    description: Verwaltung von SMPCore
+    usage: /smpcore <reload|sethub|setsmp|info|hologram>
+    permission: smpcore.admin
+
+  entityclear:
+    description: Entfernt sicher freigegebene Performance-Entities
+    usage: /entityclear
+    permission: smpcore.admin.entityclear
+  exposeore:
+    description: Findet serverseitig echte, freiliegende Erzblöcke in geladenen Chunks
+    usage: /exposeore <ore> <air|water|lava|any> [radius]
+    permission: novosmp.admin.exposeore
+  chatclear:
+    aliases: [clearchat]
+    description: Leert den Chat für alle Spieler
+    usage: /chatclear
+    permission: smpcore.admin.chatclear
+  rules:
+    description: Zeigt das konfigurierbare Novoria-Regelwerk
+    usage: /rules [Kategorie]
+  jumpnrun:
+    description: Jump'n'Run und Druckplatten-Setup
+    usage: /jumpnrun [check|setplate|remove]
+  smprestart:
+    description: Startet ausschließlich den SMP-Backend-Server neu
+    usage: /smprestart
+    permission: smpcore.admin
+  ranks:
+    aliases: [rankshop]
+    description: Öffnet den Rang-Shop
+    usage: /ranks
+    permission: smpcore.ranks.use
+  chestlog:
+    description: Zeigt Öffnungen und Inhaltsänderungen des angesehenen Containers.
+    usage: /chestlog
+    permission: smpcore.admin.chestlog
+  ip:
+    description: Zeigt IP-Verbindungen und zugehörige Accounts eines Spielers.
+    usage: /ip <Spieler>
+    permission: smpcore.admin
+permissions:
+  smpcore.nightvision:
+    description: Erlaubt /nachtsicht und /nv
+    default: true
+  smpcore.professions.use:
+    default: true
+  novosmp.customitem.admin:
+    default: op
+  novosmp.enchant.admin:
+    default: op
+  smpcore.duel.use:
+    default: true
+  smpcore.duel.admin:
+    default: op
+  smpcore.duel.world.bypass:
+    default: op
+  smpcore.king.use:
+    default: true
+  smpcore.king.duel:
+    default: true
+  smpcore.king.admin:
+    default: op
+  smpcore.discord:
+    default: true
+  smpcore.friend.use:
+    default: true
+  smpcore.friend.home:
+    default: true
+  novosmp.admin.home:
+    default: op
+  smpcore.back:
+    default: true
+  smpcore.command.stream:
+    default: op
+  smpcore.admin.entityclear:
+    default: op
+  novosmp.admin.exposeore:
+    default: op
+  smpcore.admin.chatclear:
+    default: op
+  smpcore.ranks.use:
+    default: true
+  smpcore.command.lumi:
+    default: true
+  smpcore.command.lumi.admin:
+    default: op
+  smpcore.ref.use:
+    default: true
+  smpcore.bounty.use:
+    default: true
+  smpcore.bounty.set:
+    default: true
+  smpcore.bounty.admin:
+    default: op
+  smpcore.playtime.use:
+    default: true
+  smpcore.daily.use:
+    default: true
+  smpcore.vote.use:
+    default: true
+  smpcore.vote.admin:
+    default: op
+  smpcore.daily.admin:
+    default: op
+  smpcore.clan.use:
+    default: true
+  smpcore.clan.create:
+    default: true
+  smpcore.clan.admin:
+    default: op
+  smpcore.placeholder.lumishop:
+    default: true
+  smpcore.shop.use:
+    default: true
+  smpcore.command.kill:
+    default: op
+  smpcore.command.kill.others:
+    default: op
+  smpcore.command.history:
+    default: op
+  smpcore.command.ping:
+    default: true
+  smpcore.command.afk:
+    default: true
+  smpcore.command.ban:
+    default: op
+  smpcore.command.tempban:
+    default: op
+  smpcore.command.unban:
+    default: op
+  smpcore.command.mute:
+    default: op
+  smpcore.command.tempmute:
+    default: op
+  smpcore.command.unmute:
+    default: op
+  smpcore.command.kick:
+    default: op
+  smpcore.command.ec:
+    default: true
+  smpcore.ecupgrade.use:
+    default: true
+  smpcore.command.fly:
+    default: op
+  smpcore.command.vanish:
+    default: op
+  smpcore.command.dnd:
+    default: op
+  smpcore.command.fly.others:
+    default: op
+  smpcore.command.vanish.others:
+    default: op
+  smpcore.command.gamemode.others:
+    default: op
+  smpcore.command.gamemode:
+    default: op
+  smpcore.command.tp:
+    default: op
+  smpcore.command.tp.others:
+    default: op
+  smpcore.command.msg:
+    default: true
+  smpcore.command.reply:
+    default: true
+  smpcore.command.socialspy:
+    default: op
+  smpcore.command.ecsee:
+    default: op
+  smpcore.command.invsee:
+    default: op
+  smpcore.admin.invswap:
+    default: op
+  smpcore.smp:
+    default: true
+  smpcore.hub:
+    default: true
+  smpcore.spawn:
+    default: true
+  smpcore.rtp:
+    default: true
+  smpcore.heads.use:
+    default: true
+  smpcore.heads.admin:
+    default: op
+  smpcore.home.use:
+    default: true
+  smpcore.home.set:
+    default: true
+  smpcore.home.delete:
+    default: true
+  smpcore.home.list:
+    default: true
+  smpcore.home.limit.3:
+    default: true
+  smpcore.home.bypass.limit:
+    default: op
+  smpcore.home.bypass.delay:
+    default: op
+  smpcore.spawn.bypass.delay:
+    default: op
+  smpcore.rtp.bypass.delay:
+    default: op
+  smpcore.rtp.bypass.cooldown:
+    default: op
+  smpcore.bypass.delay:
+    default: op
+  smpcore.bypass.cooldown:
+    default: op
+  smpcore.tpa.use:
+    default: true
+  smpcore.tpa.accept:
+    default: true
+  smpcore.tpa.deny:
+    default: true
+  smpcore.tpa.bypass.delay:
+    default: op
+  smpcore.tpa.bypass.cooldown:
+    default: op
+  smpcore.stats:
+    default: true
+  smpcore.economy.balance:
+    default: true
+  smpcore.economy.pay:
+    default: true
+  smpcore.economy.sell:
+    default: true
+  smpcore.economy.admin:
+    default: op
+  smpcore.economy.worth:
+    default: true
+  smpcore.leaderboards:
+    default: true
+  smpcore.admin:
+    default: op
+  smpcore.admin.chestlog:
+    default: op
+  smpcore.crate.use:
+    default: true
+  smpcore.crate.admin:
+    default: op
+
+  smpcore.tabtest:
+    default: op
+
+  smpcore.ah.use:
+    default: true
+  smpcore.ah.sell:
+    default: true
+  smpcore.ah.limit.5:
+    default: true
+  smpcore.ah.limit.10:
+    default: false
+  smpcore.ah.limit.15:
+    default: false
+  smpcore.ah.limit.25:
+    default: false
+  smpcore.ah.limit.unlimited:
+    default: op

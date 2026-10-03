@@ -1,0 +1,2638 @@
+enabled: true
+max-level: 100
+max-prestige: 5
+level-curve-exponent: 1.35
+switch-cost: 250000
+slot-unlock-prestige: 3
+max-active-profession-slots: 5
+save-interval-seconds: 30
+selection-reminder:
+  enabled: true
+  delay-minutes: 10
+  message: '<dark_gray>[</dark_gray><light_purple>Berufe</light_purple><dark_gray>]</dark_gray> <yellow>Du hast noch keinen Beruf ausgewählt. <click:run_command:/berufe><green><underlined>Klicke hier</underlined></green></click><yellow>, um einen Beruf zu wählen.</yellow>'
+gui-sounds:
+  professions:
+    open: ''
+    click: minecraft:ui.button.click
+    volume: 0.45
+    open-pitch: 1.00
+    click-pitch: 1.15
+  heads:
+    open: ''
+    click: minecraft:ui.button.click
+    volume: 0.45
+    open-pitch: 1.00
+    click-pitch: 1.15
+menus:
+  main:
+    title: <dark_gray>Berufe</dark_gray>
+    rows: 5
+    filler: GRAY_STAINED_GLASS_PANE
+    active-slot-list:
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    info-slot: 22
+    booster-slot: 40
+  selection:
+    title: <dark_gray>Beruf für Slot %slot% wählen</dark_gray>
+    confirm-title: <dark_gray>Beruf auswählen?</dark_gray>
+    rows: 5
+    filler: PURPLE_STAINED_GLASS_PANE
+    slot-info: 4
+    professions:
+      holzfaeller: 20
+      bergarbeiter: 22
+      jaeger: 24
+      farmer: 30
+      fischer: 32
+    back-slot: 36
+  lumberjack:
+    title: <dark_green>Holzfäller</dark_green>
+    rows: 6
+    filler: BROWN_STAINED_GLASS_PANE
+    status-slot: 4
+    progress-slot: 13
+    progress-bar-slots:
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 25
+    milestone-slots:
+    - 28
+    - 29
+    - 30
+    - 31
+    contribution-slot: 33
+    rewards-slot: 34
+    prestige-slot: 35
+    replacement-slot: 49
+    back-slot: 45
+  angler:
+    title: <dark_aqua>Angler</dark_aqua>
+    rows: 6
+    filler: BLUE_STAINED_GLASS_PANE
+    status-slot: 4
+    progress-slot: 13
+    progress-bar-slots: [19, 20, 21, 22, 23, 24, 25]
+    milestone-slots: [28, 29, 30, 31]
+    contribution-slot: 33
+    rewards-slot: 34
+    prestige-slot: 35
+    back-slot: 45
+  contribution:
+    title: <dark_gray>%profession%-Abgabe</dark_gray>
+    rows: 6
+    filler: BROWN_STAINED_GLASS_PANE
+    requirement-slots:
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 25
+    - 26
+    - 27
+    - 28
+    - 29
+    - 30
+    - 31
+    - 32
+    - 33
+    - 34
+    - 35
+    deposit-all-slot: 47
+    complete-slot: 49
+    deposit-inventory-slot: 51
+    back-slot: 45
+  deposit:
+    title: <dark_gray>%profession% • Materialien einzahlen</dark_gray>
+  rewards:
+    title: <dark_gray>%profession%-Levelbelohnungen</dark_gray>
+    rows: 6
+    filler: GREEN_STAINED_GLASS_PANE
+    reward-slots:
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 28
+    - 29
+    - 30
+    - 31
+    - 32
+    info-slot: 49
+    back-slot: 45
+  replacement-confirm:
+    title: <dark_red>Ersatzwerkzeug kaufen?</dark_red>
+  miner:
+    title: <dark_aqua>Bergarbeiter</dark_aqua>
+    rows: 6
+    filler: CYAN_STAINED_GLASS_PANE
+    status-slot: 4
+    progress-slot: 13
+    progress-bar-slots:
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 25
+    milestone-slots:
+    - 28
+    - 29
+    - 30
+    - 31
+    contribution-slot: 33
+    rewards-slot: 34
+    prestige-slot: 35
+    replacement-slot: 49
+    back-slot: 45
+  miner-tools:
+    title: <dark_aqua>Bergarbeiter-Werkzeuge</dark_aqua>
+    confirm-title: <dark_red>Bergarbeiter-Ersatzwerkzeug?</dark_red>
+    rows: 3
+    filler: CYAN_STAINED_GLASS_PANE
+    tool-slots:
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    back-slot: 22
+  hunter-rewards:
+    rows: 3
+    title: <dark_red>Jäger-Arsenal</dark_red>
+    filler: RED_STAINED_GLASS_PANE
+    reward-slots:
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    back-slot: 22
+    confirm-title: <dark_red>Jäger-Ersatzbelohnung?</dark_red>
+  hunter:
+    title: <dark_red>Jäger</dark_red>
+    rows: 6
+    filler: RED_STAINED_GLASS_PANE
+    status-slot: 4
+    progress-slot: 13
+    progress-bar-slots:
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 25
+    milestone-slots:
+    - 28
+    - 29
+    - 30
+    - 31
+    contribution-slot: 33
+    rewards-slot: 34
+    prestige-slot: 35
+    replacement-slot: 49
+    back-slot: 45
+messages:
+  angler-prestige-success: '<gold><bold>Angler-Prestige %prestige% erreicht!</bold></gold>'
+  prestige-rewards-unclaimed: '<red>Du musst zuerst alle freigeschalteten Berufsbelohnungen abholen. Offen: <yellow>%count%</yellow>.</red>'
+  player-only: <red>Dieser Befehl ist nur für Spieler.</red>
+  slot-locked: <red>Dieser Berufsslot ist noch nicht freigeschaltet.</red>
+  slot-order: <yellow>Belege zuerst den vorherigen Berufsslot.</yellow>
+  activated: <green>Holzfäller ist jetzt dein aktiver Beruf.</green>
+  already-active: <yellow>Holzfäller ist bereits aktiv.</yellow>
+  switch-paid: '<green>Beruf gewechselt. Kosten: <gold>%coins% Coins</gold>.</green>'
+  switch-free: <green>Dein kostenloser Berufswechsel wurde verwendet.</green>
+  switch-failed: <red>Der Berufswechsel konnte nicht gespeichert werden.</red>
+  insufficient-switch-coins: <red>Für den Berufswechsel benötigst du <gold>%coins% Coins</gold>.</red>
+  level-up: <green>Holzfäller-Level <yellow>%level%</yellow> erreicht!</green>
+  milestone-reached: <gold>Holzfäller-Meilenstein Level %level% erreicht. Öffne <yellow>/berufe</yellow> und gib die Materialien ab.</gold>
+  milestone-blocked: <dark_gray>[</dark_gray><light_purple>Abgabe</light_purple><dark_gray>]</dark_gray> <yellow>Schließe zuerst die Abgabe für Level %level% ab.</yellow>
+  contribution-locked: <yellow>Du kannst aktuell nur für die nächste Abgabe einzahlen.</yellow>
+  contributed: '<green>%amount%x %material% abgegeben. Fortschritt: <yellow>%current%/%required%</yellow>.</green>'
+  deposit-no-match: <yellow>Im Einzahlungsinventar lagen keine aktuell benötigten Materialien.</yellow>
+  deposit-success: <green>%amount% Materialien wurden für Level %level% eingezahlt.</green>
+  deposit-failed: <red>Die Materialien konnten nicht gespeichert werden und wurden zurückgegeben.</red>
+  nothing-to-contribute: <yellow>Du besitzt keine passenden Materialien für diese Abgabe.</yellow>
+  requirements-incomplete: <red>Noch nicht alle Berufsanforderungen sind vollständig.</red>
+  growth-counted: <green>Aufforstung:</green> <yellow>%current%/%required%</yellow> <gray>%type%</gray>
+  growth-complete: '<green><bold>Aufforstung abgeschlossen!</bold></green> <gray>%type%: <yellow>%current%/%required%</yellow></gray>'
+  milestone-complete: <green>Meilenstein Level %level% abgeschlossen. Du kannst weiterleveln.</green>
+  milestone-coins-missing: '<red>Dir fehlen Coins. Benötigt: <gold>%coins%</gold>.</red>'
+  prestige-not-ready: <red>Die Voraussetzungen für das nächste Prestige sind noch nicht erfüllt.</red>
+  prestige-tool-missing: <red>Deine aktuell registrierte Berufsaxt fehlt. Hole sie zurück oder kaufe im Berufsshop ein Ersatzwerkzeug.</red>
+  prestige-tool-damaged: <red>Die alte Berufsaxt muss vollständig repariert sein.</red>
+  prestige-success: <gold><bold>Holzfäller-Prestige %prestige% erreicht!</bold></gold> <gray>Du erhältst %tool%.</gray>
+  prestige-max: <yellow>Du hast bereits Holzfäller-Prestige V. Du kannst weiterhin bis Level 100 leveln.</yellow>
+  profession-slot-unlocked: <aqua>Berufsslot %slot% dauerhaft freigeschaltet! Du hast jetzt %slots% Berufsslots.</aqua>
+  free-switch-granted: <green>Du hast einen einmaligen kostenlosen Berufswechsel erhalten.</green>
+  reward-none: <yellow>Aktuell ist keine Levelbelohnung verfügbar.</yellow>
+  reward-locked: <yellow>Diese Levelbelohnung ist noch nicht freigeschaltet.</yellow>
+  reward-already-claimed: <yellow>Diese Levelbelohnung wurde bereits abgeholt.</yellow>
+  reward-claimed-one: <green>Belohnung für Holzfäller-Level %level% abgeholt.</green>
+  reward-claimed: <green>%count% Levelbelohnung(en) abgeholt.</green>
+  reward-invalid: <red>Eine konfigurierte Levelbelohnung ist ungültig. Bitte melde dies dem Team.</red>
+  replacement-not-unlocked: <red>Du hast noch kein Holzfäller-Berufswerkzeug freigeschaltet.</red>
+  replacement-no-space: <red>Du benötigst einen freien Inventarplatz.</red>
+  replacement-coins-missing: <red>Für das Ersatzwerkzeug benötigst du <gold>%coins% Coins</gold>.</red>
+  replacement-failed: <red>Das Ersatzwerkzeug konnte nicht erstellt werden. Deine alte Axt bleibt aktiv.</red>
+  replacement-success: <green>Ersatzwerkzeug gekauft. Deine vorherige Berufsaxt wurde dauerhaft deaktiviert.</green>
+  miner-replacement-not-unlocked: <red>Dieses Bergarbeiter-Werkzeug hast du noch nicht freigeschaltet.</red>
+  miner-replacement-failed: <red>Das Bergarbeiter-Ersatzwerkzeug konnte nicht erstellt werden.</red>
+  miner-replacement-success: '<green>Ersatzwerkzeug gekauft: <yellow>%tool%</yellow>. Eine vorherige registrierte Kopie dieser Stufe wurde deaktiviert.</green>'
+  hunter-replacement-not-unlocked: <red>Diese Jäger-Belohnung hast du noch nicht freigeschaltet.</red>
+  hunter-replacement-failed: <red>Die Jäger-Ersatzbelohnung konnte nicht erstellt werden.</red>
+  hunter-replacement-success: '<green>Ersatz gekauft: <yellow>%tool%</yellow>. Die vorherige registrierte Kopie dieser Stufe wurde deaktiviert.</green>'
+  revoked-tool: <red>Dieses ersetzte Berufswerkzeug ist nicht mehr aktiv und besitzt jetzt kein Holzschlag mehr.</red>
+  booster-activated: <green>%booster% für <yellow>60 Minuten Onlinezeit</yellow> aktiviert.</green>
+  booster-active: '<red>Es ist bereits ein %category%-Booster aktiv. Verbleibend: <yellow>%time%</yellow>.</red>'
+  booster-expired: <yellow>Dein %category%-Booster ist abgelaufen.</yellow>
+  mined-complete: '<aqua><bold>Bergbau-Auftrag abgeschlossen!</bold></aqua> <gray>%type%: <yellow>%current%/%required%</yellow></gray>'
+  hunt-complete: '<red><bold>Jagdauftrag abgeschlossen!</bold></red> <gray>%type%: <yellow>%current%/%required%</yellow></gray>'
+  hunter-streak: <red>⚔ Jagdserie x%streak%</red> <dark_gray>•</dark_gray> <yellow>+%xp%% XP</yellow> <dark_gray>•</dark_gray> <gold>+%loot%% Beute</gold>
+feedback:
+  level-up-hold-millis: 1800
+  xp-actionbar:
+    delay-ticks: 2
+    bar-segments: 10
+    format: '%profession% <dark_gray>•</dark_gray> <yellow>Level %level%</yellow> <dark_gray>•</dark_gray> %bar% <aqua>%current%/%needed% XP</aqua>'
+  level-up-actionbar: <green><bold>LEVELAUFSTIEG!</bold></green> <gray>%profession% <yellow>%old%</yellow> → <yellow>%level%</yellow></gray>
+  milestone-actionbar: <gold><bold>MEILENSTEIN!</bold></gold> <gray>%profession% Level <yellow>%level%</yellow> • Abgabe in /berufe</gray>
+  sounds:
+    level-up:
+      sound: ENTITY_PLAYER_LEVELUP
+      volume: 1.0
+      pitch: 1.1
+    milestone:
+      sound: ENTITY_PLAYER_LEVELUP
+      volume: 1.0
+      pitch: 1.25
+boosters:
+  duration-seconds: 3600
+  items:
+    berufe_booster_15:
+      category: PROFESSION
+      multiplier: 1.5
+      display: <green>1,5× Berufe-Booster</green>
+    berufe_booster_20:
+      category: PROFESSION
+      multiplier: 2.0
+      display: <aqua>2× Berufe-Booster</aqua>
+professions:
+  angler:
+    display-name: <dark_aqua>Angler</dark_aqua>
+    icon: FISHING_ROD
+    enabled: true
+    max-prestige-requirements-enabled: true
+    xp-total-by-prestige:
+      '0': 50000
+      '1': 80000
+      '2': 120000
+      '3': 170000
+      '4': 240000
+      '5': 240000
+    sell-multiplier-by-prestige:
+      '0': 1.0
+      '1': 1.0
+      '2': 1.0
+      '3': 1.0
+      '4': 1.0
+      '5': 1.0
+  holzfaeller:
+    display-name: <green>Holzfäller</green>
+    icon: IRON_AXE
+    enabled: true
+    # Bonus pro selbst gepflanztem Setzling/Keimling, der wirklich zu einem Baum wächst.
+    # Natürlich generierte Bäume zählen nicht.
+    sapling-growth-xp: 2.0
+    xp-total-by-prestige:
+      '0': 50000
+      '1': 80000
+      '2': 120000
+      '3': 170000
+      '4': 240000
+      '5': 240000
+    sell-multiplier-by-prestige:
+      '0': 1.5
+      '1': 1.5
+      '2': 1.5
+      '3': 1.5
+      '4': 2.0
+      '5': 2.0
+    tools:
+      '1': eisenaxt_holzschlag1
+      '2': eisenaxt_holzschlag2
+      '3': eisenaxt_holzschlag3
+      '4': diamantaxt_holzschlag4
+      '5': netheritaxt_holzschlag5
+    replacement-prices:
+      '1': 25000
+      '2': 50000
+      '3': 100000
+      '4': 200000
+      '5': 400000
+    xp-blocks:
+      OAK_LOG: 1.0
+      OAK_WOOD: 1.0
+      STRIPPED_OAK_LOG: 1.0
+      STRIPPED_OAK_WOOD: 1.0
+      BIRCH_LOG: 1.0
+      BIRCH_WOOD: 1.0
+      STRIPPED_BIRCH_LOG: 1.0
+      STRIPPED_BIRCH_WOOD: 1.0
+      SPRUCE_LOG: 1.0
+      SPRUCE_WOOD: 1.0
+      STRIPPED_SPRUCE_LOG: 1.0
+      STRIPPED_SPRUCE_WOOD: 1.0
+      ACACIA_LOG: 1.0
+      ACACIA_WOOD: 1.0
+      STRIPPED_ACACIA_LOG: 1.0
+      STRIPPED_ACACIA_WOOD: 1.0
+      DARK_OAK_LOG: 1.2
+      DARK_OAK_WOOD: 1.2
+      STRIPPED_DARK_OAK_LOG: 1.2
+      STRIPPED_DARK_OAK_WOOD: 1.2
+      CHERRY_LOG: 1.2
+      CHERRY_WOOD: 1.2
+      STRIPPED_CHERRY_LOG: 1.2
+      STRIPPED_CHERRY_WOOD: 1.2
+      PALE_OAK_LOG: 1.2
+      PALE_OAK_WOOD: 1.2
+      STRIPPED_PALE_OAK_LOG: 1.2
+      STRIPPED_PALE_OAK_WOOD: 1.2
+      JUNGLE_LOG: 1.4
+      JUNGLE_WOOD: 1.4
+      STRIPPED_JUNGLE_LOG: 1.4
+      STRIPPED_JUNGLE_WOOD: 1.4
+      MANGROVE_LOG: 1.4
+      MANGROVE_WOOD: 1.4
+      STRIPPED_MANGROVE_LOG: 1.4
+      STRIPPED_MANGROVE_WOOD: 1.4
+      CRIMSON_STEM: 5.0
+      CRIMSON_HYPHAE: 5.0
+      STRIPPED_CRIMSON_STEM: 5.0
+      STRIPPED_CRIMSON_HYPHAE: 5.0
+      WARPED_STEM: 5.0
+      WARPED_HYPHAE: 5.0
+      STRIPPED_WARPED_STEM: 5.0
+      STRIPPED_WARPED_HYPHAE: 5.0
+      BAMBOO_BLOCK: 0.5
+      STRIPPED_BAMBOO_BLOCK: 0.5
+      MUSHROOM_STEM: 0.8
+    sell-materials:
+    - OAK_LOG
+    - OAK_WOOD
+    - STRIPPED_OAK_LOG
+    - STRIPPED_OAK_WOOD
+    - BIRCH_LOG
+    - BIRCH_WOOD
+    - STRIPPED_BIRCH_LOG
+    - STRIPPED_BIRCH_WOOD
+    - SPRUCE_LOG
+    - SPRUCE_WOOD
+    - STRIPPED_SPRUCE_LOG
+    - STRIPPED_SPRUCE_WOOD
+    - ACACIA_LOG
+    - ACACIA_WOOD
+    - STRIPPED_ACACIA_LOG
+    - STRIPPED_ACACIA_WOOD
+    - DARK_OAK_LOG
+    - DARK_OAK_WOOD
+    - STRIPPED_DARK_OAK_LOG
+    - STRIPPED_DARK_OAK_WOOD
+    - CHERRY_LOG
+    - CHERRY_WOOD
+    - STRIPPED_CHERRY_LOG
+    - STRIPPED_CHERRY_WOOD
+    - PALE_OAK_LOG
+    - PALE_OAK_WOOD
+    - STRIPPED_PALE_OAK_LOG
+    - STRIPPED_PALE_OAK_WOOD
+    - JUNGLE_LOG
+    - JUNGLE_WOOD
+    - STRIPPED_JUNGLE_LOG
+    - STRIPPED_JUNGLE_WOOD
+    - MANGROVE_LOG
+    - MANGROVE_WOOD
+    - STRIPPED_MANGROVE_LOG
+    - STRIPPED_MANGROVE_WOOD
+    - CRIMSON_STEM
+    - CRIMSON_HYPHAE
+    - STRIPPED_CRIMSON_STEM
+    - STRIPPED_CRIMSON_HYPHAE
+    - WARPED_STEM
+    - WARPED_HYPHAE
+    - STRIPPED_WARPED_STEM
+    - STRIPPED_WARPED_HYPHAE
+    - BAMBOO_BLOCK
+    - STRIPPED_BAMBOO_BLOCK
+    - MUSHROOM_STEM
+  bergarbeiter:
+    display-name: <aqua>Bergarbeiter</aqua>
+    icon: IRON_PICKAXE
+    enabled: true
+    xp-total-by-prestige:
+      '0': 50000
+      '1': 80000
+      '2': 120000
+      '3': 170000
+      '4': 240000
+      '5': 240000
+    sell-multiplier-by-prestige:
+      '0': 1.5
+      '1': 1.5
+      '2': 1.5
+      '3': 1.5
+      '4': 2.0
+      '5': 2.0
+    tools:
+      '1': eisenspitzhacke_schmelzer
+      '2': eisenspitzhacke_veinminer
+      '3': diamantspitzhacke_3x3
+      '4': diamantspitzhacke_veinminer_schmelzer
+      '5': netheritespitzhacke_tnt
+    replacement-prices:
+      '1': 150000
+      '2': 150000
+      '3': 150000
+      '4': 200000
+      '5': 400000
+    xp-blocks:
+      STONE: 1.0
+      COBBLESTONE: 1.0
+      GRANITE: 1.0
+      DIORITE: 1.0
+      ANDESITE: 1.0
+      DEEPSLATE: 2.0
+      COBBLED_DEEPSLATE: 2.0
+      TUFF: 2.0
+      CALCITE: 3.0
+      DRIPSTONE_BLOCK: 2.0
+      POINTED_DRIPSTONE: 1.0
+      SANDSTONE: 1.0
+      RED_SANDSTONE: 1.0
+      MOSSY_COBBLESTONE: 1.0
+      BLACKSTONE: 2.0
+      GILDED_BLACKSTONE: 8.0
+      BASALT: 2.0
+      SMOOTH_BASALT: 2.0
+      MAGMA_BLOCK: 1.0
+      END_STONE: 2.0
+      OBSIDIAN: 5.0
+      AMETHYST_BLOCK: 3.0
+      PRISMARINE: 2.0
+      PRISMARINE_BRICKS: 2.0
+      DARK_PRISMARINE: 2.0
+      COAL_ORE: 3.0
+      DEEPSLATE_COAL_ORE: 14.0
+      COPPER_ORE: 3.0
+      DEEPSLATE_COPPER_ORE: 10.0
+      IRON_ORE: 4.0
+      DEEPSLATE_IRON_ORE: 5.0
+      GOLD_ORE: 7.0
+      DEEPSLATE_GOLD_ORE: 7.0
+      REDSTONE_ORE: 9.0
+      DEEPSLATE_REDSTONE_ORE: 5.0
+      LAPIS_ORE: 7.0
+      DEEPSLATE_LAPIS_ORE: 6.0
+      DIAMOND_ORE: 18.0
+      DEEPSLATE_DIAMOND_ORE: 12.0
+      EMERALD_ORE: 10.0
+      DEEPSLATE_EMERALD_ORE: 40.0
+      NETHERRACK: 0.1
+      NETHER_QUARTZ_ORE: 3.0
+      NETHER_GOLD_ORE: 4.0
+      ANCIENT_DEBRIS: 25.0
+      # Ein natürlich generierter Raw-Block entspricht 9 Raw-Items und erhält 50 % Bonus.
+      RAW_IRON_BLOCK: 13.5
+      RAW_COPPER_BLOCK: 13.5
+      AMETHYST_CLUSTER: 4.0
+      SULFUR: 2.0
+      CINNABAR: 2.0
+      POTENT_SULFUR: 6.0
+    sell-materials:
+    - STONE
+    - COBBLESTONE
+    - GRANITE
+    - DIORITE
+    - ANDESITE
+    - DEEPSLATE
+    - COBBLED_DEEPSLATE
+    - TUFF
+    - CALCITE
+    - DRIPSTONE_BLOCK
+    - POINTED_DRIPSTONE
+    - SANDSTONE
+    - RED_SANDSTONE
+    - MOSSY_COBBLESTONE
+    - BLACKSTONE
+    - GILDED_BLACKSTONE
+    - BASALT
+    - SMOOTH_BASALT
+    - MAGMA_BLOCK
+    - END_STONE
+    - OBSIDIAN
+    - AMETHYST_BLOCK
+    - PRISMARINE
+    - PRISMARINE_BRICKS
+    - DARK_PRISMARINE
+    - COAL_ORE
+    - DEEPSLATE_COAL_ORE
+    - COPPER_ORE
+    - DEEPSLATE_COPPER_ORE
+    - IRON_ORE
+    - DEEPSLATE_IRON_ORE
+    - GOLD_ORE
+    - DEEPSLATE_GOLD_ORE
+    - REDSTONE_ORE
+    - DEEPSLATE_REDSTONE_ORE
+    - LAPIS_ORE
+    - DEEPSLATE_LAPIS_ORE
+    - DIAMOND_ORE
+    - DEEPSLATE_DIAMOND_ORE
+    - EMERALD_ORE
+    - DEEPSLATE_EMERALD_ORE
+    - NETHERRACK
+    - NETHER_QUARTZ_ORE
+    - NETHER_GOLD_ORE
+    - ANCIENT_DEBRIS
+    - COAL
+    - CHARCOAL
+    - RAW_COPPER
+    - COPPER_INGOT
+    - RAW_COPPER_BLOCK
+    - COPPER_BLOCK
+    - RAW_IRON
+    - IRON_INGOT
+    - RAW_IRON_BLOCK
+    - IRON_BLOCK
+    - RAW_GOLD
+    - GOLD_INGOT
+    - RAW_GOLD_BLOCK
+    - GOLD_BLOCK
+    - REDSTONE
+    - REDSTONE_BLOCK
+    - LAPIS_LAZULI
+    - LAPIS_BLOCK
+    - DIAMOND
+    - DIAMOND_BLOCK
+    - EMERALD
+    - EMERALD_BLOCK
+    - QUARTZ
+    - QUARTZ_BLOCK
+    - AMETHYST_SHARD
+    - NETHERITE_SCRAP
+    - NETHERITE_INGOT
+    - NETHERITE_BLOCK
+    - FLINT
+    - AMETHYST_CLUSTER
+    - SULFUR
+    - CINNABAR
+    - POTENT_SULFUR
+  jaeger:
+    display-name: <red>Jäger</red>
+    icon: DIAMOND_SWORD
+    enabled: true
+    xp-total-by-prestige:
+      '0': 50000
+      '1': 80000
+      '2': 120000
+      '3': 170000
+      '4': 240000
+      '5': 240000
+    sell-multiplier-by-prestige:
+      '0': 1.5
+      '1': 1.5
+      '2': 1.5
+      '3': 1.5
+      '4': 2.0
+      '5': 2.0
+    replacement-prices:
+      '1': 100000
+      '2': 100000
+      '3': 100000
+      '4': 100000
+      '5': 100000
+    sell-materials:
+    - BEEF
+    - COOKED_BEEF
+    - PORKCHOP
+    - COOKED_PORKCHOP
+    - MUTTON
+    - COOKED_MUTTON
+    - CHICKEN
+    - COOKED_CHICKEN
+    - RABBIT
+    - COOKED_RABBIT
+    - RABBIT_HIDE
+    - RABBIT_FOOT
+    - LEATHER
+    - FEATHER
+    - ROTTEN_FLESH
+    - BONE
+    - STRING
+    - SPIDER_EYE
+    - GUNPOWDER
+    - SLIME_BALL
+    - ENDER_PEARL
+    - BLAZE_ROD
+    - MAGMA_CREAM
+    - GHAST_TEAR
+    - PRISMARINE_SHARD
+    - PRISMARINE_CRYSTALS
+    - PHANTOM_MEMBRANE
+    - WIND_CHARGE
+    - SHULKER_SHELL
+    - TOTEM_OF_UNDYING
+    - NETHER_STAR
+    - WITHER_SKELETON_SKULL
+    - INK_SAC
+    - GLOW_INK_SAC
+    - COD
+    - SALMON
+    - TROPICAL_FISH
+    - PUFFERFISH
+    - COOKED_COD
+    - COOKED_SALMON
+    - NAUTILUS_SHELL
+    - SADDLE
+    - GOAT_HORN
+    - OMINOUS_BOTTLE
+    - SULFUR
+    - POTENT_SULFUR
+    - WITHER_ROSE
+    tools:
+      '1': jaeger_trophaehenklinge
+      '2': jaeger_hetzjaegerspeer
+      '3': jaeger_jagdbogen
+      '4': jaeger_grosswild_mace
+      '5': jaeger_meisterbrustplatte
+    head-chance-by-prestige:
+      '0': 0.003
+      '1': 0.004
+      '2': 0.006
+      '3': 0.009
+      '4': 0.013
+      '5': 0.02
+    xp-mobs:
+      COD: 1
+      SALMON: 1
+      TROPICAL_FISH: 1
+      PUFFERFISH: 1
+      CHICKEN: 2
+      BAT: 2
+      SQUID: 2
+      COW: 3
+      PIG: 3
+      SHEEP: 3
+      RABBIT: 3
+      FROG: 3
+      GLOW_SQUID: 3
+      BEE: 4
+      CAT: 4
+      OCELOT: 4
+      FOX: 4
+      AXOLOTL: 4
+      ARMADILLO: 4
+      TURTLE: 4
+      HORSE: 4
+      DONKEY: 4
+      MULE: 4
+      LLAMA: 4
+      WOLF: 5
+      GOAT: 5
+      PANDA: 5
+      CAMEL: 5
+      POLAR_BEAR: 5
+      DOLPHIN: 5
+      MUSHROOM_COW: 5
+      MOOSHROOM: 5
+      STRIDER: 5
+      SNIFFER: 6
+      NAUTILUS: 6
+      SKELETON_HORSE: 6
+      ZOMBIE_HORSE: 6
+      IRON_GOLEM: 6
+      ZOMBIE: 5
+      SKELETON: 5
+      SPIDER: 4
+      CAVE_SPIDER: 5
+      CREEPER: 6
+      HUSK: 6
+      DROWNED: 6
+      STRAY: 6
+      BOGGED: 7
+      PARCHED: 7
+      PILLAGER: 7
+      VINDICATOR: 10
+      EVOKER: 20
+      VEX: 25
+      RAVAGER: 25
+      WITCH: 10
+      SLIME: 6
+      MAGMA_CUBE: 8
+      ENDERMAN: 8
+      ENDERMITE: 4
+      SILVERFISH: 4
+      SHULKER: 10
+      PIGLIN: 6
+      ZOMBIFIED_PIGLIN: 6
+      PIGLIN_BRUTE: 15
+      ZOGLIN: 8
+      BLAZE: 8
+      GHAST: 12
+      WITHER_SKELETON: 10
+      GUARDIAN: 8
+      ELDER_GUARDIAN: 35
+      PHANTOM: 8
+      BREEZE: 10
+      CREAKING: 8
+      SULFUR_CUBE: 6
+      ZOMBIE_NAUTILUS: 8
+      CAMEL_HUSK: 8
+      PLAYER: 25
+      WARDEN: 500
+      WITHER: 1500
+      ENDER_DRAGON: 1000
+    spear-streak:
+      window-seconds: 8
+      rare-drop-exclusions:
+      - PLAYER_HEAD
+      - WITHER_SKELETON_SKULL
+      - TOTEM_OF_UNDYING
+      - NETHER_STAR
+      - HEAVY_CORE
+      - TRIDENT
+      - ELYTRA
+      - DRAGON_EGG
+      - OMINOUS_TRIAL_KEY
+      - OMINOUS_BOTTLE
+growth-groups:
+  setzlinge:
+    display: Gewachsene Setzlinge
+    icon: OAK_SAPLING
+    description:
+    - '<gray>Zählen: Eiche, Birke, Fichte, Akazie und Schwarzeiche</gray>'
+    - <gray>sowie Dschungel, Kirsche, Blasseiche und Mangrove.</gray>
+    saplings:
+    - OAK_SAPLING
+    - BIRCH_SAPLING
+    - SPRUCE_SAPLING
+    - ACACIA_SAPLING
+    - DARK_OAK_SAPLING
+    - JUNGLE_SAPLING
+    - CHERRY_SAPLING
+    - PALE_OAK_SAPLING
+    - MANGROVE_PROPAGULE
+  eichensetzlinge:
+    display: Gewachsene Eichensetzlinge
+    icon: OAK_SAPLING
+    saplings:
+    - OAK_SAPLING
+  birkensetzlinge:
+    display: Gewachsene Birkensetzlinge
+    icon: BIRCH_SAPLING
+    saplings:
+    - BIRCH_SAPLING
+  fichtensetzlinge:
+    display: Gewachsene Fichtensetzlinge
+    icon: SPRUCE_SAPLING
+    saplings:
+    - SPRUCE_SAPLING
+  akaziensetzlinge:
+    display: Gewachsene Akaziensetzlinge
+    icon: ACACIA_SAPLING
+    saplings:
+    - ACACIA_SAPLING
+  schwarzeichensetzlinge:
+    display: Gewachsene Schwarzeichensetzlinge
+    icon: DARK_OAK_SAPLING
+    saplings:
+    - DARK_OAK_SAPLING
+  dschungelsetzlinge:
+    display: Gewachsene Dschungelsetzlinge
+    icon: JUNGLE_SAPLING
+    saplings:
+    - JUNGLE_SAPLING
+  kirschsetzlinge:
+    display: Gewachsene Kirschsetzlinge
+    icon: CHERRY_SAPLING
+    saplings:
+    - CHERRY_SAPLING
+  blasseichensetzlinge:
+    display: Gewachsene Blasseichensetzlinge
+    icon: PALE_OAK_SAPLING
+    saplings:
+    - PALE_OAK_SAPLING
+  mangrovenkeimlinge:
+    display: Gewachsene Mangroven-Keimlinge
+    icon: MANGROVE_PROPAGULE
+    saplings:
+    - MANGROVE_PROPAGULE
+material-groups:
+  holz:
+    display: Beliebige Holzstämme
+    icon: OAK_LOG
+    description:
+    - <gray>Akzeptiert alle Stamm-, Holz- und entrindeten Varianten.</gray>
+    - <gray>Dazu zählen auch Karmesin, Wirr, Bambusblock und Pilzstiel.</gray>
+    materials:
+    - OAK_LOG
+    - OAK_WOOD
+    - STRIPPED_OAK_LOG
+    - STRIPPED_OAK_WOOD
+    - BIRCH_LOG
+    - BIRCH_WOOD
+    - STRIPPED_BIRCH_LOG
+    - STRIPPED_BIRCH_WOOD
+    - SPRUCE_LOG
+    - SPRUCE_WOOD
+    - STRIPPED_SPRUCE_LOG
+    - STRIPPED_SPRUCE_WOOD
+    - ACACIA_LOG
+    - ACACIA_WOOD
+    - STRIPPED_ACACIA_LOG
+    - STRIPPED_ACACIA_WOOD
+    - DARK_OAK_LOG
+    - DARK_OAK_WOOD
+    - STRIPPED_DARK_OAK_LOG
+    - STRIPPED_DARK_OAK_WOOD
+    - CHERRY_LOG
+    - CHERRY_WOOD
+    - STRIPPED_CHERRY_LOG
+    - STRIPPED_CHERRY_WOOD
+    - PALE_OAK_LOG
+    - PALE_OAK_WOOD
+    - STRIPPED_PALE_OAK_LOG
+    - STRIPPED_PALE_OAK_WOOD
+    - JUNGLE_LOG
+    - JUNGLE_WOOD
+    - STRIPPED_JUNGLE_LOG
+    - STRIPPED_JUNGLE_WOOD
+    - MANGROVE_LOG
+    - MANGROVE_WOOD
+    - STRIPPED_MANGROVE_LOG
+    - STRIPPED_MANGROVE_WOOD
+    - CRIMSON_STEM
+    - CRIMSON_HYPHAE
+    - STRIPPED_CRIMSON_STEM
+    - STRIPPED_CRIMSON_HYPHAE
+    - WARPED_STEM
+    - WARPED_HYPHAE
+    - STRIPPED_WARPED_STEM
+    - STRIPPED_WARPED_HYPHAE
+    - BAMBOO_BLOCK
+    - STRIPPED_BAMBOO_BLOCK
+    - MUSHROOM_STEM
+  eiche:
+    display: Eichenholz
+    icon: OAK_LOG
+    description:
+    - <gray>Stamm, Holz und entrindete Varianten zählen.</gray>
+    materials:
+    - OAK_LOG
+    - OAK_WOOD
+    - STRIPPED_OAK_LOG
+    - STRIPPED_OAK_WOOD
+  birke:
+    display: Birkenholz
+    icon: BIRCH_LOG
+    description:
+    - <gray>Stamm, Holz und entrindete Varianten zählen.</gray>
+    materials:
+    - BIRCH_LOG
+    - BIRCH_WOOD
+    - STRIPPED_BIRCH_LOG
+    - STRIPPED_BIRCH_WOOD
+  fichte:
+    display: Fichtenholz
+    icon: SPRUCE_LOG
+    description:
+    - <gray>Stamm, Holz und entrindete Varianten zählen.</gray>
+    materials:
+    - SPRUCE_LOG
+    - SPRUCE_WOOD
+    - STRIPPED_SPRUCE_LOG
+    - STRIPPED_SPRUCE_WOOD
+  akazie:
+    display: Akazienholz
+    icon: ACACIA_LOG
+    description:
+    - <gray>Stamm, Holz und entrindete Varianten zählen.</gray>
+    materials:
+    - ACACIA_LOG
+    - ACACIA_WOOD
+    - STRIPPED_ACACIA_LOG
+    - STRIPPED_ACACIA_WOOD
+  schwarzeiche:
+    display: Schwarzeichenholz
+    icon: DARK_OAK_LOG
+    description:
+    - <gray>Stamm, Holz und entrindete Varianten zählen.</gray>
+    materials:
+    - DARK_OAK_LOG
+    - DARK_OAK_WOOD
+    - STRIPPED_DARK_OAK_LOG
+    - STRIPPED_DARK_OAK_WOOD
+  kirschholz:
+    display: Kirschholz
+    icon: CHERRY_LOG
+    description:
+    - <gray>Stamm, Holz und entrindete Varianten zählen.</gray>
+    materials:
+    - CHERRY_LOG
+    - CHERRY_WOOD
+    - STRIPPED_CHERRY_LOG
+    - STRIPPED_CHERRY_WOOD
+  blasseiche:
+    display: Blasseichenholz
+    icon: PALE_OAK_LOG
+    description:
+    - <gray>Stamm, Holz und entrindete Varianten zählen.</gray>
+    materials:
+    - PALE_OAK_LOG
+    - PALE_OAK_WOOD
+    - STRIPPED_PALE_OAK_LOG
+    - STRIPPED_PALE_OAK_WOOD
+  dschungelholz:
+    display: Dschungelholz
+    icon: JUNGLE_LOG
+    description:
+    - <gray>Stamm, Holz und entrindete Varianten zählen.</gray>
+    materials:
+    - JUNGLE_LOG
+    - JUNGLE_WOOD
+    - STRIPPED_JUNGLE_LOG
+    - STRIPPED_JUNGLE_WOOD
+  mangrovenholz:
+    display: Mangrovenholz
+    icon: MANGROVE_LOG
+    description:
+    - <gray>Stamm, Holz und entrindete Varianten zählen.</gray>
+    materials:
+    - MANGROVE_LOG
+    - MANGROVE_WOOD
+    - STRIPPED_MANGROVE_LOG
+    - STRIPPED_MANGROVE_WOOD
+  karmesinholz:
+    display: Karmesinholz
+    icon: CRIMSON_STEM
+    description:
+    - <gray>Stiel, Hyphen und entrindete Varianten zählen.</gray>
+    materials:
+    - CRIMSON_STEM
+    - CRIMSON_HYPHAE
+    - STRIPPED_CRIMSON_STEM
+    - STRIPPED_CRIMSON_HYPHAE
+  wirrholz:
+    display: Wirrholz
+    icon: WARPED_STEM
+    description:
+    - <gray>Stiel, Hyphen und entrindete Varianten zählen.</gray>
+    materials:
+    - WARPED_STEM
+    - WARPED_HYPHAE
+    - STRIPPED_WARPED_STEM
+    - STRIPPED_WARPED_HYPHAE
+  kohle:
+    display: Kohle
+    icon: COAL
+    materials:
+    - COAL
+  eisen:
+    display: Eisenbarren
+    icon: IRON_INGOT
+    materials:
+    - IRON_INGOT
+  kupfer:
+    display: Kupferbarren
+    icon: COPPER_INGOT
+    materials:
+    - COPPER_INGOT
+  gold:
+    display: Goldbarren
+    icon: GOLD_INGOT
+    materials:
+    - GOLD_INGOT
+  redstone:
+    display: Redstone-Staub
+    icon: REDSTONE
+    materials:
+    - REDSTONE
+  lapislazuli:
+    display: Lapislazuli
+    icon: LAPIS_LAZULI
+    materials:
+    - LAPIS_LAZULI
+  diamanten:
+    display: Diamanten
+    icon: DIAMOND
+    materials:
+    - DIAMOND
+  weizen:
+    display: Weizen
+    icon: WHEAT
+    materials:
+    - WHEAT
+  karotten:
+    display: Karotten
+    icon: CARROT
+    materials:
+    - CARROT
+  kartoffeln:
+    display: Kartoffeln
+    icon: POTATO
+    materials:
+    - POTATO
+  rote_bete:
+    display: Rote Bete
+    icon: BEETROOT
+    materials:
+    - BEETROOT
+  zuckerrohr:
+    display: Zuckerrohr
+    icon: SUGAR_CANE
+    description:
+    - <gray>Zuckerrohr ist leichter anbaubar und wird daher etwas häufiger verlangt.</gray>
+    materials:
+    - SUGAR_CANE
+  verrottetes_fleisch:
+    display: Verrottetes Fleisch
+    icon: ROTTEN_FLESH
+    materials:
+    - ROTTEN_FLESH
+  knochen:
+    display: Knochen
+    icon: BONE
+    materials:
+    - BONE
+  faeden:
+    display: Fäden
+    icon: STRING
+    materials:
+    - STRING
+  schwarzpulver:
+    display: Schwarzpulver
+    icon: GUNPOWDER
+    materials:
+    - GUNPOWDER
+  spinnenaugen:
+    display: Spinnenaugen
+    icon: SPIDER_EYE
+    materials:
+    - SPIDER_EYE
+  schleimbaelle:
+    display: Schleimbälle
+    icon: SLIME_BALL
+    materials:
+    - SLIME_BALL
+  enderperlen:
+    display: Enderperlen
+    icon: ENDER_PEARL
+    materials:
+    - ENDER_PEARL
+  bruchstein:
+    display: Bruchstein
+    icon: COBBLESTONE
+    materials:
+    - COBBLESTONE
+  bruchtiefenschiefer:
+    display: Bruchtiefenschiefer
+    icon: COBBLED_DEEPSLATE
+    materials:
+    - COBBLED_DEEPSLATE
+  tuff:
+    display: Tuff
+    icon: TUFF
+    materials:
+    - TUFF
+  calcit:
+    display: Calcit
+    icon: CALCITE
+    materials:
+    - CALCITE
+  amethystscherben:
+    display: Amethystscherben
+    icon: AMETHYST_SHARD
+    materials:
+    - AMETHYST_SHARD
+  blackstone:
+    display: Schwarzstein
+    icon: BLACKSTONE
+    materials:
+    - BLACKSTONE
+  basalt:
+    display: Basalt
+    icon: BASALT
+    materials:
+    - BASALT
+  obsidian:
+    display: Obsidian
+    icon: OBSIDIAN
+    materials:
+    - OBSIDIAN
+  netherquarz:
+    display: Netherquarz
+    icon: QUARTZ
+    materials:
+    - QUARTZ
+  roheisenblock:
+    display: Roheisenblock
+    icon: RAW_IRON_BLOCK
+    materials:
+    - RAW_IRON_BLOCK
+  rohkupferblock:
+    display: Rohkupferblock
+    icon: RAW_COPPER_BLOCK
+    materials:
+    - RAW_COPPER_BLOCK
+  rohgoldblock:
+    display: Rohgoldblock
+    icon: RAW_GOLD_BLOCK
+    materials:
+    - RAW_GOLD_BLOCK
+  netheritschrott:
+    display: Netherit-Schrott
+    icon: NETHERITE_SCRAP
+    materials:
+    - NETHERITE_SCRAP
+    description:
+    - <gray>Geschmolzene Form von Antikem Schrott.</gray>
+  netheritbarren:
+    display: Netheritbarren
+    icon: NETHERITE_INGOT
+    materials:
+    - NETHERITE_INGOT
+  eisenerz_silk:
+    display: Eisenerz (Silk Touch)
+    icon: IRON_ORE
+    materials:
+    - IRON_ORE
+  golderz_silk:
+    display: Golderz (Silk Touch)
+    icon: GOLD_ORE
+    materials:
+    - GOLD_ORE
+  lapiserz_silk:
+    display: Lapiserz (Silk Touch)
+    icon: LAPIS_ORE
+    materials:
+    - LAPIS_ORE
+  diamant_silk:
+    display: Diamanterz (Silk Touch)
+    icon: DIAMOND_ORE
+    materials:
+    - DIAMOND_ORE
+  smaragd_silk:
+    display: Smaragderz (Silk Touch)
+    icon: EMERALD_ORE
+    materials:
+    - EMERALD_ORE
+  deepslate_eisen_silk:
+    display: Tiefenschiefer-Eisenerz (Silk Touch)
+    icon: DEEPSLATE_IRON_ORE
+    materials:
+    - DEEPSLATE_IRON_ORE
+  deepslate_kohle_silk:
+    display: Tiefenschiefer-Kohleerz (Silk Touch)
+    icon: DEEPSLATE_COAL_ORE
+    materials:
+    - DEEPSLATE_COAL_ORE
+  deepslate_kupfer_silk:
+    display: Tiefenschiefer-Kupfererz (Silk Touch)
+    icon: DEEPSLATE_COPPER_ORE
+    materials:
+    - DEEPSLATE_COPPER_ORE
+  deepslate_redstone_silk:
+    display: Tiefenschiefer-Redstone-Erz (Silk Touch)
+    icon: DEEPSLATE_REDSTONE_ORE
+    materials:
+    - DEEPSLATE_REDSTONE_ORE
+  deepslate_lapis_silk:
+    display: Tiefenschiefer-Lapiserz (Silk Touch)
+    icon: DEEPSLATE_LAPIS_ORE
+    materials:
+    - DEEPSLATE_LAPIS_ORE
+  deepslate_diamant_silk:
+    display: Tiefenschiefer-Diamanterz (Silk Touch)
+    icon: DEEPSLATE_DIAMOND_ORE
+    materials:
+    - DEEPSLATE_DIAMOND_ORE
+  deepslate_smaragd_silk:
+    display: Tiefenschiefer-Smaragderz (Silk Touch)
+    icon: DEEPSLATE_EMERALD_ORE
+    materials:
+    - DEEPSLATE_EMERALD_ORE
+    description:
+    - <dark_gray>Sehr seltene Sammler-Abgabe. Muss nicht selbst gefunden werden.</dark_gray>
+  rindfleisch:
+    display: Rindfleisch (roh oder gebraten)
+    icon: COOKED_BEEF
+    materials:
+    - BEEF
+    - COOKED_BEEF
+  schweinefleisch:
+    display: Schweinefleisch (roh oder gebraten)
+    icon: COOKED_PORKCHOP
+    materials:
+    - PORKCHOP
+    - COOKED_PORKCHOP
+  hammelfleisch:
+    display: Hammelfleisch (roh oder gebraten)
+    icon: COOKED_MUTTON
+    materials:
+    - MUTTON
+    - COOKED_MUTTON
+  huehnchenfleisch:
+    display: Hühnchen (roh oder gebraten)
+    icon: COOKED_CHICKEN
+    materials:
+    - CHICKEN
+    - COOKED_CHICKEN
+  leder:
+    display: Leder
+    icon: LEATHER
+    materials:
+    - LEATHER
+  federn:
+    display: Federn
+    icon: FEATHER
+    materials:
+    - FEATHER
+  blazestaebe:
+    display: Lohenruten
+    icon: BLAZE_ROD
+    materials:
+    - BLAZE_ROD
+  magmacreme:
+    display: Magmacreme
+    icon: MAGMA_CREAM
+    materials:
+    - MAGMA_CREAM
+  ghasttraenen:
+    display: Ghasttränen
+    icon: GHAST_TEAR
+    materials:
+    - GHAST_TEAR
+  prismarinscherben:
+    display: Prismarinscherben
+    icon: PRISMARINE_SHARD
+    materials:
+    - PRISMARINE_SHARD
+  prismarinkristalle:
+    display: Prismarinkristalle
+    icon: PRISMARINE_CRYSTALS
+    materials:
+    - PRISMARINE_CRYSTALS
+  phantommembranen:
+    display: Phantommembranen
+    icon: PHANTOM_MEMBRANE
+    materials:
+    - PHANTOM_MEMBRANE
+  breeze_rods:
+    display: Breeze Rods
+    icon: BREEZE_ROD
+    materials:
+    - BREEZE_ROD
+  windladungen:
+    display: Windladungen
+    icon: WIND_CHARGE
+    materials:
+    - WIND_CHARGE
+  shulkerschalen:
+    display: Shulkerschalen
+    icon: SHULKER_SHELL
+    materials:
+    - SHULKER_SHELL
+  totems:
+    display: Totems der Unsterblichkeit
+    icon: TOTEM_OF_UNDYING
+    materials:
+    - TOTEM_OF_UNDYING
+  drachenatem:
+    display: Drachenatem
+    icon: DRAGON_BREATH
+    materials:
+    - DRAGON_BREATH
+  nethersterne:
+    display: Nethersterne
+    icon: NETHER_STAR
+    materials:
+    - NETHER_STAR
+requirements:
+  angler:
+    '0':
+      '25': {fish: {river_perch: 32, silver_carp: 24}, skills: {max_combo: 5}}
+      '50': {fish: {forest_trout: 48, sea_bass: 32}, skills: {green_hits: 20, max_combo: 10}}
+      '75': {fish: {swamp_carp: 64, night_catfish: 24}, skills: {green_hits: 50, max_combo: 20}}
+      '100': {coin-cost: 10000, fish: {moon_trout: 32, rain_carp: 32}, skills: {green_hits: 100, max_combo: 30}}
+    '1':
+      '25': {fish: {river_perch: 64, sea_bass: 64}, skills: {max_combo: 8}}
+      '50': {fish: {night_catfish: 48, rain_carp: 48}, skills: {green_hits: 40, max_combo: 15}}
+      '75': {fish: {storm_catfish: 24, storm_mackerel: 16}, skills: {green_hits: 80, max_combo: 25}}
+      '100': {coin-cost: 25000, fish: {coral_fish: 16, mangrove_catfish: 12}, skills: {green_hits: 140, max_combo: 35}}
+    '2':
+      '25': {fish: {forest_trout: 128, swamp_carp: 96}, skills: {max_combo: 10}}
+      '50': {fish: {moon_trout: 64, storm_catfish: 32}, skills: {green_hits: 55, max_combo: 18}}
+      '75': {fish: {frost_trout: 24, coral_fish: 24}, skills: {green_hits: 100, max_combo: 28}}
+      '100': {coin-cost: 50000, fish: {storm_mackerel: 32, deep_mackerel: 12}, skills: {green_hits: 170, max_combo: 40}}
+    '3':
+      '25': {fish: {night_catfish: 128, rain_carp: 128}, skills: {max_combo: 12}}
+      '50': {fish: {storm_catfish: 64, storm_mackerel: 48}, skills: {green_hits: 70, max_combo: 20}}
+      '75': {fish: {mangrove_catfish: 48, frost_trout: 48}, skills: {green_hits: 125, max_combo: 30}}
+      '100': {coin-cost: 100000, fish: {coral_fish: 64, deep_mackerel: 24}, skills: {green_hits: 200, max_combo: 45}}
+    '4':
+      '25': {fish: {river_perch: 256, silver_carp: 256}, skills: {max_combo: 15}}
+      '50': {fish: {moon_trout: 128, rain_carp: 128}, skills: {green_hits: 90, max_combo: 25}}
+      '75': {fish: {storm_mackerel: 96, coral_fish: 96}, skills: {green_hits: 150, max_combo: 35}}
+      '100': {coin-cost: 200000, fish: {mangrove_catfish: 96, frost_trout: 96, deep_mackerel: 48}, skills: {green_hits: 230, max_combo: 50}}
+    '5':
+      '25': {skills: {max_combo: 18}}
+      '50': {skills: {green_hits: 110, max_combo: 28}}
+      '75': {skills: {green_hits: 180, max_combo: 40}}
+      '100': {skills: {green_hits: 275, max_combo: 55}}
+  holzfaeller:
+    '0':
+      '25':
+        coin-cost: 0
+        materials:
+          holz: 1688
+        growths:
+          setzlinge: 38
+      '50':
+        coin-cost: 0
+        materials:
+          holz: 3375
+        growths:
+          setzlinge: 75
+      '75':
+        coin-cost: 0
+        materials:
+          holz: 6750
+        growths:
+          setzlinge: 150
+      '100':
+        coin-cost: 10000
+        materials:
+          holz: 13500
+        growths:
+          setzlinge: 300
+    '1':
+      '25':
+        coin-cost: 0
+        materials:
+          holz: 3000
+          eisen: 96
+          kupfer: 144
+          kohle: 96
+        growths:
+          setzlinge: 60
+      '50':
+        coin-cost: 0
+        materials:
+          holz: 6000
+          weizen: 72
+          karotten: 72
+          kartoffeln: 72
+          rote_bete: 72
+          zuckerrohr: 96
+        growths:
+          setzlinge: 120
+      '75':
+        coin-cost: 0
+        materials:
+          holz: 12000
+          verrottetes_fleisch: 96
+          knochen: 96
+          faeden: 72
+          schwarzpulver: 72
+          spinnenaugen: 48
+        growths:
+          setzlinge: 240
+      '100':
+        coin-cost: 50000
+        materials:
+          holz: 24000
+          eisen: 144
+          kupfer: 192
+          kohle: 96
+          gold: 48
+        growths:
+          setzlinge: 450
+    '2':
+      '25':
+        coin-cost: 0
+        materials:
+          holz: 4500
+          eisen: 144
+          kupfer: 192
+          kohle: 144
+          redstone: 96
+          lapislazuli: 48
+        growths:
+          setzlinge: 90
+      '50':
+        coin-cost: 0
+        materials:
+          holz: 9000
+          weizen: 144
+          karotten: 144
+          kartoffeln: 144
+          rote_bete: 144
+          zuckerrohr: 192
+        growths:
+          setzlinge: 180
+      '75':
+        coin-cost: 0
+        materials:
+          holz: 18000
+          verrottetes_fleisch: 144
+          knochen: 144
+          faeden: 144
+          schwarzpulver: 144
+          spinnenaugen: 96
+          schleimbaelle: 48
+          enderperlen: 12
+        growths:
+          setzlinge: 360
+      '100':
+        coin-cost: 100000
+        materials:
+          holz: 36000
+          eisen: 144
+          gold: 96
+          redstone: 192
+          lapislazuli: 96
+          diamanten: 12
+        growths:
+          setzlinge: 675
+    '3':
+      '25':
+        coin-cost: 0
+        materials:
+          eiche: 3000
+          birke: 3000
+          eisen: 144
+          gold: 96
+          redstone: 192
+          lapislazuli: 96
+          diamanten: 12
+        growths:
+          eichensetzlinge: 60
+          birkensetzlinge: 60
+      '50':
+        coin-cost: 0
+        materials:
+          schwarzeiche: 11250
+          kirschholz: 750
+          weizen: 216
+          karotten: 216
+          kartoffeln: 216
+          rote_bete: 216
+          zuckerrohr: 288
+        growths:
+          schwarzeichensetzlinge: 225
+          kirschsetzlinge: 15
+      '75':
+        coin-cost: 0
+        materials:
+          dschungelholz: 12000
+          fichte: 12000
+          verrottetes_fleisch: 192
+          knochen: 192
+          faeden: 192
+          schwarzpulver: 192
+          spinnenaugen: 144
+          schleimbaelle: 96
+          enderperlen: 24
+        growths:
+          dschungelsetzlinge: 240
+          fichtensetzlinge: 240
+      '100':
+        coin-cost: 200000
+        materials:
+          eiche: 12000
+          birke: 12000
+          akazie: 9000
+          mangrovenholz: 6000
+          kirschholz: 4500
+          blasseiche: 4500
+          eisen: 192
+          gold: 144
+          redstone: 288
+          lapislazuli: 144
+          diamanten: 24
+        growths:
+          eichensetzlinge: 225
+          birkensetzlinge: 225
+          akaziensetzlinge: 165
+          mangrovenkeimlinge: 113
+          kirschsetzlinge: 83
+          blasseichensetzlinge: 90
+    '4':
+      '25':
+        coin-cost: 0
+        materials:
+          kirschholz: 3750
+          blasseiche: 3750
+          mangrovenholz: 1500
+          eisen: 192
+          kupfer: 288
+          gold: 144
+          redstone: 288
+          lapislazuli: 144
+          diamanten: 24
+        growths:
+          kirschsetzlinge: 63
+          blasseichensetzlinge: 63
+          mangrovenkeimlinge: 24
+      '50':
+        coin-cost: 0
+        materials:
+          schwarzeiche: 7500
+          dschungelholz: 7500
+          mangrovenholz: 3000
+          weizen: 288
+          karotten: 288
+          kartoffeln: 288
+          rote_bete: 288
+          zuckerrohr: 384
+        growths:
+          schwarzeichensetzlinge: 125
+          dschungelsetzlinge: 125
+          mangrovenkeimlinge: 51
+      '75':
+        coin-cost: 0
+        materials:
+          birke: 9000
+          kirschholz: 7500
+          blasseiche: 7500
+          mangrovenholz: 9000
+          karmesinholz: 1500
+          wirrholz: 1500
+          verrottetes_fleisch: 288
+          knochen: 288
+          faeden: 240
+          schwarzpulver: 240
+          spinnenaugen: 192
+          schleimbaelle: 144
+          enderperlen: 48
+        growths:
+          birkensetzlinge: 164
+          kirschsetzlinge: 137
+          blasseichensetzlinge: 137
+          mangrovenkeimlinge: 164
+      '100':
+        coin-cost: 400000
+        materials:
+          schwarzeiche: 8438
+          dschungelholz: 9000
+          eiche: 9000
+          fichte: 9000
+          akazie: 9000
+          mangrovenholz: 7313
+          karmesinholz: 1125
+          wirrholz: 1125
+          kohle: 384
+          eisen: 288
+          kupfer: 384
+          gold: 192
+          redstone: 384
+          lapislazuli: 192
+          diamanten: 48
+        growths:
+          schwarzeichensetzlinge: 195
+          dschungelsetzlinge: 209
+          eichensetzlinge: 209
+          fichtensetzlinge: 209
+          akaziensetzlinge: 209
+          mangrovenkeimlinge: 171
+  bergarbeiter:
+    '0':
+      '25':
+        coin-cost: 0
+        materials:
+          bruchstein: 768
+          bruchtiefenschiefer: 384
+          kohle: 192
+          eisen: 96
+          kupfer: 144
+        mined:
+          stein: 320
+          tiefenschiefer: 160
+      '50':
+        coin-cost: 0
+        materials:
+          bruchstein: 1152
+          bruchtiefenschiefer: 768
+          kohle: 384
+          eisen: 192
+          kupfer: 288
+          redstone: 192
+        mined:
+          stein: 480
+          tiefenschiefer: 320
+      '75':
+        coin-cost: 0
+        materials:
+          bruchstein: 1536
+          bruchtiefenschiefer: 1152
+          eisen: 288
+          kupfer: 288
+          redstone: 384
+          lapislazuli: 144
+          amethystscherben: 192
+        mined:
+          stein: 640
+          tiefenschiefer: 480
+      '100':
+        coin-cost: 10000
+        materials:
+          bruchstein: 2304
+          bruchtiefenschiefer: 1536
+          eisen: 384
+          kupfer: 384
+          gold: 192
+          redstone: 576
+          lapislazuli: 192
+          amethystscherben: 288
+        mined:
+          stein: 960
+          tiefenschiefer: 640
+    '1':
+      '25':
+        coin-cost: 0
+        materials:
+          bruchtiefenschiefer: 1152
+          tuff: 384
+          eisen: 288
+          kupfer: 384
+          kohle: 192
+          redstone: 288
+        mined:
+          tiefenschiefer: 480
+          kohleerze: 32
+          eisenerze: 64
+          kupfererze: 40
+      '50':
+        coin-cost: 0
+        materials:
+          redstone: 384
+          lapislazuli: 192
+          gold: 144
+          amethystscherben: 288
+          calcit: 192
+          zuckerrohr: 96
+          knochen: 96
+        mined:
+          redstoneerze: 48
+          lapiserze: 16
+          golderze: 36
+      '75':
+        coin-cost: 0
+        materials:
+          netherquarz: 576
+          gold: 144
+          blackstone: 384
+          basalt: 192
+          obsidian: 96
+          eisenerz_silk: 24
+          golderz_silk: 12
+          schwarzpulver: 96
+        mined:
+          netherquarzerze: 192
+          nethergolderze: 72
+          obsidian: 48
+      '100':
+        coin-cost: 50000
+        materials:
+          eisen: 288
+          gold: 192
+          redstone: 384
+          lapislazuli: 192
+          diamanten: 18
+          deepslate_redstone_silk: 24
+          lapiserz_silk: 12
+          deepslate_diamant_silk: 3
+        mined:
+          eisenerze: 96
+          redstoneerze: 48
+          diamanterze: 6
+          netherquarzerze: 48
+    '2':
+      '25':
+        coin-cost: 0
+        materials:
+          bruchtiefenschiefer: 1536
+          tuff: 576
+          calcit: 288
+          amethystscherben: 384
+          roheisenblock: 12
+          rohkupferblock: 12
+          rohgoldblock: 3
+        mined:
+          tiefenschiefer: 640
+          eisenerze: 36
+          kupfererze: 18
+      '50':
+        coin-cost: 0
+        materials:
+          redstone: 576
+          lapislazuli: 288
+          gold: 192
+          deepslate_redstone_silk: 24
+          deepslate_lapis_silk: 12
+          golderz_silk: 12
+          zuckerrohr: 144
+          weizen: 96
+        mined:
+          redstoneerze: 64
+          lapiserze: 20
+          golderze: 48
+      '75':
+        coin-cost: 0
+        materials:
+          netherquarz: 768
+          gold: 192
+          blackstone: 384
+          basalt: 288
+          obsidian: 144
+          netheritschrott: 6
+          schwarzpulver: 144
+          knochen: 144
+        mined:
+          netherquarzerze: 256
+          nethergolderze: 96
+          obsidian: 72
+      '100':
+        coin-cost: 100000
+        materials:
+          eisen: 384
+          gold: 288
+          redstone: 576
+          lapislazuli: 288
+          diamanten: 30
+          deepslate_diamant_silk: 18
+          diamant_silk: 3
+          smaragd_silk: 9
+          netheritschrott: 9
+        mined:
+          eisenerze: 128
+          redstoneerze: 64
+          diamanterze: 12
+          smaragderze: 3
+    '3':
+      '25':
+        coin-cost: 0
+        materials:
+          bruchtiefenschiefer: 2304
+          tuff: 768
+          calcit: 384
+          amethystscherben: 576
+          roheisenblock: 18
+          rohkupferblock: 18
+          rohgoldblock: 6
+        mined:
+          tiefenschiefer: 960
+          eisenerze: 54
+          kupfererze: 27
+      '50':
+        coin-cost: 0
+        materials:
+          redstone: 768
+          lapislazuli: 384
+          gold: 288
+          deepslate_eisen_silk: 36
+          deepslate_redstone_silk: 24
+          deepslate_kohle_silk: 9
+          deepslate_kupfer_silk: 6
+        mined:
+          redstoneerze: 80
+          lapiserze: 24
+          golderze: 64
+          diamanterze: 8
+      '75':
+        coin-cost: 0
+        materials:
+          netherquarz: 1152
+          gold: 288
+          blackstone: 576
+          basalt: 384
+          obsidian: 192
+          netheritschrott: 6
+          netheritbarren: 2
+          schwarzpulver: 192
+          zuckerrohr: 144
+        mined:
+          netherquarzerze: 384
+          nethergolderze: 128
+          obsidian: 96
+          diamanterze: 10
+      '100':
+        coin-cost: 200000
+        materials:
+          eisen: 480
+          gold: 384
+          redstone: 768
+          lapislazuli: 384
+          diamanten: 48
+          deepslate_diamant_silk: 36
+          diamant_silk: 6
+          smaragd_silk: 18
+          netheritschrott: 12
+          netheritbarren: 3
+        mined:
+          eisenerze: 160
+          redstoneerze: 80
+          diamanterze: 18
+          smaragderze: 9
+          netherquarzerze: 96
+    '4':
+      '25':
+        coin-cost: 0
+        materials:
+          bruchtiefenschiefer: 3072
+          tuff: 1152
+          calcit: 576
+          amethystscherben: 768
+          roheisenblock: 24
+          rohkupferblock: 24
+          rohgoldblock: 9
+        mined:
+          tiefenschiefer: 1280
+          eisenerze: 72
+          kupfererze: 36
+      '50':
+        coin-cost: 0
+        materials:
+          redstone: 1152
+          lapislazuli: 576
+          gold: 384
+          deepslate_eisen_silk: 48
+          deepslate_redstone_silk: 36
+          deepslate_kohle_silk: 15
+          deepslate_kupfer_silk: 9
+          golderz_silk: 18
+        mined:
+          redstoneerze: 128
+          lapiserze: 36
+          golderze: 96
+          diamanterze: 12
+      '75':
+        coin-cost: 0
+        materials:
+          netherquarz: 1536
+          gold: 384
+          blackstone: 768
+          basalt: 576
+          obsidian: 288
+          netheritschrott: 12
+          netheritbarren: 3
+          amethystscherben: 384
+          schwarzpulver: 192
+          zuckerrohr: 192
+        mined:
+          netherquarzerze: 512
+          nethergolderze: 192
+          obsidian: 144
+          diamanterze: 16
+      '100':
+        coin-cost: 400000
+        materials:
+          eisen: 768
+          gold: 576
+          redstone: 1152
+          lapislazuli: 576
+          diamanten: 72
+          deepslate_diamant_silk: 48
+          diamant_silk: 9
+          smaragd_silk: 24
+          deepslate_smaragd_silk: 1
+          netheritschrott: 12
+          netheritbarren: 6
+        mined:
+          eisenerze: 256
+          redstoneerze: 128
+          golderze: 144
+          diamanterze: 24
+          smaragderze: 12
+          netherquarzerze: 128
+  jaeger:
+    '0':
+      '25':
+        coin-cost: 0
+        materials:
+          rindfleisch: 192
+          schweinefleisch: 192
+          hammelfleisch: 192
+          huehnchenfleisch: 192
+          leder: 192
+          federn: 192
+        hunts:
+          kuehe: 30
+          schweine: 30
+          schafe: 30
+          huehner: 30
+      '50':
+        coin-cost: 0
+        materials:
+          verrottetes_fleisch: 384
+          knochen: 288
+          faeden: 192
+          schwarzpulver: 144
+          eisen: 96
+        hunts:
+          zombies: 60
+          skelette: 45
+          spinnen: 35
+          creeper: 25
+      '75':
+        coin-cost: 0
+        materials:
+          verrottetes_fleisch: 288
+          knochen: 192
+          kupfer: 128
+          enderperlen: 48
+          eisen: 192
+          kohle: 128
+        hunts:
+          ertrunkene: 25
+          husks: 15
+          strays: 10
+          bogged: 8
+          endermen: 12
+      '100':
+        coin-cost: 10000
+        materials:
+          schwarzpulver: 576
+          schleimbaelle: 384
+          redstone: 288
+          phantommembranen: 96
+          eisen: 144
+          spinnenaugen: 96
+        hunts:
+          pillager: 20
+          hexen: 8
+          slimes: 15
+          phantome: 8
+          creeper: 25
+    '1':
+      '25':
+        coin-cost: 0
+        materials:
+          schweinefleisch: 384
+          leder: 384
+          blazestaebe: 192
+          magmacreme: 192
+          gold: 144
+          blackstone: 192
+        hunts:
+          blazes: 30
+          piglins: 30
+          hoglins: 20
+          magmawuerfel: 20
+      '50':
+        coin-cost: 0
+        materials:
+          verrottetes_fleisch: 384
+          prismarinscherben: 384
+          prismarinkristalle: 288
+          eisen: 288
+          kupfer: 192
+          enderperlen: 96
+          obsidian: 192
+        hunts:
+          endermen: 35
+          shulker: 12
+          ertrunkene: 20
+          guardians: 20
+      '75':
+        coin-cost: 0
+        materials:
+          prismarinscherben: 384
+          prismarinkristalle: 288
+          breeze_rods: 192
+          knochen: 144
+          kohle: 144
+          phantommembranen: 24
+        hunts:
+          breezes: 12
+          guardians: 30
+          phantome: 10
+          witherskelette: 12
+      '100':
+        coin-cost: 50000
+        materials:
+          gold: 256
+          eisen: 144
+          ghasttraenen: 32
+          totems: 8
+          prismarinscherben: 192
+        hunts:
+          ghasts: 8
+          piglin_brutes: 5
+          evoker: 3
+          ravager: 2
+          elder_guardians: 1
+    '2':
+      '25':
+        coin-cost: 0
+        materials:
+          eisen: 576
+          redstone: 288
+          schwarzpulver: 192
+          leder: 288
+          federn: 192
+          kohle: 48
+        hunts:
+          pillager: 35
+          vindicators: 18
+          evoker: 4
+          ravager: 2
+      '50':
+        coin-cost: 0
+        materials:
+          blazestaebe: 384
+          knochen: 288
+          kohle: 192
+          enderperlen: 288
+          blackstone: 128
+          obsidian: 96
+        hunts:
+          blazes: 45
+          witherskelette: 25
+          endermen: 40
+          shulker: 16
+      '75':
+        coin-cost: 0
+        materials:
+          prismarinscherben: 512
+          prismarinkristalle: 288
+          breeze_rods: 288
+          windladungen: 288
+          phantommembranen: 36
+          gold: 96
+        hunts:
+          breezes: 20
+          guardians: 40
+          phantome: 16
+          elder_guardians: 1
+      '100':
+        coin-cost: 100000
+        materials:
+          nethersterne: 1
+          drachenatem: 48
+          enderperlen: 192
+          diamanten: 16
+          netheritschrott: 2
+        hunts:
+          wither: 1
+          warden: 1
+          enderdrachen: 1
+    '3':
+      '25':
+        coin-cost: 0
+        materials:
+          leder: 768
+          federn: 768
+          knochen: 768
+          verrottetes_fleisch: 768
+          schwarzpulver: 576
+          eisen: 288
+          kohle: 384
+        hunts:
+          parched: 15
+          camel_husks: 5
+          zombie_nautilus: 5
+          zombiepferde: 1
+          sulfur_cubes: 20
+      '50':
+        coin-cost: 0
+        materials:
+          blackstone: 1024
+          netherquarz: 512
+          enderperlen: 384
+          blazestaebe: 192
+          knochen: 128
+          obsidian: 64
+        hunts:
+          blazes: 50
+          witherskelette: 30
+          endermen: 45
+          shulker: 18
+      '75':
+        coin-cost: 0
+        materials:
+          prismarinscherben: 768
+          prismarinkristalle: 384
+          eisen: 384
+          redstone: 384
+          gold: 64
+          schwarzpulver: 48
+        hunts:
+          evoker: 5
+          ravager: 3
+          guardians: 35
+          elder_guardians: 1
+      '100':
+        coin-cost: 200000
+        materials:
+          totems: 2
+          nethersterne: 1
+          shulkerschalen: 64
+          drachenatem: 32
+          diamanten: 24
+          netheritschrott: 4
+        hunts:
+          warden: 1
+          enderdrachen: 1
+    '4':
+      '25':
+        coin-cost: 0
+        materials:
+          leder: 1024
+          federn: 1024
+          knochen: 1536
+          verrottetes_fleisch: 1536
+          schwarzpulver: 768
+          eisen: 384
+          redstone: 512
+        hunts:
+          parched: 20
+          camel_husks: 8
+          zombie_nautilus: 8
+          zombiepferde: 2
+          sulfur_cubes: 30
+      '50':
+        coin-cost: 0
+        materials:
+          blackstone: 1536
+          gold: 768
+          eisen: 192
+          obsidian: 96
+          totems: 2
+          diamanten: 16
+          enderperlen: 256
+        hunts:
+          piglin_brutes: 10
+          evoker: 6
+          ravager: 3
+          shulker: 25
+      '75':
+        coin-cost: 0
+        materials:
+          prismarinscherben: 512
+          prismarinkristalle: 512
+          blackstone: 512
+          knochen: 96
+          diamanten: 64
+          netheritschrott: 6
+        hunts:
+          wither: 1
+          warden: 1
+          elder_guardians: 2
+      '100':
+        coin-cost: 400000
+        materials:
+          nethersterne: 3
+          totems: 4
+          drachenatem: 64
+          shulkerschalen: 128
+          diamanten: 32
+          netheritbarren: 2
+        hunts:
+          wither: 1
+          warden: 1
+          enderdrachen: 1
+miner-replacement-warning:
+  lines:
+  - <red><bold>⚠ Ersatzwerkzeug</bold></red>
+  - ''
+  - <gray>Eine bereits registrierte Kopie genau dieser</gray>
+  - <gray>Prestige-Werkzeugstufe wird dauerhaft deaktiviert.</gray>
+  - <gray>Andere Bergarbeiter-Werkzeuge bleiben aktiv.</gray>
+max-prestige-continuation:
+  milestone-requirements-enabled: false
+level-rewards:
+  coin-scale-per-prestige: 0.25
+  rewards:
+    '10':
+      coins: 5000
+    '20':
+      coins: 7500
+    '25':
+      custom-items:
+        werkzeugfragment: 3
+    '30':
+      coins: 10000
+    '40':
+      coins: 12500
+    '50':
+      custom-items:
+        werkzeugfragment: 4
+        berufe_booster_15: 1
+    '60':
+      coins: 15000
+    '70':
+      coins: 17500
+    '75':
+      custom-items:
+        werkzeugfragment: 6
+        lumi_booster_15: 1
+    '80':
+      coins: 20000
+    '90':
+      coins: 25000
+    '100':
+      custom-items:
+        werkzeugfragment: 12
+replacement-warning:
+  lines:
+  - <red><bold>⚠ Achtung!</bold></red>
+  - ''
+  - <gray>Wenn du ein neues Holzfäller-Werkzeug kaufst,</gray>
+  - <gray>wird dein bisheriges Werkzeug dauerhaft deaktiviert.</gray>
+  - ''
+  - <red>Die alte Axt verliert Holzschlag und kann danach</red>
+  - <red>nur noch wie eine normale Axt verwendet werden.</red>
+  - ''
+  - <dark_red>Dieser Vorgang kann nicht rückgängig gemacht werden.</dark_red>
+mined-groups:
+  stein:
+    display: Stein
+    icon: STONE
+    materials:
+    - STONE
+    description:
+    - <gray>Nur selbst abgebaute, nicht platzierte Blöcke zählen.</gray>
+  tiefenschiefer:
+    display: Tiefenschiefer
+    icon: DEEPSLATE
+    materials:
+    - DEEPSLATE
+    description:
+    - <gray>Nur selbst abgebaute, nicht platzierte Blöcke zählen.</gray>
+  kohleerze:
+    display: Kohleerz
+    icon: COAL_ORE
+    materials:
+    - COAL_ORE
+    - DEEPSLATE_COAL_ORE
+    description:
+    - <gray>Normales Erz und Tiefenschiefer-Erz zählen gemeinsam.</gray>
+  eisenerze:
+    display: Eisenerz
+    icon: IRON_ORE
+    materials:
+    - IRON_ORE
+    - DEEPSLATE_IRON_ORE
+    description:
+    - <gray>Normales Erz und Tiefenschiefer-Erz zählen gemeinsam.</gray>
+  kupfererze:
+    display: Kupfererz
+    icon: COPPER_ORE
+    materials:
+    - COPPER_ORE
+    - DEEPSLATE_COPPER_ORE
+    description:
+    - <gray>Normales Erz und Tiefenschiefer-Erz zählen gemeinsam.</gray>
+  redstoneerze:
+    display: Redstone-Erz
+    icon: REDSTONE_ORE
+    materials:
+    - REDSTONE_ORE
+    - DEEPSLATE_REDSTONE_ORE
+    description:
+    - <gray>Normales Erz und Tiefenschiefer-Erz zählen gemeinsam.</gray>
+  lapiserze:
+    display: Lapiserz
+    icon: LAPIS_ORE
+    materials:
+    - LAPIS_ORE
+    - DEEPSLATE_LAPIS_ORE
+    description:
+    - <gray>Normales Erz und Tiefenschiefer-Erz zählen gemeinsam.</gray>
+  golderze:
+    display: Golderz
+    icon: GOLD_ORE
+    materials:
+    - GOLD_ORE
+    - DEEPSLATE_GOLD_ORE
+    description:
+    - <gray>Normales Erz und Tiefenschiefer-Erz zählen gemeinsam.</gray>
+  diamanterze:
+    display: Diamanterz
+    icon: DIAMOND_ORE
+    materials:
+    - DIAMOND_ORE
+    - DEEPSLATE_DIAMOND_ORE
+    description:
+    - <gray>Normales Erz und Tiefenschiefer-Erz zählen gemeinsam.</gray>
+  smaragderze:
+    display: Smaragderz
+    icon: EMERALD_ORE
+    materials:
+    - EMERALD_ORE
+    - DEEPSLATE_EMERALD_ORE
+    description:
+    - <gray>Normales Erz und Tiefenschiefer-Erz zählen gemeinsam.</gray>
+  netherquarzerze:
+    display: Netherquarzerz
+    icon: NETHER_QUARTZ_ORE
+    materials:
+    - NETHER_QUARTZ_ORE
+  nethergolderze:
+    display: Nethergolderz
+    icon: NETHER_GOLD_ORE
+    materials:
+    - NETHER_GOLD_ORE
+  obsidian:
+    display: Obsidian
+    icon: OBSIDIAN
+    materials:
+    - OBSIDIAN
+    description:
+    - <gray>Natürliches und durch Lava + Wasser erzeugtes Obsidian zählt.</gray>
+    - <dark_gray>Vom Spieler platziertes Obsidian zählt nicht.</dark_gray>
+heads:
+  # Spieler-Köpfe: 25 % bei einem PvP-Kill, unabhängig von Schwert, Looting und Beruf.
+  player-kill-chance: 0.25
+  # Globale Kopfchance für Nicht-Jäger bei Kills mit beliebigen Schwertern.
+  global-sword-chance: 0.002
+  looting-relative-per-level: 0.2
+  collection-rewards:
+    enabled: true
+    # trigger.type: COUNT oder PERCENT. delivery: CLAIM oder AUTO.
+    # serial-slot muss je Reward eindeutig bleiben, damit Ersatz nur genau diese Kopie deaktiviert.
+    rewards:
+      merge-10:
+        order: 1
+        trigger:
+          type: COUNT
+          value: 10
+        delivery: CLAIM
+        serial-slot: 1
+        item-id: merge_helm
+        replacement-price: 100000
+      merge-25:
+        order: 2
+        trigger:
+          type: PERCENT
+          value: 25
+        delivery: CLAIM
+        serial-slot: 2
+        item-id: merge_helm
+        replacement-price: 100000
+      merge-60:
+        order: 3
+        trigger:
+          type: PERCENT
+          value: 60
+        delivery: CLAIM
+        serial-slot: 3
+        item-id: merge_helm
+        replacement-price: 100000
+      master:
+        order: 4
+        trigger:
+          type: PERCENT
+          value: 100
+        require-all: true
+        delivery: CLAIM
+        serial-slot: 100
+        item-id: master_merge_helm
+        replacement-price: 100000
+  boss-multipliers:
+    ELDER_GUARDIAN: 2.0
+    WITHER: 3.0
+    WARDEN: 5.0
+    ENDER_DRAGON: 10.0
+  variant-reroll-by-prestige:
+    '3': 0.1
+    '4': 0.2
+    '5': 0.3
+  missing-variant-weight-by-prestige:
+    '4': 2.0
+    '5': 4.0
+  variant-reroll-disabled-families: []
+  new-head-actionbar: <gold>✦ Neuer Kopf in deiner Kopfsammlung:</gold> <yellow>%head%</yellow> <dark_gray>•</dark_gray> <gray>%current%/%total%</gray>
+  collection-complete-message: <light_purple><bold>✦ Kopfsammlung vollständig!</bold></light_purple> <gray>Deine 100%-Belohnung ist jetzt freigeschaltet.</gray>
+hunt-groups:
+  kuehe:
+    display: Kühe
+    icon: BEEF
+    entity-types:
+    - COW
+  schweine:
+    display: Schweine
+    icon: PORKCHOP
+    entity-types:
+    - PIG
+  schafe:
+    display: Schafe
+    icon: MUTTON
+    entity-types:
+    - SHEEP
+  huehner:
+    display: Hühner
+    icon: FEATHER
+    entity-types:
+    - CHICKEN
+  zombies:
+    display: Zombies
+    icon: ROTTEN_FLESH
+    entity-types:
+    - ZOMBIE
+  skelette:
+    display: Skelette
+    icon: BONE
+    entity-types:
+    - SKELETON
+  spinnen:
+    display: Spinnen
+    icon: SPIDER_EYE
+    entity-types:
+    - SPIDER
+  creeper:
+    display: Creeper
+    icon: GUNPOWDER
+    entity-types:
+    - CREEPER
+  ertrunkene:
+    display: Ertrunkene
+    icon: TRIDENT
+    entity-types:
+    - DROWNED
+  husks:
+    display: Wüstenzombies
+    icon: ROTTEN_FLESH
+    entity-types:
+    - HUSK
+  strays:
+    display: Eiswanderer
+    icon: BONE
+    entity-types:
+    - STRAY
+  bogged:
+    display: Bogged
+    icon: BONE
+    entity-types:
+    - BOGGED
+  endermen:
+    display: Endermen
+    icon: ENDER_PEARL
+    entity-types:
+    - ENDERMAN
+  pillager:
+    display: Plünderer
+    icon: CROSSBOW
+    entity-types:
+    - PILLAGER
+  hexen:
+    display: Hexen
+    icon: GLASS_BOTTLE
+    entity-types:
+    - WITCH
+  slimes:
+    display: Slimes
+    icon: SLIME_BALL
+    entity-types:
+    - SLIME
+  phantome:
+    display: Phantome
+    icon: PHANTOM_MEMBRANE
+    entity-types:
+    - PHANTOM
+  blazes:
+    display: Lohen
+    icon: BLAZE_ROD
+    entity-types:
+    - BLAZE
+  piglins:
+    display: Piglins
+    icon: GOLD_INGOT
+    entity-types:
+    - PIGLIN
+  hoglins:
+    display: Hoglins
+    icon: PORKCHOP
+    entity-types:
+    - HOGLIN
+  magmawuerfel:
+    display: Magmawürfel
+    icon: MAGMA_CREAM
+    entity-types:
+    - MAGMA_CUBE
+  shulker:
+    display: Shulker
+    icon: SHULKER_SHELL
+    entity-types:
+    - SHULKER
+  guardians:
+    display: Wächter
+    icon: PRISMARINE_SHARD
+    entity-types:
+    - GUARDIAN
+  breezes:
+    display: Breezes
+    icon: WIND_CHARGE
+    entity-types:
+    - BREEZE
+  witherskelette:
+    display: Witherskelette
+    icon: WITHER_SKELETON_SKULL
+    entity-types:
+    - WITHER_SKELETON
+  ghasts:
+    display: Ghasts
+    icon: GHAST_TEAR
+    entity-types:
+    - GHAST
+  piglin_brutes:
+    display: Piglin-Barbaren
+    icon: GOLDEN_AXE
+    entity-types:
+    - PIGLIN_BRUTE
+  evoker:
+    display: Magier
+    icon: TOTEM_OF_UNDYING
+    entity-types:
+    - EVOKER
+  ravager:
+    display: Verwüster
+    icon: SADDLE
+    entity-types:
+    - RAVAGER
+  elder_guardians:
+    display: Große Wächter
+    icon: SPONGE
+    entity-types:
+    - ELDER_GUARDIAN
+  vindicators:
+    display: Diener
+    icon: IRON_AXE
+    entity-types:
+    - VINDICATOR
+  wither:
+    display: Wither
+    icon: NETHER_STAR
+    entity-types:
+    - WITHER
+  warden:
+    display: Warden
+    icon: SCULK_CATALYST
+    entity-types:
+    - WARDEN
+  enderdrachen:
+    display: Enderdrachen
+    icon: DRAGON_HEAD
+    entity-types:
+    - ENDER_DRAGON
+  parched:
+    display: Parched
+    icon: BONE
+    entity-types:
+    - PARCHED
+  camel_husks:
+    display: Kamelhüllen
+    icon: ROTTEN_FLESH
+    entity-types:
+    - CAMEL_HUSK
+  zombie_nautilus:
+    display: Zombie-Nautilus
+    icon: NAUTILUS_SHELL
+    entity-types:
+    - ZOMBIE_NAUTILUS
+  zombiepferde:
+    display: Zombiepferde
+    icon: ROTTEN_FLESH
+    entity-types:
+    - ZOMBIE_HORSE
+  sulfur_cubes:
+    display: Schwefelwürfel
+    icon: GUNPOWDER
+    entity-types:
+    - SULFUR_CUBE

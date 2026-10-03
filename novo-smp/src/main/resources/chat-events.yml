@@ -1,0 +1,177 @@
+
+# NovoSMP Chat-Events
+# Änderungen werden mit /chatevent reload oder einem Serverneustart geladen.
+enabled: true
+
+enabled-types:
+  - math
+  - minecraft
+  - missing
+  - unscramble
+  - type
+
+weights:
+  math: 40
+  minecraft: 15
+  missing: 20
+  unscramble: 20
+  type: 5
+
+time:
+  default: 20
+  math: 30
+
+reward:
+  crate-id: vanta
+  amount: 1
+
+messages:
+  title: "AUFGABE"
+  math: "Löse als Erstes im Chat:"
+  minecraft: "Beantworte als Erstes im Chat:"
+  missing: "Vervollständige als Erstes im Chat:"
+  unscramble: "Entwirre als Erstes im Chat:"
+  typing: "Tippe als Erstes im Chat:"
+
+  # Leer lassen, damit unter der Aufgabe keine Belohnungszeile erscheint.
+  reward-line: ""
+
+  # MiniMessage-Format. Verfügbare Platzhalter: %player%, %answer%, %time%
+  winner: "<dark_gray>[</dark_gray><green>SMP</green><dark_gray>]</dark_gray> <green>✔</green> %player% <gray>hat die Aufgabe gelöst.</gray>\n<dark_gray>[</dark_gray><green>SMP</green><dark_gray>]</dark_gray> <gray>Antwort:</gray> <aqua>%answer%</aqua> <dark_gray>(</dark_gray><aqua>%time%s</aqua><dark_gray>)</dark_gray>"
+
+
+  # MiniMessage-Format. Verfügbarer Platzhalter: %answer%
+  timeout: "<dark_gray>[</dark_gray><green>SMP</green><dark_gray>]</dark_gray> <red>✘ Die Zeit ist abgelaufen.</red> <gray>Richtige Antwort:</gray> <#FF6B6B><bold>%answer%</bold></#FF6B6B>"
+
+layout:
+  border-text: "━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  border-format: "<#7A1E2C><bold>%text%</bold></#7A1E2C>"
+  title-format: "<#E63946><bold>%text%</bold></#E63946>"
+  wrap-pixels: 220
+
+type:
+  length: 8
+
+sounds:
+  start:
+    name: BLOCK_NOTE_BLOCK_XYLOPHONE
+    volume: 1.0
+    pitch: 1.15
+  win:
+    # Nur der Gewinner hört weiterhin diesen Erfolgssound.
+    name: ENTITY_PLAYER_LEVELUP
+    volume: 1.0
+    pitch: 1.15
+  lose:
+    # Alle anderen hören einen tieferen Xylophon-Schlag.
+    name: BLOCK_NOTE_BLOCK_IRON_XYLOPHONE
+    volume: 1.0
+    pitch: 0.8
+  timeout:
+    name: ENTITY_VILLAGER_NO
+    volume: 1.0
+    pitch: 0.9
+
+words:
+  - Diamant
+  - Crafting
+  - Redstone
+  - Netherite
+  - Enderman
+  - Werkbank
+  - Spawner
+  - Obsidian
+  - Creeper
+  - Elytra
+  - Dreizack
+  - Smaragd
+  - Eisen
+  - Gold
+  - Kupfer
+  - Kohle
+  - Lapislazuli
+  - Kolben
+  - Amboss
+  - Leuchtfeuer
+  - Verzauberung
+  - Schmiedetisch
+  - Komposter
+  - Trichter
+  - Beobachter
+  - Spender
+  - Werfer
+  - Seelensand
+  - Schwarzstein
+  - Basalt
+  - Glowstone
+  - Quarz
+  - Prismarin
+  - Laterne
+  - Fackel
+  - Melone
+  - Kaktus
+  - Bambus
+  - Mangroven
+  - Kirschholz
+  - Akazie
+  - Kettenrüstung
+  - Diamantschwert
+  - Enderkiste
+  - Shulker
+  - Wither
+  - Ghast
+  - Piglin
+  - Hoglin
+  - Warden
+  - Eisengolem
+  - Dorfbewohner
+  - Allay
+  - Axolotl
+  - Frosch
+  - Schild
+  - Armbrust
+  - Bogen
+  - Rakete
+  - Totem
+  - Goldapfel
+  - Karotte
+  - Enderperle
+  - Braustand
+  - Lohenrute
+  - Netherstern
+  - Schallplatte
+  - Sattel
+
+minecraft-questions:
+  - question: "Wie viele Slots hat eine Doppelkiste?"
+    answer: "54"
+  - question: "Wie viele Herzen hat ein Spieler standardmäßig?"
+    answer: "10"
+  - question: "Wie heißt die Dimension des Enderdrachen?"
+    answer: "End"
+  - question: "Welches Material benötigt man für ein Netherportal?"
+    answer: "Obsidian"
+  - question: "Wie viele Blöcke hoch ist ein normales Netherportal mindestens?"
+    answer: "5"
+  - question: "Welcher Boss lässt einen Netherstern fallen?"
+    answer: "Wither"
+  - question: "Wie heißt das stärkste Rüstungsmaterial?"
+    answer: "Netherite"
+  - question: "Welcher Block speichert Gegenstände auch nach dem Abbau?"
+    answer: "Shulkerkiste"
+  - question: "Wie heißt das fliegende Monster im Nether?"
+    answer: "Ghast"
+  - question: "Welche Kreatur tauscht Gold gegen Items?"
+    answer: "Piglin"
+  - question: "Welches Werkzeug baut Obsidian am schnellsten ab?"
+    answer: "Diamantspitzhacke"
+  - question: "Welche Pflanze wächst am schnellsten?"
+    answer: "Bambus"
+  - question: "Welcher Gegenstand verhindert einmal den Tod?"
+    answer: "Totem"
+  - question: "Welche Dimension erreicht man mit einem Obsidianportal?"
+    answer: "Nether"
+  - question: "Wie heißt der fliegende Helfer, der Items bringt?"
+    answer: "Allay"
+  - question: "Welcher Block erzeugt Licht im Nether?"
+    answer: "Glowstone"

@@ -1,0 +1,80 @@
+# Zusätzliche /shop-Kategorien, die Custom-Items oder Custom-Items als Währung verwenden.
+# Die normale Shop-Konfiguration in der globalen config.yml bleibt unverändert.
+
+messages:
+  invalid-product: '<red>Dieses Angebot ist ungültig.</red>'
+  not-enough-currency: '<red>Du hast nicht genug <white>%currency%</white>.</red>'
+  success: '<green>Du hast <yellow>%amount%x %item%</yellow> für <gold>%price% %currency%</gold> gekauft.</green>'
+
+# Standardmäßig werden alle CUSTOM_ITEM-Produkte aus diesem Shop beim Kauf mit einer
+# dauerhaften Mending-Sperre markiert. Einzelne Produkte können mit allow-mending: true
+# ausdrücklich davon ausgenommen werden.
+mending-policy:
+  warning-lore:
+    - ''
+    - '<red>⚠ Kein Mending möglich</red>'
+    - '<gray>Dieses Shop-Werkzeug kann nicht mit Reparatur verzaubert werden.</gray>'
+    - '<dark_gray>Auch mit einem Berufswerkzeug bleibt das Ergebnis Mending-gesperrt.</dark_gray>'
+  blocked-message: '<red>Dieses Custom-Shop-Werkzeug kann nicht mit Reparatur verzaubert werden.</red>'
+
+categories:
+  werkzeuge:
+    enabled: true
+    slot: 13
+    material: IRON_AXE
+    name: '<aqua>Werkzeug-Shop</aqua>'
+    lore:
+      - '<gray>Bezahlt wird mit Werkzeugfragmenten</gray>'
+      - '<yellow>Klicke zum Öffnen</yellow>'
+    menu-title: '<aqua>Werkzeug-Shop</aqua>'
+    rows: 3
+    filler: GRAY_STAINED_GLASS_PANE
+    currency: CUSTOM_ITEM
+    currency-item: werkzeugfragment
+    currency-label: Werkzeugfragmente
+    products:
+      eisenaxt_holzschlag3:
+        enabled: true
+        slot: 11
+        type: CUSTOM_ITEM
+        item: eisenaxt_holzschlag3
+        display: Eisenaxt mit Holzschlag III
+        price: 25
+        max-amount: 1
+
+      diamantspitzhacke_3x3:
+        enabled: true
+        slot: 12
+        type: CUSTOM_ITEM
+        item: diamantspitzhacke_3x3
+        display: 3×3-Diamantspitzhacke
+        price: 35
+        max-amount: 1
+
+      eisenspitzhacke_veinminer:
+        enabled: true
+        slot: 13
+        type: CUSTOM_ITEM
+        item: eisenspitzhacke_veinminer
+        display: Veinminer-Eisenspitzhacke
+        price: 25
+        max-amount: 1
+
+      eisenspitzhacke_schmelzer:
+        enabled: true
+        slot: 14
+        type: CUSTOM_ITEM
+        item: eisenspitzhacke_schmelzer
+        display: Schmelzer-Eisenspitzhacke
+        price: 15
+        max-amount: 1
+
+      diamantschaufel_3x3:
+        enabled: true
+        slot: 15
+        type: CUSTOM_ITEM
+        item: diamantschaufel_3x3
+        display: 3×3-Diamantschaufel
+        allow-mending: true
+        price: 30
+        max-amount: 1

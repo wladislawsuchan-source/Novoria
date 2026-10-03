@@ -1,0 +1,158 @@
+schema-version: 2
+timezone: Europe/Berlin
+
+# Standardbelohnungen stehen direkt unter dem Tag. Premium erhält zusätzlich
+# den Block "premium". Premium+ erhält Premium UND zusätzlich "premium-plus".
+# Unterstützte Key-IDs entsprechen den IDs unter plugins/NovoSMP/crates/.
+days:
+  '1':
+    slot: 10
+    material: CHEST
+    coins: 250
+    lumis: 0
+    keys:
+      daily: 1
+    premium:
+      slot: 1
+      coins: 125
+    premium-plus:
+      slot: 19
+      coins: 125
+  '2':
+    slot: 11
+    material: GOLD_INGOT
+    coins: 400
+    lumis: 0
+    keys:
+      daily: 1
+    premium:
+      slot: 2
+      coins: 200
+    premium-plus:
+      slot: 20
+      coins: 200
+  '3':
+    slot: 12
+    material: AMETHYST_SHARD
+    coins: 0
+    lumis: 2
+    keys:
+      daily: 1
+    premium:
+      slot: 3
+      lumis: 1
+    premium-plus:
+      slot: 21
+      lumis: 1
+  '4':
+    slot: 13
+    material: GOLD_BLOCK
+    coins: 600
+    lumis: 0
+    keys:
+      daily: 1
+    premium:
+      slot: 4
+      coins: 300
+    premium-plus:
+      slot: 22
+      coins: 300
+  '5':
+    slot: 14
+    material: NAME_TAG
+    coins: 0
+    lumis: 0
+    keys:
+      daily: 3
+    premium:
+      slot: 5
+      keys:
+        lumi: 1
+    premium-plus:
+      slot: 23
+      keys:
+        lumi: 1
+  '6':
+    slot: 15
+    material: EMERALD
+    coins: 800
+    lumis: 0
+    keys:
+      daily: 1
+    premium:
+      slot: 6
+      coins: 400
+    premium-plus:
+      slot: 24
+      coins: 400
+  '7':
+    slot: 16
+    material: NETHER_STAR
+    coins: 0
+    lumis: 5
+    keys:
+      daily: 5
+    premium:
+      slot: 7
+      lumis: 3
+      keys:
+        lumi: 1
+    premium-plus:
+      slot: 25
+      lumis: 2
+      keys:
+        lumi: 1
+
+messages:
+  join-actionbar: '<green><bold>Tägliche Belohnung verfügbar!</bold></green>'
+
+daily:
+  menu:
+    title: '<gold>Tägliche Belohnungen</gold>'
+    rows: 3
+    # Oben Premium, in der Mitte Standard und unten Premium+.
+    # Die jeweiligen Slots stehen direkt beim Tag beziehungsweise Rangblock.
+    # true zeigt auch zukünftige Standard-, Premium- und Premium+-Belohnungen.
+    show-rewards-for-all-days: true
+    # Kompatibler globaler Fallback. Jeder Tag kann oben mit "slot" einzeln verschoben werden.
+    day-slots: [10, 11, 12, 13, 14, 15, 16]
+    filler:
+      material: BLACK_STAINED_GLASS_PANE
+      name: ' '
+      lore: []
+    states:
+      claimed:
+        material: LIME_CONCRETE
+        name: '<green><bold>✔ %tier% · Tag %day%</bold></green>'
+        lore: []
+      available:
+        # Leer lassen, damit das Material des jeweiligen Tages verwendet wird.
+        material: ''
+        name: '<yellow><bold>★ %tier% · Tag %day%</bold></yellow>'
+        glint: true
+        lore: []
+      locked:
+        material: RED_STAINED_GLASS_PANE
+        name: '<red><bold>✖ %tier% · Tag %day%</bold></red>'
+        lore: []
+      rank_locked:
+        material: GRAY_STAINED_GLASS_PANE
+        name: '<gray><bold>🔒 %tier% · Tag %day%</bold></gray>'
+        lore: []
+  messages:
+    player-only: '<red>Dieser Befehl ist nur für Spieler.</red>'
+    storage-error: '<red>Deine Daily-Daten konnten nicht geladen werden.</red>'
+    already-claimed: '<red>Du hast deine Daily-Belohnung heute bereits abgeholt.</red>'
+    rank-required: '<red>Für diese Belohnung benötigst du den passenden Rang.</red>'
+    inventory-full: '<red>Dein Inventar ist zu voll für die Daily-Keys. Schaffe zuerst Platz.</red>'
+    payout-error: '<red>Deine Belohnung konnte nicht vollständig ausgezahlt werden. Bitte informiere einen Admin.</red>'
+    command-warning: '<yellow>Daily abgeholt, aber eine Zusatzbelohnung muss ein Admin prüfen.</yellow>'
+    claimed: '<green><bold>✔ Daily abgeholt!</bold></green> <gray>Du hast %reward% erhalten.</gray>'
+  admin:
+    storage-error: '<red>Die Daily-Daten konnten nicht gespeichert werden.</red>'
+    reload-success: '<green>Daily-Konfiguration neu geladen.</green>'
+    reset-success: '<green>Daily-Fortschritt von <yellow>%player%</yellow> wurde zurückgesetzt.</green>'
+    setday-success: '<green>Daily-Tag von <yellow>%player%</yellow> wurde auf <yellow>%day%</yellow> gesetzt.</green>'
+    usage: '<gray>Benutzung: <yellow>/daily</yellow>, <yellow>/daily reset &lt;Spieler&gt;</yellow>, <yellow>/daily setday &lt;Spieler&gt; &lt;1-7&gt;</yellow>, <yellow>/daily reload</yellow></gray>'
+    invalid-day: '<red>Der Daily-Tag muss zwischen 1 und 7 liegen.</red>'
+    player-not-found: '<red>Der Spieler <yellow>%player%</yellow> wurde nicht gefunden.</red>'

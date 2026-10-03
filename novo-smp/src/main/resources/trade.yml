@@ -1,0 +1,69 @@
+# Gemeinsame Handelsregeln für /order, /ah, /sell und /worth.
+# Diese Datei wird einmalig angelegt, wenn sie fehlt. Eine vorhandene trade.yml
+# wird vom Plugin weder migriert noch automatisch überschrieben.
+trade:
+  blocked-materials:
+    - BEDROCK
+    - BARRIER
+    - LIGHT
+    - STRUCTURE_VOID
+    - STRUCTURE_BLOCK
+    - JIGSAW
+    - COMMAND_BLOCK
+    - CHAIN_COMMAND_BLOCK
+    - REPEATING_COMMAND_BLOCK
+    - COMMAND_BLOCK_MINECART
+    - DEBUG_STICK
+    - KNOWLEDGE_BOOK
+    - END_PORTAL_FRAME
+    - REINFORCED_DEEPSLATE
+    - BUDDING_AMETHYST
+    - TRIAL_SPAWNER
+    - VAULT
+    - TEST_BLOCK
+    - TEST_INSTANCE_BLOCK
+
+  # Deckt auch neue Varianten ab, die in späteren Minecraft-Versionen hinzukommen.
+  blocked-name-exact: []
+  blocked-name-suffixes:
+    - _SPAWN_EGG
+  blocked-name-contains:
+    - COMMAND_BLOCK
+    - STRUCTURE_BLOCK
+    - JIGSAW
+    - DEBUG
+    - TEST_BLOCK
+
+  channels:
+    orders:
+      blocked-materials:
+        - SPAWNER
+        - DRAGON_EGG
+        - PLAYER_HEAD
+      block-custom-model-data: true
+      block-persistent-data: true
+
+    auction-house:
+      blocked-materials: []
+      # Custom-Items bleiben standardmäßig im AH handelbar.
+      block-custom-model-data: false
+      block-persistent-data: false
+
+    sell:
+      blocked-materials:
+        - SPAWNER
+        - DRAGON_EGG
+        - PLAYER_HEAD
+      block-custom-model-data: true
+      block-persistent-data: true
+      block-filled-bundles: true
+      block-filled-shulkers: true
+      block-owned-player-heads: true
+      block-filled-maps: true
+      block-written-books: true
+
+    worth:
+      blocked-materials:
+        - SPAWNER
+        - DRAGON_EGG
+        - PLAYER_HEAD

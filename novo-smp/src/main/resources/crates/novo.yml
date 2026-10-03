@@ -1,0 +1,130 @@
+id: novo
+display-name: Novo-Kiste
+key-display-name: Novo-Key
+key-material: AMETHYST_SHARD
+enabled: true
+
+# Servereigene Endgame-/Custom-Item-Kiste. Die seltenen Werkzeug-Rewards
+# sind als eigene Custom-Items definiert; ihre Mending-Sperre steckt in items.yml.
+rewards:
+  baumfaeller:
+    type: CUSTOM_ITEM
+    display-name: "Baumfäller-Axt (Holzschlag IV)"
+    item: novo_baumfaeller_axt
+    amount: 1
+    chance: 1.50
+
+  veinminer:
+    type: CUSTOM_ITEM
+    display-name: "Vein-Miner-Spitzhacke"
+    item: novo_veinminer_spitzhacke
+    amount: 1
+    chance: 1.50
+
+  schmelzer:
+    type: CUSTOM_ITEM
+    display-name: "Schmelzer-Spitzhacke"
+    item: novo_schmelzer_spitzhacke
+    amount: 1
+    chance: 1.50
+
+  effizienz_6:
+    type: CUSTOM_ITEM
+    display-name: "Effizienz-VI-Spitzhacke"
+    item: novo_effizienz6_spitzhacke
+    amount: 1
+    chance: 2.50
+
+  pickaxe_3x3:
+    type: CUSTOM_ITEM
+    display-name: "3×3-Spitzhacke"
+    item: novo_3x3_spitzhacke
+    amount: 1
+    chance: 0.75
+
+  shovel_3x3:
+    type: CUSTOM_ITEM
+    display-name: "3×3-Schaufel"
+    item: netheriteschaufel_3x3
+    amount: 1
+    chance: 0.75
+
+  elytra_plus:
+    type: ITEM
+    display-name: "Elytra+"
+    item-name: "<light_purple><bold>Elytra+</bold></light_purple>"
+    material: ELYTRA
+    amount: 1
+    enchantments:
+      unbreaking: 10
+    chance: 0.50
+
+  raketenmodul:
+    type: CUSTOM_ITEM
+    display-name: "Raketenmodul I"
+    item: infinite_rocket_1
+    amount: 1
+    chance: 0.50
+
+  spawner:
+    type: ITEM
+    display-name: "Spawner"
+    material: SPAWNER
+    amount: 1
+    chance: 0.15
+
+  fragmente_5:
+    type: CUSTOM_ITEM
+    display-name: "Werkzeugfragment ×5"
+    item: werkzeugfragment
+    amount: 5
+    chance: 2.00
+
+  fragmente_3:
+    type: CUSTOM_ITEM
+    display-name: "Werkzeugfragment ×3"
+    item: werkzeugfragment
+    amount: 3
+    chance: 5.00
+
+  fragment_1:
+    type: CUSTOM_ITEM
+    display-name: "Werkzeugfragment ×1"
+    item: werkzeugfragment
+    amount: 1
+    chance: 15.00
+
+  lumi_booster_100:
+    type: CUSTOM_ITEM
+    display-name: "Lumi-Booster (+100 %)"
+    item: lumi_booster_20
+    amount: 1
+    chance: 4.00
+
+  lumi_booster_50:
+    type: CUSTOM_ITEM
+    display-name: "Lumi-Booster (+50 %)"
+    item: lumi_booster_15
+    amount: 1
+    chance: 10.00
+
+  berufe_booster_50:
+    type: CUSTOM_ITEM
+    display-name: "Berufs-EXP-Booster (+50 %)"
+    item: berufe_booster_15
+    amount: 1
+    chance: 15.00
+
+  lumi_keys_3:
+    type: KEY
+    display-name: "Lumi-Key ×3"
+    crate: lumi
+    amount: 3
+    chance: 8.00
+
+  lumi_key_1:
+    type: KEY
+    display-name: "Lumi-Key ×1"
+    crate: lumi
+    amount: 1
+    chance: 31.35

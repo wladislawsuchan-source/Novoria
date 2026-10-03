@@ -1,0 +1,4 @@
+name: AnglerBundlePaperProbe
+version: 1.0
+main: de.walahi.novosmp.angler.AnglerBundlePaperProbe
+api-version: '26.2'

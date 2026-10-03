@@ -1,0 +1,128 @@
+enabled: true
+respect-protection: true
+
+# Gemeinsamer Schutz für alle besonderen Mining-Werkzeuge.
+# Würde die vollständige Fähigkeit das Werkzeug zerstören, wird der erste Schlag
+# abgebrochen. Ein zweiter Versuch innerhalb des Zeitfensters bestätigt den Verlust.
+durability-safety:
+  enabled: true
+  confirmation-seconds: 10
+
+messages:
+  tool-would-break: '<red>Dein Werkzeug würde bei diesem Abbau zerbrechen. Baue innerhalb von <white>%seconds%</white> Sekunden erneut ab, wenn es trotzdem zerbrechen darf.</red>'
+  tnt-cooldown: '<red>Die TNT-Spitzhacke ist noch <white>%seconds%s</white> im Cooldown.</red>'
+  tnt-cooldown-actionbar: true
+
+# Die IDs bleiben stabil, weil sie im PersistentDataContainer der Items gespeichert werden.
+enchantments:
+  dreixdrei:
+    display-name: '3×3'
+    color: '<aqua>'
+  veinminer:
+    display-name: 'Veinminer'
+    color: '<dark_aqua>'
+  schmelzer:
+    display-name: 'Schmelzer'
+    color: '<gold>'
+  tnt:
+    display-name: 'TNT'
+    color: '<red>'
+
+three-by-three:
+  # Nur eine Netherite-3x3 darf normales Obsidian als 3x3 abbauen.
+  # Während dieses Obsidian-Abbaus wird Efficiency temporär ignoriert.
+  netherite-obsidian:
+    enabled: true
+
+  # Der angeschlagene Block bestimmt die Ebene: Wand = vertikal, Boden/Decke = horizontal.
+  # Inventarblöcke werden unabhängig von dieser Liste nie mit abgebaut.
+  excluded-materials:
+    - OBSIDIAN
+    - CRYING_OBSIDIAN
+    - BEDROCK
+    - BARRIER
+    - END_PORTAL_FRAME
+    - REINFORCED_DEEPSLATE
+    - SPAWNER
+    - TRIAL_SPAWNER
+    - VAULT
+    - COMMAND_BLOCK
+    - CHAIN_COMMAND_BLOCK
+    - REPEATING_COMMAND_BLOCK
+    - STRUCTURE_BLOCK
+    - JIGSAW
+
+veinminer:
+  max-blocks: 32
+  include-diagonals: true
+  ore-families:
+    coal:
+      - COAL_ORE
+      - DEEPSLATE_COAL_ORE
+    iron:
+      - IRON_ORE
+      - DEEPSLATE_IRON_ORE
+    copper:
+      - COPPER_ORE
+      - DEEPSLATE_COPPER_ORE
+    gold:
+      - GOLD_ORE
+      - DEEPSLATE_GOLD_ORE
+    redstone:
+      - REDSTONE_ORE
+      - DEEPSLATE_REDSTONE_ORE
+    emerald:
+      - EMERALD_ORE
+      - DEEPSLATE_EMERALD_ORE
+    lapis:
+      - LAPIS_ORE
+      - DEEPSLATE_LAPIS_ORE
+    diamond:
+      - DIAMOND_ORE
+      - DEEPSLATE_DIAMOND_ORE
+    nether-gold:
+      - NETHER_GOLD_ORE
+    quartz:
+      - NETHER_QUARTZ_ORE
+    ancient-debris:
+      - ANCIENT_DEBRIS
+
+smelter:
+  # Fortune wirkt über die normalen Rohstoff-Drops vor dem Schmelzen.
+  # Silk Touch hat Vorrang und überspringt diese Rezepte vollständig.
+  recipes:
+    IRON_ORE:
+      result: IRON_INGOT
+      experience-per-item: 0.7
+    DEEPSLATE_IRON_ORE:
+      result: IRON_INGOT
+      experience-per-item: 0.7
+    GOLD_ORE:
+      result: GOLD_INGOT
+      experience-per-item: 1.0
+    DEEPSLATE_GOLD_ORE:
+      result: GOLD_INGOT
+      experience-per-item: 1.0
+    COPPER_ORE:
+      result: COPPER_INGOT
+      experience-per-item: 0.7
+    DEEPSLATE_COPPER_ORE:
+      result: COPPER_INGOT
+      experience-per-item: 0.7
+    ANCIENT_DEBRIS:
+      result: NETHERITE_SCRAP
+      experience-per-item: 2.0
+    RAW_IRON_BLOCK:
+      result: IRON_BLOCK
+      # Keine zusätzliche Erfahrung durch den Schmelzvorgang; Berufs-XP kommt vom Blockabbau.
+      experience-per-item: 0.0
+    RAW_COPPER_BLOCK:
+      result: COPPER_BLOCK
+      # Keine zusätzliche Erfahrung durch den Schmelzvorgang; Berufs-XP kommt vom Blockabbau.
+      experience-per-item: 0.0
+
+tnt:
+  cooldown-seconds: 3
+  power: 4.0
+  fuse-ticks: 0
+  incendiary: false

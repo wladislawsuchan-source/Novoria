@@ -1,0 +1,23 @@
+
+# NovoHub - nur Hub-spezifische Einstellungen
+shared-folder: ../shared/NovoCore
+world: world
+
+velocity:
+  this-server: hub
+  smp-server: smp
+
+spawn:
+  join-spawn: true
+
+# Premium und Premium+ dürfen im Hub automatisch per Doppelsprung fliegen.
+premium-flight:
+  enabled: true
+
+
+# /discord - Link kann hier jederzeit geändert werden.
+discord:
+  invite-link: "https://discord.gg/DEIN-LINK"
+  messages:
+    invite: '<dark_gray>[<light_purple>Novoria</light_purple>]</dark_gray> <gray>Discord: <light_purple><u>%link%</u></light_purple></gray>'
+    not-configured: '<dark_gray>[<light_purple>Novoria</light_purple>]</dark_gray> <red>Der Discord-Link ist noch nicht eingerichtet.</red>'

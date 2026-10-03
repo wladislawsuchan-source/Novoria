@@ -1,0 +1,128 @@
+# Virtuelles Regelbuch für /rules.
+# Die Reihenfolge der Kapitel und Seiten bestimmt automatisch das Inhaltsverzeichnis
+# und alle Sprungziele. Es müssen keine Seitenzahlen von Hand gepflegt werden.
+book:
+  title: '<dark_purple>Novoria Regelwerk</dark_purple>'
+  author: '<gray>Novoria Serverteam</gray>'
+
+# Sichtbares Paragraphenzeichen als sicherer Component-Tag. Ein direktes „§1.1“
+# wird von Adventure als altes Minecraft-Farbformat erkannt und deshalb abgelehnt.
+symbols:
+  section: '§'
+
+index:
+  entries-per-page: 5
+  title: '<dark_purple><bold>Novoria Regelwerk</bold></dark_purple>'
+  subtitle: '<dark_gray>Wähle ein Kapitel:</dark_gray>'
+  page-indicator: '<dark_gray>Inhalt %page%/%pages%</dark_gray>'
+  entry-format: '<dark_purple><bold>%number%.</bold></dark_purple> <black>%title%</black>'
+  entry-hover: '<gray>Kapitel „<white>%title%</white>“ öffnen</gray>'
+
+chapter:
+  title-format: '<dark_purple><bold>%title%</bold></dark_purple>'
+  page-indicator: '<dark_gray>Kapitel-Seite %page%/%pages%</dark_gray>'
+
+navigation:
+  back-to-index: '<gray>« Inhaltsverzeichnis</gray>'
+  back-hover: '<gray>Zur ersten Inhaltsseite</gray>'
+
+limits:
+  # Vanilla-Bücher unterstützen höchstens 100 Seiten. Höhere Werte werden auf 100 begrenzt.
+  max-pages: 100
+  # Nur eine Konsolenwarnung; Regeltext wird niemals still abgeschnitten.
+  warn-plain-characters-per-page: 260
+
+chapters:
+  allgemein:
+    title: 'Allgemeines'
+    pages:
+      - |-
+        <dark_purple><section/>1.1</dark_purple> <black>Anweisungen des Serverteams ist Folge zu leisten.</black>
+      - |-
+        <dark_purple><section/>1.2</dark_purple> <black>Jeder Spieler ist selbst für seinen Account und alle darüber ausgeführten Aktionen verantwortlich.</black>
+      - |-
+        <dark_purple><section/>1.3</dark_purple> <black>Das absichtliche Ausnutzen des Supports oder Behindern von Teammitgliedern ist verboten.</black>
+      - |-
+        <dark_purple><section/>1.4</dark_purple> <black>Das Manipulieren oder künstliche Verfälschen von Statistiken ist verboten.</black>
+      - |-
+        <dark_purple><section/>1.5</dark_purple> <black>Bugs und Spielfehler dürfen nicht absichtlich ausgenutzt werden und sind dem Team zu melden.</black>
+      - |-
+        <dark_purple><section/>1.6</dark_purple> <black>Das Nachahmen anderer Spieler oder Teammitglieder ist verboten.</black>
+      - |-
+        <dark_purple><section/>1.7</dark_purple> <black>Skins mit rassistischen, pornografischen oder diskriminierenden Inhalten sind verboten.</black>
+      - |-
+        <dark_purple><section/>1.8</dark_purple> <black>Betrug oder Betrugsversuche, um sich einen unerlaubten Vorteil zu verschaffen, sind verboten.</black>
+      - |-
+        <dark_purple><section/>1.9</dark_purple> <black>Das absichtliche Fälschen von Beweisen ist verboten.</black>
+      - |-
+        <dark_purple><section/>1.10</dark_purple> <black>Das Umgehen aktiver Strafen ist verboten.</black>
+
+  chat:
+    title: 'Auftreten'
+    pages:
+      - |-
+        <dark_purple><section/>2.1</dark_purple> <black>Provozierende, beleidigende, sexistische oder anderweitig anstößige Äußerungen sind verboten.</black>
+      - |-
+        <dark_purple><section/>2.2</dark_purple> <black>Drohungen sowie rassistische, extremistische und diskriminierende Äußerungen sind verboten.</black>
+      - |-
+        <dark_purple><section/>2.3</dark_purple> <black>Werbung für andere Server oder Netzwerke ist verboten.</black>
+      - |-
+        <dark_purple><section/>2.4</dark_purple> <black>Spam und das wiederholte Senden derselben oder ähnlicher Nachrichten sind untersagt.</black>
+      - |-
+        <dark_purple><section/>2.5</dark_purple> <black>Das Veröffentlichen personenbezogener Daten anderer Personen ist verboten.</black>
+      - |-
+        <dark_purple><section/>2.6</dark_purple> <black>Namen dürfen keine beleidigenden, irreführenden oder diskriminierenden Inhalte enthalten.</black>
+      - |-
+        <dark_purple><section/>2.7</dark_purple> <black>Unangemessene oder diskriminierende Skins sind verboten.</black>
+
+  cheats:
+    title: 'Modifikationen & Cheats'
+    pages:
+      - |-
+        <dark_purple><section/>3.1</dark_purple> <black>Client-Modifikationen, die einen erheblichen unfairen Vorteil verschaffen, sind verboten.</black>
+      - |-
+        <dark_purple><section/>3.2</dark_purple> <black>Autoclicker, Makros, Bots oder vergleichbare automatisierte Aktionen sind verboten.</black>
+      - |-
+        <dark_purple><section/>3.3</dark_purple> <black>Addons oder Tools, die Kämpfe oder andere Spielmechaniken unfair erleichtern, sind verboten.</black>
+      - |-
+        <dark_purple><section/>3.4</dark_purple> <black>X-Ray, ESP, unerlaubte Freecam-Funktionen und vergleichbare Cheats sind verboten.</black>
+      - |-
+        <dark_purple><section/>3.5</dark_purple> <black>Das bewusste Umgehen des Anti-Cheats oder anderer Schutzsysteme ist verboten.</black>
+
+  survival:
+    title: 'Survival'
+    pages:
+      - |-
+        <dark_purple><section/>4.1</dark_purple> <black>Scammen von Spielern ist im angemessenen Rahmen erlaubt.</black>
+      - |-
+        <dark_purple><section/>4.2</dark_purple> <black>PvP und das Töten anderer Spieler sind grundsätzlich erlaubt.</black>
+      - |-
+        <dark_purple><section/>4.3</dark_purple> <black>TPA-Fallen sind verboten.</black>
+      - |-
+        <dark_purple><section/>4.4</dark_purple> <black>Griefing und Raiden sind grundsätzlich erlaubt.</black>
+      - |-
+        <dark_purple><section/>4.5</dark_purple> <black>Combat-Logging ist verboten. Das Verlassen des Servers, um einem Kampf zu entkommen, kann bestraft werden.</black>
+      - |-
+        <dark_purple><section/>4.6</dark_purple> <black>Das Ausnutzen von Duels, Arenen oder anderen Servermechaniken zur Duplizierung oder Beschaffung unerlaubter Items ist verboten.</black>
+
+  clans:
+    title: 'Clans & Sonstiges'
+    pages:
+      - |-
+        <dark_purple><section/>5.1</dark_purple> <black>Jeder Spieler ist selbst für seinen Clan verantwortlich.</black>
+      - |-
+        <dark_purple><section/>5.2</dark_purple> <black>Clanwerbung darf ausschließlich in dafür vorgesehenen Bereichen stattfinden.</black>
+      - |-
+        <dark_purple><section/>5.3</dark_purple> <black>Clannamen dürfen keine beleidigenden, irreführenden oder diskriminierenden Inhalte enthalten.</black>
+      - |-
+        <dark_purple><section/>5.4</dark_purple> <black>Situationen, die nicht ausdrücklich im Regelwerk genannt werden, können trotzdem vom Serverteam bewertet werden.</black>
+      - |-
+        <dark_purple><section/>5.5</dark_purple> <black>Das Serverteam entscheidet abhängig von Schwere und Umständen über Sanktionen.</black>
+      - |-
+        <dark_purple><section/>5.6</dark_purple> <black>Änderungen am Regelwerk sind jederzeit möglich.</black>
+      - |-
+        <black>Mit dem Spielen auf Novoria akzeptierst du dieses Regelwerk.</black>
+
+messages:
+  player-only: '<red>Nur Spieler können das virtuelle Regelbuch öffnen.</red>'
+  error: '<red>Das Regelwerk konnte nicht geöffnet werden. Bitte informiere das Serverteam.</red>'

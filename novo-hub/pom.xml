@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"><modelVersion>4.0.0</modelVersion>
+<parent><groupId>de.walahi</groupId><artifactId>novo-server-parent</artifactId><version>1.53.60</version></parent>
+<artifactId>novo-hub</artifactId>
+<dependencies>
+<dependency><groupId>de.walahi</groupId><artifactId>novo-common</artifactId><version>${project.version}</version></dependency>
+<dependency><groupId>io.papermc.paper</groupId><artifactId>paper-api</artifactId><scope>provided</scope></dependency>
+<dependency><groupId>net.luckperms</groupId><artifactId>api</artifactId><scope>provided</scope></dependency>
+<dependency><groupId>net.dmulloy2</groupId><artifactId>ProtocolLib</artifactId><scope>provided</scope></dependency>
+<dependency><groupId>me.clip</groupId><artifactId>placeholderapi</artifactId><scope>provided</scope></dependency>
+</dependencies>
+<build><finalName>NovoHub</finalName><plugins>
+<plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version><configuration><release>21</release></configuration></plugin>
+<plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-shade-plugin</artifactId><version>3.6.0</version><executions><execution><phase>package</phase><goals><goal>shade</goal></goals><configuration><createDependencyReducedPom>false</createDependencyReducedPom><minimizeJar>false</minimizeJar><filters><filter><artifact>*:*</artifact><excludes><exclude>META-INF/*.SF</exclude><exclude>META-INF/*.DSA</exclude><exclude>META-INF/*.RSA</exclude></excludes></filter></filters></configuration></execution></executions></plugin>
+</plugins></build>
+</project>

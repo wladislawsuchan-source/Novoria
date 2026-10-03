@@ -1,0 +1,201 @@
+# Endloses persönliches Jump'n'Run
+enabled: true
+
+# Wird mit /jumpnrun setplate gesetzt. Nur exakt diese Position löst einen Run aus.
+trigger:
+  world: ''
+  x: 0
+  y: 0
+  z: 0
+  material: STONE_PRESSURE_PLATE
+
+admin:
+  target-distance: 6
+
+start:
+  height-above-spawn: 100
+  height-variation: 10
+  horizontal-radius: 150
+  max-position-attempts: 40
+  clearance:
+    horizontal-radius: 1
+    blocks-below: 1
+    blocks-above: 3
+
+runs:
+  minimum-distance: 32
+
+border:
+  safety-margin: 32
+  inward-turn-degrees: 35
+
+blocks:
+  materials:
+    - WHITE_CONCRETE
+    - ORANGE_CONCRETE
+    - MAGENTA_CONCRETE
+    - LIGHT_BLUE_CONCRETE
+    - YELLOW_CONCRETE
+    - LIME_CONCRETE
+    - PINK_CONCRETE
+    - GRAY_CONCRETE
+    - LIGHT_GRAY_CONCRETE
+    - CYAN_CONCRETE
+    - PURPLE_CONCRETE
+    - BLUE_CONCRETE
+    - BROWN_CONCRETE
+    - GREEN_CONCRETE
+    - RED_CONCRETE
+    - BLACK_CONCRETE
+
+generator:
+  # current + bis zu vier vorausliegende Plattformen; technisch auf 2-5 begrenzt.
+  visible-platforms: 3
+  max-attempts-per-jump: 30
+  fallback-attempts: 20
+  diagonal-side-offset: 1.0
+  minimum-self-distance: 1.25
+  history-limit: 128
+
+# Harte technische Sicherheitsgrenzen verhindern auch bei zu großzügiger Config
+# unmögliche Sprünge. Diese Werte dürfen darunter, aber nicht darüber wirken.
+validator:
+  minimum-horizontal: 1.0
+  maximum-rise: 1
+  maximum-drop: 1
+  maximum-horizontal:
+    same-level: 3.75
+    up-one: 3.0
+    down-one: 4.0
+  landing-headroom: 2
+  path-arc-height: 1.25
+  path-samples: 12
+
+# Zwischen den Stufen wird fließend interpoliert. Es gibt keine harten Sprünge
+# in der Schwierigkeit. Gewichte müssen nicht zusammen 100 ergeben.
+difficulty:
+  stages:
+    easy:
+      from-score: 0
+      horizontal:
+        2: 85
+        3: 15
+      vertical:
+        -1: 3
+        0: 94
+        1: 3
+      diagonal-chance: 18
+      turn-chance: 8
+      max-turn-degrees: 12
+
+    medium:
+      from-score: 50
+      horizontal:
+        2: 60
+        3: 40
+      vertical:
+        -1: 12
+        0: 72
+        1: 16
+      diagonal-chance: 38
+      turn-chance: 16
+      max-turn-degrees: 22
+
+    hard:
+      from-score: 150
+      horizontal:
+        2: 35
+        3: 65
+      vertical:
+        -1: 20
+        0: 55
+        1: 25
+      diagonal-chance: 55
+      turn-chance: 24
+      max-turn-degrees: 30
+
+fail:
+  below-current-block: 8
+  return-to-spawn: true
+
+sounds:
+  jump-success:
+    enabled: true
+    sound: BLOCK_BEEHIVE_EXIT
+    volume: 0.7
+    pitch: 1.0
+  fail:
+    enabled: false
+    sound: ENTITY_VILLAGER_NO
+    volume: 1.0
+    pitch: 1.0
+
+actionbar:
+  enabled: true
+  refresh-ticks: 20
+  text: '<gray>Sprünge: <white>%score% <dark_gray>| <gray>Rekord: <yellow>%highscore%'
+
+# Nutzt die gespeicherte Trigger-Druckplatte automatisch als Basisposition.
+# Die X/Z-Mitte des Blocks wird intern ergänzt; die Offsets verschieben davon ausgehend.
+leaderboard:
+  enabled: true
+  offset:
+    x: 0.0
+    y: 1.5
+    z: 0.0
+  max-entries: 10
+  title: '<gradient:#A855F7:#7C3AED><bold>JUMP’N’RUN TOP 10</bold></gradient>'
+  line-format: '<dark_gray>#<yellow>%rank%</yellow> <white>%player%</white> <dark_gray>– <gold>%score%</gold>'
+  empty-line: '<gray>Noch kein Highscore vorhanden.</gray>'
+  # 0 deaktiviert den optionalen langsamen Abgleich. Neue Bestwerte und setplate aktualisieren sofort.
+  refresh-seconds: 0
+  display:
+    line-spacing: 0.3
+    line-width: 240
+    view-range: 48.0
+    scale: 1.0
+    billboard: CENTER
+    shadowed: true
+    see-through: false
+    background: false
+
+# Alle sichtbaren Texte liegen hier. MiniMessage-Formatierung wird unterstützt.
+messages:
+  prefix: '<dark_gray>[<light_purple>JNR</light_purple>]</dark_gray> '
+  player-only: '%prefix%<red>Dieser Befehl ist nur für Spieler verfügbar.</red>'
+  no-permission: '%prefix%<red>Dafür hast du keine Berechtigung.</red>'
+  usage:
+    - '%prefix%<light_purple>/jumpnrun check</light_purple> <gray>zeigt den aktuellen Status.</gray>'
+  admin-usage:
+    - '%prefix%<light_purple>/jumpnrun setplate [Material]</light_purple> <gray>setzt die anvisierte Druckplatte.</gray>'
+    - '%prefix%<light_purple>/jumpnrun remove</light_purple> <gray>entfernt den Startpunkt.</gray>'
+  invalid-trigger: '%prefix%<red>Schau eine Druckplatte an oder stehe direkt darauf.</red>'
+  trigger-saved: '%prefix%<green>Start-Druckplatte gesetzt:</green> <white>%material%</white> <gray>in</gray> <white>%world% %x%/%y%/%z%</white>'
+  trigger-removed: '%prefix%<yellow>Die Start-Druckplatte wurde entfernt.</yellow>'
+  already-running: '%prefix%<red>Du bist bereits in einem Jump’n’Run.</red>'
+  no-start-position: '%prefix%<red>Es konnte keine freie und sichere Startposition gefunden werden.</red>'
+  no-valid-material: '%prefix%<red>Es ist kein gültiges Plattformmaterial konfiguriert.</red>'
+  started: '%prefix%<gray>Jump’n’Run gestartet. Rekord: <yellow>%highscore%</yellow></gray>'
+  failed: '%prefix%<gray>Run beendet. <white>%score%</white> Sprünge • Rekord: <yellow>%highscore%</yellow></gray>'
+  new-highscore: '%prefix%<yellow>Neuer Rekord: <white>%score%</white> Sprünge!</yellow>'
+  technical-stop: '%prefix%<red>Der Run wurde sicher beendet, weil kein gültiger Folgesprung gefunden wurde.</red> <gray>Punkte: <white>%score%</white></gray>'
+  external-stop: '%prefix%<gray>Run wegen eines Teleports beendet. <white>%score%</white> Sprünge.</gray>'
+  death-stop: '%prefix%<gray>Run durch deinen Tod beendet. <white>%score%</white> Sprünge.</gray>'
+  not-set-value: 'nicht gesetzt'
+  valid-value: 'ja'
+  invalid-value: 'nein'
+  check:
+    - '%prefix%<light_purple><bold>Jump’n’Run-Status</bold></light_purple>'
+    - '<gray>Welt: <white>%world%</white>'
+    - '<gray>Position: <white>%x% / %y% / %z%</white>'
+    - '<gray>Material: <white>%material%</white>'
+    - '<gray>Trigger gültig: <white>%valid%</white>'
+    - '<gray>Aktive Runs: <white>%active_runs%</white>'
+    - '<gray>Dein Highscore: <yellow>%highscore%</yellow>'
+    - '<gray>Bestenliste aktiviert: <white>%leaderboard_enabled%</white>'
+    - '<gray>Bestenlisten-Welt: <white>%leaderboard_world%</white>'
+    - '<gray>Bestenlisten-Position: <white>%leaderboard_x% / %leaderboard_y% / %leaderboard_z%</white>'
+    - '<gray>Top-Einträge: <white>%leaderboard_entries%</white>'
+    - '<gray>Hologramm vorhanden: <white>%leaderboard_active%</white>'
+    - '<gray>Hologramm-ID: <white>%leaderboard_id%</white>'
+    - '<gray>Sichtbare Plattformen: <white>%visible_platforms%</white>'

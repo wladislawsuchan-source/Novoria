@@ -1,0 +1,21 @@
+id: lumi
+display-name: Lumi-Kiste
+key-material: TRIAL_KEY
+enabled: true
+rewards:
+  empty_spawner: {type: ITEM, display-name: "Leerer Spawner", material: SPAWNER, amount: 1, chance: 0.10}
+  witch_egg: {type: ITEM, display-name: "Hexen-Spawn-Ei", material: WITCH_SPAWN_EGG, amount: 1, chance: 0.10}
+  enderman_egg: {type: ITEM, display-name: "Enderman-Spawn-Ei", material: ENDERMAN_SPAWN_EGG, amount: 1, chance: 0.10}
+  slime_egg: {type: ITEM, display-name: "Schleim-Spawn-Ei", material: SLIME_SPAWN_EGG, amount: 1, chance: 0.10}
+  budding_amethyst: {type: ITEM, display-name: "Knospender Amethyst", material: BUDDING_AMETHYST, amount: 1, chance: 0.20}
+  elytra: {type: ITEM, display-name: "Elytra", material: ELYTRA, amount: 1, chance: 0.40}
+  heavy_core: {type: ITEM, display-name: "Heavy Core", material: HEAVY_CORE, amount: 1, chance: 1.20}
+  trident: {type: ITEM, display-name: "Dreizack", material: TRIDENT, amount: 1, chance: 2.00}
+  enchanted_gapple: {type: ITEM, display-name: "Verzauberter Goldapfel", material: ENCHANTED_GOLDEN_APPLE, amount: 1, chance: 2.00}
+  netherite_template: {type: ITEM, display-name: "Netherite Upgrade Template", material: NETHERITE_UPGRADE_SMITHING_TEMPLATE, amount: 1, chance: 3.00}
+  netherite_ingot: {type: ITEM, display-name: "Netherite Ingot", material: NETHERITE_INGOT, amount: 4, chance: 4.00}
+  shulker_shells: {type: ITEM, display-name: "Shulker Shell ×6", material: SHULKER_SHELL, amount: 6, chance: 8.00}
+  wind_charges: {type: ITEM, display-name: "Wind Charges ×64", material: WIND_CHARGE, amount: 64, chance: 22.00}
+  totem: {type: ITEM, display-name: "Totem der Unsterblichkeit", material: TOTEM_OF_UNDYING, amount: 1, chance: 12.00}
+  gapples: {type: ITEM, display-name: "Goldäpfel ×8", material: GOLDEN_APPLE, amount: 8, chance: 20.00}
+  rockets: {type: ITEM, display-name: "Raketen ×64", material: FIREWORK_ROCKET, amount: 64, chance: 24.80}

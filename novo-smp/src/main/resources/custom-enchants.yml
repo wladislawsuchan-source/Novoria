@@ -1,0 +1,12 @@
+messages:
+  unknown: '<red>Die Verzauberung <white>%enchantment%</white> ist nicht verfügbar.</red>'
+  usage: '<yellow>/%label% <1-%max%|entfernen> [spieler]</yellow>'
+  usage-single: '<yellow>/%label% [spieler] • /%label% entfernen [spieler]</yellow>'
+  no-target: '<red>Gib einen Onlinespieler an oder führe den Befehl selbst als Spieler aus.</red>'
+  invalid-level: '<red>Die Stufe muss zwischen 1 und %max% liegen.</red>'
+  empty-hand: '<red><white>%player%</white> hält nichts in der Hand.</red>'
+  not-applicable: '<red><white>%enchantment%</white> passt nicht auf dieses Item.</red>'
+  conflict: '<red><white>%enchantment%</white> kann nicht mit <white>%conflict%</white> kombiniert werden.</red>'
+  applied: '<green><white>%enchantment% %level%</white> wurde auf das Item von <white>%player%</white> gesetzt.</green>'
+  applied-single: '<green><white>%enchantment%</white> wurde auf das Item von <white>%player%</white> gesetzt.</green>'
+  removed: '<green><white>%enchantment%</white> wurde vom Item von <white>%player%</white> entfernt.</green>'
