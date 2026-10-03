@@ -15,6 +15,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.potion.PotionEffectType;
 
 import java.sql.SQLException;
 import java.text.NumberFormat;
@@ -186,6 +187,11 @@ public final class BountyManager implements Listener {
         if (event.cause() == ValidKillCause.DUEL && !duelKillsCanClaim) return;
         if (!friendsCanClaim && relationships.isFriendly(event.killerId(), event.victimId())) return;
 
+        // Valid kills are dispatched synchronously. Snapshot identity at the kill,
+        // before the payout and its economy listeners can change potion state.
+        Player killer = Bukkit.getPlayer(event.killerId());
+        boolean killerInvisible = killer != null && killer.hasPotionEffect(PotionEffectType.INVISIBILITY);
+
         ActionContext context = ActionContext.actorTarget(
                 ActionSource.SYSTEM, event.killerId(), event.victimId());
         BountyRepository.Mutation result = repository.claim(event.killerId(), event.victimId(), context);
@@ -201,11 +207,29 @@ public final class BountyManager implements Listener {
         active.remove(event.victimId());
         publishEconomy(event.killerId(), EconomyTransactionEvent.Type.DEPOSIT, result.entry().amount(),
                 result.balanceBefore(), result.balanceAfter(), "BOUNTY_CLAIM", context);
-        announce("bounty-claimed", Map.of(
+        announceClaim(event, result.entry().amount(), killer, killerInvisible);
+    }
+
+    private void announceClaim(ValidPlayerKillEvent event, long amount, Player killer, boolean killerInvisible) {
+        var anonymity = plugin.invisibilityAnonymity();
+        if (!killerInvisible || anonymity == null) {
+            announce("bounty-claimed", Map.of(
                 "%killer%", escape(event.killerName()),
                 "%player%", escape(event.victimName()),
-                "%amount%", format(result.entry().amount())
-        ));
+                "%amount%", format(amount)
+            ));
+            return;
+        }
+        Component template = announcement("bounty-claimed", Map.of(
+                "%player%", escape(event.victimName()), "%amount%", format(amount)));
+        if (template == null) return;
+        for (Player viewer : Bukkit.getOnlinePlayers()) {
+            Component name = anonymity.shouldAnonymize(viewer, killer, killerInvisible)
+                    ? anonymity.anonymousName() : Component.text(event.killerName());
+            // Insert a component so the configured anonymous name retains its style
+            // without leaking formatting into the rest of the configured message.
+            viewer.sendMessage(template.replaceText(builder -> builder.matchLiteral("%killer%").replacement(name)));
+        }
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -234,8 +258,13 @@ public final class BountyManager implements Listener {
     }
 
     private void announce(String key, Map<String, String> replacements) {
+        Component message = announcement(key, replacements);
+        if (message != null) Bukkit.broadcast(message);
+    }
+
+    private Component announcement(String key, Map<String, String> replacements) {
         if (!plugin.configs().server().getBoolean("bounty.announcements.enabled", true)
-                || !plugin.configs().server().getBoolean("bounty.announcements." + key, true)) return;
+                || !plugin.configs().server().getBoolean("bounty.announcements." + key, true)) return null;
         String fallback = switch (key) {
             case "new-bounty" -> "<dark_red>☠</dark_red> <red>Auf <yellow>%player%</yellow> wurde ein Kopfgeld von <gold>%amount% Coins</gold> ausgesetzt!</red>";
             case "bounty-increased" -> "<dark_red>☠</dark_red> <red>Das Kopfgeld auf <yellow>%player%</yellow> wurde auf <gold>%amount% Coins</gold> erhöht!</red>";
@@ -245,8 +274,7 @@ public final class BountyManager implements Listener {
         for (Map.Entry<String, String> replacement : replacements.entrySet()) {
             configured = configured.replace(replacement.getKey(), replacement.getValue());
         }
-        Component message = miniMessage.deserialize(configured);
-        Bukkit.broadcast(message);
+        return miniMessage.deserialize(configured);
     }
 
     public static String format(long value) {
