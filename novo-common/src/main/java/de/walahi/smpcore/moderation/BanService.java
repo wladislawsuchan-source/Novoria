@@ -39,7 +39,7 @@ public final class BanService {
 
     private Result createBan(CommandSender actor, UUID targetUuid, String targetName, Player onlineTarget, String reason, Duration duration) {
         if (actor instanceof Player actorPlayer && actorPlayer.getUniqueId().equals(targetUuid)) return Result.SELF;
-        if (onlineTarget != null && !hierarchy.mayActOn(actor, onlineTarget)) return Result.HIERARCHY;
+        if (!hierarchy.mayActOn(actor, targetUuid)) return Result.HIERARCHY;
         Optional<Punishment> activeBan = punishments.active(targetUuid, PunishmentType.BAN);
         if (activeBan.isPresent()) return Result.ALREADY_BANNED;
 
@@ -52,11 +52,16 @@ public final class BanService {
         plugin.getLogger().info("[Team] " + staffName + " hat " + targetName +
                 (duration == null ? " permanent" : " für " + PunishmentFormatter.duration(duration)) +
                 " gebannt. Grund: " + reason);
+        Player preferredCarrier = onlineTarget != null && onlineTarget.isOnline() ? onlineTarget
+                : actor instanceof Player player ? player : null;
+        boolean sentToProxy = plugin.getNetworkManager().addNetworkBan(
+                preferredCarrier, targetUuid, result.punishment().expiresAt(), buildBanMiniMessage(result.punishment()));
+        if (!sentToProxy) {
+            plugin.getLogger().warning("Unmittelbarer Velocity-Ban-Sync für " + targetUuid
+                    + " fehlgeschlagen. Der Ban bleibt gespeichert; der Datenbank-Login-Schutz bleibt aktiv.");
+        }
         if (onlineTarget != null && onlineTarget.isOnline()) {
             Component screen = buildBanScreen(result.punishment());
-            String networkMessage = buildBanMiniMessage(result.punishment());
-            boolean sentToProxy = plugin.getNetworkManager().addNetworkBan(
-                    onlineTarget, targetUuid, result.punishment().expiresAt(), networkMessage);
 
             // Fallback only. A normal backend kick would otherwise send the player to the Hub,
             // therefore the proxy receives and stores BAN_ADD before disconnecting the connection.

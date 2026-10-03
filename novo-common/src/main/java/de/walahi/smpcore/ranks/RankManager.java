@@ -25,6 +25,7 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Function;
@@ -137,6 +138,25 @@ public final class RankManager {
     public RankDefinition resolve(UUID playerId) {
         User user = luckPerms.getUserManager().getUser(playerId);
         if (user == null) return fallbackPlayerRank();
+
+        return resolve(user);
+    }
+
+    /** Moderation must load persisted groups instead of treating an unloaded user as a player. */
+    public Optional<RankDefinition> resolveForModeration(UUID playerId) {
+        try {
+            User user = luckPerms.getUserManager().getUser(playerId);
+            if (user == null) user = luckPerms.getUserManager().loadUser(playerId).join();
+            if (user == null) throw new IllegalStateException("LuckPerms hat keinen User geliefert");
+            return Optional.of(resolve(user));
+        } catch (RuntimeException exception) {
+            plugin.getLogger().warning("Moderationsrang für " + playerId + " konnte nicht geladen werden; "
+                    + "Hierarchieaktion wird abgelehnt: " + exception.getMessage());
+            return Optional.empty();
+        }
+    }
+
+    private RankDefinition resolve(User user) {
 
         Set<String> inheritedGroups = inheritedGroups(user);
 
