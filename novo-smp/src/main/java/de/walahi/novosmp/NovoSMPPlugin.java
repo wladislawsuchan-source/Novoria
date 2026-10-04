@@ -56,6 +56,8 @@ import de.walahi.novosmp.chat.SmpChatListener;
 import de.walahi.novosmp.chat.ChatColorService;
 import de.walahi.novosmp.combat.CombatManager;
 import de.walahi.novosmp.combat.CombatRelationshipService;
+import de.walahi.novosmp.sit.SitCommand;
+import de.walahi.novosmp.sit.SitManager;
 import de.walahi.novosmp.bounty.BountyCommand;
 import de.walahi.novosmp.bounty.BountyManager;
 import de.walahi.novosmp.clan.ClanManager;
@@ -130,6 +132,10 @@ import de.walahi.novosmp.daily.DailyMenu;
 import de.walahi.novosmp.daily.DailyRepository;
 import de.walahi.novosmp.duel.*;
 import de.walahi.novosmp.lumi.LumiRepository;
+import de.walahi.novosmp.quests.QuestCommand;
+import de.walahi.novosmp.quests.QuestListener;
+import de.walahi.novosmp.quests.QuestMenu;
+import de.walahi.novosmp.quests.QuestService;
 import de.walahi.smpcore.network.ServerType;
 import de.walahi.novosmp.feature.SmpScoreboardManager;
 import de.walahi.novosmp.feature.DeathMessageListener;
@@ -176,6 +182,8 @@ public final class NovoSMPPlugin extends SMPCorePlugin {
     private AfkZoneManager lumiAfkZoneManager;
     private ExpandableEnderChestManager expandableEnderChestManager;
     private LumiRepository lumiRepository;
+    private QuestService questService;
+    private QuestMenu questMenu;
     private SmpScoreboardManager smpScoreboardManager;
     private AfkAccess afkAccess;
     private PerformanceCleanupManager performanceCleanupManager;
@@ -201,6 +209,7 @@ public final class NovoSMPPlugin extends SMPCorePlugin {
     private WorldDamageProtectionListener worldDamageProtectionListener;
     private ChatColorService chatColorService;
     private CombatManager combatManager;
+    private SitManager sitManager;
     private CombatRelationshipService combatRelationshipService;
     private BountyManager bountyManager;
     private ClanManager clanManager;
@@ -510,7 +519,7 @@ public final class NovoSMPPlugin extends SMPCorePlugin {
                 "berufe", "beruf", "abgabe",
                 "koepfe", "köpfe", "heads", "kopfsammlung",
                 "vote", "nachtsicht", "nv",
-                "clan", "csethome", "chome", "cdelhome", "cc", "cp", "king"
+                "clan", "csethome", "chome", "cdelhome", "cc", "cp", "king", "quests"
         );
         List<String> paths = List.of(
                 "server-groups.smp.default.allowed"
@@ -621,6 +630,9 @@ public final class NovoSMPPlugin extends SMPCorePlugin {
         combatRelationshipService = new CombatRelationshipService(this, friendManager);
         combatManager = new CombatManager(this, combatRelationshipService, sharedStatsManager());
         combatManager.start();
+        sitManager = new SitManager(this);
+        Bukkit.getPluginManager().registerEvents(sitManager, this);
+        commands.register("sit", new SitCommand(this, sitManager));
         bountyManager = new BountyManager(this, combatRelationshipService);
         bountyManager.start();
         commands.register("friend", new FriendCommand(this, friendManager));
@@ -847,6 +859,15 @@ public final class NovoSMPPlugin extends SMPCorePlugin {
                 this, dailyManager, sharedEconomyService(), featureLumiRepository, crateManager);
         commands.register("daily", new DailyCommand(this, dailyMenu, dailyManager));
 
+        questService = new QuestService(this, sharedStorageManager(), lumiRepository, crateManager);
+        questService.start();
+        questMenu = new QuestMenu(this, questService);
+        questService.rowsChanged(ignored -> Bukkit.getScheduler().runTask(this, questMenu::reopenViewers));
+        QuestListener questListener = new QuestListener(this, questService);
+        Bukkit.getPluginManager().registerEvents(questListener, this);
+        anglerFishingService.fishCaught(questListener::customFish);
+        commands.register("quests", new QuestCommand(this, questMenu));
+
         validateRequiredCommandVisibility();
         DuelConfig duelConfig = new DuelConfig(this);
         WorldEditArenaService duelArenas = new WorldEditArenaService(this, duelConfig);
@@ -1031,6 +1052,7 @@ public final class NovoSMPPlugin extends SMPCorePlugin {
 
     @Override
     protected void reloadServerFeatures() {
+        if (questService != null) questService.reload();
         if (chestLogManager != null) chestLogManager.flushForReload();
         if (worldDamageProtectionListener != null) worldDamageProtectionListener.reload();
         if (combatManager != null) combatManager.reload();
@@ -1059,6 +1081,9 @@ public final class NovoSMPPlugin extends SMPCorePlugin {
 
     @Override
     protected void stopServerFeatures() {
+        if (questMenu != null) { questMenu.stop(); questMenu = null; }
+        if (questService != null) { questService.shutdown(); questService = null; }
+        if (sitManager != null) { sitManager.shutdown(); sitManager = null; }
         if (chestLogManager != null) { chestLogManager.shutdown(); chestLogManager = null; }
         if (jumpRunManager != null) { jumpRunManager.shutdown(); jumpRunManager = null; }
         if (clanManager != null) { clanManager.shutdown(); clanManager = null; }

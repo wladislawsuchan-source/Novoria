@@ -144,6 +144,10 @@ commands:
     description: Öffnet die täglichen Belohnungen
     usage: /daily
     permission: smpcore.daily.use
+  quests:
+    description: Öffnet persönliche und globale Quests
+    usage: /quests
+    permission: smpcore.quests.use
   vote:
     aliases: [votes]
     description: Öffnet die Vote-Übersicht
@@ -239,6 +243,9 @@ commands:
   afk:
     description: Aktiviert oder deaktiviert deinen AFK-Status
     usage: /afk
+  sit:
+    description: Setzt dich hin oder lässt dich aufstehen
+    usage: /sit
   ban:
     description: Bannt einen Spieler permanent vom Server
     usage: /ban <Spieler> [Grund]
@@ -442,6 +449,8 @@ permissions:
     default: op
   smpcore.discord:
     default: true
+  smpcore.discord.admin:
+    default: op
   smpcore.friend.use:
     default: true
   smpcore.friend.home:
@@ -475,6 +484,8 @@ permissions:
   smpcore.playtime.use:
     default: true
   smpcore.daily.use:
+    default: true
+  smpcore.quests.use:
     default: true
   smpcore.vote.use:
     default: true

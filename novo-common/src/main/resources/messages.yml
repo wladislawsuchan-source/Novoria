@@ -14,6 +14,14 @@ message-api:
     novoria: '<dark_gray>[<light_purple>Novoria</light_purple>]</dark_gray> '
 death-messages:
   enabled: true
+sit:
+  messages:
+    player-only: '<red>Nur Spieler können /sit nutzen.</red>'
+    usage: '<gray>Benutzung: <yellow>/sit</yellow></gray>'
+    sitting: '<green>Du sitzt jetzt.</green>'
+    stood: '<gray>Du bist wieder aufgestanden.</gray>'
+    invalid: '<red>Du kannst dich hier nicht hinsetzen.</red>'
+    combat: '<red>Du kannst dich im Kampf nicht hinsetzen.</red>'
 chat:
   messages:
     no-permission: <dark_gray>[<green>SMP</green>]</dark_gray> <red>Dafür hast du keine Berechtigung.</red>

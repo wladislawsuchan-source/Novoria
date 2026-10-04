@@ -1,0 +1,70 @@
+enabled: true
+timezone: Europe/Berlin
+daily:
+  count: 5
+  reset-hour: 0
+  reset-minute: 0
+  key-crate-id: daily
+  key-amount: 1
+  pool:
+    - {id: mob_30, type: MOB_KILL, target: 30, lumis: 3, item: IRON_SWORD, name: 'Töte 30 Mobs'}
+    - {id: tame_1, type: TAME, target: 1, lumis: 3, item: LEAD, name: 'Zähme 1 Tier'}
+    - {id: breed_5, type: BREED, target: 5, lumis: 3, item: WHEAT, name: 'Vermehre 5 Tiere'}
+    - {id: egg_20, type: EGG_THROW, target: 20, lumis: 3, item: EGG, name: 'Wirf 20 Eier'}
+    - {id: fish_3, type: FISH_CATCH, target: 3, lumis: 3, item: FISHING_ROD, name: 'Fange 3 Fische'}
+    - {id: ore_5, type: ORE_BREAK, target: 5, lumis: 3, item: IRON_ORE, name: 'Baue 5 Erze ab'}
+    - {id: block_100, type: BLOCK_BREAK, target: 100, lumis: 3, item: STONE_PICKAXE, name: 'Baue 100 Blöcke ab'}
+    - {id: elytra_500, type: ELYTRA_DISTANCE, target: 500, lumis: 3, item: ELYTRA, name: 'Fliege 500 Blöcke mit einer Elytra'}
+    - {id: boat_500, type: BOAT_DISTANCE, target: 500, lumis: 3, item: OAK_BOAT, name: 'Fahre 500 Blöcke mit einem Boot'}
+    - {id: enchant_1, type: ENCHANT, target: 1, lumis: 3, item: ENCHANTING_TABLE, name: 'Verzaubere 1 Item'}
+    - {id: mob_75, type: MOB_KILL, target: 75, lumis: 5, item: DIAMOND_SWORD, name: 'Töte 75 Mobs'}
+    - {id: ore_25, type: ORE_BREAK, target: 25, lumis: 5, item: DIAMOND_ORE, name: 'Baue 25 Erze ab'}
+global:
+  cooldown-seconds: 900
+  row-thresholds: [1, 5, 10, 15, 20]
+  pool:
+    - {id: mob_250, type: MOB_KILL, target: 250, lumis: 3, item: DIAMOND_SWORD, name: 'Töte 250 Mobs'}
+    - {id: creeper_100, type: ENTITY_KILL, entity: CREEPER, target: 100, lumis: 3, item: CREEPER_HEAD, name: 'Töte 100 Creeper'}
+    - {id: enderman_100, type: ENTITY_KILL, entity: ENDERMAN, target: 100, lumis: 3, item: ENDER_PEARL, name: 'Töte 100 Endermen'}
+    - {id: tame_10, type: TAME, target: 10, lumis: 3, item: LEAD, name: 'Zähme 10 Tiere'}
+    - {id: cow_50, type: BREED, entity: COW, target: 50, lumis: 3, item: WHEAT, name: 'Vermehre 50 Kühe'}
+    - {id: sheep_50, type: BREED, entity: SHEEP, target: 50, lumis: 3, item: WHITE_WOOL, name: 'Vermehre 50 Schafe'}
+    - {id: egg_100, type: EGG_THROW, target: 100, lumis: 1, item: EGG, name: 'Wirf 100 Eier'}
+    - {id: fish_10, type: FISH_CATCH, target: 10, lumis: 1, item: FISHING_ROD, name: 'Fange 10 Fische'}
+    - {id: diamond_30, type: MATERIAL_BREAK, material: DIAMOND_ORE, target: 30, lumis: 3, item: DIAMOND_ORE, name: 'Baue 30 Diamanterze ab'}
+    - {id: deepslate_diamond_50, type: MATERIAL_BREAK, material: DEEPSLATE_DIAMOND_ORE, target: 50, lumis: 5, item: DEEPSLATE_DIAMOND_ORE, name: 'Baue 50 Deepslate-Diamanterze ab'}
+    - {id: debris_10, type: MATERIAL_BREAK, material: ANCIENT_DEBRIS, target: 10, lumis: 5, item: ANCIENT_DEBRIS, name: 'Baue 10 Ancient Debris ab'}
+    - {id: elytra_5000, type: ELYTRA_DISTANCE, target: 5000, lumis: 3, item: ELYTRA, name: 'Fliege 5000 Blöcke mit einer Elytra'}
+    - {id: boat_3000, type: BOAT_DISTANCE, target: 3000, lumis: 3, item: OAK_BOAT, name: 'Fahre 3000 Blöcke mit einem Boot'}
+    - {id: enchant_10, type: ENCHANT, target: 10, lumis: 3, item: ENCHANTING_TABLE, name: 'Verzaubere 10 Items'}
+    - {id: dragon_1, type: BOSS_KILL, entity: ENDER_DRAGON, target: 1, lumis: 5, item: DRAGON_HEAD, name: 'Besiege den Enderdrachen'}
+    - {id: wither_1, type: BOSS_KILL, entity: WITHER, target: 1, lumis: 5, item: WITHER_SKELETON_SKULL, name: 'Besiege einen Wither'}
+    - {id: warden_1, type: BOSS_KILL, entity: WARDEN, target: 1, lumis: 5, item: SCULK_CATALYST, name: 'Besiege einen Warden'}
+ore-materials: [COAL_ORE, DEEPSLATE_COAL_ORE, IRON_ORE, DEEPSLATE_IRON_ORE, COPPER_ORE, DEEPSLATE_COPPER_ORE, GOLD_ORE, DEEPSLATE_GOLD_ORE, REDSTONE_ORE, DEEPSLATE_REDSTONE_ORE, LAPIS_ORE, DEEPSLATE_LAPIS_ORE, DIAMOND_ORE, DEEPSLATE_DIAMOND_ORE, EMERALD_ORE, DEEPSLATE_EMERALD_ORE, NETHER_GOLD_ORE, NETHER_QUARTZ_ORE, ANCIENT_DEBRIS]
+movement:
+  maximum-step-blocks: 16
+anti-farm:
+  recent-place-seconds: 300
+  recent-placements-per-player: 256
+storage:
+  flush-seconds: 60
+  daily-retention-days: 14
+menu:
+  title: '<gold>Novoria Quests</gold>'
+  completed-material: LIME_CONCRETE
+  cooldown-material: BARRIER
+  daily-slots: [2, 3, 4, 5, 6]
+  daily-lore: ['<gray>Fortschritt: <yellow>%progress%/%target%</yellow>', '<gray>Belohnung: <yellow>%keys% Daily Key</yellow> + <light_purple>%lumis% Lumis</light_purple>', '<gray>Reset in: <yellow>%reset%</yellow>']
+  completed-name: '<green>Abgeschlossen</green>'
+  completed-lore: ['<gray>%name%</gray>', '<green>Abgeschlossen</green>']
+  global-lore: ['<gray>Fortschritt: <yellow>%progress%/%target%</yellow>', '<gray>Belohnung: <light_purple>%lumis% Lumis</light_purple>']
+  ranking-header: '<gray>Top 3:</gray>'
+  ranking-lines: ['<yellow>#1 %player% - %progress%/%target%</yellow>', '<#C0C0C0>#2 %player% - %progress%/%target%</#C0C0C0>', '<#CD7F32>#3 %player% - %progress%/%target%</#CD7F32>']
+  cooldown-name: '<red>Neue Quest in %time%</red>'
+messages:
+  player-only: '<red>Nur Spieler können /quests verwenden.</red>'
+  disabled: '<red>Quests sind derzeit deaktiviert.</red>'
+  storage-error: '<red>Deine Questdaten konnten nicht geladen werden. Bitte versuche es später erneut.</red>'
+  daily-complete: '<green>Quest geschafft!</green> <gray>Du hast <yellow>%keys% Daily Key</yellow> und <light_purple>%lumis% Lumis</light_purple> erhalten.</gray>'
+  daily-complete-dropped: '<green>Quest geschafft!</green> <gray>Du hast <light_purple>%lumis% Lumis</light_purple> erhalten. Dein <yellow>Daily Key</yellow> wurde vor dir gedroppt.</gray>'
+  global-win: '<green>Globale Quest gewonnen!</green> <gray>Du hast <light_purple>%lumis% Lumis</light_purple> erhalten.</gray>'

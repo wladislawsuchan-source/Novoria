@@ -71,6 +71,7 @@ public final class PluginConfigurations {
             register("angler", plugin, loader, new File(serverFolder, "angler.yml"), "angler.yml");
             register("rules", plugin, loader, new File(serverFolder, "rules.yml"), "rules.yml");
             register("jumpnrun", plugin, loader, new File(serverFolder, "jumpnrun.yml"), "jumpnrun.yml");
+            register("quests", plugin, loader, new File(serverFolder, "quests.yml"), "quests.yml");
         }
     }
 
@@ -105,6 +106,7 @@ public final class PluginConfigurations {
     public FileConfiguration angler() { return file("angler").configuration(); }
     public FileConfiguration rules() { return file("rules").configuration(); }
     public FileConfiguration jumpnrun() { return file("jumpnrun").configuration(); }
+    public FileConfiguration quests() { return file("quests").configuration(); }
 
     public ConfigurationFile serverFile() { return file("server"); }
     public ConfigurationFile mainFile() { return file("main"); }
@@ -137,6 +139,7 @@ public final class PluginConfigurations {
     public ConfigurationFile anglerFile() { return file("angler"); }
     public ConfigurationFile rulesFile() { return file("rules"); }
     public ConfigurationFile jumpnrunFile() { return file("jumpnrun"); }
+    public ConfigurationFile questsFile() { return file("quests"); }
 
 
     /**

@@ -303,6 +303,21 @@ leaderboards:
   hidden-players: []
   # Spieler mit weniger SMP-Spielzeit erscheinen in keiner Bestenliste.
   minimum-playtime-seconds: 60
+  overall:
+    enabled: true
+    # Schlüssel aus leaderboards.menu.items; jede gültige Kategorie zählt einmal.
+    included: [coins, kills, mob-kills, blocks-broken, blocks-placed, playtime, sell-earnings, lumis, active-days, prestige, heads-collected, advancements]
+    player-head:
+      name: '<yellow>#%rank% <white>%player%</white>'
+      lore:
+        - '<gray>Overall: <gold>%average%'
+        - '<gray>Gewertete Kategorien: <yellow>%categories%'
+    own-head:
+      name: '<gold>Dein Overall</gold>'
+      lore:
+        - '<gray>Overall: <gold>%average%'
+        - '<gray>Platz: <green>%rank% <dark_gray>/ %total%'
+        - '<gray>Gewertete Kategorien: <yellow>%categories%'
   menu:
     title: '<dark_gray>Bestenlisten</dark_gray>'
     rows: 4
@@ -313,6 +328,14 @@ leaderboards:
     # Auch die Bestenlisten-Kategorien werden ausschließlich hier definiert.
     # Entfernen/disabled = keine Kategorie im Menü. Slot/Material/Name/Lore kommen 1:1 aus dieser Datei.
     items:
+      overall:
+        stat: overall
+        slot: 4
+        material: NETHER_STAR
+        name: '<gradient:#F8D66D:#F4B400><bold>Overall</bold></gradient>'
+        lore:
+          - '<gray>Wer ist insgesamt am besten platziert?'
+          - '<gray>Alle gewerteten Kategorien zählen gleich stark.'
       coins:
         stat: coins
         format: number

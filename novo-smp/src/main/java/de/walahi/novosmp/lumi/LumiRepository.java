@@ -126,6 +126,21 @@ public final class LumiRepository {
         }
     }
 
+    /** Credits the existing Lumi account inside a caller-owned reward transaction. */
+    public boolean add(Connection connection, UUID uuid, long amount) throws SQLException {
+        if (amount <= 0) return false;
+        ensure(connection, uuid);
+        try (PreparedStatement statement = connection.prepareStatement(
+                "UPDATE " + storage.table("lumi_accounts")
+                        + " SET balance=balance+?, updated_at=? WHERE player_uuid=? AND balance<=?")) {
+            statement.setLong(1, amount);
+            statement.setLong(2, System.currentTimeMillis());
+            statement.setString(3, uuid.toString());
+            statement.setLong(4, Long.MAX_VALUE - amount);
+            return statement.executeUpdate() == 1;
+        }
+    }
+
     public boolean set(UUID uuid, long amount) {
         if (amount < 0) return false;
         try (Connection connection = storage.connection()) {

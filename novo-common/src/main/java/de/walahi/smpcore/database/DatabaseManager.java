@@ -34,6 +34,7 @@ import de.walahi.smpcore.database.migration.CreateClanMigration;
 import de.walahi.smpcore.database.migration.CreateDragonEggKingMigration;
 import de.walahi.smpcore.database.migration.AddJumpRunHighscoreMigration;
 import de.walahi.smpcore.database.migration.CreateAnglerCatchStorageMigration;
+import de.walahi.smpcore.database.migration.CreateQuestSystemMigration;
 import de.walahi.smpcore.database.migration.SchemaMigration;
 import de.walahi.smpcore.storage.StorageDialect;
 import de.walahi.smpcore.network.ServerType;
@@ -95,7 +96,8 @@ public final class DatabaseManager implements AutoCloseable {
                         new CreateClanMigration(),
                         new CreateDragonEggKingMigration(),
                         new AddJumpRunHighscoreMigration(),
-                        new CreateAnglerCatchStorageMigration()
+                        new CreateAnglerCatchStorageMigration(),
+                        new CreateQuestSystemMigration()
                 );
     }
 

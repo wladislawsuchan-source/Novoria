@@ -58,6 +58,10 @@ final class StatsFormatter {
         return safeSeconds + "s";
     }
 
+    String averageRank(long rankSum, int categories) {
+        return categories <= 0 ? "-" : String.format(Locale.GERMANY, "%.1f", rankSum / (double) categories);
+    }
+
     String escape(String text) {
         return text == null ? "" : text.replace("<", "\\<");
     }

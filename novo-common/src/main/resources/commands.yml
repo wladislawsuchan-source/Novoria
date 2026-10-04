@@ -108,6 +108,7 @@ server-groups:
         - r
         - ping
         - afk
+        - sit
         - balance
         - bal
         - money
@@ -128,6 +129,7 @@ server-groups:
         - playtime
         - spielzeit
         - daily
+        - quests
         - vote
         - clan
         - csethome

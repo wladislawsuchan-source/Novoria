@@ -412,6 +412,9 @@ discord:
   messages:
     invite: '<dark_gray>[<light_purple>Novoria</light_purple>]</dark_gray> <gray>Discord: <light_purple><u>%link%</u></light_purple></gray>'
     not-configured: '<dark_gray>[<light_purple>Novoria</light_purple>]</dark_gray> <red>Der Discord-Link ist noch nicht eingerichtet.</red>'
+    set-usage: '<gray>Benutzung: <yellow>/discord set <Link></yellow></gray>'
+    link-updated: '<dark_gray>[<red>Team</red>]</dark_gray> <green>Discord-Link aktualisiert: <light_purple>%link%</light_purple></green>'
+    invalid-link: '<dark_gray>[<red>Team</red>]</dark_gray> <red>Bitte gib einen gültigen Discord-Einladungslink an.</red>'
 
 night-vision:
   messages:

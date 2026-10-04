@@ -1,6 +1,7 @@
 package de.walahi.novosmp.feature;
 
 import de.walahi.smpcore.SMPCorePlugin;
+import de.walahi.novosmp.sit.SitManager;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
@@ -294,6 +295,10 @@ public final class SmpSpawnProtectionListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onCreatureSpawn(CreatureSpawnEvent event) {
+        // /sit creates only its own marked, non-persistent ArmorStand. Do not relax
+        // spawning for any other entity in the protected spawn world.
+        if (event.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM
+                && SitManager.isTechnicalSeat(plugin, event.getEntity())) return;
         if (deny(event.getLocation().getWorld(), "mob-spawning")) event.setCancelled(true);
     }
 

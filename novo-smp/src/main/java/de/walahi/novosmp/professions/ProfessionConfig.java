@@ -318,11 +318,21 @@ public final class ProfessionConfig {
 
     public List<String> minedGroupsFor(Material material, Set<String> requiredGroupIds) {
         if (material == null || requiredGroupIds == null || requiredGroupIds.isEmpty()) return List.of();
+        Material oreVariant = pairedOreVariant(material);
         return requiredGroupIds.stream()
                 .map(this::minedGroup)
-                .filter(group -> group != null && group.materials().contains(material))
+                .filter(group -> group != null && (group.materials().contains(material)
+                        || oreVariant != null && group.materials().contains(oreVariant)))
                 .map(MinedGroup::id)
                 .toList();
+    }
+
+    private static Material pairedOreVariant(Material material) {
+        String name = material.name();
+        if (!name.endsWith("_ORE")) return null;
+        String pairedName = name.startsWith("DEEPSLATE_")
+                ? name.substring("DEEPSLATE_".length()) : "DEEPSLATE_" + name;
+        return Material.getMaterial(pairedName);
     }
 
     public List<LevelReward> rewards() {

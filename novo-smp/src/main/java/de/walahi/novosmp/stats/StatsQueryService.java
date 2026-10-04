@@ -4,6 +4,7 @@ import de.walahi.novosmp.NovoSMPPlugin;
 import de.walahi.smpcore.StatType;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -113,6 +114,14 @@ final class StatsQueryService {
         return statPath == null ? "" : statPath.trim().toLowerCase(Locale.ROOT);
     }
 
+    static boolean supportsPath(String statPath) {
+        String path = normalizePath(statPath);
+        if (path.equals("coins") || path.equals("lumis") || path.equals("active-days")
+                || path.equals("registered-at") || path.equals("last-seen")) return true;
+        for (StatType type : StatType.values()) if (type.path().equals(path)) return true;
+        return false;
+    }
+
     record Values(List<StatsSnapshot> entries, Map<UUID, Long> byPlayer) {
         Values {
             entries = List.copyOf(entries);
@@ -145,6 +154,26 @@ final class StatsQueryService {
                 }
             }
             return rank;
+        }
+
+        /** The displayed leaderboard order, including its existing tie-breaks. */
+        void sortLeaderboardEntries(List<StatsSnapshot> list) {
+            list.sort(Comparator
+                    .comparingLong((StatsSnapshot entry) -> value(entry.uuid()))
+                    .reversed()
+                    .thenComparing(Comparator.comparingLong(StatsSnapshot::lastSeen).reversed())
+                    .thenComparing(StatsSnapshot::name, String.CASE_INSENSITIVE_ORDER));
+        }
+
+        /** All displayed positions in O(n log n), also for players with zero. */
+        Map<UUID, Integer> ranks() {
+            List<StatsSnapshot> sorted = new ArrayList<>(entries);
+            sortLeaderboardEntries(sorted);
+            Map<UUID, Integer> result = new HashMap<>(sorted.size());
+            for (int index = 0; index < sorted.size(); index++) {
+                result.put(sorted.get(index).uuid(), index + 1);
+            }
+            return result;
         }
     }
 

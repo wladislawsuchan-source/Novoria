@@ -106,6 +106,11 @@ public final class AnglerFishingService implements Listener {
     private BukkitTask activeTask;
     private final int[] afkIntervals = new int[6];
     private java.util.function.Consumer<Player> refreshHud = ignored -> { };
+    private java.util.function.Consumer<Player> fishCaught = ignored -> { };
+
+    public void fishCaught(java.util.function.Consumer<Player> listener) {
+        fishCaught = listener == null ? ignored -> { } : listener;
+    }
 
     public void hudRefresh(java.util.function.Consumer<Player> refresh) {
         refreshHud = refresh == null ? ignored -> { } : refresh;
@@ -409,6 +414,7 @@ public final class AnglerFishingService implements Listener {
                 for (ItemStack overflow : player.getInventory().addItem(caught.clone()).values())
                     player.getWorld().dropItemNaturally(player.getLocation(), overflow);
             }
+            fishCaught.accept(player);
         }
         double base = plugin.configs().angler().getDouble("fishing.xp.base", 25D);
         double colorMultiplier = plugin.configs().angler().getDouble(
@@ -684,6 +690,7 @@ public final class AnglerFishingService implements Listener {
             if (caught == null) return false;
             ItemStack overflow = feature.storeCatch(player, caught);
             if (overflow != null) player.getWorld().dropItemNaturally(player.getLocation(), overflow);
+            fishCaught.accept(player);
             return true;
         }
         int prestige = professions.angler(player.getUniqueId()).prestige();

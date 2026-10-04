@@ -20,10 +20,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 /** Main leaderboard selector and paginated category lists. Categories come only from menus.yml. */
 final class LeaderboardMenu {
@@ -33,6 +36,7 @@ final class LeaderboardMenu {
     private final StatsFormatter formatter;
     private final LeaderboardProfileCache profiles;
     private final MiniMessageItems items = new MiniMessageItems();
+    private final Set<String> warnedOverallSettings = new HashSet<>();
 
     LeaderboardMenu(NovoSMPPlugin plugin, StatsCache cache,
                     StatsQueryService queries, StatsFormatter formatter) {
@@ -53,6 +57,8 @@ final class LeaderboardMenu {
         ConfigurationSection root = plugin.configs().menus().getConfigurationSection("leaderboards.menu.items");
         for (ConfiguredStatMenuItem category : ConfiguredStatMenuItem.load(
                 root, size, plugin.getLogger(), "leaderboards.menu.items")) {
+            if (isOverall(category) && !plugin.configs().menus().getBoolean("leaderboards.overall.enabled", true))
+                continue;
             menu.button(category.slot(), GuiButton.of(categoryItem(category), event -> {
                 playSound(viewer, "leaderboards.list.sounds.open",
                         Sound.BLOCK_CHEST_OPEN, 0.7f, 1.2f);
@@ -71,15 +77,8 @@ final class LeaderboardMenu {
     private void openPage(Player viewer, ConfiguredStatMenuItem category, int requestedPage) {
         List<StatsSnapshot> entries = queries.visibleEntries();
         StatsSnapshot ownEntry = cache.snapshot(viewer.getUniqueId(), viewer.getName());
-        StatsQueryService.Values values = queries.values(entries, category.statPath(), ownEntry);
-        if (plugin.configs().menus().getBoolean("leaderboards.list.hide-zero-values", false)) {
-            entries.removeIf(entry -> values.value(entry.uuid()) <= 0L);
-        }
-        entries.sort(Comparator
-                .comparingLong((StatsSnapshot entry) -> values.value(entry.uuid()))
-                .reversed()
-                .thenComparing(Comparator.comparingLong(StatsSnapshot::lastSeen).reversed())
-                .thenComparing(StatsSnapshot::name, String.CASE_INSENSITIVE_ORDER));
+        Board board = isOverall(category) ? overallBoard(entries) : normalBoard(category, entries, ownEntry);
+        entries = board.entries();
 
         int rows = Math.max(2, Math.min(6,
                 plugin.configs().menus().getInt("leaderboards.list.rows", 6)));
@@ -103,9 +102,9 @@ final class LeaderboardMenu {
             int slot = contentSlots.get(index);
             StatsSnapshot entry = page.entries().get(index);
             int rank = globalStart + index + 1;
-            long rawValue = values.value(entry.uuid());
-            gui.item(slot, playerHead(category, entry, rank, rawValue));
-            pendingHeads.add(new PendingHead(slot, entry, rank, false, 0, rawValue));
+            String value = board.value(entry.uuid());
+            gui.item(slot, playerHead(category, entry, rank, value, board.categories()));
+            pendingHeads.add(new PendingHead(slot, entry, rank, false, 0, value, board.categories()));
         }
 
         int ownRank = 0;
@@ -118,9 +117,10 @@ final class LeaderboardMenu {
         }
 
         int ownSlot = navigationSlot("leaderboards.list.own-head.slot", 49, size);
-        long ownValue = values.value(ownEntry.uuid());
-        gui.item(ownSlot, ownHead(category, ownEntry, ownRank, entries.size(), ownValue));
-        pendingHeads.add(new PendingHead(ownSlot, ownEntry, ownRank, true, entries.size(), ownValue));
+        String ownValue = board.value(ownEntry.uuid());
+        gui.item(ownSlot, ownHead(category, ownEntry, ownRank, entries.size(), ownValue, board.categories()));
+        pendingHeads.add(new PendingHead(ownSlot, ownEntry, ownRank, true, entries.size(), ownValue,
+                board.categories()));
 
         int backSlot = navigationSlot("leaderboards.list.back.slot", 45, size);
         gui.button(backSlot, GuiButton.of(simpleItem(
@@ -150,6 +150,75 @@ final class LeaderboardMenu {
         refreshPendingHeads(viewer, inventory, category, pendingHeads);
     }
 
+    private Board normalBoard(ConfiguredStatMenuItem category, List<StatsSnapshot> entries,
+                              StatsSnapshot ownEntry) {
+        StatsQueryService.Values values = queries.values(entries, category.statPath(), ownEntry);
+        if (plugin.configs().menus().getBoolean("leaderboards.list.hide-zero-values", false))
+            entries.removeIf(entry -> values.value(entry.uuid()) <= 0L);
+        values.sortLeaderboardEntries(entries);
+        Map<UUID, String> formatted = new HashMap<>();
+        for (StatsSnapshot entry : entries)
+            formatted.put(entry.uuid(), value(category, values.value(entry.uuid())));
+        formatted.put(ownEntry.uuid(), value(category, values.value(ownEntry.uuid())));
+        return new Board(entries, formatted, 0);
+    }
+
+    private Board overallBoard(List<StatsSnapshot> visible) {
+        List<ConfiguredStatMenuItem> included = overallCategories();
+        List<StatsQueryService.Values> values = new ArrayList<>(included.size());
+        for (ConfiguredStatMenuItem category : included)
+            values.add(queries.values(visible, category.statPath(), null));
+        List<OverallRanking.Entry> ranked = OverallRanking.calculate(visible, values);
+        List<StatsSnapshot> sorted = new ArrayList<>(ranked.size());
+        Map<UUID, String> formatted = new HashMap<>(ranked.size());
+        for (OverallRanking.Entry entry : ranked) {
+            sorted.add(entry.player());
+            formatted.put(entry.player().uuid(), formatter.averageRank(entry.rankSum(), entry.categories()));
+        }
+        return new Board(sorted, formatted, included.size());
+    }
+
+    private List<ConfiguredStatMenuItem> overallCategories() {
+        ConfigurationSection root = plugin.configs().menus().getConfigurationSection("leaderboards.menu.items");
+        if (root == null) return List.of();
+        int rows = Math.max(3, Math.min(6, plugin.configs().menus().getInt("leaderboards.menu.rows", 4)));
+        Map<String, ConfiguredStatMenuItem> available = new HashMap<>();
+        for (ConfiguredStatMenuItem item : ConfiguredStatMenuItem.load(
+                root, rows * 9, plugin.getLogger(), "leaderboards.menu.items"))
+            if (!isOverall(item)) available.put(item.key(), item);
+
+        List<ConfiguredStatMenuItem> included = new ArrayList<>();
+        Set<String> usedPaths = new HashSet<>();
+        for (String key : plugin.configs().menus().getStringList("leaderboards.overall.included")) {
+            ConfiguredStatMenuItem item = available.get(key);
+            if (item == null) {
+                warnOverall("Kategorie '" + key + "' fehlt, ist deaktiviert oder ungültig.");
+                continue;
+            }
+            String path = StatsQueryService.normalizePath(item.statPath());
+            if (!StatsQueryService.supportsPath(path)) {
+                warnOverall("Kategorie '" + key + "' hat einen unbekannten Stat-Pfad: " + path);
+                continue;
+            }
+            if (!usedPaths.add(path)) {
+                warnOverall("Kategorie '" + key + "' nutzt einen bereits gewerteten Stat-Pfad: " + path);
+                continue;
+            }
+            included.add(item);
+        }
+        if (included.isEmpty()) warnOverall("Keine gültigen Kategorien konfiguriert.");
+        return included;
+    }
+
+    private void warnOverall(String message) {
+        if (warnedOverallSettings.add(message))
+            plugin.getLogger().warning("leaderboards.overall: " + message);
+    }
+
+    private boolean isOverall(ConfiguredStatMenuItem category) {
+        return category.key().equals("overall");
+    }
+
     private void refreshPendingHeads(Player viewer, Inventory inventory, ConfiguredStatMenuItem category,
                                      List<PendingHead> pendingHeads) {
         for (PendingHead pending : pendingHeads) {
@@ -159,8 +228,10 @@ final class LeaderboardMenu {
                 if (viewer.getOpenInventory().getTopInventory() != inventory) return;
 
                 ItemStack refreshed = pending.own()
-                        ? ownHead(category, pending.entry(), pending.rank(), pending.total(), pending.value())
-                        : playerHead(category, pending.entry(), pending.rank(), pending.value());
+                        ? ownHead(category, pending.entry(), pending.rank(), pending.total(), pending.value(),
+                                pending.categories())
+                        : playerHead(category, pending.entry(), pending.rank(), pending.value(),
+                                pending.categories());
                 inventory.setItem(pending.slot(), refreshed);
             });
         }
@@ -171,15 +242,17 @@ final class LeaderboardMenu {
         return items.item(category.material(), category.name(), lore);
     }
 
-    private ItemStack playerHead(ConfiguredStatMenuItem category, StatsSnapshot entry, int rank, long rawValue) {
-        String value = value(category, rawValue);
+    private ItemStack playerHead(ConfiguredStatMenuItem category, StatsSnapshot entry, int rank,
+                                 String value, int categories) {
         Map<String, String> placeholders = Map.of(
                 "%rank%", Integer.toString(rank),
                 "%player%", formatter.escape(entry.name()),
                 "%value%", value,
-                "%category%", category.key()
+                "%average%", value,
+                "%category%", category.key(),
+                "%categories%", Integer.toString(categories)
         );
-        String base = "leaderboards.list.player-head";
+        String base = isOverall(category) ? "leaderboards.overall.player-head" : "leaderboards.list.player-head";
         List<String> lore = plugin.configs().menus().getStringList(base + ".lore");
         if (lore.isEmpty()) lore = List.of("<gray>Wert: <yellow>%value%");
         ItemStack head = playerHead(entry);
@@ -195,16 +268,17 @@ final class LeaderboardMenu {
     }
 
     private ItemStack ownHead(ConfiguredStatMenuItem category, StatsSnapshot entry, int rank, int total,
-                              long rawValue) {
-        String value = value(category, rawValue);
+                              String value, int categories) {
         Map<String, String> placeholders = Map.of(
                 "%rank%", rank <= 0 ? "-" : "#" + rank,
                 "%player%", formatter.escape(entry.name()),
                 "%value%", value,
+                "%average%", value,
                 "%total%", Integer.toString(total),
-                "%category%", category.key()
+                "%category%", category.key(),
+                "%categories%", Integer.toString(categories)
         );
-        String base = "leaderboards.list.own-head";
+        String base = isOverall(category) ? "leaderboards.overall.own-head" : "leaderboards.list.own-head";
         List<String> lore = plugin.configs().menus().getStringList(base + ".lore");
         if (lore.isEmpty()) {
             lore = List.of("<gray>Wert: <yellow>%value%", "<gray>Platz: <green>%rank%</green>");
@@ -262,8 +336,12 @@ final class LeaderboardMenu {
         }
     }
 
+    private record Board(List<StatsSnapshot> entries, Map<UUID, String> formatted, int categories) {
+        String value(UUID playerId) { return formatted.getOrDefault(playerId, "-"); }
+    }
+
     private record PendingHead(int slot, StatsSnapshot entry, int rank, boolean own, int total,
-                               long value) { }
+                               String value, int categories) { }
 
     private void hideSkullProfileTooltip(ItemStack head) {
         head.setData(
