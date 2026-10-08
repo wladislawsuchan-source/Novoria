@@ -38,6 +38,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerFishEvent;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -1752,6 +1753,42 @@ public final class AnglerBundlePaperProbe extends SMPCorePlugin {
                 && diamond.getAmount() == 3 && probeEnchants.totemCharge(emptyShield) == 0;
         getLogger().info("TOTEMBINDUNG_FULL_WRONG_ITEM="
                 + (noExtra && wrongItem ? "PASS" : "FAIL"));
+
+        ItemStack offhandShield = emptyShield.clone();
+        ItemStack[] offhandCase = {new ItemStack(Material.TOTEM_OF_UNDYING, 3), offhandShield};
+        PlayerSwapHandItemsEvent offhandSwap = new PlayerSwapHandItemsEvent(
+                fakePlayerWithHands(offhandCase), offhandCase[1], offhandCase[0]);
+        binding.onSwapHands(offhandSwap);
+        boolean offhandLoaded = offhandSwap.isCancelled()
+                && offhandCase[0].getType() == Material.TOTEM_OF_UNDYING
+                && offhandCase[0].getAmount() == 2
+                && probeEnchants.totemCharge(offhandCase[1]) == 1;
+        PlayerSwapHandItemsEvent chargedSwap = new PlayerSwapHandItemsEvent(
+                fakePlayerWithHands(offhandCase), offhandCase[1], offhandCase[0]);
+        binding.onSwapHands(chargedSwap);
+        offhandLoaded &= !chargedSwap.isCancelled() && offhandCase[0].getAmount() == 2
+                && probeEnchants.totemCharge(offhandCase[1]) == 1;
+        getLogger().info("TOTEMBINDUNG_SWAP_OFFHAND=" + (offhandLoaded ? "PASS" : "FAIL"));
+
+        ItemStack[] mainhandCase = {emptyShield.clone(), new ItemStack(Material.TOTEM_OF_UNDYING)};
+        PlayerSwapHandItemsEvent mainhandSwap = new PlayerSwapHandItemsEvent(
+                fakePlayerWithHands(mainhandCase), mainhandCase[1], mainhandCase[0]);
+        binding.onSwapHands(mainhandSwap);
+        boolean mainhandLoaded = mainhandSwap.isCancelled()
+                && probeEnchants.totemCharge(mainhandCase[0]) == 1
+                && mainhandCase[1].getType().isAir();
+        getLogger().info("TOTEMBINDUNG_SWAP_MAINHAND=" + (mainhandLoaded ? "PASS" : "FAIL"));
+
+        ItemStack[] ordinaryCase = {new ItemStack(Material.TOTEM_OF_UNDYING, 2),
+                new ItemStack(Material.SHIELD)};
+        PlayerSwapHandItemsEvent ordinarySwap = new PlayerSwapHandItemsEvent(
+                fakePlayerWithHands(ordinaryCase), ordinaryCase[1], ordinaryCase[0]);
+        binding.onSwapHands(ordinarySwap);
+        boolean ordinaryUnchanged = !ordinarySwap.isCancelled()
+                && ordinaryCase[0].getAmount() == 2
+                && ordinaryCase[1].getType() == Material.SHIELD;
+        getLogger().info("TOTEMBINDUNG_SWAP_NORMAL_SHIELD="
+                + (ordinaryUnchanged ? "PASS" : "FAIL"));
 
         ItemStack serialized = ItemStack.deserializeBytes(shield.serializeAsBytes());
         boolean itemPersistent = probeEnchants.totemCharge(serialized) == 1

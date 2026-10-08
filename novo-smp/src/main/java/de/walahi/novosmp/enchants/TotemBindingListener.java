@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityResurrectEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -51,6 +52,28 @@ public final class TotemBindingListener implements Listener {
         enchantments.setTotemCharge(shield, 1);
         cursor.setAmount(cursor.getAmount() - 1);
         return true;
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onSwapHands(PlayerSwapHandItemsEvent event) {
+        PlayerInventory inventory = event.getPlayer().getInventory();
+        ItemStack mainHand = inventory.getItemInMainHand();
+        ItemStack offHand = inventory.getItemInOffHand();
+        if (mainHand == null || offHand == null) return;
+        boolean shieldInMainHand = mainHand.getType() == Material.SHIELD;
+        ItemStack shield = (shieldInMainHand ? mainHand : offHand).clone();
+        ItemStack totems = (shieldInMainHand ? offHand : mainHand).clone();
+        if (!loadOne(shield, totems)) return;
+
+        event.setCancelled(true);
+        ItemStack remaining = totems.getAmount() == 0 ? new ItemStack(Material.AIR) : totems;
+        if (shieldInMainHand) {
+            inventory.setItemInMainHand(shield);
+            inventory.setItemInOffHand(remaining);
+        } else {
+            inventory.setItemInOffHand(shield);
+            inventory.setItemInMainHand(remaining);
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

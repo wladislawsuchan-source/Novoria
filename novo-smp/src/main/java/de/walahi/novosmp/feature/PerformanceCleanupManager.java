@@ -147,6 +147,7 @@ public final class PerformanceCleanupManager implements Listener {
     /** Step 1: entity classes which the cleanup must never touch. */
     private boolean isTechnicallyProtected(Entity entity) {
         if (entity instanceof Player) return true;
+        if (entity instanceof FishHook) return true;
         if (isCitizensNpc(entity)) return true;
         if (entity instanceof ArmorStand || entity instanceof Mannequin || entity instanceof Hanging
                 || entity instanceof Display || entity instanceof Interaction || entity instanceof Marker

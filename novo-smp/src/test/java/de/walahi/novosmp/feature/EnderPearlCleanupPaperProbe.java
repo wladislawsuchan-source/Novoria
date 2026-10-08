@@ -17,6 +17,8 @@ public final class EnderPearlCleanupPaperProbe extends JavaPlugin implements Lis
     private PerformanceCleanupManager cleanup;
     private World world;
     private Player player;
+    private Object nativeOwner;
+    private Object nativeLevel;
     private int teleports;
     private final List<Entity> created = new ArrayList<>();
 
@@ -59,6 +61,8 @@ public final class EnderPearlCleanupPaperProbe extends JavaPlugin implements Lis
         Object owner = ownerType.getConstructor(type("net.minecraft.server.MinecraftServer"),
                 type("net.minecraft.server.level.ServerLevel"), profileType, infoType)
                 .newInstance(server, level, profile, infoType.getMethod("createDefault").invoke(null));
+        nativeOwner = owner;
+        nativeLevel = level;
         Class<?> flow = type("net.minecraft.network.protocol.PacketFlow");
         Class<?> transportType = type("net.minecraft.network.Connection");
         Object transport = transportType.getConstructor(flow).newInstance(flow.getField("SERVERBOUND").get(null));
@@ -73,6 +77,7 @@ public final class EnderPearlCleanupPaperProbe extends JavaPlugin implements Lis
         ownerType.getField("joining").setBoolean(owner, false);
         level.getClass().getMethod("addNewPlayer", ownerType).invoke(level, owner);
         player = (Player) ownerType.getMethod("getBukkitEntity").invoke(owner);
+        player.getInventory().setItemInMainHand(new ItemStack(Material.FISHING_ROD));
         created.add(player);
         Bukkit.getPluginManager().registerEvents(this, this);
         require(player.teleport(new Location(world, .5, 103, .5)), "place player in isolated test area");
@@ -106,6 +111,8 @@ public final class EnderPearlCleanupPaperProbe extends JavaPlugin implements Lis
             aged.add(projectile);
         }
         Arrow fresh = spawn(new Location(world, x, 110, .5), Arrow.class);
+        FishHook hook = spawnHook(new Location(world, x, 110, .5));
+        hook.setTicksLived(1201);
         ArmorStand protectedStand = spawn(new Location(world, x, 110, .5), ArmorStand.class);
         if (automatic) {
             long interval = field(cleanup, "intervalSeconds").getLong(cleanup);
@@ -120,9 +127,26 @@ public final class EnderPearlCleanupPaperProbe extends JavaPlugin implements Lis
         require(active.isValid() && old.isValid(), "fresh thrown and ownerless aged pearls survive clear");
         require(!drop.isValid(), "normal dropped ender-pearl item still removed");
         require(aged.stream().noneMatch(Entity::isValid), "aged arrows/snowballs/eggs/tridents still removed");
+        require(hook.isValid(), "aged fishing hook survives clear");
         require(fresh.isValid() && protectedStand.isValid(), "young-projectile age rule and existing technical protection unchanged");
-        fresh.remove(); protectedStand.remove(); old.remove();
+        hook.remove(); fresh.remove(); protectedStand.remove(); old.remove();
         getLogger().info((automatic ? "AUTO" : "MANUAL") + "_PEARL_DROP_OTHER_PROJECTILE_POLICY=PASS");
+    }
+
+    private FishHook spawnHook(Location at) throws Exception {
+        Class<?> hookType = type("net.minecraft.world.entity.projectile.FishingHook");
+        Object nativeHook = hookType.getConstructor(type("net.minecraft.world.entity.player.Player"),
+                        type("net.minecraft.world.level.Level"), int.class, int.class)
+                .newInstance(nativeOwner, nativeLevel, 0, 0);
+        hookType.getMethod("setPos", double.class, double.class, double.class)
+                .invoke(nativeHook, at.getX(), at.getY(), at.getZ());
+        type("net.minecraft.server.level.ServerLevel")
+                .getMethod("addFreshEntity", type("net.minecraft.world.entity.Entity"))
+                .invoke(nativeLevel, nativeHook);
+        FishHook hook = (FishHook) hookType.getMethod("getBukkitEntity").invoke(nativeHook);
+        require(hook.isValid(), "real fishing hook added to world");
+        created.add(hook);
+        return hook;
     }
 
     private <T extends Entity> T spawn(Location at, Class<T> kind) {
