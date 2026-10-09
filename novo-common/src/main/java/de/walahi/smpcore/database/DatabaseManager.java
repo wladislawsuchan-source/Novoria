@@ -15,6 +15,7 @@ import de.walahi.smpcore.database.migration.CreateDeathBackMigration;
 import de.walahi.smpcore.database.migration.CreateFriendsMigration;
 import de.walahi.smpcore.database.migration.AddFriendGlowPrivacyMigration;
 import de.walahi.smpcore.database.migration.CreateProfessionsMigration;
+import de.walahi.smpcore.database.migration.ResetAnglerGreenHitStagesMigration;
 import de.walahi.smpcore.database.migration.CreateProfessionSaplingsMigration;
 import de.walahi.smpcore.database.migration.CreateHeadCollectionMigration;
 import de.walahi.smpcore.database.migration.AddCollectionPrestigeStatsMigration;
@@ -97,7 +98,8 @@ public final class DatabaseManager implements AutoCloseable {
                         new CreateDragonEggKingMigration(),
                         new AddJumpRunHighscoreMigration(),
                         new CreateAnglerCatchStorageMigration(),
-                        new CreateQuestSystemMigration()
+                        new CreateQuestSystemMigration(),
+                        new ResetAnglerGreenHitStagesMigration()
                 );
     }
 

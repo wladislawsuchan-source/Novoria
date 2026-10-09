@@ -485,7 +485,7 @@ public final class ProfessionMenu {
         gui.open(player);
     }
 
-    private void openRewards(Player player, String professionId) {
+    void openRewards(Player player, String professionId) {
         int rows = rows("menus.rewards.rows", 6);
         int size = rows * 9;
         String title = config.string("menus.rewards.title", "<dark_gray>%profession%-Levelbelohnungen</dark_gray>")

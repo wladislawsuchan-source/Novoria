@@ -172,6 +172,7 @@ public final class ProfessionManager implements SellBonusProvider {
     }
 
     public void openAngler(Player player) { menu.openAngler(player); }
+    void openRewards(Player player, String professionId) { menu.openRewards(player, professionId); }
     public void anglerFeature(AnglerFeature feature) { this.anglerFeature = feature; }
     public AnglerFeature anglerFeature() { return anglerFeature; }
     public void anglerFishingService(AnglerFishingService service) { this.anglerFishingService = service; }
@@ -384,13 +385,14 @@ public final class ProfessionManager implements SellBonusProvider {
     }
     private enum XpFeedbackMode { NORMAL, SUPPRESS_PROGRESS }
 
-    /** Skill records belong to this prestige, including milestones not yet level-reachable. */
+    /** Only the current stage receives Green hits; combo records stay prestige-wide. */
     public AnglerCatchResult recordAnglerCatch(Player player, boolean greenHit, int combo, long xp) {
         if (!isAnglerActive(player.getUniqueId())) return AnglerCatchResult.NONE;
         ProfessionProgress progress = angler(player.getUniqueId());
         List<MilestoneRequirement> requirements = config.milestones().stream()
                 .map(level -> config.requirement(ANGLER, progress.prestige(), level)).toList();
-        repository.recordAnglerSkills(player.getUniqueId(), progress.prestige(), requirements, greenHit, combo);
+        repository.recordAnglerSkills(player.getUniqueId(), progress.prestige(), requirements,
+                config.nextUncompletedMilestone(progress), greenHit, combo);
         return addProfessionXp(player, ANGLER, xp, XpFeedbackMode.SUPPRESS_PROGRESS);
     }
 
@@ -454,6 +456,7 @@ public final class ProfessionManager implements SellBonusProvider {
         boolean importantFeedback = calculatedLevel > oldLevel;
         if (calculatedLevel > oldLevel) {
             feedback.showLevelUp(player, progress, oldLevel, calculatedLevel, reachedMilestone);
+            feedback.showReachedMilestones(player, professionId, oldLevel, calculatedLevel, reachedMilestone);
         } else if (feedbackMode == XpFeedbackMode.NORMAL) {
             feedback.showProgress(player, progress);
         }
@@ -1114,7 +1117,10 @@ public final class ProfessionManager implements SellBonusProvider {
         int previous = progress.completedMilestone();
         progress.completedMilestone(milestone);
         try {
-            repository.saveProgressImmediate(player.getUniqueId(), progress);
+            if (ANGLER.equals(professionId)) {
+                int nextMilestone = config.nextUncompletedMilestone(progress);
+                repository.completeAnglerMilestone(player.getUniqueId(), progress, nextMilestone);
+            } else repository.saveProgressImmediate(player.getUniqueId(), progress);
         } catch (RuntimeException exception) {
             progress.completedMilestone(previous);
             if (paid) economy.deposit(player.getUniqueId(), requirement.coinCost(),

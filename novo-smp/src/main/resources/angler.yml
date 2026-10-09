@@ -287,7 +287,6 @@ messages:
   storage-locked: '<red>Das Fanglager ist nur mit dem Beruf <aqua>Angler</aqua> verfügbar.</red>'
   storage-error: '<red>Dein Fanglager ist wegen eines Speicherfehlers vorübergehend gesperrt.</red>'
   admin-storecatch: '<green>%stored%x %fish% im Fanglager von %player% gespeichert. <yellow>%dropped%x Überlauf vor dem Spieler gedroppt.</yellow></green>'
-  admin-pool-preview: '<green>Test-Pool %pool% für %player% angezeigt (ohne Belohnung).</green>'
   admin-roll-header: '<aqua>Fishing-Roll Simulation (%count% / %quality% / %tier%)</aqua>'
   admin-roll-line: '<gray>%pool%: <yellow>%count%</yellow></gray>'
   admin-bundle-test: '<green>Vanilla-Bundle %case% an %player%: %actual-stacks%/%expected-stacks% Stacks, %actual%/%expected% Items im Data-Component-Readback. Client-Anzeige/Entnahme bitte prüfen.</green>'
@@ -381,8 +380,8 @@ fishing:
 
 # Äußere Pool-Auswahl. Die Prestige-V-Legendary-Chance bleibt 0.01 %.
 loot:
-  test-message: '<gray>[Fishing-Test] Pool: <yellow>%pool%</yellow></gray>'
-  extra-test-message: '<gray>[Fishing-Test] Luck-Zusatzroll: <yellow>%pool%</yellow></gray>'
+  fish:
+    bonus-message: '<gray>Zusatzfund: <white>%entry%</white></gray>'
   empty-message: '<red>Kein Fishing-Loot-Pool konfiguriert.</red>'
   pools:
     no-angler: {fish: 70.0, junk: 20.0, treasure: 10.0, rare: 0.0, epic: 0.0, legendary: 0.0}
@@ -394,6 +393,7 @@ loot:
     prestige-5: {fish: 86.0, junk: 5.0, treasure: 3.5, rare: 3.4, epic: 2.09, legendary: 0.01}
   junk:
     received-message: '<gray>Beifang: <white>%entry%</white> erhalten.</gray>'
+    bonus-message: '<gray>Zusatzfund: <white>%entry%</white></gray>'
     unavailable-message: '<red>Junk-Loot ist derzeit nicht vollständig konfiguriert.</red>'
     failed-message: '<red>Dein Beifang konnte nicht ausgegeben werden. Das Team wurde informiert.</red>'
     entries:
@@ -410,6 +410,7 @@ loot:
       damaged_leather_boots: {weight: 2, type: NORMAL_ITEM, material: LEATHER_BOOTS, amount: 1, min-durability-percent: 10, max-durability-percent: 35, display-name: 'Beschädigte Lederstiefel'}
   treasure:
     received-message: '<aqua>Schatzfund: <white>%entry%</white> erhalten.</aqua>'
+    bonus-message: '<aqua>Zusatzfund: <white>%entry%</white></aqua>'
     unavailable-message: '<red>Treasure-Loot ist derzeit nicht vollständig konfiguriert.</red>'
     failed-message: '<red>Dein Schatzfund konnte nicht ausgegeben werden. Das Team wurde informiert.</red>'
     entries:
@@ -466,6 +467,7 @@ loot:
             binding_curse: {enchantment: minecraft:binding_curse, level: 1, weight: 1}
             vanishing_curse: {enchantment: minecraft:vanishing_curse, level: 1, weight: 1}
   rare:
+    bonus-message: '<light_purple>Zusatzfund: <white>%entry%</white></light_purple>'
     received-message: '<light_purple>Seltener Fang: <white>%entry%</white> erhalten.</light_purple>'
     unavailable-message: '<red>Rare-Loot ist derzeit nicht vollständig konfiguriert.</red>'
     failed-message: '<red>Dein seltener Fang konnte nicht ausgegeben werden. Das Team wurde informiert.</red>'
@@ -594,6 +596,7 @@ loot:
           - {material: DIAMOND_SHOVEL, amount: 1, enchantments: {efficiency: 5, unbreaking: 3, silk_touch: 1}}
       overlevel_book: {weight: 4, type: OVERLEVEL_BOOK, display-name: 'Overlevel-Buch'}
   legendary:
+    bonus-message: '<gold>Zusatzfund: <white>%entry%</white></gold>'
     min-prestige: 5
     received-message: '<gold>Legendärer Fang: <white>%entry%</white> erhalten.</gold>'
     unavailable-message: '<red>Legendary-Loot ist derzeit nicht vollständig konfiguriert.</red>'
@@ -667,6 +670,7 @@ loot:
           - {material: ANCIENT_DEBRIS, amount: 8}
       legendary_lumi: {weight: 8, type: LUMI, amount: 50, display-name: '50 Lumis'}
   epic:
+    bonus-message: '<gold>Zusatzfund: <white>%entry%</white></gold>'
     received-message: '<gold>Epischer Fang: <white>%entry%</white> erhalten.</gold>'
     unavailable-message: '<red>Epic-Loot ist derzeit nicht vollständig konfiguriert.</red>'
     failed-message: '<red>Dein epischer Fang konnte nicht ausgegeben werden. Das Team wurde informiert.</red>'

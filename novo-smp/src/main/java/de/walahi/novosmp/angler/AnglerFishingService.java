@@ -403,17 +403,10 @@ public final class AnglerFishingService implements Listener {
         FishingLootPoolSelector.Result loot = lootPools.roll(
                 angler, prestige, quality, session.luckLevel, random);
         FishingLootPoolSelector.Pool selectedPool = loot.main();
+        if (selectedPool == null) player.sendMessage(miniMessage.deserialize(plugin.configs().angler().getString(
+                "loot.empty-message", "<red>Kein Fishing-Loot-Pool konfiguriert.</red>")));
         if (selectedPool == FishingLootPoolSelector.Pool.FISH) {
-            ItemStack caught = factory.create(session.fish.id(), 1);
-            if (caught == null) return;
-            if (angler) {
-                ItemStack overflow = feature.storeCatch(player, caught);
-                if (overflow != null) player.getWorld().dropItemNaturally(player.getLocation(), overflow);
-            } else {
-                // Bukkit fills matching partial stacks before free storage slots.
-                for (ItemStack overflow : player.getInventory().addItem(caught.clone()).values())
-                    player.getWorld().dropItemNaturally(player.getLocation(), overflow);
-            }
+            if (!deliverFish(player, session.fish, angler)) return;
             fishCaught.accept(player);
         }
         double base = plugin.configs().angler().getDouble("fishing.xp.base", 25D);
@@ -427,31 +420,14 @@ public final class AnglerFishingService implements Listener {
                 plugin.getLogger().log(Level.SEVERE, "Angler-Fortschritt konnte nicht gespeichert werden", exception);
             }
         }
-        if (selectedPool != FishingLootPoolSelector.Pool.FISH) {
-            if (selectedPool == null) {
-                player.sendMessage(miniMessage.deserialize(plugin.configs().angler().getString(
-                        "loot.empty-message", "<red>Kein Fishing-Loot-Pool konfiguriert.</red>")));
-            } else if (selectedPool == FishingLootPoolSelector.Pool.JUNK) {
-                giveJunk(player);
-            } else if (selectedPool == FishingLootPoolSelector.Pool.TREASURE && angler) {
-                giveTreasure(player);
-            } else if (selectedPool == FishingLootPoolSelector.Pool.RARE && angler) {
-                giveRare(player, null);
-            } else if (selectedPool == FishingLootPoolSelector.Pool.EPIC && angler) {
-                giveEpic(player, null);
-            } else if (selectedPool == FishingLootPoolSelector.Pool.LEGENDARY && angler) {
-                giveLegendary(player, null);
-            } else previewPool(player, selectedPool);
-        }
-        // The extra roll is loot only: no second XP, combo, Green hit or fish item in this block.
-        if (loot.extra() == FishingLootPoolSelector.Pool.JUNK) giveJunk(player);
-        else if (loot.extra() == FishingLootPoolSelector.Pool.TREASURE && angler) giveTreasure(player);
-        else if (loot.extra() == FishingLootPoolSelector.Pool.RARE && angler) giveRare(player, null);
-        else if (loot.extra() == FishingLootPoolSelector.Pool.EPIC && angler) giveEpic(player, null);
-        else if (loot.extra() == FishingLootPoolSelector.Pool.LEGENDARY && angler) giveLegendary(player, null);
-        else if (loot.extra() != null) previewExtraPool(player, loot.extra());
-        if (selectedPool != FishingLootPoolSelector.Pool.FISH) return;
-        if (award.importantFeedback()) return; // Keep the rarer level-up/milestone actionbar visible.
+        CatchDisplay mainCatch = selectedPool == FishingLootPoolSelector.Pool.FISH
+                ? new CatchDisplay("fish", session.fish.displayName())
+                : rollCatch(player, selectedPool, angler, true);
+        // An extra roll is loot only: no second XP, combo, Green hit or fish-caught statistic.
+        CatchDisplay extraCatch = loot.extra() == FishingLootPoolSelector.Pool.FISH
+                ? deliverFish(player, session.fish, angler)
+                    ? new CatchDisplay("fish", session.fish.displayName()) : null
+                : rollCatch(player, loot.extra(), angler, false);
         int capacity = 0;
         int occupied = 0;
         if (angler) {
@@ -463,16 +439,72 @@ public final class AnglerFishingService implements Listener {
                 plugin.getLogger().log(Level.WARNING, "Fanglager-Anzeige konnte nicht gelesen werden", exception);
             }
         }
+        presentCatch(plugin.configs().angler(), angler, quality, mainCatch, extraCatch,
+                award.creditedXp(), combo.combo(), occupied, capacity,
+                raw -> actionbar(player, raw), raw -> player.sendMessage(miniMessage.deserialize(raw)));
+    }
+
+    record CatchDisplay(String pool, String entry) { }
+
+    static void presentCatch(FileConfiguration config, boolean angler, FishingGame.Quality quality,
+                             CatchDisplay main, CatchDisplay bonus, long xp, int combo, int stored, int capacity,
+                             java.util.function.Consumer<String> actionbar,
+                             java.util.function.Consumer<String> chat) {
+        if (bonus != null) chat.accept(config.getString("loot." + bonus.pool() + ".bonus-message",
+                "<gray>Zusatzfund: <white>%entry%</white></gray>").replace("%entry%", bonus.entry()));
+        if (main == null) return;
         String qualityKey = quality.name().toLowerCase(java.util.Locale.ROOT);
-        String template = plugin.configs().angler().getString(
+        String template = config.getString(
                 angler ? "fishing.actionbar." + qualityKey : "fishing.actionbar.non-angler." + qualityKey,
                 angler ? "<green>%fish% • +%xp% XP | Combo: %combo% | Lager: %stored%/%capacity%</green>"
                         : "<green>%fish% | Combo: %combo%</green>");
-        actionbar(player, template.replace("%fish%", session.fish.displayName())
-                .replace("%xp%", Long.toString(award.creditedXp()))
-                .replace("%combo%", Integer.toString(combo.combo()))
-                .replace("%stored%", Integer.toString(occupied))
+        actionbar.accept(template.replace("%fish%", main.entry())
+                .replace("%xp%", Long.toString(xp))
+                .replace("%combo%", Integer.toString(combo))
+                .replace("%stored%", Integer.toString(stored))
                 .replace("%capacity%", Integer.toString(capacity)));
+    }
+
+    private boolean deliverFish(Player player, FishDefinition fish, boolean angler) {
+        ItemStack caught = factory.create(fish.id(), 1);
+        if (caught == null) return false;
+        if (angler) {
+            ItemStack overflow = feature.storeCatch(player, caught);
+            if (overflow != null) player.getWorld().dropItemNaturally(player.getLocation(), overflow);
+        } else {
+            // Bukkit fills matching partial stacks before free storage slots.
+            for (ItemStack overflow : player.getInventory().addItem(caught.clone()).values())
+                player.getWorld().dropItemNaturally(player.getLocation(), overflow);
+        }
+        return true;
+    }
+
+    private CatchDisplay rollCatch(Player player, FishingLootPoolSelector.Pool pool,
+                                   boolean angler, boolean announce) {
+        if (pool == null || pool == FishingLootPoolSelector.Pool.FISH) return null;
+        return switch (pool) {
+            case JUNK -> {
+                FishingJunkPool.Result result = giveJunk(player, announce);
+                yield result == null ? null : new CatchDisplay("junk", result.displayName());
+            }
+            case TREASURE -> {
+                FishingTreasurePool.Result result = giveTreasure(player, announce);
+                yield result == null ? null : new CatchDisplay("treasure", result.displayName());
+            }
+            case RARE -> {
+                FishingRarePool.Result result = angler ? giveRare(player, null, announce) : null;
+                yield result == null ? null : new CatchDisplay("rare", result.displayName());
+            }
+            case EPIC -> {
+                FishingEpicPool.Result result = angler ? giveEpic(player, null, announce) : null;
+                yield result == null ? null : new CatchDisplay("epic", result.displayName());
+            }
+            case LEGENDARY -> {
+                FishingLegendaryPool.Result result = angler ? giveLegendary(player, null, announce) : null;
+                yield result == null ? null : new CatchDisplay("legendary", result.displayName());
+            }
+            default -> null;
+        };
     }
 
     private void loadAfkIntervals() {
@@ -791,13 +823,6 @@ public final class AnglerFishingService implements Listener {
         return random.nextDouble() < Math.max(0D, Math.min(1D, chance));
     }
 
-    /** Admin-only command hook: shows a category without rolling rewards or changing progress. */
-    public void previewPool(Player player, FishingLootPoolSelector.Pool selectedPool) {
-        player.sendMessage(miniMessage.deserialize(plugin.configs().angler().getString(
-                "loot.test-message", "<gray>[Fishing-Test] Pool: <yellow>%pool%</yellow></gray>")
-                .replace("%pool%", selectedPool.name())));
-    }
-
     public boolean treasureReady() { return treasurePool.ready(); }
     public boolean junkReady() { return junkPool.ready(); }
     public boolean rareReady() { return rarePool.ready(); }
@@ -817,6 +842,10 @@ public final class AnglerFishingService implements Listener {
 
     /** One Epic entry, either weighted or explicitly selected by the admin test. */
     public FishingEpicPool.Result giveEpic(Player player, String entryId) {
+        return giveEpic(player, entryId, true);
+    }
+
+    private FishingEpicPool.Result giveEpic(Player player, String entryId, boolean announce) {
         if (!isActiveAngler(player)) {
             plugin.messages().sendConfiguredAuto(player, plugin.configs().angler(),
                     "loot.epic.angler-required-message", "<red>Für Epic-Loot muss Angler aktiv sein.</red>");
@@ -837,7 +866,7 @@ public final class AnglerFishingService implements Listener {
                         "<red>Dein epischer Fang konnte nicht ausgegeben werden. Das Team wurde informiert.</red>");
                 return null;
             }
-            plugin.messages().sendConfiguredAuto(player, plugin.configs().angler(),
+            if (announce) plugin.messages().sendConfiguredAuto(player, plugin.configs().angler(),
                     "loot.epic.received-message",
                     "<gold>Epischer Fang: <white>%entry%</white> erhalten.</gold>",
                     "%entry%", result.displayName());
@@ -871,6 +900,10 @@ public final class AnglerFishingService implements Listener {
 
     /** One Legendary entry, selected by the live outer roll or the admin test. */
     public FishingLegendaryPool.Result giveLegendary(Player player, String entryId) {
+        return giveLegendary(player, entryId, true);
+    }
+
+    private FishingLegendaryPool.Result giveLegendary(Player player, String entryId, boolean announce) {
         if (!isActiveAngler(player)) {
             plugin.messages().sendConfiguredAuto(player, plugin.configs().angler(),
                     "loot.legendary.angler-required-message", "<red>Für Legendary-Loot muss Angler aktiv sein.</red>");
@@ -897,7 +930,7 @@ public final class AnglerFishingService implements Listener {
                         "<red>Dein legendärer Fang konnte nicht ausgegeben werden. Das Team wurde informiert.</red>");
                 return null;
             }
-            plugin.messages().sendConfiguredAuto(player, plugin.configs().angler(),
+            if (announce) plugin.messages().sendConfiguredAuto(player, plugin.configs().angler(),
                     "loot.legendary.received-message",
                     "<gold>Legendärer Fang: <white>%entry%</white> erhalten.</gold>",
                     "%entry%", result.displayName());
@@ -923,6 +956,10 @@ public final class AnglerFishingService implements Listener {
 
     /** One Rare entry, either weighted or explicitly selected by the admin test. */
     public FishingRarePool.Result giveRare(Player player, String entryId) {
+        return giveRare(player, entryId, true);
+    }
+
+    private FishingRarePool.Result giveRare(Player player, String entryId, boolean announce) {
         if (!isActiveAngler(player)) {
             plugin.messages().sendConfiguredAuto(player, plugin.configs().angler(),
                     "loot.rare.angler-required-message", "<red>Für Rare-Loot muss Angler aktiv sein.</red>");
@@ -943,7 +980,7 @@ public final class AnglerFishingService implements Listener {
                         "<red>Dein seltener Fang konnte nicht ausgegeben werden. Das Team wurde informiert.</red>");
                 return null;
             }
-            plugin.messages().sendConfiguredAuto(player, plugin.configs().angler(),
+            if (announce) plugin.messages().sendConfiguredAuto(player, plugin.configs().angler(),
                     "loot.rare.received-message",
                     "<light_purple>Seltener Fang: <white>%entry%</white> erhalten.</light_purple>",
                     "%entry%", result.displayName());
@@ -969,6 +1006,10 @@ public final class AnglerFishingService implements Listener {
 
     /** Used by real catches and the single admin test; exactly one internal Junk roll. */
     public FishingJunkPool.Result giveJunk(Player player) {
+        return giveJunk(player, true);
+    }
+
+    private FishingJunkPool.Result giveJunk(Player player, boolean announce) {
         if (!junkPool.ready()) {
             plugin.messages().sendConfiguredAuto(player, plugin.configs().angler(),
                     "loot.junk.unavailable-message",
@@ -989,7 +1030,7 @@ public final class AnglerFishingService implements Listener {
                 for (ItemStack overflow : player.getInventory().addItem(item).values())
                     player.getWorld().dropItemNaturally(player.getLocation(), overflow);
             }
-            plugin.messages().sendConfiguredAuto(player, plugin.configs().angler(),
+            if (announce) plugin.messages().sendConfiguredAuto(player, plugin.configs().angler(),
                     "loot.junk.received-message", "<gray>Beifang: <white>%entry%</white> erhalten.</gray>",
                     "%entry%", result.displayName());
             return result;
@@ -1014,6 +1055,10 @@ public final class AnglerFishingService implements Listener {
 
     /** Used by real catches and the single admin test; exactly one internal Treasure roll. */
     public FishingTreasurePool.Result giveTreasure(Player player) {
+        return giveTreasure(player, true);
+    }
+
+    private FishingTreasurePool.Result giveTreasure(Player player, boolean announce) {
         if (!treasurePool.ready()) {
             plugin.messages().sendConfiguredAuto(player, plugin.configs().angler(),
                     "loot.treasure.unavailable-message",
@@ -1022,13 +1067,23 @@ public final class AnglerFishingService implements Listener {
         }
         try {
             FishingTreasurePool.Result result = treasurePool.roll(random);
-            if (!lootFoundation.deliver(player, result.reward(), feature).success()) {
+            boolean delivered;
+            if (isActiveAngler(player)) delivered = lootFoundation.deliver(player, result.reward(), feature).success();
+            else if (result.reward() instanceof AnglerLootFoundation.CurrencyReward currency)
+                delivered = lootFoundation.credit(player, currency);
+            else {
+                ItemStack item = lootFoundation.createPhysicalReward(result.reward());
+                for (ItemStack overflow : player.getInventory().addItem(item).values())
+                    player.getWorld().dropItemNaturally(player.getLocation(), overflow);
+                delivered = true;
+            }
+            if (!delivered) {
                 plugin.messages().sendConfiguredAuto(player, plugin.configs().angler(),
                         "loot.treasure.failed-message",
                         "<red>Dein Schatzfund konnte nicht ausgegeben werden. Das Team wurde informiert.</red>");
                 return null;
             }
-            plugin.messages().sendConfiguredAuto(player, plugin.configs().angler(),
+            if (announce) plugin.messages().sendConfiguredAuto(player, plugin.configs().angler(),
                     "loot.treasure.received-message",
                     "<aqua>Schatzfund: <white>%entry%</white> erhalten.</aqua>",
                     "%entry%", result.displayName());
@@ -1050,12 +1105,6 @@ public final class AnglerFishingService implements Listener {
         for (int index = 0; index < attempts; index++)
             counts.merge(treasurePool.rollEntryId(random), 1, Integer::sum);
         return Map.copyOf(counts);
-    }
-
-    private void previewExtraPool(Player player, FishingLootPoolSelector.Pool selectedPool) {
-        player.sendMessage(miniMessage.deserialize(plugin.configs().angler().getString(
-                "loot.extra-test-message", "<gray>[Fishing-Test] Luck-Zusatzroll: <yellow>%pool%</yellow></gray>")
-                .replace("%pool%", selectedPool.name())));
     }
 
     public record RollSimulation(boolean angler, int prestige, FishingGame.Quality quality,

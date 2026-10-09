@@ -86,7 +86,6 @@ public final class CustomItemCommand extends BaseCommand {
         return switch (action) {
             case "give", "take", "count" -> handleInventoryAction(sender, label, action, args);
             case "storecatch" -> handleStoreCatch(sender, label, args);
-            case "fishingpool" -> handleFishingPool(sender, label, args);
             case "fishingroll" -> handleFishingRoll(sender, label, args);
             case "bundletest" -> handleBundleTest(sender, label, args);
             case "list" -> handleList(sender);
@@ -366,20 +365,6 @@ public final class CustomItemCommand extends BaseCommand {
                 "%player%", target.getName(), "%dropped%", Integer.toString(dropped));
     }
 
-    private boolean handleFishingPool(CommandSender sender, String label, String[] args) {
-        if (fixedItemId != null || anglerFishing == null || args.length != 3) return usage(sender, label);
-        Player target = Bukkit.getPlayerExact(args[1]);
-        if (target == null) return messageOrDefault(sender, "custom-items.messages.player-not-found",
-                "<red>Spieler <white>%player%</white> ist nicht online.</red>", "%player%", args[1]);
-        FishingLootPoolSelector.Pool pool;
-        try { pool = FishingLootPoolSelector.Pool.valueOf(args[2].toUpperCase(Locale.ROOT)); }
-        catch (IllegalArgumentException exception) { return usage(sender, label); }
-        anglerFishing.previewPool(target, pool);
-        return plugin.messages().sendConfiguredAuto(sender, plugin.configs().angler(),
-                "messages.admin-pool-preview", "<green>Test-Pool %pool% für %player% angezeigt (ohne Belohnung).</green>",
-                "%pool%", pool.name(), "%player%", target.getName());
-    }
-
     private boolean handleFishingRoll(CommandSender sender, String label, String[] args) {
         if (fixedItemId != null || anglerFishing == null || args.length < 3 || args.length > 4)
             return usage(sender, label);
@@ -538,7 +523,6 @@ public final class CustomItemCommand extends BaseCommand {
                 "<yellow>/%label% give|take <spieler>%item% [anzahl]  •  /%label% count <spieler>%item%"
                         + "  •  /%label% list  •  /%label% reload"
                         + (fixedItemId == null ? "  •  /%label% storecatch <spieler> fish:<id> [anzahl]"
-                        + "  •  /%label% fishingpool <spieler> <pool>"
                         + "  •  /%label% fishingroll <spieler> <farbe> [anzahl]"
                         + "  •  /%label% bundletest <spieler> <fall>" : "")
                         + "</yellow>",
@@ -579,11 +563,11 @@ public final class CustomItemCommand extends BaseCommand {
 
         if (args.length == 1) {
             return filtered(fixedItemId == null
-                    ? List.of("give", "take", "count", "storecatch", "fishingpool", "fishingroll", "bundletest", "list", "reload")
+                    ? List.of("give", "take", "count", "storecatch", "fishingroll", "bundletest", "list", "reload")
                     : List.of("give", "take", "count", "list", "reload"), args[0]);
         }
         String action = args[0].toLowerCase(Locale.ROOT);
-        if (!List.of("give", "take", "count", "storecatch", "fishingpool", "fishingroll", "bundletest").contains(action)) return List.of();
+        if (!List.of("give", "take", "count", "storecatch", "fishingroll", "bundletest").contains(action)) return List.of();
 
         if (args.length == 2) {
             List<String> names = new ArrayList<>();
@@ -591,8 +575,6 @@ public final class CustomItemCommand extends BaseCommand {
             return filtered(names, args[1]);
         }
         if (args.length == 3 && fixedItemId == null) {
-            if (action.equals("fishingpool")) return filtered(
-                    java.util.Arrays.stream(FishingLootPoolSelector.Pool.values()).map(Enum::name).toList(), args[2]);
             if (action.equals("fishingroll")) return filtered(List.of("red", "orange", "yellow", "green"), args[2]);
             if (action.equals("bundletest")) return filtered(
                     List.of("normal", "over64", "tools", "armor", "armor_set"), args[2]);

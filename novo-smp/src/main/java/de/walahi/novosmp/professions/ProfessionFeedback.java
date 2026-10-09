@@ -9,11 +9,24 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 /** Compact profession XP and level feedback without chat spam. */
 final class ProfessionFeedback {
+    private static final Set<Integer> REWARD_MILESTONES = Set.of(10, 20, 30, 40, 60, 70, 80, 90);
+    enum Notice { NONE, REWARD, LIMIT }
+
+    static Notice noticeFor(int level) {
+        if (level == 25 || level == 50 || level == 75 || level == 100) return Notice.LIMIT;
+        return REWARD_MILESTONES.contains(level) ? Notice.REWARD : Notice.NONE;
+    }
+
+    static String rewardCommand(String professionId) { return "/berufe rewards " + professionId; }
+    static String progressCommand(String professionId, int level) {
+        return "/berufe progress " + professionId + " " + level;
+    }
     private final SMPCorePlugin plugin;
     private final ProfessionConfig config;
     private final MiniMessage miniMessage = MiniMessage.miniMessage();
@@ -46,7 +59,7 @@ final class ProfessionFeedback {
         levelDisplayUntil.put(playerId, System.currentTimeMillis() + holdMillis);
         String path = milestone > 0 ? "feedback.milestone-actionbar" : "feedback.level-up-actionbar";
         String fallback = milestone > 0
-                ? "<gold><bold>MEILENSTEIN!</bold></gold> <gray>%profession% Level <yellow>%level%</yellow> • Abgabe in /berufe</gray>"
+                ? "<gold><bold>BERUFS-LIMIT!</bold></gold> <gray>%profession% Level <yellow>%level%</yellow> • Anforderungen in /berufe</gray>"
                 : "<green><bold>LEVELAUFSTIEG!</bold></green> <gray>%profession% <yellow>%old%</yellow> → <yellow>%level%</yellow></gray>";
         String raw = config.string(path, fallback)
                 .replace("%profession%", config.professionDisplayName(progress.professionId()))
@@ -54,6 +67,25 @@ final class ProfessionFeedback {
                 .replace("%level%", Integer.toString(newLevel));
         player.sendActionBar(miniMessage.deserialize(raw));
         playLevelSound(player, milestone > 0);
+    }
+
+    void showReachedMilestones(Player player, String professionId, int oldLevel, int newLevel, int limit) {
+        for (int level = oldLevel + 1; level <= newLevel; level++) {
+            if (noticeFor(level) != Notice.REWARD) continue;
+            String raw = config.string("feedback.reward-reached-chat",
+                    "<gold>✦ Meilenstein erreicht!</gold> <yellow><click:run_command:'%command%'>[Belohnung abholen]</click></yellow>");
+            player.sendMessage(miniMessage.deserialize(raw.replace("%command%", rewardCommand(professionId))
+                    .replace("%profession%", config.professionDisplayName(professionId))
+                    .replace("%level%", Integer.toString(level))));
+        }
+        if (limit > 0 && noticeFor(limit) == Notice.LIMIT) {
+            String raw = config.string("feedback.limit-reached-chat",
+                    "<gold>Berufs-Limit erreicht.</gold> <gray>Erfülle die offenen Anforderungen, um weiterzuleveln.</gray> <yellow><click:run_command:'%command%'>[Fortschritt öffnen]</click></yellow>");
+            player.sendMessage(miniMessage.deserialize(raw.replace("%command%",
+                            progressCommand(professionId, limit))
+                    .replace("%profession%", config.professionDisplayName(professionId))
+                    .replace("%level%", Integer.toString(limit))));
+        }
     }
 
     void clear(UUID playerId) {

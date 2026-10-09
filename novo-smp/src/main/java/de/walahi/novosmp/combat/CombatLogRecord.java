@@ -14,6 +14,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -67,6 +68,10 @@ final class CombatLogRecord {
     ItemStack[] extra;
     ItemStack cursor;
     List<EffectState> effects;
+    // An empty dummy slot only means "consumed" after its snapshot item was actually applied.
+    private boolean[] armorApplied = new boolean[0];
+    private boolean mainHandApplied;
+    private boolean offHandApplied;
 
     CombatLogRecord(UUID playerId, String playerName, long createdAt, long expiresAt, Phase phase,
                     String worldName, double x, double y, double z, float yaw, float pitch,
@@ -143,12 +148,23 @@ final class CombatLogRecord {
                 .map(effect -> EffectState.capture(effect, now)).toList();
         EntityEquipment equipment = captureEquipment ? dummy.getEquipment() : null;
         if (equipment != null) {
-            armor = cloneItems(equipment.getArmorContents());
+            ItemStack[] wornArmor = equipment.getArmorContents();
+            if (wornArmor == null) wornArmor = new ItemStack[0];
+            armor = Arrays.copyOf(armor, Math.max(armor.length, wornArmor.length));
+            for (int slot = 0; slot < armor.length; slot++) {
+                ItemStack worn = slot < wornArmor.length ? wornArmor[slot] : null;
+                if ((slot < armorApplied.length && armorApplied[slot]) || sameItem(armor[slot], worn)) {
+                    armor[slot] = cloneItem(worn);
+                }
+            }
             if (extra.length == 0) extra = new ItemStack[1];
-            extra[0] = cloneItem(equipment.getItemInOffHand());
+            ItemStack offHand = equipment.getItemInOffHand();
+            if (offHandApplied || sameItem(extra[0], offHand)) extra[0] = cloneItem(offHand);
             // Main hand is storage slot selected at logout. Reflect durability/consumption changes.
             ItemStack mainHand = equipment.getItemInMainHand();
-            if (heldSlot >= 0 && heldSlot < storage.length) storage[heldSlot] = cloneItem(mainHand);
+            if (heldSlot >= 0 && heldSlot < storage.length
+                    && (mainHandApplied || sameItem(storage[heldSlot], mainHand)))
+                storage[heldSlot] = cloneItem(mainHand);
         }
     }
 
@@ -159,11 +175,22 @@ final class CombatLogRecord {
         dummy.setAbsorptionAmount(Math.max(0D, absorption));
         dummy.setFireTicks(Math.max(0, fireTicks));
         dummy.setCanPickupItems(false);
+        armorApplied = new boolean[armor.length];
+        mainHandApplied = false;
+        offHandApplied = false;
         EntityEquipment equipment = dummy.getEquipment();
         if (equipment != null) {
             equipment.setArmorContents(cloneItems(armor));
             equipment.setItemInMainHand(selectedMainHand());
             equipment.setItemInOffHand(extra.length == 0 ? null : cloneItem(extra[0]));
+            ItemStack[] wornArmor = equipment.getArmorContents();
+            if (wornArmor == null) wornArmor = new ItemStack[0];
+            for (int slot = 0; slot < armor.length; slot++) {
+                armorApplied[slot] = sameItem(armor[slot],
+                        slot < wornArmor.length ? wornArmor[slot] : null);
+            }
+            mainHandApplied = sameItem(selectedMainHand(), equipment.getItemInMainHand());
+            offHandApplied = sameItem(extra.length == 0 ? null : extra[0], equipment.getItemInOffHand());
         }
         long now = System.currentTimeMillis();
         for (EffectState effect : effects) {
@@ -242,6 +269,14 @@ final class CombatLogRecord {
 
     private ItemStack selectedMainHand() {
         return heldSlot >= 0 && heldSlot < storage.length ? cloneItem(storage[heldSlot]) : null;
+    }
+
+    private static boolean hasItem(ItemStack item) {
+        return item != null && !item.getType().isAir();
+    }
+
+    private static boolean sameItem(ItemStack expected, ItemStack actual) {
+        return hasItem(expected) ? expected.equals(actual) : !hasItem(actual);
     }
 
     private static void addItems(Collection<ItemStack> target, ItemStack[] source) {

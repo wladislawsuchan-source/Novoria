@@ -274,13 +274,15 @@ messages:
   hunt-complete: '<red><bold>Jagdauftrag abgeschlossen!</bold></red> <gray>%type%: <yellow>%current%/%required%</yellow></gray>'
   hunter-streak: <red>⚔ Jagdserie x%streak%</red> <dark_gray>•</dark_gray> <yellow>+%xp%% XP</yellow> <dark_gray>•</dark_gray> <gold>+%loot%% Beute</gold>
 feedback:
+  reward-reached-chat: "<gold>✦ Meilenstein erreicht!</gold> <yellow><click:run_command:'%command%'>[Belohnung abholen]</click></yellow>"
+  limit-reached-chat: "<gold>Berufs-Limit erreicht.</gold> <gray>Erfülle die noch offenen Anforderungen, um weiterzuleveln. Du kannst schon vor diesem Level einzahlen.</gray> <yellow><click:run_command:'%command%'>[Fortschritt öffnen]</click></yellow>"
   level-up-hold-millis: 1800
   xp-actionbar:
     delay-ticks: 2
     bar-segments: 10
     format: '%profession% <dark_gray>•</dark_gray> <yellow>Level %level%</yellow> <dark_gray>•</dark_gray> %bar% <aqua>%current%/%needed% XP</aqua>'
   level-up-actionbar: <green><bold>LEVELAUFSTIEG!</bold></green> <gray>%profession% <yellow>%old%</yellow> → <yellow>%level%</yellow></gray>
-  milestone-actionbar: <gold><bold>MEILENSTEIN!</bold></gold> <gray>%profession% Level <yellow>%level%</yellow> • Abgabe in /berufe</gray>
+  milestone-actionbar: <gold><bold>BERUFS-LIMIT!</bold></gold> <gray>%profession% Level <yellow>%level%</yellow> • Anforderungen in /berufe</gray>
   sounds:
     level-up:
       sound: ENTITY_PLAYER_LEVELUP
@@ -1345,35 +1347,35 @@ material-groups:
 requirements:
   angler:
     '0':
-      '25': {fish: {river_perch: 32, silver_carp: 24}, skills: {max_combo: 5}}
-      '50': {fish: {forest_trout: 48, sea_bass: 32}, skills: {green_hits: 20, max_combo: 10}}
-      '75': {fish: {swamp_carp: 64, night_catfish: 24}, skills: {green_hits: 50, max_combo: 20}}
-      '100': {coin-cost: 10000, fish: {moon_trout: 32, rain_carp: 32}, skills: {green_hits: 100, max_combo: 30}}
+      '25': {fish: {river_perch: 32, silver_carp: 24}, skills: {green_hits: 25, max_combo: 5}}
+      '50': {fish: {forest_trout: 48, sea_bass: 32}, skills: {green_hits: 30, max_combo: 10}}
+      '75': {fish: {swamp_carp: 64, night_catfish: 24}, skills: {green_hits: 35, max_combo: 20}}
+      '100': {coin-cost: 10000, fish: {moon_trout: 32, rain_carp: 32}, skills: {green_hits: 50, max_combo: 30}}
     '1':
-      '25': {fish: {river_perch: 64, sea_bass: 64}, skills: {max_combo: 8}}
-      '50': {fish: {night_catfish: 48, rain_carp: 48}, skills: {green_hits: 40, max_combo: 15}}
-      '75': {fish: {storm_catfish: 24, storm_mackerel: 16}, skills: {green_hits: 80, max_combo: 25}}
-      '100': {coin-cost: 25000, fish: {coral_fish: 16, mangrove_catfish: 12}, skills: {green_hits: 140, max_combo: 35}}
+      '25': {fish: {river_perch: 64, sea_bass: 64}, skills: {green_hits: 30, max_combo: 8}}
+      '50': {fish: {night_catfish: 48, rain_carp: 48}, skills: {green_hits: 35, max_combo: 15}}
+      '75': {fish: {storm_catfish: 24, storm_mackerel: 16}, skills: {green_hits: 40, max_combo: 25}}
+      '100': {coin-cost: 25000, fish: {coral_fish: 16, mangrove_catfish: 12}, skills: {green_hits: 60, max_combo: 35}}
     '2':
-      '25': {fish: {forest_trout: 128, swamp_carp: 96}, skills: {max_combo: 10}}
-      '50': {fish: {moon_trout: 64, storm_catfish: 32}, skills: {green_hits: 55, max_combo: 18}}
-      '75': {fish: {frost_trout: 24, coral_fish: 24}, skills: {green_hits: 100, max_combo: 28}}
-      '100': {coin-cost: 50000, fish: {storm_mackerel: 32, deep_mackerel: 12}, skills: {green_hits: 170, max_combo: 40}}
+      '25': {fish: {forest_trout: 128, swamp_carp: 96}, skills: {green_hits: 35, max_combo: 10}}
+      '50': {fish: {moon_trout: 64, storm_catfish: 32}, skills: {green_hits: 40, max_combo: 18}}
+      '75': {fish: {frost_trout: 24, coral_fish: 24}, skills: {green_hits: 45, max_combo: 28}}
+      '100': {coin-cost: 50000, fish: {storm_mackerel: 32, deep_mackerel: 12}, skills: {green_hits: 70, max_combo: 40}}
     '3':
-      '25': {fish: {night_catfish: 128, rain_carp: 128}, skills: {max_combo: 12}}
-      '50': {fish: {storm_catfish: 64, storm_mackerel: 48}, skills: {green_hits: 70, max_combo: 20}}
-      '75': {fish: {mangrove_catfish: 48, frost_trout: 48}, skills: {green_hits: 125, max_combo: 30}}
-      '100': {coin-cost: 100000, fish: {coral_fish: 64, deep_mackerel: 24}, skills: {green_hits: 200, max_combo: 45}}
+      '25': {fish: {night_catfish: 128, rain_carp: 128}, skills: {green_hits: 40, max_combo: 12}}
+      '50': {fish: {storm_catfish: 64, storm_mackerel: 48}, skills: {green_hits: 45, max_combo: 20}}
+      '75': {fish: {mangrove_catfish: 48, frost_trout: 48}, skills: {green_hits: 50, max_combo: 30}}
+      '100': {coin-cost: 100000, fish: {coral_fish: 64, deep_mackerel: 24}, skills: {green_hits: 75, max_combo: 45}}
     '4':
-      '25': {fish: {river_perch: 256, silver_carp: 256}, skills: {max_combo: 15}}
-      '50': {fish: {moon_trout: 128, rain_carp: 128}, skills: {green_hits: 90, max_combo: 25}}
-      '75': {fish: {storm_mackerel: 96, coral_fish: 96}, skills: {green_hits: 150, max_combo: 35}}
-      '100': {coin-cost: 200000, fish: {mangrove_catfish: 96, frost_trout: 96, deep_mackerel: 48}, skills: {green_hits: 230, max_combo: 50}}
+      '25': {fish: {river_perch: 256, silver_carp: 256}, skills: {green_hits: 45, max_combo: 15}}
+      '50': {fish: {moon_trout: 128, rain_carp: 128}, skills: {green_hits: 50, max_combo: 25}}
+      '75': {fish: {storm_mackerel: 96, coral_fish: 96}, skills: {green_hits: 60, max_combo: 35}}
+      '100': {coin-cost: 200000, fish: {mangrove_catfish: 96, frost_trout: 96, deep_mackerel: 48}, skills: {green_hits: 80, max_combo: 50}}
     '5':
-      '25': {skills: {max_combo: 18}}
-      '50': {skills: {green_hits: 110, max_combo: 28}}
-      '75': {skills: {green_hits: 180, max_combo: 40}}
-      '100': {skills: {green_hits: 275, max_combo: 55}}
+      '25': {skills: {green_hits: 50, max_combo: 18}}
+      '50': {skills: {green_hits: 60, max_combo: 28}}
+      '75': {skills: {green_hits: 70, max_combo: 40}}
+      '100': {skills: {green_hits: 95, max_combo: 55}}
   holzfaeller:
     '0':
       '25':

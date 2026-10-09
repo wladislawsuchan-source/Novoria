@@ -232,9 +232,13 @@ public final class ProfessionRepository {
         }
     }
 
-    /** Credits all Angler milestones of the current prestige in one ordered transaction. */
+    /** Green hits belong only to the current stage; combo remains a prestige-wide best value. */
+    static boolean shouldCreditGreenHit(int currentMilestone, int requirementLevel, boolean greenHit) {
+        return greenHit && currentMilestone == requirementLevel;
+    }
+
     public void recordAnglerSkills(UUID playerId, int prestige, Collection<MilestoneRequirement> milestones,
-                                   boolean greenHit, int combo) {
+                                   int currentMilestone, boolean greenHit, int combo) {
         if (!greenHit && combo <= 0) return;
         try (Connection connection = database.connection()) {
             boolean previous = connection.getAutoCommit();
@@ -242,7 +246,7 @@ public final class ProfessionRepository {
             try {
                 for (MilestoneRequirement requirement : milestones) {
                     long greenTarget = requirement.skills().getOrDefault("green_hits", 0L);
-                    if (greenHit && greenTarget > 0L) {
+                    if (shouldCreditGreenHit(currentMilestone, requirement.level(), greenHit) && greenTarget > 0L) {
                         long current = contribution(connection, playerId, ProfessionManager.ANGLER,
                                 prestige, requirement.level(), "green_hits");
                         if (current < greenTarget) upsertContribution(connection, playerId, ProfessionManager.ANGLER,
@@ -307,6 +311,43 @@ public final class ProfessionRepository {
             progress.markClean();
         } catch (SQLException exception) {
             throw new IllegalStateException("Berufsfortschritt konnte nicht gespeichert werden", exception);
+        }
+    }
+
+    /** Commit the completed Angler stage and start the next Green-hit stage at zero together. */
+    public void completeAnglerMilestone(UUID playerId, ProfessionProgress progress, int nextMilestone) {
+        try (Connection connection = database.connection()) {
+            boolean previous = connection.getAutoCommit();
+            connection.setAutoCommit(false);
+            try {
+                saveProgress(connection, playerId, progress);
+                resetGreenHitStage(connection, database.table("profession_contributions"),
+                        playerId, progress.prestige(), nextMilestone);
+                connection.commit();
+                progress.markClean();
+            } catch (SQLException exception) {
+                rollback(connection, exception);
+                throw exception;
+            } finally {
+                restoreAutoCommit(connection, previous);
+            }
+        } catch (SQLException exception) {
+            throw new IllegalStateException("Angler-Meilenstein konnte nicht gespeichert werden", exception);
+        }
+    }
+
+    static void resetGreenHitStage(Connection connection, String table, UUID playerId,
+                                   int prestige, int nextMilestone) throws SQLException {
+        if (nextMilestone <= 0) return;
+        String sql = "DELETE FROM " + table
+                + " WHERE player_uuid=? AND profession_id=? AND prestige=? AND milestone=? AND requirement_id=?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, playerId.toString());
+            statement.setString(2, ProfessionManager.ANGLER);
+            statement.setInt(3, prestige);
+            statement.setInt(4, nextMilestone);
+            statement.setString(5, "green_hits");
+            statement.executeUpdate();
         }
     }
 

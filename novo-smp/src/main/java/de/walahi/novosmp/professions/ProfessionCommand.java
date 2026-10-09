@@ -25,6 +25,19 @@ public final class ProfessionCommand extends BaseCommand {
                     sender, plugin.configs().professions(), "messages.player-only",
                     "<red>Dieser Befehl ist nur für Spieler.</red>");
         }
+        if (args.length >= 2 && (args[0].equalsIgnoreCase("rewards")
+                || args[0].equalsIgnoreCase("progress"))) {
+            String professionId = args[1].toLowerCase(java.util.Locale.ROOT);
+            if (java.util.Set.of(ProfessionManager.LUMBERJACK, ProfessionManager.MINER,
+                    ProfessionManager.HUNTER, ProfessionManager.ANGLER).contains(professionId)) {
+                if (args[0].equalsIgnoreCase("rewards")) manager.openRewards(player, professionId);
+                else if (args.length >= 3) {
+                    try { manager.openContribution(player, professionId, Integer.parseInt(args[2])); }
+                    catch (NumberFormatException ignored) { manager.open(player); }
+                } else manager.open(player);
+            } else manager.open(player);
+            return true;
+        }
         if (args.length > 0 && args[0].equalsIgnoreCase("holzfaeller")) {
             manager.openLumberjack(player);
         } else if (args.length > 0 && (args[0].equalsIgnoreCase("bergarbeiter")

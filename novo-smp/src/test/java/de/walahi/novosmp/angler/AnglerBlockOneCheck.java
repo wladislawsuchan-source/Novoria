@@ -4,6 +4,7 @@ import de.walahi.novosmp.professions.MilestoneRequirement;
 import de.walahi.novosmp.professions.PlayerProfessionState;
 import de.walahi.smpcore.database.migration.CreateAnglerCatchStorageMigration;
 import de.walahi.smpcore.database.migration.CreateProfessionsMigration;
+import de.walahi.smpcore.database.migration.ResetAnglerGreenHitStagesMigration;
 import de.walahi.smpcore.storage.StorageDialect;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -28,6 +29,25 @@ public final class AnglerBlockOneCheck {
     public static void main(String[] args) throws Exception {
         YamlConfiguration angler = YamlConfiguration.loadConfiguration(
                 new File("novo-smp/src/main/resources/angler.yml"));
+        check(!angler.getString("fishing.actionbar.green", "").isBlank(), "fish catch actionbar configured");
+        check(!angler.contains("loot.test-message") && !angler.contains("loot.extra-test-message"),
+                "old fishing test messages removed");
+        for (String pool : List.of("fish", "junk", "treasure", "rare", "epic", "legendary")) {
+            List<String> bars = new ArrayList<>();
+            List<String> chats = new ArrayList<>();
+            AnglerFishingService.presentCatch(angler, true, FishingGame.Quality.GREEN,
+                    new AnglerFishingService.CatchDisplay(pool, "Hauptfang"),
+                    new AnglerFishingService.CatchDisplay(pool, "Bonusfang"), 25, 7, 3, 54,
+                    bars::add, chats::add);
+            String fishLayout = angler.getString("fishing.actionbar.green")
+                    .replace("%fish%", "Hauptfang").replace("%xp%", "25")
+                    .replace("%combo%", "7").replace("%stored%", "3")
+                    .replace("%capacity%", "54");
+            check(bars.size() == 1 && bars.getFirst().equals(fishLayout)
+                            && chats.size() == 1 && chats.getFirst().contains("Zusatzfund")
+                            && chats.getFirst().contains("Bonusfang") && !bars.getFirst().contains("Bonusfang"),
+                    pool + " uses exact fish actionbar layout; bonus stays in chat");
+        }
         List<String> warnings = new ArrayList<>();
         Map<String, FishDefinition> fish = FishRegistry.parse(
                 angler.getConfigurationSection("fish"), warnings::add, material -> true);
@@ -193,6 +213,29 @@ public final class AnglerBlockOneCheck {
                         && doubleFish.extra() == FishingLootPoolSelector.Pool.FISH
                         && luckRandom.calls == 3,
                 "extra roll may match main pool and never chains");
+        YamlConfiguration deterministicPools = new YamlConfiguration();
+        deterministicPools.setDefaults(angler);
+        for (FishingLootPoolSelector.Pool candidate : FishingLootPoolSelector.Pool.values())
+            deterministicPools.set("loot.pools.no-angler." + candidate.name().toLowerCase(java.util.Locale.ROOT), 0D);
+        deterministicPools.set("loot.pools.no-angler.fish", 50D);
+        deterministicPools.set("loot.pools.no-angler.treasure", 50D);
+        FishingLootPoolSelector.Result treasureAndFish = new FishingLootPoolSelector(deterministicPools)
+                .roll(false, -1, FishingGame.Quality.GREEN, 5, new SequenceRandom(0.75D, 0D, 0.25D));
+        check(treasureAndFish.main() == FishingLootPoolSelector.Pool.TREASURE
+                        && treasureAndFish.extra() == FishingLootPoolSelector.Pool.FISH,
+                "Luck V executes the independent extra roll after a Treasure main catch");
+        List<String> mainBars = new ArrayList<>();
+        List<String> bonusChats = new ArrayList<>();
+        AnglerFishingService.presentCatch(angler, false, FishingGame.Quality.GREEN,
+                new AnglerFishingService.CatchDisplay("treasure", "Diamant"),
+                new AnglerFishingService.CatchDisplay("fish", "Flussbarsch"),
+                0, 2, 0, 0, mainBars::add, bonusChats::add);
+        check(mainBars.size() == 1 && mainBars.getFirst().equals(angler.getString("fishing.actionbar.non-angler.green")
+                        .replace("%fish%", "Diamant").replace("%combo%", "2"))
+                        && !mainBars.getFirst().contains("Schatz")
+                        && bonusChats.size() == 1 && bonusChats.getFirst().contains("Zusatzfund")
+                        && bonusChats.getFirst().contains("Flussbarsch"),
+                "deterministic Treasure main actionbar and Fish bonus chat do not overwrite each other");
         CountingRandom grayRandom = new CountingRandom(0D);
         check(loot.roll(true, 5, FishingGame.Quality.GRAY, 5, grayRandom)
                         .equals(new FishingLootPoolSelector.Result(null, null)) && grayRandom.calls == 0,
@@ -345,8 +388,8 @@ public final class AnglerBlockOneCheck {
                 {12, 20, 30, 45}, {15, 25, 35, 50}, {18, 28, 40, 55}
         };
         int[][] greenTargets = {
-                {0, 20, 50, 100}, {0, 40, 80, 140}, {0, 55, 100, 170},
-                {0, 70, 125, 200}, {0, 90, 150, 230}, {0, 110, 180, 275}
+                {25, 30, 35, 50}, {30, 35, 40, 60}, {35, 40, 45, 70},
+                {40, 45, 50, 75}, {45, 50, 60, 80}, {50, 60, 70, 95}
         };
         int[] milestones = {25, 50, 75, 100};
         for (int prestige = 0; prestige <= 5; prestige++) {
@@ -374,7 +417,7 @@ public final class AnglerBlockOneCheck {
         for (String suffix : anglerBookIds) {
             String path = "items.angler_buch_" + suffix;
             check(itemConfig.getString(path + ".material", "").equals("ENCHANTED_BOOK")
-                            && !itemConfig.getString(path + ".display-name", "").isBlank()
+                            && itemConfig.getString(path + ".display-name", "").isBlank()
                             && !itemConfig.getStringList(path + ".lore").isEmpty()
                             && itemConfig.getInt(path + ".max-stack-size") == 1,
                     "configured custom book " + suffix);
@@ -455,6 +498,39 @@ public final class AnglerBlockOneCheck {
                 try (ResultSet rows = statement.executeQuery()) {
                     check(rows.next() && rows.getInt(1) == 1,
                             "SQLite contribution key separates prestige cycles");
+                }
+            }
+            try (PreparedStatement profile = connection.prepareStatement(
+                    "INSERT INTO profession_profiles(player_uuid,profession_id,prestige,level,xp,completed_milestone,updated_at) VALUES (?,'angler',0,25,0,25,0)")) {
+                profile.setString(1, playerId.toString());
+                profile.executeUpdate();
+            }
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "INSERT INTO profession_contributions(player_uuid,profession_id,prestige,milestone,requirement_id,amount,updated_at) VALUES (?,'angler',0,?,?,?,0)")) {
+                for (Object[] row : new Object[][] {{25, "green_hits", 25}, {75, "green_hits", 5}, {50, "max_combo", 10}}) {
+                    statement.setString(1, playerId.toString());
+                    statement.setInt(2, (int) row[0]);
+                    statement.setString(3, (String) row[1]);
+                    statement.setInt(4, (int) row[2]);
+                    statement.executeUpdate();
+                }
+            }
+            new ResetAnglerGreenHitStagesMigration().apply(connection, StorageDialect.SQLITE, "");
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "SELECT milestone,requirement_id,amount FROM profession_contributions WHERE player_uuid=? AND profession_id='angler' AND prestige=0")) {
+                statement.setString(1, playerId.toString());
+                try (ResultSet rows = statement.executeQuery()) {
+                    boolean completedGreen = false, nextGreen = false, futureGreen = false, combo = false;
+                    while (rows.next()) {
+                        int milestone = rows.getInt(1);
+                        String id = rows.getString(2);
+                        if (id.equals("green_hits") && milestone == 25) completedGreen = rows.getInt(3) == 25;
+                        if (id.equals("green_hits") && milestone == 50) nextGreen = true;
+                        if (id.equals("green_hits") && milestone == 75) futureGreen = true;
+                        if (id.equals("max_combo") && milestone == 50) combo = rows.getInt(3) == 10;
+                    }
+                    check(completedGreen && !nextGreen && !futureGreen && combo,
+                            "legacy future Green hits reset; completed hits and combo preserved");
                 }
             }
         }
